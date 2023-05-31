@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.ssg.views.dialogs.DialogBox"
+           prefHeight="671.0" prefWidth="975.0" fx:id="mainDialogBox">
+
+</StackPane>

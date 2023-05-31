@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="671.0" prefWidth="975.0" style="-fx-background-color: rgba(17, 19, 47);" stylesheets="@../css/main-style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.MainView">
+   <children>
+      <VBox prefHeight="670.0" prefWidth="975.0">
+         <children>
+            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="93.0" prefWidth="975.0" style="-fx-background-color: rgba(17, 19, 47);">
+               <children>
+                  <ImageView fitHeight="6.0" fitWidth="8.0" layoutX="441.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/icons/dot.png" />
+                     </image>
+                  </ImageView>
+                  <HBox alignment="CENTER_LEFT" layoutX="385.0" layoutY="35.0" prefHeight="32.0" prefWidth="583.0">
+                     <children>
+                        <Label fx:id="navDashboard" alignment="CENTER" prefHeight="32.0" prefWidth="122.0" styleClass="fontregular" text="Dashboard" textAlignment="CENTER" textFill="#eeff00">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="navOfficers" alignment="CENTER" prefHeight="23.0" prefWidth="97.0" styleClass="fontregular" text="Officers" textAlignment="CENTER" textFill="#4f513a">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="navProjects" alignment="CENTER" prefHeight="32.0" prefWidth="99.0" styleClass="fontregular" text="Projects" textAlignment="CENTER" textFill="#4f513a">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="navStatistics" alignment="CENTER" prefHeight="32.0" prefWidth="99.0" styleClass="fontregular" text="Statistics" textAlignment="CENTER" textFill="#4f513a">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="navSettings" alignment="CENTER" prefHeight="32.0" prefWidth="99.0" styleClass="fontregular" text="Settings" textAlignment="CENTER" textFill="#4f513a">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+            <StackPane fx:id="stkView" prefHeight="575.0" prefWidth="975.0" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

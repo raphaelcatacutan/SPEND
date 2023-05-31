@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="182.0" prefWidth="758.0" style="-fx-background-color: rgba(7, 13, 48, 1); -fx-border-radius: 20; -fx-background-radius: 20;" styleClass="template" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.templates.OfficersProjectBox">
+   <children>
+      <VBox prefHeight="202.0" prefWidth="758.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="projectTitle" alignment="CENTER" contentDisplay="CENTER" text="Feeding Program" textAlignment="CENTER" textFill="WHITE">
+               <styleClass>
+                  <String fx:value="fontregular" />
+                  <String fx:value="_34" />
+               </styleClass>
+            </Label>
+            <Label fx:id="projectDescription" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="93.0" prefWidth="651.0" text="This is an example description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed blandit malesuada massa id venenatis. Praesent ac neque vel nulla efficitur consectetur. " textFill="WHITE" wrapText="true">
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+               <styleClass>
+                  <String fx:value="fontregular" />
+                  <String fx:value="_23" />
+               </styleClass>
+            </Label>
+            <HBox prefHeight="28.0" prefWidth="727.0">
+               <children>
+                  <Label fx:id="projectDate" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="262.0" text="Started: 12-APR-23" textFill="WHITE">
+                     <styleClass>
+                        <String fx:value="_23" />
+                        <String fx:value="fontregular" />
+                     </styleClass>
+                  </Label>
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  <Label fx:id="projectStatus" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="257.0" text="Status: Ongoing" textFill="WHITE">
+                     <styleClass>
+                        <String fx:value="_23" />
+                        <String fx:value="fontregular" />
+                     </styleClass>
+                  </Label>
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  <Label fx:id="projectExpense" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="241.0" text="Expense: 5000" textFill="WHITE">
+                     <styleClass>
+                        <String fx:value="_23" />
+                        <String fx:value="fontregular" />
+                     </styleClass>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+   </padding>
+   <stylesheets>
+      <URL value="@../../css/templates/main-templates.css" />
+      <URL value="@../../css/font-size.css" />
+      <URL value="@../../css/main-style.css" />
+   </stylesheets>
+</AnchorPane>

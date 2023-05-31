@@ -1,0 +1,39 @@
+.chart-pie .chart-pie-area {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+.chart-plot-background, .chart-legend {
+    -fx-background-color: transparent;
+}
+.chart-series-line {
+    -fx-stroke: #FFF000;
+}
+.chart-title,
+.axis-title,
+.chart-legend .label,
+.chart-pie-label-line > .text,
+.chart-legend .symbol,
+.chart-category-axis .tick-mark-label,
+.chart-value-axis .tick-mark-label,
+.chart-line-symbol {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Tw Cen MT";
+}
+.default-color0.chart-pie {
+    -fx-pie-color: #28666e; /* replace with your desired color */
+}
+.default-color1.chart-pie {
+    -fx-pie-color: #7c9885;
+}
+.default-color2.chart-pie {
+    -fx-pie-color: #b5b682;
+}
+.default-color3.chart-pie {
+    -fx-pie-color: #28666e;
+}
+.default-color4.chart-pie {
+    -fx-pie-color: #7c9885;
+}
+.default-color5.chart-pie {
+    -fx-pie-color: #b5b682;
+}

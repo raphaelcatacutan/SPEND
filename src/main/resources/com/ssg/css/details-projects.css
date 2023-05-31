@@ -1,0 +1,21 @@
+.table-view {
+    -fx-background-color: rgba(17, 19, 47);
+    -fx-border-color: white;
+    -fx-border-width: 1px;
+    -fx-border-radius: 19;
+}
+
+.table-row-cell {
+    -fx-border-width: 1px;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}
+
+.table-column {
+    -fx-border-color: white;
+    -fx-background-color: rgba(17, 19, 47);
+    -fx-border-width:  0 0 1 1;
+}
+.table-view .column-header-background {
+    -fx-background-color: none;
+}

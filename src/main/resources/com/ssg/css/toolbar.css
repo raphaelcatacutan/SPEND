@@ -1,0 +1,8 @@
+
+#toolbar {
+    -fx-background-color: none!important;
+}
+
+#toolbar:hover {
+    -fx-background-color: rgba(15, 16, 36, 0.3)!important;
+}

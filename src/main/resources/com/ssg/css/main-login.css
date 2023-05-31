@@ -1,0 +1,41 @@
+.pageNav {
+    -fx-font-size: 18px;
+    -fx-underline: false;
+    -fx-text-fill: yellow!important;
+    -fx-background-color: none;
+}
+.pageNav:hover {
+    -fx-text-fill: yellow!important;
+    -fx-font-size: 18px;
+    -fx-underline: true;
+}
+.txfPane {
+    -fx-background-color: none;
+    -fx-border-color: yellow;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+.txfLabel {
+    -fx-font-size: 12px;
+    -fx-text-fill: yellow;
+}
+.txfLogin {
+    -fx-font-size: 20px;
+    -fx-background-color: none;
+    -fx-text-fill: white;
+}
+.btnProceed:hover {
+    -fx-background-color: yellow!important;
+    -fx-text-fill: rgba(17, 19, 47)!important;
+    -fx-border-color: none;
+    -fx-border-radius: 40;
+    -fx-background-radius: 40;
+}
+.btnProceed {
+    -fx-border-color: yellow;
+    -fx-background-color: none;
+    -fx-border-radius: 40;
+    -fx-background-radius: 40;
+    -fx-font-size: 13px;
+    -fx-text-fill: white!important;
+}

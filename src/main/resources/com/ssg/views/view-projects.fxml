@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXPaginatedTableView?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainProjects" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="975.0" style="-fx-background-color: rgba(17, 19, 47);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.ViewProjects">
+   <children>
+      <StackPane prefHeight="547.0" prefWidth="976.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <VBox prefHeight="575.0" prefWidth="976.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label prefHeight="46.0" prefWidth="343.0" text="Projects List" textAlignment="CENTER" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets left="100.0" top="20.0" />
+                           </VBox.margin>
+                           <styleClass>
+                              <String fx:value="fontregular" />
+                              <String fx:value="_52" />
+                           </styleClass>
+                        </Label>
+                        <HBox prefHeight="41.0" prefWidth="976.0">
+                           <children>
+                              <Pane id="pneOfficialSearch" prefHeight="39.0" prefWidth="336.0" style="-fx-border-color: white; -fx-border-radius: 50;">
+                                 <children>
+                                    <TextField fx:id="txfProjectListSearchProject" focusTraversable="false" layoutX="32.0" layoutY="5.0" prefHeight="28.0" prefWidth="296.0" promptText="Search Project" style="-fx-background-color: none; -fx-text-fill: white;">
+                                       <styleClass>
+                                          <String fx:value="fontregular" />
+                                          <String fx:value="_16" />
+                                       </styleClass>
+                                    </TextField>
+                                    <ImageView fitHeight="19.0" fitWidth="21.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/icons/search.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="100.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Pane>
+                              <Button fx:id="btnProjectListClearSearch" focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Clear Search">
+                                 <HBox.margin>
+                                    <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
+                                 </HBox.margin>
+                                 <styleClass>
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="_14" />
+                                 </styleClass>
+                              </Button>
+                              <Button fx:id="btnProjectListAddNew" focusTraversable="false" mnemonicParsing="false" prefHeight="109.0" prefWidth="124.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Add New">
+                                 <HBox.margin>
+                                    <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
+                                 </HBox.margin>
+                                 <styleClass>
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="_14" />
+                                 </styleClass>
+                              </Button>
+                              <Button fx:id="btnProjectListRefresh" focusTraversable="false" mnemonicParsing="false" prefHeight="109.0" prefWidth="124.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Refresh">
+                                 <HBox.margin>
+                                    <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
+                                 </HBox.margin>
+                                 <styleClass>
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="_14" />
+                                 </styleClass>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <ScrollPane prefHeight="402.0" prefWidth="756.0" style="-fx-background-color: rgba(17, 19, 47);">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="100.0" right="100.0" top="10.0" />
+                           </VBox.margin>
+                           <content>
+                              <GridPane fx:id="gnpProjectsList" prefHeight="90.0" prefWidth="755.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" />
+                                  <ColumnConstraints hgrow="SOMETIMES" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints vgrow="SOMETIMES" />
+                                  <RowConstraints vgrow="SOMETIMES" />
+                                  <RowConstraints vgrow="SOMETIMES" />
+                                </rowConstraints>
+                              </GridPane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </VBox>
+                  <Pane fx:id="pneViewProjectsNoProject" layoutY="152.0" prefHeight="423.0" prefWidth="976.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="152.0">
+                     <children>
+                        <Label layoutX="313.0" layoutY="127.0" text="Hmm. We can't find any projects for this officer">
+                           <styleClass>
+                              <String fx:value="_20" />
+                              <String fx:value="whiteText" />
+                              <String fx:value="fontregular" />
+                           </styleClass>
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="anpProjectDetails" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="573.0" prefWidth="975.0" styleClass="mainBackground" visible="false">
+               <children>
+                  <VBox prefHeight="575.0" prefWidth="976.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane minHeight="-Infinity" prefHeight="231.0" prefWidth="976.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" layoutX="155.0" layoutY="180.0" prefHeight="38.0" prefWidth="490.0">
+                                 <children>
+                                    <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" styleClass="contributors">
+                                       <image>
+                                          <Image url="@../assets/icons/school-logo.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets left="-10.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" styleClass="contributors">
+                                       <image>
+                                          <Image url="@../assets/icons/school-logo.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets left="-10.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" styleClass="contributors">
+                                       <image>
+                                          <Image url="@../assets/icons/school-logo.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets left="-10.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" styleClass="contributors">
+                                       <image>
+                                          <Image url="@../assets/icons/school-logo.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets left="-10.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                              <Label fx:id="lblProjectDetailsItemName" alignment="TOP_LEFT" layoutX="178.0" layoutY="15.0" prefHeight="58.0" prefWidth="497.0" text="Feeding Program">
+                                 <styleClass>
+                                    <String fx:value="_52" />
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="noBackground" />
+                                    <String fx:value="whiteText" />
+                                 </styleClass>
+                              </Label>
+                              <Label fx:id="lblProjectDetailsItemDescription" layoutX="155.0" layoutY="76.0" prefHeight="92.0" prefWidth="490.0" text="Program Date: April 28, 2023&#10;This is an example description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed blandit malesuada massa id venenatis. Praesent ac neque vel nulla efficitur consectetur. " wrapText="true">
+                                 <styleClass>
+                                    <String fx:value="_20" />
+                                    <String fx:value="whiteText" />
+                                    <String fx:value="fontregular" />
+                                 </styleClass>
+                              </Label>
+                              <ImageView fx:id="imvProjectDetailsBack" fitHeight="25.0" fitWidth="25.0" layoutX="143.0" layoutY="31.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../assets/icons/back.png" />
+                                 </image>
+                              </ImageView>
+                              <VBox layoutX="690.0" layoutY="30.0" prefHeight="156.0" prefWidth="137.0">
+                                 <children>
+                                    <Button fx:id="btnProjectDetailsEditDetails" minWidth="140.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="114.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50;" text="Edit Details">
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                       <styleClass>
+                                          <String fx:value="fontregular" />
+                                          <String fx:value="whiteText" />
+                                          <String fx:value="_14" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button fx:id="btnProjectDetailsGenerateReport" minWidth="140.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="114.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50;" text="Generate Report">
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                       <styleClass>
+                                          <String fx:value="fontregular" />
+                                          <String fx:value="whiteText" />
+                                          <String fx:value="_14" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button fx:id="btnProjectDetailsDeleteProject" minWidth="140.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="114.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50;" text="Delete Project">
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                       <styleClass>
+                                          <String fx:value="fontregular" />
+                                          <String fx:value="whiteText" />
+                                          <String fx:value="_14" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button fx:id="btnProjectDetailsAddExpense" minWidth="140.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="114.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50;" text="Add Expense">
+                                       <styleClass>
+                                          <String fx:value="fontregular" />
+                                          <String fx:value="whiteText" />
+                                          <String fx:value="_14" />
+                                       </styleClass>
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="355.0" prefWidth="974.0">
+                           <children>
+                              <MFXPaginatedTableView fx:id="tbvProjectDetailsExpenses" layoutX="147.0" layoutY="31.0" pagesToShow="8" prefWidth="706.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="anpProjectEditExpense" prefHeight="573.0" prefWidth="975.0" visible="false">
+               <children>
+                  <AnchorPane layoutX="646.0" layoutY="92.0" prefHeight="550.0" prefWidth="330.0" style="-fx-background-radius: 30 0 0 30;" styleClass="secondaryBackground" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="646.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="575.2" prefWidth="976.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label fx:id="lblEditExpenseDialogTitle" contentDisplay="CENTER" prefHeight="60.0" prefWidth="258.0" text="Edit Expense" textFill="WHITE" wrapText="true">
+                                 <styleClass>
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="_42" />
+                                 </styleClass>
+                              </Label>
+                              <Pane id="pneOfficialSearch" prefHeight="39.0" prefWidth="249.0" style="-fx-border-color: yellow; -fx-border-radius: 5;">
+                                 <children>
+                                    <TextField fx:id="txfEditExpenseName" focusTraversable="false" layoutX="12.0" layoutY="5.0" prefHeight="29.0" prefWidth="210.0" promptText="Item Name" style="-fx-background-color: none; -fx-text-fill: yellow;">
+                                       <styleClass>
+                                          <String fx:value="fontregular" />
+                                          <String fx:value="_16" />
+                                       </styleClass>
+                                    </TextField>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <FlowPane.margin>
+                                    <Insets right="10.0" top="10.0" />
+                                 </FlowPane.margin>
+                              </Pane>
+                              <Pane id="pneOfficialSearch" prefHeight="39.0" prefWidth="103.0" style="-fx-border-color: yellow; -fx-border-radius: 5;">
+                                 <children>
+                                    <TextField fx:id="txfEditExpenseQuantity" focusTraversable="false" layoutX="12.0" layoutY="5.0" prefHeight="29.0" prefWidth="76.0" promptText="Quantity" style="-fx-background-color: none; -fx-text-fill: yellow;">
+                                       <styleClass>
+                                          <String fx:value="fontregular" />
+                                          <String fx:value="_16" />
+                                       </styleClass>
+                                    </TextField>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <FlowPane.margin>
+                                    <Insets right="10.0" top="10.0" />
+                                 </FlowPane.margin>
+                              </Pane>
+                              <RadioButton fx:id="rbtEditExpenseIsProposed" mnemonicParsing="false" prefHeight="26.0" prefWidth="116.0" style="-fx-text-fill: yellow;" text="Proposed">
+                                 <styleClass>
+                                    <String fx:value="_15" />
+                                    <String fx:value="fontregular" />
+                                 </styleClass>
+                                 <FlowPane.margin>
+                                    <Insets right="30.0" top="10.0" />
+                                 </FlowPane.margin>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="rbgEditExpenseRadioStatus" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <Pane id="pneOfficialSearch" prefHeight="39.0" prefWidth="101.0" style="-fx-border-color: yellow; -fx-border-radius: 5;">
+                                 <children>
+                                    <TextField fx:id="txfEditExpenseTotalPrice" focusTraversable="false" layoutX="9.0" layoutY="5.0" prefHeight="29.0" prefWidth="85.0" promptText="Unit Price" style="-fx-background-color: none; -fx-text-fill: yellow;">
+                                       <styleClass>
+                                          <String fx:value="fontregular" />
+                                          <String fx:value="_16" />
+                                       </styleClass>
+                                    </TextField>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <FlowPane.margin>
+                                    <Insets right="10.0" top="10.0" />
+                                 </FlowPane.margin>
+                              </Pane>
+                              <RadioButton fx:id="rbtEditExpenseIsApproved" mnemonicParsing="false" prefHeight="26.0" prefWidth="114.0" style="-fx-text-fill: yellow;" text="Approved" toggleGroup="$rbgEditExpenseRadioStatus">
+                                 <styleClass>
+                                    <String fx:value="_15" />
+                                    <String fx:value="fontregular" />
+                                 </styleClass>
+                                 <FlowPane.margin>
+                                    <Insets right="30.0" top="10.0" />
+                                 </FlowPane.margin>
+                              </RadioButton>
+                              <Pane id="pneOfficialSearch" prefHeight="39.0" prefWidth="250.0" style="-fx-border-color: yellow; -fx-border-radius: 5;">
+                                 <children>
+                                    <TextField fx:id="txfEditExpenseUnitPrice" focusTraversable="false" layoutX="4.0" layoutY="5.0" prefHeight="29.0" prefWidth="232.0" promptText="Total Price" style="-fx-background-color: none; -fx-text-fill: yellow;">
+                                       <styleClass>
+                                          <String fx:value="fontregular" />
+                                          <String fx:value="_16" />
+                                       </styleClass>
+                                    </TextField>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <FlowPane.margin>
+                                    <Insets right="10.0" top="10.0" />
+                                 </FlowPane.margin>
+                              </Pane>
+                              <DatePicker fx:id="dpkEditExpenseDate" prefHeight="38.0" prefWidth="249.0" promptText="Expense Date" styleClass="mainBackground">
+                                 <FlowPane.margin>
+                                    <Insets right="10.0" top="10.0" />
+                                 </FlowPane.margin>
+                              </DatePicker>
+                              <Button fx:id="btnEditExpenseAction4" focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Button4">
+                                 <styleClass>
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="_14" />
+                                 </styleClass>
+                                 <FlowPane.margin>
+                                    <Insets right="5.0" top="40.0" />
+                                 </FlowPane.margin>
+                              </Button>
+                              <Button fx:id="btnEditExpenseAction3" focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Button3">
+                                 <styleClass>
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="_14" />
+                                 </styleClass>
+                                 <FlowPane.margin>
+                                    <Insets right="5.0" top="40.0" />
+                                 </FlowPane.margin>
+                              </Button>
+                              <Button fx:id="btnEditExpenseAction2" focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Button2">
+                                 <styleClass>
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="_14" />
+                                 </styleClass>
+                                 <FlowPane.margin>
+                                    <Insets right="5.0" top="10.0" />
+                                 </FlowPane.margin>
+                              </Button>
+                              <Button fx:id="btnEditExpenseAction1" focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white; -fx-background-color: none;" text="Button1">
+                                 <styleClass>
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="_14" />
+                                 </styleClass>
+                                 <FlowPane.margin>
+                                    <Insets right="5.0" top="10.0" />
+                                 </FlowPane.margin>
+                              </Button>
+                           </children>
+                        </FlowPane>
+                     </children>
+                     <padding>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                     </padding>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="anpProjectEditProject" prefHeight="573.0" prefWidth="975.0" visible="false">
+               <children>
+                  <AnchorPane layoutX="646.0" layoutY="92.0" prefHeight="550.0" prefWidth="330.0" style="-fx-background-radius: 30 0 0 30;" styleClass="secondaryBackground" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="646.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="575.2" prefWidth="976.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label fx:id="lblEditProjectDialogTitle" contentDisplay="CENTER" prefHeight="46.0" prefWidth="258.0" text="Add Project" textAlignment="CENTER" textFill="WHITE">
+                                 <styleClass>
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="_42" />
+                                 </styleClass>
+                              </Label>
+                              <Pane id="pneOfficialSearch" prefHeight="39.0" prefWidth="269.0" style="-fx-border-color: yellow; -fx-border-radius: 5;">
+                                 <children>
+                                    <TextField fx:id="txfEditProjectName" focusTraversable="false" layoutX="12.0" layoutY="5.0" prefHeight="29.0" prefWidth="243.0" promptText="Project Title" style="-fx-background-color: none; -fx-text-fill: yellow;">
+                                       <styleClass>
+                                          <String fx:value="fontregular" />
+                                          <String fx:value="_16" />
+                                       </styleClass>
+                                    </TextField>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <FlowPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </FlowPane.margin>
+                              </Pane>
+                              <Pane id="pneOfficialSearch" prefHeight="187.0" prefWidth="270.0" style="-fx-border-color: yellow; -fx-border-radius: 5;">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <children>
+                                    <TextArea fx:id="txaEditProjectDescription" layoutX="11.0" layoutY="10.0" prefHeight="164.0" prefWidth="248.0" promptText="Project Description" wrapText="true">
+                                       <styleClass>
+                                          <String fx:value="whiteText" />
+                                          <String fx:value="fontregular" />
+                                          <String fx:value="_15" />
+                                       </styleClass>
+                                    </TextArea>
+                                 </children>
+                                 <FlowPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </FlowPane.margin>
+                              </Pane>
+                              <DatePicker fx:id="dpkEditProjectDate" prefHeight="38.0" prefWidth="270.0" promptText="Expense Date">
+                                 <FlowPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </FlowPane.margin>
+                              </DatePicker>
+                              <Button fx:id="btnEditProjectAction4" focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Button4">
+                                 <styleClass>
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="_14" />
+                                 </styleClass>
+                                 <FlowPane.margin>
+                                    <Insets right="5.0" top="30.0" />
+                                 </FlowPane.margin>
+                              </Button>
+                              <Button fx:id="btnEditProjectAction3" focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Button3">
+                                 <styleClass>
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="_14" />
+                                 </styleClass>
+                                 <FlowPane.margin>
+                                    <Insets right="5.0" top="30.0" />
+                                 </FlowPane.margin>
+                              </Button>
+                              <Button fx:id="btnEditProjectAction2" focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Button2">
+                                 <styleClass>
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="_14" />
+                                 </styleClass>
+                                 <FlowPane.margin>
+                                    <Insets right="5.0" top="10.0" />
+                                 </FlowPane.margin>
+                              </Button>
+                              <Button fx:id="btnEditProjectAction1" focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Button1">
+                                 <styleClass>
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="_14" />
+                                 </styleClass>
+                                 <FlowPane.margin>
+                                    <Insets right="5.0" top="10.0" />
+                                 </FlowPane.margin>
+                              </Button>
+                           </children>
+                        </FlowPane>
+                     </children>
+                     <padding>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                     </padding>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
+   </children>
+   <stylesheets>
+      <URL value="@../css/main-style.css" />
+      <URL value="@../css/font-size.css" />
+      <URL value="@../css/view-projects.css" />
+   </stylesheets>
+</AnchorPane>

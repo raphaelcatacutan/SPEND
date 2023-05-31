@@ -1,0 +1,35 @@
+.fontregular {
+    -fx-font-family: "Tw Cen MT";
+}
+.whiteText {
+    -fx-text-fill: #FFFFFF;
+}
+.yellowText {
+    -fx-text-fill: yellow;
+}
+
+.mainBackground {
+    -fx-background-color: #11132f;
+}
+.secondaryBackground {
+    -fx-background-color: #040814;
+}
+.background1 {
+    -fx-background-color: #212342;
+}
+
+.noBackground,
+.scroll-pane .viewport,
+.scroll-pane .content,
+.scroll-pane,
+.text-area .scroll-pane .content,
+.text-area .scroll-pane .viewport,
+.text-area .scroll-pane,
+.text-area {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+}

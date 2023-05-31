@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.3.final using JasperReports Library version 6.20.3-415f9428cffdb6805c6f85bbb29ebaf18813a2ab  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="expense-proposal" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0c5307ea-8f28-470d-b342-011ad08f1956">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SPENDB"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<subDataset name="EXPENSES" uuid="de1ab655-8b4a-4b62-b50a-f9dda4518b79">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SPENDB"/>
+		<property name="com.jaspersoft.studio.data.sql.tables">
+			<![CDATA[c3BlbmRiLmV4cGVuc2VzIEFTICwzNCwxMDMsNzc4NDc3MjQtNmZjOC00ZGI2LTgyZGQtZjVlOGM5
+ZjZkYTYzOw==]]>
+		</property>
+		<queryString>
+			<![CDATA[SELECT `EXPENSE_ID`,
+	`ITEMNAME`,
+	`TOTALPRICE`,
+	`QUANTITY`,
+	`UNITPRICE`
+FROM spendb.expenses
+WHERE 
+	 spendb.expenses.`EXPENSE_ID` IN ('3','1','2')]]>
+		</queryString>
+		<field name="EXPENSE_ID" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="EXPENSE_ID"/>
+			<property name="com.jaspersoft.studio.field.label" value="EXPENSE_ID"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="expenses"/>
+		</field>
+		<field name="ITEMNAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="ITEMNAME"/>
+			<property name="com.jaspersoft.studio.field.label" value="ITEMNAME"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="expenses"/>
+		</field>
+		<field name="TOTALPRICE" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.name" value="TOTALPRICE"/>
+			<property name="com.jaspersoft.studio.field.label" value="TOTALPRICE"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="expenses"/>
+		</field>
+		<field name="QUANTITY" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.name" value="QUANTITY"/>
+			<property name="com.jaspersoft.studio.field.label" value="QUANTITY"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="expenses"/>
+		</field>
+		<field name="UNITPRICE" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.name" value="UNITPRICE"/>
+			<property name="com.jaspersoft.studio.field.label" value="UNITPRICE"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="expenses"/>
+		</field>
+	</subDataset>
+	<parameter name="SCHOOL_YEAR" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT `EXPENSE_ID`, `ITEMNAME`, `TOTALPRICE`, `QUANTITY`, `UNITPRICE`
+FROM spendb.expenses
+WHERE spendb.expenses.`EXPENSE_ID` IN ('1', '2', '3')]]>
+	</queryString>
+	<field name="EXPENSE_ID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="EXPENSE_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="EXPENSE_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="expenses"/>
+	</field>
+	<field name="ITEMNAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ITEMNAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="ITEMNAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="expenses"/>
+	</field>
+	<field name="TOTALPRICE" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="TOTALPRICE"/>
+		<property name="com.jaspersoft.studio.field.label" value="TOTALPRICE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="expenses"/>
+	</field>
+	<field name="QUANTITY" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="QUANTITY"/>
+		<property name="com.jaspersoft.studio.field.label" value="QUANTITY"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="expenses"/>
+	</field>
+	<field name="UNITPRICE" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="UNITPRICE"/>
+		<property name="com.jaspersoft.studio.field.label" value="UNITPRICE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="expenses"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="130" splitType="Stretch">
+			<staticText>
+				<reportElement x="170" y="20" width="221" height="30" uuid="4f17c252-d6fa-4c97-9cd4-66c8c13419ed"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="14"/>
+				</textElement>
+				<text><![CDATA[SHS in San Nicholas III, Bacoor City]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="40" width="185" height="30" uuid="f355284d-9ee2-4c3b-9e74-f03966a9ddca"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="14"/>
+				</textElement>
+				<text><![CDATA[Supreme Student Government]]></text>
+			</staticText>
+<!--			<image>-->
+<!--				<reportElement x="40" y="20" width="82" height="80" uuid="9605a146-77b9-4ae3-96d8-1b9ca51f3e2b"/>-->
+<!--				<imageExpression><![CDATA["school-logo.png"]]></imageExpression>-->
+<!--			</image>-->
+<!--			<image>-->
+<!--				<reportElement x="430" y="20" width="82" height="80" uuid="ba71a303-2701-43f5-a01b-3813fc1259e5"/>-->
+<!--				<imageExpression><![CDATA["school-logo.png"]]></imageExpression>-->
+<!--			</image>-->
+			<textField>
+				<reportElement x="190" y="60" width="185" height="30" uuid="42985d60-9480-4e49-a10f-bade4ab9b5f0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["School Year " + $P{SCHOOL_YEAR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="190" y="80" width="185" height="30" uuid="68dbf4ef-fed4-4eb3-bfda-78f913c0375c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="14"/>
+				</textElement>
+				<text><![CDATA[SPEND System]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="190" y="10" width="185" height="30" uuid="392eecc9-30ce-42b7-a655-47b3ddcdca63"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="14"/>
+				</textElement>
+				<text><![CDATA[Project Expense Proposal Letter]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="530" splitType="Stretch">
+			<staticText>
+				<reportElement x="40" y="47" width="185" height="30" uuid="94d9b316-ffcf-4c0a-80a2-720d192d8e9a"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="14"/>
+				</textElement>
+				<text><![CDATA[To whom it may concern,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="80" width="480" height="160" uuid="30f77fb4-4e3c-4fee-8e4b-b3be8aa71feb"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="14"/>
+				</textElement>
+				<text><![CDATA[	Quisque consequat sodales est, id maximus odio hendrerit vel. Vivamus fermentum enim maximus quam mattis lobortis. Pellentesque urna enim, iaculis ac enim vel, malesuada dignissim sapien. Curabitur mattis tempus feugiat. Aliquam laoreet enim quis neque scelerisque, sed pellentesque ex aliquet. Ut et nunc nec elit imperdiet varius ut a libero. Aenean egestas suscipit ante id luctus. Proin ante urna, euismod eget rhoncus eget, interdum vitae lectus. Sed porttitor euismod euismod. Aliquam semper, justo non accumsan maximus, felis erat commodo magna, eu placerat libero massa in urna.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="247" width="480" height="20" uuid="613ce9cb-899c-4128-8933-1932aebef82a"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="14"/>
+				</textElement>
+				<text><![CDATA[These are the list of items we want to propose:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="51" y="435" width="113" height="42" uuid="9d92f028-7272-4c77-bcd0-c128379c6f1b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="14"/>
+				</textElement>
+				<text><![CDATA[Stephen Bugna
+SSG President]]></text>
+			</staticText>
+			<line>
+				<reportElement x="32" y="433" width="150" height="1" uuid="ec9c1bd4-a34d-4a4f-b61a-034009bc4060"/>
+			</line>
+			<line>
+				<reportElement x="200" y="433" width="150" height="1" uuid="c8e3f341-7bcb-45c6-a903-a6bcf23df654"/>
+			</line>
+			<staticText>
+				<reportElement x="219" y="435" width="113" height="42" uuid="f295e9ce-b9d7-4b3d-81a4-dd9c0f68d598"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="14"/>
+				</textElement>
+				<text><![CDATA[Nermie Dela Paz
+SSG Adviser]]></text>
+			</staticText>
+			<line>
+				<reportElement x="369" y="433" width="150" height="1" uuid="dd4ae34c-308b-41ae-9fc3-dc6c9d4ac008"/>
+			</line>
+			<staticText>
+				<reportElement x="388" y="435" width="113" height="42" uuid="50c45f4b-e955-469c-9b02-1d1b47a42474"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="14"/>
+				</textElement>
+				<text><![CDATA[CJ Belen
+School Principal]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="40" y="22" width="185" height="30" uuid="803a0962-1f5a-4e5d-b71d-d3258f2b191c"/>
+				<textElement>
+					<font fontName="Serif" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="70" y="287" width="431" height="30" uuid="11b9748c-afd9-49a3-bced-4a3fd486b2d6"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="EXPENSES" uuid="c4271d11-194e-4860-8f75-59ff17c286e9">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="30" width="431">
+						<textField>
+							<reportElement x="20" y="0" width="411" height="30" uuid="50ba0a92-9cca-4e4b-aec3-e8794f72e104"/>
+							<textElement>
+								<font fontName="Serif" size="14"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{QUANTITY} + " of ₱" + $F{UNITPRICE} + " - " + $F{ITEMNAME} + " for ₱" + $F{TOTALPRICE}]]></textFieldExpression>
+						</textField>
+						<ellipse>
+							<reportElement x="10" y="8" width="5" height="5" forecolor="rgba(0, 0, 0, 0.0)" backcolor="#030303" uuid="292c341a-a5d5-4032-bd8d-63a6939bf02f"/>
+						</ellipse>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="50"/>
+	</lastPageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

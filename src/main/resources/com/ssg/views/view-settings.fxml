@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="viewSettings" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="975.0" style="-fx-background-color: rgba(17, 19, 47);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.ViewSettings">
+   <children>
+      <VBox>
+         <children>
+            <Label prefHeight="46.0" prefWidth="343.0" styleClass="fontregular" text="System" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="50.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="100.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </Label>
+            <HBox prefHeight="41.0" prefWidth="976.0">
+               <children>
+                  <Pane id="pneOfficialSearch" prefHeight="39.0" prefWidth="336.0" style="-fx-border-color: white; -fx-border-radius: 50;">
+                     <children>
+                        <TextField fx:id="txfSearchOfficer" focusTraversable="false" layoutX="32.0" layoutY="5.0" prefHeight="28.0" prefWidth="296.0" promptText="Search Officer" style="-fx-background-color: none; -fx-text-fill: white;" text="Search Settings">
+                           <styleClass>
+                              <String fx:value="fontregular" />
+                              <String fx:value="_16" />
+                           </styleClass>
+                        </TextField>
+                        <ImageView fitHeight="19.0" fitWidth="21.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/icons/search.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="100.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Pane>
+                  <Button focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Clear Search">
+                     <HBox.margin>
+                        <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
+                     </HBox.margin>
+                     <styleClass>
+                        <String fx:value="fontregular" />
+                        <String fx:value="_14" />
+                     </styleClass>
+                  </Button>
+                  <Button focusTraversable="false" mnemonicParsing="false" prefHeight="109.0" prefWidth="124.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Set to Default">
+                     <HBox.margin>
+                        <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
+                     </HBox.margin>
+                     <styleClass>
+                        <String fx:value="fontregular" />
+                        <String fx:value="_14" />
+                     </styleClass>
+                  </Button>
+                  <Button focusTraversable="false" mnemonicParsing="false" prefHeight="109.0" prefWidth="124.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Refresh">
+                     <HBox.margin>
+                        <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
+                     </HBox.margin>
+                     <styleClass>
+                        <String fx:value="fontregular" />
+                        <String fx:value="_14" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
+            <ScrollPane hbarPolicy="NEVER" prefHeight="367.0" prefWidth="776.0">
+               <content>
+                  <VBox prefHeight="739.0" prefWidth="769.0">
+                     <children>
+                        <VBox>
+                           <children>
+                              <Label prefHeight="46.0" prefWidth="343.0" text="Database" textAlignment="CENTER" textFill="WHITE">
+                                 <styleClass>
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="_34" />
+                                 </styleClass>
+                              </Label>
+                              <VBox>
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
+                                       <children>
+                                          <Label prefHeight="42.0" prefWidth="561.0" text="Export Databse" textAlignment="CENTER" textFill="WHITE">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_25" />
+                                             </styleClass>
+                                          </Label>
+                                          <Button focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Export">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_14" />
+                                             </styleClass>
+                                          </Button>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
+                                       <children>
+                                          <Label prefHeight="42.0" prefWidth="561.0" text="Import Database" textAlignment="CENTER" textFill="WHITE">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_25" />
+                                             </styleClass>
+                                          </Label>
+                                          <Button focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Import">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_14" />
+                                             </styleClass>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="30.0" />
+                                 </VBox.margin>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="246.0" prefWidth="823.0">
+                           <children>
+                              <Label prefHeight="46.0" prefWidth="343.0" text="Your Account" textAlignment="CENTER" textFill="WHITE">
+                                 <styleClass>
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="_34" />
+                                 </styleClass>
+                              </Label>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
+                                       <children>
+                                          <Label prefHeight="42.0" prefWidth="561.0" text="Edit Account Information" textAlignment="CENTER" textFill="WHITE">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_25" />
+                                             </styleClass>
+                                          </Label>
+                                          <Button focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Edit Details">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_14" />
+                                             </styleClass>
+                                          </Button>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
+                                       <children>
+                                          <Label prefHeight="42.0" prefWidth="561.0" text="Account Activities" textAlignment="CENTER" textFill="WHITE">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_25" />
+                                             </styleClass>
+                                          </Label>
+                                          <Button focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="View Activity">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_14" />
+                                             </styleClass>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
+                                       <children>
+                                          <Label prefHeight="42.0" prefWidth="561.0" text="Account Ownership" textAlignment="CENTER" textFill="WHITE">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_25" />
+                                             </styleClass>
+                                          </Label>
+                                          <Button focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Delete Account">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_14" />
+                                             </styleClass>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
+                                       <children>
+                                          <Label prefHeight="42.0" prefWidth="561.0" text="Account Logs" textAlignment="CENTER" textFill="WHITE">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_25" />
+                                             </styleClass>
+                                          </Label>
+                                          <Button focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Generate Logs">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_14" />
+                                             </styleClass>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="30.0" />
+                                 </VBox.margin>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label prefHeight="46.0" prefWidth="343.0" text="Preference" textAlignment="CENTER" textFill="WHITE">
+                                 <styleClass>
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="_34" />
+                                 </styleClass>
+                              </Label>
+                              <VBox>
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
+                                       <children>
+                                          <Label prefHeight="42.0" prefWidth="561.0" text="Default School Year" textAlignment="CENTER" textFill="WHITE">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_25" />
+                                             </styleClass>
+                                          </Label>
+                                          <MFXComboBox />
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
+                                       <children>
+                                          <Label prefHeight="42.0" prefWidth="943.0" text="Report Location" textAlignment="CENTER" textFill="WHITE">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_25" />
+                                             </styleClass>
+                                          </Label>
+                                          <Label prefHeight="42.0" prefWidth="561.0" text="C:/Users/Documents/Foo/Bar/Hello/World/Lorem" textAlignment="CENTER" textFill="WHITE">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_15" />
+                                             </styleClass>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
+                                       <children>
+                                          <Label prefHeight="42.0" prefWidth="561.0" text="Theme" textAlignment="CENTER" textFill="WHITE">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_25" />
+                                             </styleClass>
+                                          </Label>
+                                          <MFXComboBox prefHeight="20.0" prefWidth="119.0" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
+                                       <children>
+                                          <Label prefHeight="42.0" prefWidth="561.0" text="XAMPP Manager" textAlignment="CENTER" textFill="WHITE">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_25" />
+                                             </styleClass>
+                                          </Label>
+                                          <MFXToggleButton contentDisposition="GRAPHIC_ONLY" prefHeight="42.0" prefWidth="121.0" selected="true" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
+                                       <children>
+                                          <Label prefHeight="42.0" prefWidth="943.0" text="XAMPP Location" textAlignment="CENTER" textFill="WHITE">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_25" />
+                                             </styleClass>
+                                          </Label>
+                                          <Label prefHeight="42.0" prefWidth="561.0" text="C:/xampp/" textAlignment="CENTER" textFill="WHITE">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_15" />
+                                             </styleClass>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
+                                       <children>
+                                          <Label prefHeight="42.0" prefWidth="561.0" text="Use XAMPP" textAlignment="CENTER" textFill="WHITE">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_25" />
+                                             </styleClass>
+                                          </Label>
+                                          <MFXToggleButton contentDisposition="GRAPHIC_ONLY" prefHeight="42.0" prefWidth="121.0" selected="true" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="30.0" />
+                                 </VBox.margin>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </content>
+               <VBox.margin>
+                  <Insets left="100.0" right="100.0" top="20.0" />
+               </VBox.margin>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../css/main-style.css" />
+      <URL value="@../css/font-size.css" />
+   </stylesheets>
+</AnchorPane>

@@ -1,0 +1,41 @@
+Index: src/temp/notes/CHANGELOG.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/temp/notes/CHANGELOG.md b/src/temp/notes/CHANGELOG.md
+--- a/src/temp/notes/CHANGELOG.md	
++++ b/src/temp/notes/CHANGELOG.md	(date 1684582020000)
+@@ -20,17 +20,17 @@
+       - Saving BLOBS in database
+       - Updated util methods
+ 
+-## Backup v.0.0.
++## Backup v.0.0.15
+   - With Frontend
+-      - Adding Officer
+-      - Displaying Officer Avatar
+-      - Editing Officer Details
+-      - Deleting Officer
+-      - Navigating to a Project in Officer Detail
+-      - Editing Project Details
+-      - Other small changes
+-        - Displaying Formatted Expenses
+-    - Backend Only
+-      - Generating Officer Report
+-    - Without Backend
+-      - System View
+\ No newline at end of file
++    - Adding Officer
++    - Displaying Officer Avatar
++    - Editing Officer Details
++    - Deleting Officer
++    - Navigating to a Project in Officer Detail
++    - Editing Project Details
++    - Other small changes
++      - Displaying Formatted Expenses
++  - Backend Only
++    - Generating Officer Report
++  - Without Backend
++    - System View
+\ No newline at end of file

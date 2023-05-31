@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.media.MediaView?>
+
+<AnchorPane fx:id="anpSplashScreen" prefHeight="309.0" prefWidth="550.0" style="-fx-background-color: rgba(17, 19, 47, 1);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.SplashScreen">
+   <children>
+      <MediaView fx:id="mvwLogoMedia" fitHeight="200.0" fitWidth="200.0" />
+   </children>
+</AnchorPane>

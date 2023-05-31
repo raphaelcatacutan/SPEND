@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="mainStatistics" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="975.0" style="-fx-background-color: rgba(17, 19, 47);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.ViewStatistics">
+   <children>
+      <AnchorPane fx:id="anpProjectNumber" layoutX="35.0" layoutY="20.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="118.0" prefWidth="206.0" style="-fx-background-radius: 20;" styleClass="background1">
+         <children>
+            <Label layoutX="24.0" layoutY="26.0" prefHeight="48.0" prefWidth="212.0" text="24" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="26.0">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="fontregular" />
+                  <String fx:value="_42" />
+               </styleClass>
+            </Label>
+            <Label layoutX="24.0" layoutY="52.0" prefHeight="48.0" prefWidth="152.0" text="Projects">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="fontregular" />
+                  <String fx:value="_21" />
+               </styleClass>
+            </Label>
+            <Label layoutX="24.0" layoutY="86.0" prefHeight="18.0" prefWidth="152.0" text="15 added last week">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="fontregular" />
+                  <String fx:value="_13" />
+               </styleClass>
+            </Label>
+            <ImageView fitHeight="42.0" fitWidth="40.0" layoutX="148.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="21.0">
+               <image>
+                  <Image url="@../assets/icons/project.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anpExpensesNumber" layoutX="267.0" layoutY="20.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="118.0" prefWidth="212.0" style="-fx-background-radius: 20;" styleClass="background1">
+         <children>
+            <Label layoutX="24.0" layoutY="26.0" prefHeight="48.0" prefWidth="212.0" text="312" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="26.0">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="fontregular" />
+                  <String fx:value="_42" />
+               </styleClass>
+            </Label>
+            <Label layoutX="24.0" layoutY="52.0" prefHeight="48.0" prefWidth="152.0" text="Expenses">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="fontregular" />
+                  <String fx:value="_21" />
+               </styleClass>
+            </Label>
+            <Label layoutX="24.0" layoutY="86.0" prefHeight="18.0" prefWidth="152.0" text="15 added last week">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="fontregular" />
+                  <String fx:value="_13" />
+               </styleClass>
+            </Label>
+            <ImageView fitHeight="42.0" fitWidth="40.0" layoutX="141.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="21.0">
+               <image>
+                  <Image url="@../assets/icons/acquisitions.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anpOfficerNumber" layoutX="501.0" layoutY="20.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="118.0" prefWidth="212.0" style="-fx-background-radius: 20;" styleClass="background1">
+         <children>
+            <Label layoutX="24.0" layoutY="26.0" prefHeight="48.0" prefWidth="212.0" text="23M" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="26.0">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="fontregular" />
+                  <String fx:value="_42" />
+               </styleClass>
+            </Label>
+            <Label layoutX="24.0" layoutY="52.0" prefHeight="48.0" prefWidth="152.0" text="Officers">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="fontregular" />
+                  <String fx:value="_21" />
+               </styleClass>
+            </Label>
+            <Label layoutX="24.0" layoutY="86.0" prefHeight="18.0" prefWidth="152.0" text="15 added last week">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="fontregular" />
+                  <String fx:value="_13" />
+               </styleClass>
+            </Label>
+            <ImageView fitHeight="42.0" fitWidth="40.0" layoutX="141.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="21.0">
+               <image>
+                  <Image url="@../assets/icons/officer.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anpActivityLogsNumber" layoutX="736.0" layoutY="21.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="118.0" prefWidth="212.0" style="-fx-background-radius: 20;" styleClass="background1">
+         <children>
+            <Label layoutX="24.0" layoutY="26.0" prefHeight="48.0" prefWidth="212.0" text="214K" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="26.0">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="fontregular" />
+                  <String fx:value="_42" />
+               </styleClass>
+            </Label>
+            <Label layoutX="24.0" layoutY="52.0" prefHeight="48.0" prefWidth="152.0" text="Activity Logs">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="fontregular" />
+                  <String fx:value="_21" />
+               </styleClass>
+            </Label>
+            <Label layoutX="24.0" layoutY="86.0" prefHeight="18.0" prefWidth="152.0" text="15 added last week">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="fontregular" />
+                  <String fx:value="_13" />
+               </styleClass>
+            </Label>
+            <ImageView fitHeight="42.0" fitWidth="40.0" layoutX="141.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="21.0">
+               <image>
+                  <Image url="@../assets/icons/activity.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anpRemainingFundsNumber" layoutX="33.0" layoutY="167.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="138.0" prefWidth="571.0" style="-fx-background-radius: 20;" styleClass="background1">
+         <children>
+            <HBox fillHeight="false" layoutY="-1.0" prefHeight="159.2" prefWidth="556.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Pane prefHeight="90.0" prefWidth="225.0">
+                     <children>
+                        <Label layoutY="8.0" prefHeight="48.0" prefWidth="152.0" text="₱1,231">
+                           <styleClass>
+                              <String fx:value="whiteText" />
+                              <String fx:value="fontregular" />
+                              <String fx:value="_50" />
+                           </styleClass>
+                        </Label>
+                        <Label layoutY="43.0" prefHeight="48.0" prefWidth="186.0" text="Remaining Funds">
+                           <styleClass>
+                              <String fx:value="whiteText" />
+                              <String fx:value="fontregular" />
+                              <String fx:value="_25" />
+                           </styleClass>
+                        </Label>
+                        <Label layoutY="79.0" prefHeight="18.0" prefWidth="152.0" text="21 transactions last week">
+                           <styleClass>
+                              <String fx:value="whiteText" />
+                              <String fx:value="fontregular" />
+                              <String fx:value="_15" />
+                           </styleClass>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Pane>
+                  <VBox alignment="TOP_CENTER" prefHeight="111.0" prefWidth="298.0" spacing="8.0">
+                     <children>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="241.0">
+                           <children>
+                              <ImageView blendMode="RED" fitHeight="25.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                                 <image>
+                                    <Image url="@../assets/icons/triangle.png" />
+                                 </image>
+                              </ImageView>
+                              <Label prefHeight="23.0" prefWidth="90.0" style="-fx-text-fill: #FF4242;" text="Purchased">
+                                 <styleClass>
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="_17" />
+                                 </styleClass>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="170.0" style="-fx-text-fill: #FF4242;" text="-₱13,324">
+                                 <styleClass>
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="_22" />
+                                 </styleClass>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="241.0">
+                           <children>
+                              <ImageView blendMode="RED" fitHeight="25.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                                 <image>
+                                    <Image url="@../assets/icons/triangle.png" />
+                                 </image>
+                              </ImageView>
+                              <Label prefHeight="23.0" prefWidth="90.0" style="-fx-text-fill: #FF4242;" text="Approved">
+                                 <styleClass>
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="_17" />
+                                 </styleClass>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="170.0" style="-fx-text-fill: #FF4242;" text="-₱6,324">
+                                 <styleClass>
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="_22" />
+                                 </styleClass>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="241.0">
+                           <children>
+                              <ImageView blendMode="GREEN" fitHeight="25.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/icons/triangle.png" />
+                                 </image>
+                              </ImageView>
+                              <Label prefHeight="23.0" prefWidth="90.0" style="-fx-text-fill: #00FF00;" text="Augmented">
+                                 <styleClass>
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="_17" />
+                                 </styleClass>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="170.0" style="-fx-text-fill: #00FF00;" text="₱324">
+                                 <styleClass>
+                                    <String fx:value="fontregular" />
+                                    <String fx:value="_22" />
+                                 </styleClass>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </HBox>
+            <ImageView fitHeight="49.0" fitWidth="51.0" layoutX="200.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/icons/funds.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anpOfficerStats" layoutX="33.0" layoutY="336.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="202.0" prefWidth="242.0" style="-fx-background-radius: 20;" />
+      <AnchorPane fx:id="anpExpenseStats" layoutX="306.0" layoutY="337.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="296.0" style="-fx-background-radius: 20;" styleClass="background1">
+         <children>
+            <Label layoutX="19.0" layoutY="20.0" text="Expense Statistics">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="fontregular" />
+                  <String fx:value="_21" />
+               </styleClass>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="50.0" />
+         </padding>
+      </AnchorPane>
+      <AnchorPane fx:id="anpProjectStats" layoutX="631.0" layoutY="167.0" prefHeight="368.0" prefWidth="317.0" style="-fx-background-radius: 20;" styleClass="background1">
+         <children>
+            <Label layoutX="25.0" layoutY="19.0" text="Projects Statistics">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="fontregular" />
+                  <String fx:value="_21" />
+               </styleClass>
+            </Label>
+         </children>
+         <padding>
+            <Insets top="80.0" />
+         </padding></AnchorPane>
+   </children>
+   <stylesheets>
+      <URL value="@../css/main-style.css" />
+      <URL value="@../css/font-size.css" />
+   </stylesheets>
+</AnchorPane>

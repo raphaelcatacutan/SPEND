@@ -1,0 +1,4 @@
+.template:hover {
+    -fx-background-color: rgba(24, 27, 71, 0.8)!important;
+    -fx-background-radius: 20;
+}
