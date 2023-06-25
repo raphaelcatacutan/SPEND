@@ -2,6 +2,7 @@ package com.ssg.views;
 
 import com.ssg.database.SpendBRead;
 import com.ssg.database.SpendBUtils;
+import com.ssg.database.models.SchoolData;
 import com.ssg.utils.RuntimeData;
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
@@ -19,8 +20,8 @@ public abstract class ViewController {
     protected ObservableList<Object> officers;
     protected ObservableList<Object> contributors;
     protected ObservableList<Object> users;
-    protected ObservableList<Object> schoolData;
     protected ObservableList<Object> funds;
+    protected SchoolData schoolData;
 
     protected String[] DBNEEDED = SpendBUtils.SPENDBTABLES;
     public void initialize() {
@@ -47,7 +48,7 @@ public abstract class ViewController {
                 case "OFFICERS" -> officers = tableDataMap.get(key);
                 case "CONTRIBUTORS" -> contributors = tableDataMap.get(key);
                 case "USERS" -> users = tableDataMap.get(key);
-                case "SCHOOLDATA" -> schoolData = tableDataMap.get(key);
+                case "SCHOOLDATA" -> schoolData = (SchoolData) tableDataMap.get(key).get(0);
                 case "FUNDS" -> funds = tableDataMap.get(key);
             }
         }

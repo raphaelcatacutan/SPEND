@@ -56,7 +56,6 @@ public class DateUtils {
     }
 
 
-
     public static String[] getLastMonths(int monthNumbers) {
         Calendar cal = Calendar.getInstance();
         Date now = new Date(cal.getTimeInMillis());
@@ -124,6 +123,10 @@ public class DateUtils {
         return lastDaysAsStrings;
     }
 
+    public static int getYear(Date date) {
+        LocalDate localDate = date.toLocalDate();
+        return localDate.getYear();
+    }
 
     /**
      * Converts a Date to String
@@ -172,5 +175,7 @@ public class DateUtils {
             throw new RuntimeException(e);
         }
     }
+
+
 
 }

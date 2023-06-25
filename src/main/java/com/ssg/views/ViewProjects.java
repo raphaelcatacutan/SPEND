@@ -245,14 +245,13 @@ public class ViewProjects extends ViewController {
 
             for (Object p : projects) {
                 Project project = (Project) p;
-
+                if (schoolData.isCurrentSchoolYear() && schoolData.getSchoolYear() > DateUtils.getYear(project.getProject_cd())) continue;
                 int matchStrength = ProgramUtils.lowestNumber(
                         ProgramUtils.stringMatch(DateUtils.formatDate("5", project.getEventdate()), searchProjectPattern), // Event Year
                         ProgramUtils.stringMatch(DateUtils.formatDate("6", project.getEventdate()), searchProjectPattern), // Event Month
                         ProgramUtils.stringMatch(project.getTitle(), "%" + searchProjectPattern + "%"),
                         ProgramUtils.stringMatch(project.getDescription(), "%" + searchProjectPattern + "%")
                 );
-
                 switch (matchStrength) {
                     case 1 -> strongFilterProject.add(project);
                     case 2 -> moderateFilterProject.add(project);

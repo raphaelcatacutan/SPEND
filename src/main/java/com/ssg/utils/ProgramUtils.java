@@ -40,7 +40,7 @@ public class ProgramUtils {
     public static String CONFIGFILE = SPENDDATA + "/config.json";
 
     public static void main(String[] args) {
-        System.out.println(parseInt("5."));
+        System.out.println(readConfig("startXAMPP"));
     }
 
     /**
@@ -374,6 +374,35 @@ public class ProgramUtils {
             e.printStackTrace();
         }
     }
+
+    public static Object readConfig(String key) {
+        Object value = null;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(CONFIGFILE));
+            String line;
+            StringBuilder jsonContent = new StringBuilder();
+            while ((line = reader.readLine()) != null) jsonContent.append(line);
+            reader.close();
+            String jsonString = jsonContent.toString();
+            jsonString = jsonString.trim().substring(1, jsonString.length() - 1);
+            String[] keyValuePairs = jsonString.split(",");
+            for (String pair : keyValuePairs) {
+                String[] entry = pair.split(":");
+                String currentKey = entry[0].trim().replace("\"", "");
+                if (!currentKey.equals(key)) continue;
+                String valueString = String.join(":", Arrays.copyOfRange(entry, 1, entry.length)).trim();
+                if (valueString.startsWith("\"") && valueString.endsWith("\"")) value = valueString.substring(1, valueString.length() - 1);
+                else if (valueString.equalsIgnoreCase("true") || valueString.equalsIgnoreCase("false")) value = Boolean.parseBoolean(valueString);
+                else if (valueString.contains(".")) value = Double.parseDouble(valueString);
+                else value = Integer.parseInt(valueString);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return value;
+    }
+
 
     public static void showDialogMessage(String title, String content) {
         try {

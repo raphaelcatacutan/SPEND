@@ -3,6 +3,7 @@ package com.ssg.views;
 import com.google.common.eventbus.Subscribe;
 import com.ssg.database.*;
 import com.ssg.database.models.*;
+import com.ssg.utils.DateUtils;
 import com.ssg.utils.ProgramUtils;
 import com.ssg.utils.RuntimeData;
 import com.ssg.views.animations.AnimationUtils;
@@ -128,7 +129,7 @@ public class ViewOfficers extends ViewController {
 
             for (Object o: officers) {
                 Officer officer = (Officer) o;
-
+                if (schoolData.isCurrentSchoolYear() && schoolData.getSchoolYear() > DateUtils.getYear(officer.getOfficer_cd())) continue;
                 int matchStrength = ProgramUtils.lowestNumber(
                         ProgramUtils.stringMatch(officer.getLastName(), "%" + searchOfficerPattern + "%"), // Last Name
                         ProgramUtils.stringMatch(officer.getFirstname(), "%" + searchOfficerPattern + "%"), // First Name

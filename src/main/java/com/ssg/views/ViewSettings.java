@@ -66,9 +66,9 @@ public class ViewSettings extends ViewController {
     @FXML private Button btnSettingsAdministratorSchoolLogo;
     @FXML private Button btnSettingsAdministratorSSGLogo;
     @FXML private Button btnSettingsAdministratorAccountAdmin;
+    @FXML private Label lblSettingsAdministratorSchoolYear;
 
     // About
-
     private final HashMap<Label, AnchorPane> settingsView = new HashMap<>();
 
     @Override
@@ -123,13 +123,18 @@ public class ViewSettings extends ViewController {
 
     public void refreshView(boolean loadDB) {
         if (loadDB) loadDatabase();
-        SchoolData data = (SchoolData) schoolData.get(0);
         // Preference
-        lblSettingsPreferenceReportExportLocation.setText(data.getReportExportLocation());
+        lblSettingsPreferenceReportExportLocation.setText(schoolData.getReportExportLocation());
+        lblSettingsPreferenceXAMPPLocation.setText((String) ProgramUtils.readConfig("xamppLocation"));
+        tgbSettingsPreferenceXAMPPManager.setSelected((Boolean) ProgramUtils.readConfig("startXAMPP"));
+        tgbSettingsPreferenceViewPDF.setSelected(schoolData.isViewPDF());
+        tgbSettingsPreferenceCurrentSchoolYear.setSelected(schoolData.isCurrentSchoolYear());
         // Report Templates
-        txfSettingsReportTemplatesAdviser.setPromptText(data.getSsgAdviser());
-        txfSettingsReportTemplatesPrincipal.setPromptText(data.getPrincipal());
-        txfSettingsReportTemplatesProposal.setPromptText(data.getProposalParagraph());
+        txfSettingsReportTemplatesAdviser.setPromptText(schoolData.getSsgAdviser());
+        txfSettingsReportTemplatesPrincipal.setPromptText(schoolData.getPrincipal());
+        txfSettingsReportTemplatesProposal.setPromptText(schoolData.getProposalParagraph());
+        // Administrator
+        lblSettingsAdministratorSchoolYear.setText("Current School Year: " + schoolData.getSchoolYear() + " - " + (schoolData.getSchoolYear() + 1));
         // Your Account
         txfSettingsYourAccountName.setPromptText(RuntimeData.USER.getFormattedName());
         txfSettingsYourAccountUserName.setPromptText(RuntimeData.USER.getUsername());
@@ -494,8 +499,9 @@ public class ViewSettings extends ViewController {
     @Subscribe public void newSchoolYear(ControllerEvent event) {
         if (event.notEvent("New School Year")) return;
         try {
+            int schoolYear = schoolData.getSchoolYear() + 1;
             Object[] newSchoolData = ModelValues.newSchoolData(
-                    ((SchoolData) schoolData.get(0)).getSchoolYear() + 1,
+                    schoolYear,
                     null,
                     null,
                     null,
@@ -508,6 +514,7 @@ public class ViewSettings extends ViewController {
                     null
             );
             SpendBUpdate.updateSchoolData(newSchoolData, true, true);
+            lblSettingsAdministratorSchoolYear.setText("Current School Year: " + schoolYear + " - " + (schoolYear + 1));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

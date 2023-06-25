@@ -120,10 +120,10 @@
 - [ ] Refreshing reloads the database once
 - [ ] Hover Recents
 - [x] Change the position of choice dialog
-- [-] Current School Year Only
+- [x] Current School Year Only
 - [ ] Filtered Print
 - [ ] Remove filter parameter in update methods
-- [ ] Add boolean `reload` in create methodsw
+- [ ] Add boolean `reload` in create methods
 - [ ] Release `stmt` statements
 - [ ] New ways of displaying data
 - [ ] New ways of displaying data

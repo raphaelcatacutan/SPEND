@@ -1,6 +1,7 @@
 package com.ssg.database;
 
 import com.ssg.MainActivity;
+import com.ssg.database.models.ModelValues;
 
 import java.io.File;
 import java.sql.SQLException;
@@ -198,20 +199,21 @@ public class SpendBPrefill {
         Object[][] contributorsData = {
                 {1, 1}, {1, 2}, {1, 3}, {1, 4}, {2, 5}, {2, 6}, {2, 7}, {2, 8}, {3, 9}, {3, 10}, {3, 11}, {3, 12}, {4, 13}, {4, 14}, {4, 15}, {4, 1}, {5, 2}, {5, 3}, {5, 4}, {5, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 9}, {7, 10}, {7, 11}, {7, 12}, {7, 13}, {8, 14}, {8, 15}, {8, 1}, {8, 2}, {9, 3}, {9, 4}, {9, 5}, {9, 6}, {10, 7}, {10, 8}, {10, 9}, {10, 10}, {11, 11}, {11, 12}, {11, 13}, {11, 14}, {12, 15}, {12, 1}, {12, 2}, {12, 3}, {13, 4}, {13, 5}, {13, 6}, {13, 7}, {14, 8}, {14, 9}, {14, 10}, {14, 11}, {15, 12}, {15, 13}, {15, 14}, {15, 15}, {16, 1}, {16, 2}, {16, 3}, {16, 4}, {17, 5}, {17, 6}, {17, 7}, {17, 8}, {18, 9}, {18, 10}, {18, 11}, {18, 12}, {19, 13}, {19, 14}, {19, 15}, {19, 1}, {20, 2}, {20, 3}, {20, 4}, {20, 5}, {21, 6}, {21, 7}, {21, 8}, {21, 9}, {22, 10}, {22, 11}, {22, 12}, {22, 13}, {23, 14}, {23, 15}, {23, 1}, {23, 2}, {24, 3}, {24, 4}, {24, 5}, {24, 6}, {25, 7}, {25, 8}, {25, 9}, {25, 10}, {26, 11}, {26, 12}, {26, 13}, {26, 14}, {27, 15}, {27, 1}, {27, 2}, {27, 3}, {28, 4}, {28, 5}, {28, 6}, {28, 7}, {29, 8}, {29, 9}, {29, 10}, {29, 11}, {30, 12}, {30, 13}, {30, 14}, {30, 15}
         };
-        Object[][] schoolData = {{
-                Year.now().getValue() - 1,
-                new File(Objects.requireNonNull(MainActivity.class.getResource("assets/icons/school-logo.png")).getFile()).getAbsolutePath().replace("%20", " "),
-                new File(Objects.requireNonNull(MainActivity.class.getResource("assets/icons/school-logo.png")).getFile()).getAbsolutePath().replace("%20", " "),
-                // FIXME Get SSG Logo
-                "G:\\Downloads",
-                1,
-                "C:\\xampp",
-                1,
-                1,
-                "Ms. Nermie Dela Paz",
-                "Mr. Alord Somera",
-                lorem200
-        }};
+        Object[][] schoolData = {
+                ModelValues.newSchoolData(
+                        Year.now().getValue() - 1,
+                        new File(Objects.requireNonNull(MainActivity.class.getResource("assets/icons/school-logo.png")).getFile()).getAbsolutePath().replace("%20", " "),
+                        new File(Objects.requireNonNull(MainActivity.class.getResource("assets/icons/school-logo.png")).getFile()).getAbsolutePath().replace("%20", " "),
+                        "G:\\Downloads",
+                        1,
+                        "C:\\xampp",
+                        1,
+                        1,
+                        "Ms. Nermie Dela Paz",
+                        "Mr. Alord Somera",
+                        lorem200
+                )
+        };
         Object[][] fundsData = {{
                 200.0,
                 lorem200
