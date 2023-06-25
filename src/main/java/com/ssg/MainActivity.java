@@ -34,7 +34,7 @@ import java.util.Objects;
 public class MainActivity extends Application {
     private Stage primaryStage;
     private Stage splashStage;
-    private Scene mainScene;
+    private Scene thisMainScene;
     private double xOffset = 0;
     private double yOffset = 0;
 
@@ -52,29 +52,153 @@ public class MainActivity extends Application {
         MFXProgressBar progressBar = splashController.getPgbSplashProgress();
         Label lblProgress = splashController.getLblProgressStatus();
 
-        Task<Void> mainSceneTask = new Task<>() {
+        Task<Void> splashScreenTask = new Task<Void>() {
+            public void newProgress(double progress, String description) {
+                updateProgress(progress, 1.0);
+                updateMessage(description);
+            }
+
+            public void loadConfigs() {
+                newProgress(0.1, "Loading Configurations");
+                HashMap<String, Object> template = new HashMap<>();
+                template.put("startXAMPP", true);
+                template.put("xamppLocation", "c:\\xampp");
+                File jsonFile = new File(ProgramUtils.CONFIGFILE);
+
+                // Reading the json file
+                if (jsonFile.exists()) {
+                    try {
+                        newProgress(0.2, "Reading Configurations");
+                        BufferedReader reader = new BufferedReader(new FileReader(jsonFile));
+                        String line;
+                        StringBuilder jsonContent = new StringBuilder();
+                        while ((line = reader.readLine()) != null) jsonContent.append(line);
+                        reader.close();
+                        String jsonString = jsonContent.toString();
+                        jsonString = jsonString.trim().substring(1, jsonString.length() - 1);
+                        String[] keyValuePairs = jsonString.split(",");
+                        for (String pair : keyValuePairs) {
+                            String[] entry = pair.split(":");
+                            String key = entry[0].trim().replace("\"", "");
+                            String valueString = String.join(":", Arrays.copyOfRange(entry, 1, entry.length)).trim();
+                            Object value;
+                            if (valueString.startsWith("\"") && valueString.endsWith("\"")) value = valueString.substring(1, valueString.length() - 1);
+                            else if (valueString.equalsIgnoreCase("true") || valueString.equalsIgnoreCase("false")) value = Boolean.parseBoolean(valueString);
+                            else if (valueString.contains(".")) value = Double.parseDouble(valueString);
+                            else value = Integer.parseInt(valueString);
+                            template.put(key, value);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        newProgress(0.2, "Creating File Configurations");
+                        File directory = new File(ProgramUtils.SPENDDATA);
+                        directory.mkdir();
+                        StringBuilder jsonContent = new StringBuilder();
+                        jsonContent.append("{");
+                        for (Map.Entry<String, Object> entry : template.entrySet()) {
+                            String key = entry.getKey();
+                            Object value = entry.getValue();
+                            jsonContent.append("\"").append(key).append("\":");
+                            if (value instanceof String) jsonContent.append("\"").append(value).append("\"");
+                            else jsonContent.append(value);
+                            jsonContent.append(",");
+                        }
+                        if (jsonContent.charAt(jsonContent.length() - 1) == ',') jsonContent.deleteCharAt(jsonContent.length() - 1);
+                        jsonContent.append("}");
+                        BufferedWriter writer = new BufferedWriter(new FileWriter(jsonFile));
+                        writer.write(jsonContent.toString());
+                        writer.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                // Setting the data
+                RuntimeData.STARTXAMPP = (boolean) template.get("startXAMPP");
+                RuntimeData.XAMPPLOCATION = (String) template.get("xamppLocation");
+            }
+            public void loadDatabase() {
+                newProgress(0.25, "Starting XAMPP");
+                if (RuntimeData.STARTXAMPP && RuntimeData.MANAGEXAMPP) XamppServer.manage(true);
+                newProgress(0.45, "Initializing Connection");
+                SpendBConnection.intializeConnection();
+                newProgress(0.5, "Adding shutdown hook");
+                Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                    if (RuntimeData.MANAGEXAMPP && RuntimeData.STARTXAMPP) XamppServer.manage(false);
+                    File folder = new File(ProgramUtils.SPENDTEMP);
+                    if (!folder.exists() || !folder.isDirectory()) return;
+                    File[] files = folder.listFiles();
+                    if (files == null) return;
+                    for (File file : files) {
+                        if (!file.isFile()) continue;
+                        file.delete();
+                    }
+                    System.out.println("Application exiting...");
+                }));
+            }
+            public void loadMainScene() {
+                try {// FIXME Scene Size
+                    newProgress(0.55, "Loading Scenes");
+                    AnchorPane login = ControllerUtils.getLoader("main-login").load();
+                    AnchorPane view = ControllerUtils.getLoader("main-view").load();
+                    HBox toolbar = ControllerUtils.getLoader("toolbar").load();
+                    StackPane dialogs = ControllerUtils.getLoader("dialogs/dialog-box").load();
+
+                    StackPane.setAlignment(toolbar, Pos.TOP_LEFT);
+
+                    newProgress(0.85, "Adding Scenes to the Activity");
+                    StackPane mainRoot = new StackPane();
+                    mainRoot.getChildren().addAll(dialogs, view, login, toolbar);
+                    mainRoot.setPrefSize(975.0, 671.0);
+                    toolbar.toFront();
+                    login.toFront();
+
+
+                    // Set Dragging Position
+                    toolbar.setOnMousePressed(event -> {
+                        xOffset = event.getSceneX();
+                        yOffset = event.getSceneY();
+                    });
+                    toolbar.setOnMouseDragged(event -> {
+                        primaryStage.setX(event.getScreenX() - xOffset);
+                        primaryStage.setY(event.getScreenY() - yOffset);
+                    });
+
+                    newProgress(1.0, "Launching Main Activity");
+                    // Add the arc on the window's border
+                    Rectangle mainRect = new Rectangle(mainRoot.getPrefWidth(), mainRoot.getPrefHeight());
+                    mainRect.setArcHeight(40.0);
+                    mainRect.setArcWidth(40.0);
+                    mainRoot.setClip(mainRect);
+
+                    Scene mainScene = new Scene(mainRoot);
+                    mainScene.setFill(Color.TRANSPARENT);
+                    MFXThemeManager.addOn(mainScene, Themes.DEFAULT, Themes.LEGACY);
+
+                    thisMainScene = mainScene;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             @Override
             protected Void call() throws Exception {
                 loadConfigs();
-                updateProgress(0.2, 1.0);
-                updateMessage("Reading Configurations");
                 Thread.sleep(3000);
 
                 loadDatabase();
-                updateProgress(0.5, 1.0);
-                updateMessage("Setting Up Database");
                 Thread.sleep(3000);
 
                 loadMainScene();
-                updateProgress(1.0, 1.0);
-                updateMessage("Launching Main Activity");
                 Thread.sleep(3000);
                 return null;
             }
         };
 
-        mainSceneTask.setOnSucceeded(event -> {
-            primaryStage.setScene(mainScene);
+        splashScreenTask.setOnSucceeded(event -> {
+            primaryStage.setScene(thisMainScene);
             primaryStage.initStyle(StageStyle.TRANSPARENT);
             primaryStage.setTitle("SPEND");
 
@@ -87,10 +211,10 @@ public class MainActivity extends Application {
             splashStage.close();
         });
 
-        progressBar.progressProperty().bind(mainSceneTask.progressProperty());
-        lblProgress.textProperty().bind(mainSceneTask.messageProperty());
+        progressBar.progressProperty().bind(splashScreenTask.progressProperty());
+        lblProgress.textProperty().bind(splashScreenTask.messageProperty());
 
-        new Thread(mainSceneTask).start();
+        new Thread(splashScreenTask).start();
     }
 
 
@@ -137,63 +261,6 @@ public class MainActivity extends Application {
 
         return splashLoader.getController();
     }
-    public void loadMainScene() throws IOException {
-        try {// FIXME Scene Size
-            AnchorPane login = ControllerUtils.getLoader("main-login").load();
-            AnchorPane view = ControllerUtils.getLoader("main-view").load();
-            HBox toolbar = ControllerUtils.getLoader("toolbar").load();
-            StackPane dialogs = ControllerUtils.getLoader("dialogs/dialog-box").load();
-
-            StackPane.setAlignment(toolbar, Pos.TOP_LEFT);
-
-            StackPane mainRoot = new StackPane();
-            mainRoot.getChildren().addAll(dialogs, view, login, toolbar);
-            mainRoot.setPrefSize(975.0, 671.0);
-            toolbar.toFront();
-            login.toFront();
-
-
-            // Set Dragging Position
-            toolbar.setOnMousePressed(event -> {
-                xOffset = event.getSceneX();
-                yOffset = event.getSceneY();
-            });
-            toolbar.setOnMouseDragged(event -> {
-                primaryStage.setX(event.getScreenX() - xOffset);
-                primaryStage.setY(event.getScreenY() - yOffset);
-            });
-
-            // Add the arc on the window's border
-            Rectangle mainRect = new Rectangle(mainRoot.getPrefWidth(), mainRoot.getPrefHeight());
-            mainRect.setArcHeight(40.0);
-            mainRect.setArcWidth(40.0);
-            mainRoot.setClip(mainRect);
-
-            Scene mainScene = new Scene(mainRoot);
-            mainScene.setFill(Color.TRANSPARENT);
-            MFXThemeManager.addOn(mainScene, Themes.DEFAULT, Themes.LEGACY);
-
-            this.mainScene = mainScene;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    public void loadDatabase() {
-        if (RuntimeData.STARTXAMPP && RuntimeData.MANAGEXAMPP) XamppServer.manage(true);
-        SpendBConnection.intializeConnection();
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            if (RuntimeData.MANAGEXAMPP && RuntimeData.STARTXAMPP) XamppServer.manage(false);
-            File folder = new File(ProgramUtils.SPENDTEMP);
-            if (!folder.exists() || !folder.isDirectory()) return;
-            File[] files = folder.listFiles();
-            if (files == null) return;
-            for (File file : files) {
-                if (!file.isFile()) continue;
-                file.delete();
-            }
-            System.out.println("Application exiting...");
-        }));
-    }
     public void loadFonts() {
         // ENHANCE Make this an inline variable
         String fontsProperty = ProgramUtils.getProperty("load_resource", "fonts");
@@ -206,64 +273,5 @@ public class MainActivity extends Application {
                 e.printStackTrace();
             }
         }
-    }
-    public void loadConfigs() {
-        HashMap<String, Object> template = new HashMap<>();
-        template.put("startXAMPP", true);
-        template.put("xamppLocation", "c:\\xampp");
-        File jsonFile = new File(ProgramUtils.CONFIGFILE);
-
-        // Reading the json file
-        if (jsonFile.exists()) {
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(jsonFile));
-                String line;
-                StringBuilder jsonContent = new StringBuilder();
-                while ((line = reader.readLine()) != null) jsonContent.append(line);
-                reader.close();
-                String jsonString = jsonContent.toString();
-                jsonString = jsonString.trim().substring(1, jsonString.length() - 1);
-                String[] keyValuePairs = jsonString.split(",");
-                for (String pair : keyValuePairs) {
-                    String[] entry = pair.split(":");
-                    String key = entry[0].trim().replace("\"", "");
-                    String valueString = String.join(":", Arrays.copyOfRange(entry, 1, entry.length)).trim();
-                    Object value;
-                    if (valueString.startsWith("\"") && valueString.endsWith("\"")) value = valueString.substring(1, valueString.length() - 1);
-                    else if (valueString.equalsIgnoreCase("true") || valueString.equalsIgnoreCase("false")) value = Boolean.parseBoolean(valueString);
-                    else if (valueString.contains(".")) value = Double.parseDouble(valueString);
-                    else value = Integer.parseInt(valueString);
-                    template.put(key, value);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            try {
-                File directory = new File(ProgramUtils.SPENDDATA);
-                directory.mkdir();
-                StringBuilder jsonContent = new StringBuilder();
-                jsonContent.append("{");
-                for (Map.Entry<String, Object> entry : template.entrySet()) {
-                    String key = entry.getKey();
-                    Object value = entry.getValue();
-                    jsonContent.append("\"").append(key).append("\":");
-                    if (value instanceof String) jsonContent.append("\"").append(value).append("\"");
-                    else jsonContent.append(value);
-                    jsonContent.append(",");
-                }
-                if (jsonContent.charAt(jsonContent.length() - 1) == ',') jsonContent.deleteCharAt(jsonContent.length() - 1);
-                jsonContent.append("}");
-                BufferedWriter writer = new BufferedWriter(new FileWriter(jsonFile));
-                writer.write(jsonContent.toString());
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        // Setting the data
-        RuntimeData.STARTXAMPP = (boolean) template.get("startXAMPP");
-        RuntimeData.XAMPPLOCATION = (String) template.get("xamppLocation");
     }
 }

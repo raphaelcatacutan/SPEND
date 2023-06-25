@@ -129,7 +129,7 @@
 - [ ] New ways of displaying data
 - [ ] Remove data adding in setups
 - [x] Toolbar
-- [-] Splash Screen
+- [x] Splash Screen
 - [-] Empty reports when empty query
 - [x] No avatar officer reports
 - [ ] Jasper Reports Fonts
