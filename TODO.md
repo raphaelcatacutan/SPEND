@@ -140,7 +140,9 @@
 - [x] Adding or Editing Officer Avatar
 - [-] Animation
 - [x] Admin Privilege showing on login
-- [-] Expense Status Bug
+- [x] Expense Status Bug
+- [-] Projects Statistics
+- [-] Numbers Statistics
 
 # TODO v.1.0.0
 - [ ] Packaging to JAR

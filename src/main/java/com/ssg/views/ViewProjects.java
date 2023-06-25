@@ -153,7 +153,7 @@ public class ViewProjects extends ViewController {
         MFXTableColumn<Expense> quantityColumn = new MFXTableColumn<>("Quantity", false, Comparator.comparing(Expense::getQuantity));
         MFXTableColumn<Expense> titleColumn = new MFXTableColumn<>("Title", false, Comparator.comparing(Expense::getTitle));
         MFXTableColumn<Expense> unitPriceColumn = new MFXTableColumn<>("Unit Price", false, Comparator.comparing(Expense::getUnitPrice));
-        MFXTableColumn<Expense> statusColumn = new MFXTableColumn<>("Status", false, Comparator.comparing(expense -> expense.getStatus() == 0 ? "Proposed" : "Approved"));
+        MFXTableColumn<Expense> statusColumn = new MFXTableColumn<>("Status", false, Comparator.comparing(Expense::getStatus));
         MFXTableColumn<Expense> expenseDateColumn = new MFXTableColumn<>("Date", false, Comparator.comparing(Expense::getExpenseDate_cd));
         MFXTableColumn<Expense> totalPriceColumn = new MFXTableColumn<>("Total Price", false, Comparator.comparing(Expense::getTotalPrice));
 
@@ -184,7 +184,7 @@ public class ViewProjects extends ViewController {
                 });
             }
         });
-        statusColumn.setRowCellFactory(expense -> new MFXTableRowCell<>(e -> expense.getStatus() == 0 ? "Proposed" : "Approved"){
+        statusColumn.setRowCellFactory(expense -> new MFXTableRowCell<>(factoryExpense -> factoryExpense.getStatus() == 0 ? "Proposed" : "Approved"){
             {
                 setAlignment(Pos.CENTER);
                 setOnMouseClicked(event -> {
@@ -290,21 +290,18 @@ public class ViewProjects extends ViewController {
             e.printStackTrace();
         }
     }
-
     public void searchProject(KeyEvent event) {
         if (event.getCode() != KeyCode.ENTER) return;
         String searchValue = txfProjectListSearchProject.getText();
         searchProjectPattern = searchValue.isEmpty() ? "%" : searchValue;
         refreshView(false);
     }
-
     private void clearSearches(MouseEvent mouseEvent) {
         txfProjectListSearchProject.setText("");
         txfProjectListSearchProject.getParent().requestFocus();
         searchProjectPattern = "%";
         refreshView(false);
     }
-
     private void generateProjectsReport(MouseEvent mouseEvent) {
         MainEvents.startLoading();
         String filter = SpendBUtils.spendBFilterID("P.PROJECT_ID", true, searchedProjects.stream().mapToInt(Integer::intValue).toArray());
@@ -389,7 +386,6 @@ public class ViewProjects extends ViewController {
         }
         tbvProjectDetailsExpenses.setItems(expenseList);
     }
-
     public void projectsListBack() {
         focusedProject = null;
         anpProjectDetails.setVisible(false);
@@ -397,7 +393,6 @@ public class ViewProjects extends ViewController {
         expenseDialogEditor("hide");
         tbvProjectDetailsExpenses.getSelectionModel().clearSelection();
     }
-
     private void showProjectDialogChoices(MouseEvent mouseEvent) {
         if (notAdmin()) return;
         // FIXME Not showing when officer doens't have a project
@@ -412,7 +407,6 @@ public class ViewProjects extends ViewController {
         Object[] sArgs = {"choice", "officersChoices"};
         ControllerUtils.triggerEvent("showDialog", sArgs, aArgs);
     }
-
     private void deleteProjectConfirm(MouseEvent event) {
         if (notAdmin()) return;
         MainEvents.showDialogMessage("Edit Project", "Are you sure you want to delete this project", "Delete Project", "Back");
@@ -476,7 +470,6 @@ public class ViewProjects extends ViewController {
             }
         }
     }
-
     public Object[] getEditProjectInput(boolean allowNull) {
         dpkEditProjectDate.setValue(dpkEditProjectDate.getConverter().fromString(dpkEditProjectDate.getEditor().getText()));
         Object[] userInput = {
@@ -492,7 +485,6 @@ public class ViewProjects extends ViewController {
             return userInput;
         }
     }
-
     public void createProject() {
         try {
             MainEvents.startLoading();
@@ -510,7 +502,6 @@ public class ViewProjects extends ViewController {
             throw new RuntimeException(e);
         }
     }
-
     public void generateProjectReport(Event ignored) {
         MainEvents.startLoading();
         Map<String, String> queries = new HashMap<>();
@@ -634,6 +625,7 @@ public class ViewProjects extends ViewController {
         }
     }
     private Object[] getEditExpenseInput(boolean allowNull) {
+        System.out.println(rbtEditExpenseIsProposed.isSelected());
         Object[] userInput = {
                 txfEditExpenseName.getText().isEmpty() ? null: txfEditExpenseName.getText(),
                 ProgramUtils.parseDouble(txfEditExpenseTotalPrice.getText()),
@@ -785,6 +777,7 @@ public class ViewProjects extends ViewController {
                     userInput[4]
             };
             SpendBUpdate.updateExpense(newExpense, true, true, filter);
+            MainEvents.stopLoading();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
