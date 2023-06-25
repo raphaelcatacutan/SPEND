@@ -14,6 +14,7 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -48,20 +49,25 @@ public class MainActivity extends Application {
         splashStage.show();
         splashStage.setAlwaysOnTop(false);
 
+        MFXProgressBar progressBar = splashController.getPgbSplashProgress();
+        Label lblProgress = splashController.getLblProgressStatus();
+
         Task<Void> mainSceneTask = new Task<>() {
             @Override
             protected Void call() throws Exception {
-                Thread.sleep(1000);
                 loadConfigs();
-                splashController.setProgress(0.2);
+                updateProgress(0.2, 1.0);
+                updateMessage("Reading Configurations");
                 Thread.sleep(3000);
 
                 loadDatabase();
-                splashController.setProgress(0.5);
+                updateProgress(0.5, 1.0);
+                updateMessage("Setting Up Database");
                 Thread.sleep(3000);
 
                 loadMainScene();
-                splashController.setProgress(1.0);
+                updateProgress(1.0, 1.0);
+                updateMessage("Launching Main Activity");
                 Thread.sleep(3000);
                 return null;
             }
@@ -81,8 +87,12 @@ public class MainActivity extends Application {
             splashStage.close();
         });
 
-        ProgramUtils.callDelay(5, () -> new Thread(mainSceneTask).start());
+        progressBar.progressProperty().bind(mainSceneTask.progressProperty());
+        lblProgress.textProperty().bind(mainSceneTask.messageProperty());
+
+        new Thread(mainSceneTask).start();
     }
+
 
 
     public static void main(String[] args) {
