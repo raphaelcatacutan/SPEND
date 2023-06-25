@@ -55,6 +55,7 @@ public class ViewStatistics extends ViewController {
 
     @FXML private AnchorPane anpExpenseStats;
     @FXML private Label lblNoDatatoDisplay;
+    @FXML private Label lblBarChartTitle;
 
     private static final Random RND = new Random();
     private static final String[] expenseStatus = {"Proposed", "Approved"};
@@ -103,7 +104,7 @@ public class ViewStatistics extends ViewController {
         setupExpenseNumber();
         setupOfficerNumber();
         setupRemainingFundsNumber();
-        setupExpensesStats();
+        setupProjectsStats();
 
         refreshView(true);
     }
@@ -117,7 +118,7 @@ public class ViewStatistics extends ViewController {
         displayExpenseNumber();
         displayOfficerNumber();
         displayRemainingFundsNumber();
-        displayExpensesStats();
+        displayBarChart();
     }
 
     @Override public void onNavigate() {
@@ -231,7 +232,7 @@ public class ViewStatistics extends ViewController {
         remainingFundsChart.setClip(newRect);
         anpRemainingFundsNumber.getChildren().add(0, remainingFundsChart);
     }
-    private void setupExpensesStats() {
+    private void setupProjectsStats() {
         double width = anpExpenseStats.getPrefWidth() - anpExpenseStats.getPadding().getLeft() - anpExpenseStats.getPadding().getRight();
         double height = anpExpenseStats.getPrefHeight() - anpExpenseStats.getPadding().getBottom() - anpExpenseStats.getPadding().getTop();
         int projectSize = 8;
@@ -257,8 +258,8 @@ public class ViewStatistics extends ViewController {
         for (Object p: projects) {
             Project project = (Project) p;
             int timeAgo = switch (chartDataType) {
-                case 0 -> DateUtils.calculateWeeksAgo(project.getProject_cd());
-                case 1 -> DateUtils.calculateDaysAgo(project.getProject_cd());
+                case 0 -> DateUtils.calculateDaysAgo(project.getProject_cd());
+                case 1 -> DateUtils.calculateWeeksAgo(project.getProject_cd());
                 case 2 -> DateUtils.calculateMonthsAgo(project.getProject_cd());
                 default -> throw new IllegalStateException("Unexpected value: " + chartDataType);
             };
@@ -277,8 +278,8 @@ public class ViewStatistics extends ViewController {
         for (Object e: expenses) {
             Expense expense = (Expense) e;
             int timeAgo = switch (chartDataType) {
-                case 0 -> DateUtils.calculateWeeksAgo(expense.getExpenseDate_cd());
-                case 1 -> DateUtils.calculateDaysAgo(expense.getExpenseDate_cd());
+                case 0 -> DateUtils.calculateDaysAgo(expense.getExpenseDate_cd());
+                case 1 -> DateUtils.calculateWeeksAgo(expense.getExpenseDate_cd());
                 case 2 -> DateUtils.calculateMonthsAgo(expense.getExpenseDate_cd());
                 default -> throw new IllegalStateException("Unexpected value: " + chartDataType);
             };
@@ -291,15 +292,15 @@ public class ViewStatistics extends ViewController {
         expenseNumberChartData4.setValue(recentlyAdded[0]);
 
         lblExpenseNumber.setText(String.valueOf(expenses.size()));
-        lblExpenseAdded.setText(recentlyAdded[0] - 1 + " added last " + chartDataTime[chartDataType]);
+        lblExpenseAdded.setText(recentlyAdded[0] - 1 + " added this " + chartDataTime[chartDataType]);
     }
     private void displayOfficerNumber() {
         int[] recentlyAdded = {1, 1, 1, 1};
         for (Object o: officers) {
             Officer officer = (Officer) o;
             int timeAgo = switch (chartDataType) {
-                case 0 -> DateUtils.calculateWeeksAgo(officer.getOfficer_cd());
-                case 1 -> DateUtils.calculateDaysAgo(officer.getOfficer_cd());
+                case 0 -> DateUtils.calculateDaysAgo(officer.getOfficer_cd());
+                case 1 -> DateUtils.calculateWeeksAgo(officer.getOfficer_cd());
                 case 2 -> DateUtils.calculateMonthsAgo(officer.getOfficer_cd());
                 default -> throw new IllegalStateException("Unexpected value: " + chartDataType);
             };
@@ -331,28 +332,24 @@ public class ViewStatistics extends ViewController {
         lblRemainingFundsAugmented.setText("₱" + ProgramUtils.shortenNumber(augmentedFunds[0]));
         remainingFundsChart.setValue((2 * percentageFunds) - 100);
     }
-    private void displayExpensesStats() {
+    private void displayBarChart() {
         lblNoDatatoDisplay.setVisible(projects.size() == 0);
         int projectSize = 10;
         ChartItemSeries[] projectsBar = new ChartItemSeries[projectSize];
-        for (int i = projectSize - 1; i >= 0; i--) {
+        for (int i = 0; i < projectSize; i++) {
+            Object p = projects.get(i);
+            Project project = (Project) p;
             ChartItem[] items = new ChartItem[2];
             for (int x = 0; x < 2; x++) items[x] = new ChartItem(expenseStatus[x], 1.0, expenseChartBarSubs[x]);
-            projectsBar[projectSize - 1 - i] = new ChartItemSeries<>(ChartType.NESTED_BAR, i + " Weeks Ago ", expenseChartBar, Color.TRANSPARENT, items);
-        }
-        for (Object p : projects) {
-            Project project = (Project) p;
-            int index = DateUtils.calculateWeeksAgo(project.getUpdatetime());
-            if (index > projectSize) continue;
+            projectsBar[projectSize - 1 - i] = new ChartItemSeries<>(ChartType.NESTED_BAR, project.getTitle(), expenseChartBar, Color.TRANSPARENT, items);
             for (Object e : expenses) {
                 Expense expense = (Expense) e;
                 if (expense.getProject_id() != project.getProject_id()) continue;
                 int status = expense.getStatus();
-                ChartItem item = (ChartItem) projectsBar[projectSize - 1 - index].getItems().get(status);
+                ChartItem item = (ChartItem) projectsBar[projectSize - i - 1].getItems().get(status);
                 item.setValue(expense.getTotalPrice() + item.getValue());
             }
         }
-
         expenseStatsChart.setSeries(projectsBar);
     }
 
@@ -405,6 +402,5 @@ public class ViewStatistics extends ViewController {
         MainEvents.stopLoading();
 
     }
-
 
 }

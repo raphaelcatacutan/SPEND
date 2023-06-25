@@ -108,41 +108,48 @@
 - [x] Database failed handler
 - [x] No Right Click on TextFields and TextArea
 - [x] List of Officers Text Wrapping
-- [ ] Comma Separated Currency
 - [x] Text Limits
-- [ ] Add Tooltips
 - [x] Adding image in officer
 - [x] Style Table 
-- [ ] Catch Message
 - [x] Multiple Selection of Expense
 - [x] Refreshing new visual data
 - [x] Refreshing expense stats
-- [ ] Refreshing reloads the database once
-- [ ] Hover Recents
 - [x] Change the position of choice dialog
 - [x] Current School Year Only
-- [ ] Filtered Print
-- [ ] Remove filter parameter in update methods
-- [ ] Add boolean `reload` in create methods
-- [ ] Release `stmt` statements
-- [ ] New ways of displaying data
-- [ ] New ways of displaying data
-- [ ] Remove data adding in setups
+- [-] Filtered Print
+- [-] New ways of displaying data
+- [-] New ways of displaying data
 - [x] Toolbar
 - [x] Splash Screen
 - [-] Empty reports when empty query
 - [x] No avatar officer reports
-- [ ] Jasper Reports Fonts
 - [-] Editors
 - [x] Expense Editor Enables
-- [ ] Design Filter
-- [ ] Optimize Jasper Queries
 - [x] Adding or Editing Officer Avatar
 - [-] Animation
 - [x] Admin Privilege showing on login
 - [x] Expense Status Bug
 - [-] Projects Statistics
-- [-] Numbers Statistics
+- [-] Numbers Statistics Bug
+
+# Optimization
+- [ ] Remove filter parameter in update methods
+- [ ] Optimize Jasper Queries
+- [ ] Add boolean `reload` in create methods
+- [ ] Release `stmt` statements
+- [ ] Remove data adding in setups
+
+# Enhancement
+- [ ] Comma Separated Currency
+- [ ] Add Tooltips
+- [ ] Catch Message
+- [ ] Refreshing reloads the database once
+- [ ] Hover Recents
+- [ ] Jasper Reports Fonts
+- [ ] Design Filter
+
+# Bugs
+- [ ] Invalid Credentials Fonts
 
 # TODO v.1.0.0
 - [ ] Packaging to JAR

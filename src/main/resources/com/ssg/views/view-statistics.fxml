@@ -309,7 +309,7 @@
             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
          </padding>
       </AnchorPane>
-      <Label layoutX="47.0" layoutY="281.0" text="Expense Statistics">
+      <Label fx:id="lblBarChartTitle" layoutX="47.0" layoutY="281.0" prefHeight="27.0" prefWidth="227.0" text="10 Recent Projects">
          <styleClass>
             <String fx:value="whiteText" />
             <String fx:value="fontregular" />
