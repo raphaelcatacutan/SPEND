@@ -44,7 +44,7 @@ TextField, TextArea {
 }
 
 .combo-box .list-cell {
-    -fx-background-color: #212342;
+    -fx-background-color: #040814;
     -fx-padding: 5px;
     -fx-text-fill: white;
 }
@@ -53,21 +53,21 @@ TextField, TextArea {
     -fx-border-color: yellow;
     -fx-text-fill: white;
     -fx-background-radius: 5 0 0 5;
-    -fx-background-color: #212342;
+    -fx-background-color: #040814;
     -fx-border-radius: 5 0 0 5;
     -fx-font-family: "Century Gothic";
     -fx-text-fill: white;
 }
 
 .combo-box .list-view {
-    -fx-background-color: #212342;
+    -fx-background-color: #040814;
     -fx-padding: 0;
     -fx-text-fill: white;
     -fx-border-color: yellow;
 }
 
 .combo-box .list-view .list-cell {
-    -fx-background-color: #212342;
+    -fx-background-color: #040814;
     -fx-text-fill: white;
 }
 

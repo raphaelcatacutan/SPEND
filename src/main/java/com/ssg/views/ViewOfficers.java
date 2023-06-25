@@ -61,7 +61,6 @@ public class ViewOfficers extends ViewController {
     @FXML private Button btnEditOfficerAction1;
     @FXML private Button btnEditOfficerAction2;
     @FXML private Button btnEditOfficerAction3;
-    @FXML private Button btnEditOfficerAction4;
 
     private final String[] DBNEEDED = {"OFFICERS", "CONTRIBUTORS", "EXPENSES", "PROJECTS", "SCHOOLDATA"};
     private final ArrayList<Integer> searchedOfficers = new ArrayList<>();
@@ -348,24 +347,12 @@ public class ViewOfficers extends ViewController {
         anpOfficerEditOfficer.setVisible(!Objects.equals(mode, "hide"));
         switch (mode) {
             case "add" -> {
-                lblEditOfficerDialogTitle.setText("Add Officer");
-                btnEditOfficerAction1.setVisible(true);
-                btnEditOfficerAction2.setVisible(true);
-                btnEditOfficerAction3.setVisible(true);
-
-                btnEditOfficerAction1.setText("Add");
-                btnEditOfficerAction2.setText("Cancel");
-                btnEditOfficerAction3.setText("Add Image");
-
                 btnEditOfficerAction1.setOnMouseClicked(event -> createOfficer());
                 btnEditOfficerAction2.setOnMouseClicked(event -> officerDialogEditor("hide"));
                 btnEditOfficerAction3.setOnMouseClicked(event -> selectedImage = ProgramUtils.chooseFile(ControllerUtils.getStage(btnEditOfficerAction1), "Choose an Image", "png", "jpg", "jpeg"));
             }
             case "edit" -> {
                 lblEditOfficerDialogTitle.setText("Edit Officer");
-                btnEditOfficerAction1.setVisible(true);
-                btnEditOfficerAction2.setVisible(true);
-                btnEditOfficerAction3.setVisible(true);
 
                 txfEditOfficerName.setText(focusedOfficer.getFormattedName());
                 txaEditOfficerDescription.setText(focusedOfficer.getDescription());
@@ -373,36 +360,16 @@ public class ViewOfficers extends ViewController {
                 txfEditOfficerTerm.setText(String.valueOf(focusedOfficer.getYear()));
                 cbxEditOfficerStrand.setValue(focusedOfficer.getStrand());
 
-                btnEditOfficerAction1.setText("Update");
-                btnEditOfficerAction2.setText("Cancel");
-                btnEditOfficerAction3.setText("Edit Image");
-
                 btnEditOfficerAction1.setOnMouseClicked(event -> MainEvents.showDialogMessage("Edit Officer", "Are you sure you want to edit the details of this officer", "Edit Officer", "Back"));
                 btnEditOfficerAction2.setOnMouseClicked(event -> officerDialogEditor("hide"));
                 btnEditOfficerAction3.setOnMouseClicked(event -> selectedImage = ProgramUtils.chooseFile(ControllerUtils.getStage(btnEditOfficerAction1), "Choose an Image", "png", "jpg", "jpeg"));
             }
             case "hide" -> {
-                lblEditOfficerDialogTitle.setText("");
-                btnEditOfficerAction1.setVisible(false);
-                btnEditOfficerAction2.setVisible(false);
-                btnEditOfficerAction3.setVisible(false);
-                btnEditOfficerAction4.setVisible(false);
-
-                txfEditOfficerName.setText("");
-                txaEditOfficerDescription.setText("");
-                txfEditOfficerPosition.setText("");
-                txfEditOfficerTerm.setText("");
                 cbxEditOfficerStrand.setValue(null);
-
-                btnEditOfficerAction1.setText("");
-                btnEditOfficerAction2.setText("");
-                btnEditOfficerAction3.setText("");
-                btnEditOfficerAction4.setText("");
 
                 btnEditOfficerAction1.setOnMouseClicked(null);
                 btnEditOfficerAction2.setOnMouseClicked(null);
                 btnEditOfficerAction3.setOnMouseClicked(null);
-                btnEditOfficerAction4.setOnMouseClicked(null);
 
                 selectedImage = null;
             }
@@ -442,6 +409,7 @@ public class ViewOfficers extends ViewController {
             };
             officerDialogEditor("hide");
             SpendBCreate.createOfficer(newOfficer, true);
+            MainEvents.stopLoading();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -731,14 +699,6 @@ public class ViewOfficers extends ViewController {
 
     public void setBtnEditOfficerAction3(Button btnEditOfficerAction3) {
         this.btnEditOfficerAction3 = btnEditOfficerAction3;
-    }
-
-    public Button getBtnEditOfficerAction4() {
-        return btnEditOfficerAction4;
-    }
-
-    public void setBtnEditOfficerAction4(Button btnEditOfficerAction4) {
-        this.btnEditOfficerAction4 = btnEditOfficerAction4;
     }
 
     public String[] getDBNEEDED() {

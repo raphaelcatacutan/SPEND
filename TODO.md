@@ -116,9 +116,6 @@
 - [x] Refreshing expense stats
 - [x] Change the position of choice dialog
 - [x] Current School Year Only
-- [-] Filtered Print
-- [-] New ways of displaying data
-- [-] New ways of displaying data
 - [x] Toolbar
 - [x] Splash Screen
 - [-] Empty reports when empty query
@@ -129,8 +126,9 @@
 - [-] Animation
 - [x] Admin Privilege showing on login
 - [x] Expense Status Bug
-- [-] Projects Statistics
-- [-] Numbers Statistics Bug
+- [x] Projects Statistics
+- [x] Numbers Statistics Bug
+- [ ] Buttons and Cursors
 
 # Optimization
 - [ ] Remove filter parameter in update methods
@@ -147,9 +145,13 @@
 - [ ] Hover Recents
 - [ ] Jasper Reports Fonts
 - [ ] Design Filter
+- [-] New ways of displaying data
+- [-] New ways of displaying data
 
 # Bugs
 - [ ] Invalid Credentials Fonts
+- [ ] Refresh Statistics
+- [ ] Stop Loading
 
 # TODO v.1.0.0
 - [ ] Packaging to JAR

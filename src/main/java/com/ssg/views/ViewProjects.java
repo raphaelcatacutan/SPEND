@@ -67,8 +67,6 @@ public class ViewProjects extends ViewController {
     @FXML private DatePicker dpkEditProjectDate;
     @FXML private Button btnEditProjectAction1;
     @FXML private Button btnEditProjectAction2;
-    @FXML private Button btnEditProjectAction3;
-    @FXML private Button btnEditProjectAction4;
 
     // Project Expenses Editor
     @FXML private AnchorPane anpProjectEditExpense;
@@ -418,27 +416,13 @@ public class ViewProjects extends ViewController {
         anpProjectEditProject.setVisible(!Objects.equals(mode, "hide"));
         switch (mode) {
             case "add" -> {
-                lblEditProjectDialogTitle.setText("Add Project");
-                btnEditProjectAction1.setVisible(true);
-                btnEditProjectAction2.setVisible(true);
-
-                btnEditProjectAction1.setText("Add");
-                btnEditProjectAction2.setText("Cancel");
-
                 btnEditProjectAction1.setOnMouseClicked(event -> createProject());
                 btnEditProjectAction2.setOnMouseClicked(event -> projectDialogEditor("hide"));
             }
             case "edit" -> {
-                lblEditProjectDialogTitle.setText("Edit Project");
-                btnEditProjectAction1.setVisible(true);
-                btnEditProjectAction2.setVisible(true);
-
                 txfEditProjectName.setText(focusedProject.getTitle());
                 txaEditProjectDescription.setText(focusedProject.getDescription());
                 dpkEditProjectDate.setValue(focusedProject.getEventdate().toLocalDate());
-
-                btnEditProjectAction1.setText("Update");
-                btnEditProjectAction2.setText("Cancel");
 
                 btnEditProjectAction1.setOnMouseClicked(event -> MainEvents.showDialogMessage("Edit Project", "Are you sure you want to edit the details of this project", "Edit Project", "Back"));
                 btnEditProjectAction2.setOnMouseClicked(event -> projectDialogEditor("hide"));
@@ -446,25 +430,12 @@ public class ViewProjects extends ViewController {
                 txfEditProjectName.setDisable(false);
             }
             case "hide" -> {
-                lblEditProjectDialogTitle.setText("");
-                btnEditProjectAction1.setVisible(false);
-                btnEditProjectAction2.setVisible(false);
-                btnEditProjectAction3.setVisible(false);
-                btnEditProjectAction4.setVisible(false);
-
                 txfEditProjectName.setText("");
                 txaEditProjectDescription.setText("");
                 dpkEditProjectDate.setValue(null);
 
-                btnEditProjectAction1.setText("");
-                btnEditProjectAction2.setText("");
-                btnEditProjectAction3.setText("");
-                btnEditProjectAction4.setText("");
-
                 btnEditProjectAction1.setOnMouseClicked(null);
                 btnEditProjectAction2.setOnMouseClicked(null);
-                btnEditProjectAction3.setOnMouseClicked(null);
-                btnEditProjectAction4.setOnMouseClicked(null);
 
                 txfEditProjectName.setDisable(false);
             }
@@ -545,19 +516,11 @@ public class ViewProjects extends ViewController {
         anpProjectEditExpense.setVisible(!Objects.equals(mode, "hide"));
         switch (mode) {
             case "add" -> {
-                lblEditExpenseDialogTitle.setText("Add Expense");
-                btnEditExpenseAction1.setVisible(true);
-                btnEditExpenseAction2.setVisible(true);
-
-                btnEditExpenseAction1.setText("Add");
-                btnEditExpenseAction2.setText("Cancel");
-
                 btnEditExpenseAction1.setOnMouseClicked(event -> createExpense());
                 btnEditExpenseAction2.setOnMouseClicked(event -> expenseDialogEditor("hide"));
             }
             case "edit" -> {
                 List<Expense> selectedExpenses = (List<Expense>) args[0];
-                lblEditExpenseDialogTitle.setText("Edit Expense");
                 if (selectedExpenses.size() == 1) {
                     Expense updatingExpense = selectedExpenses.get(0);
                     txfEditExpenseName.setText(updatingExpense.getTitle());
@@ -577,25 +540,15 @@ public class ViewProjects extends ViewController {
                     txfEditExpenseUnitPrice.setDisable(true);
                     txfEditExpenseTotalPrice.setDisable(true);
                 }
-                btnEditExpenseAction1.setVisible(true);
-                btnEditExpenseAction2.setVisible(true);
                 btnEditExpenseAction3.setVisible(true);
                 btnEditExpenseAction4.setVisible(true);
 
-                btnEditExpenseAction1.setText("Update");
-                btnEditExpenseAction2.setText("Delete");
-                btnEditExpenseAction3.setText("Propose");
-                btnEditExpenseAction4.setText("Cancel");
-
                 btnEditExpenseAction1.setOnMouseClicked(this::editExpenseConfirm);
-                btnEditExpenseAction2.setOnMouseClicked(this::deleteExpenseConfirm);
+                btnEditExpenseAction2.setOnMouseClicked(event -> expenseDialogEditor("hide"));
                 btnEditExpenseAction3.setOnMouseClicked(event -> proposeExpense(selectedExpenses));
-                btnEditExpenseAction4.setOnMouseClicked(event -> expenseDialogEditor("hide"));
+                btnEditExpenseAction4.setOnMouseClicked(this::deleteExpenseConfirm);
             }
             case "hide" -> {
-                lblEditExpenseDialogTitle.setText("");
-                btnEditExpenseAction1.setVisible(false);
-                btnEditExpenseAction2.setVisible(false);
                 btnEditExpenseAction3.setVisible(false);
                 btnEditExpenseAction4.setVisible(false);
 
@@ -609,11 +562,6 @@ public class ViewProjects extends ViewController {
                 txfEditExpenseQuantity.setDisable(false);
                 txfEditExpenseUnitPrice.setDisable(false);
                 txfEditExpenseTotalPrice.setDisable(false);
-
-                btnEditExpenseAction1.setText("");
-                btnEditExpenseAction2.setText("");
-                btnEditExpenseAction3.setText("");
-                btnEditExpenseAction4.setText("");
 
                 btnEditExpenseAction1.setOnMouseClicked(null);
                 btnEditExpenseAction2.setOnMouseClicked(null);
