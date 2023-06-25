@@ -3,6 +3,7 @@
 <?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -13,76 +14,80 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane fx:id="officer_1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="159.0" prefWidth="287.0" style="-fx-background-color: rgba(17, 19, 47, 1); -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-color: none;" styleClass="template" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.templates.OfficersProfileBox">
-   <children>
-      <HBox layoutX="-57.0" layoutY="14.0" prefHeight="130.0" prefWidth="267.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <ImageView fx:id="officerAvatar" fitHeight="74.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../assets/icons/school-logo.png" />
-               </image>
-               <HBox.margin>
-                  <Insets left="10.0" right="10.0" top="30.0" />
-               </HBox.margin>
-            </ImageView>
-            <VBox alignment="CENTER_LEFT">
-               <children>
-                  <Label fx:id="officerName" alignment="BOTTOM_LEFT" prefWidth="181.0" text="Raphael James C. Catacutan" textFill="WHITE" wrapText="true">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                     <styleClass>
-                        <String fx:value="fontregular" />
-                        <String fx:value="_24" />
-                     </styleClass>
-                  </Label>
-                  <Label fx:id="officerDescription" alignment="BOTTOM_LEFT" maxHeight="-Infinity" prefWidth="181.0" text="Financial Ma" textFill="WHITE" wrapText="true">
-                     <styleClass>
-                        <String fx:value="fontregular" />
-                        <String fx:value="_17" />
-                     </styleClass>
-                  </Label>
-                  <TilePane fx:id="tagContainer" hgap="1.0" prefHeight="26.0" prefWidth="200.0" tileAlignment="TOP_LEFT" vgap="1.0">
-                     <children>
-                        <Button fx:id="officerYear" minWidth="40.0" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 30; -fx-text-fill: white;" text="Tag">
-                           <padding>
-                              <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                           </padding>
-                           <styleClass>
-                              <String fx:value="fontregular" />
-                              <String fx:value="_12" />
-                           </styleClass>
-                           <TilePane.margin>
-                              <Insets bottom="5.0" right="5.0" top="5.0" />
-                           </TilePane.margin>
-                        </Button>
-                        <Button fx:id="officerStrand" minWidth="40.0" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 30; -fx-text-fill: white;" text="Tag">
-                           <padding>
-                              <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                           </padding>
-                           <styleClass>
-                              <String fx:value="fontregular" />
-                              <String fx:value="_12" />
-                           </styleClass>
-                           <TilePane.margin>
-                              <Insets bottom="5.0" right="5.0" top="5.0" />
-                           </TilePane.margin>
-                        </Button>
-                     </children>
-                     <VBox.margin>
-                        <Insets bottom="3.0" top="4.0" />
-                     </VBox.margin>
-                  </TilePane>
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-   </children>
-   <padding>
-      <Insets bottom="5.0" left="5.0" right="10.0" top="10.0" />
-   </padding>
+    <children>
+        <HBox layoutX="-57.0" layoutY="14.0" prefHeight="130.0" prefWidth="267.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <ImageView fx:id="officerAvatar" fitHeight="74.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../assets/icons/school-logo.png" />
+                    </image>
+                    <HBox.margin>
+                        <Insets left="10.0" right="10.0" top="30.0" />
+                    </HBox.margin>
+                </ImageView>
+                <VBox alignment="CENTER_LEFT">
+                    <children>
+                        <Label fx:id="officerName" alignment="BOTTOM_LEFT" prefWidth="181.0" text="Raphael James C. Catacutan" textFill="WHITE" wrapText="true">
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                            <styleClass>
+                                <String fx:value="fontregular" />
+                                <String fx:value="_21" />
+                            </styleClass>
+                        </Label>
+                        <Label fx:id="officerDescription" alignment="BOTTOM_LEFT" maxHeight="-Infinity" prefWidth="181.0" text="Financial Ma" textFill="WHITE" wrapText="true">
+                            <styleClass>
+                                <String fx:value="fontregular" />
+                                <String fx:value="_15" />
+                            </styleClass>
+                        </Label>
+                        <TilePane fx:id="tagContainer" hgap="1.0" prefHeight="26.0" prefWidth="200.0" tileAlignment="TOP_LEFT" vgap="1.0">
+                            <children>
+                                <Button fx:id="officerYear" minWidth="40.0" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 30; -fx-text-fill: white;" text="Tag">
+                                    <padding>
+                                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                    </padding>
+                                    <styleClass>
+                                        <String fx:value="fontregular" />
+                                        <String fx:value="_10" />
+                                    </styleClass>
+                                    <TilePane.margin>
+                                        <Insets bottom="5.0" right="5.0" top="5.0" />
+                                    </TilePane.margin>
+                                </Button>
+                                <Button fx:id="officerStrand" minWidth="40.0" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 30; -fx-text-fill: white;" text="Tag">
+                                    <padding>
+                                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                    </padding>
+                                    <styleClass>
+                                        <String fx:value="fontregular" />
+                                        <String fx:value="_10" />
+                                    </styleClass>
+                                    <TilePane.margin>
+                                        <Insets bottom="5.0" right="5.0" top="5.0" />
+                                    </TilePane.margin>
+                                </Button>
+                            </children>
+                            <VBox.margin>
+                                <Insets bottom="3.0" top="4.0" />
+                            </VBox.margin>
+                        </TilePane>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
+    <padding>
+        <Insets bottom="5.0" left="5.0" right="10.0" top="10.0" />
+    </padding>
    <stylesheets>
-      <URL value="@../../css/templates/main-templates.css" />
-      <URL value="@../../css/main-style.css" />
-      <URL value="@../../css/font-size.css" />
+      <URL value="@../../css/components.css" />
+      <URL value="@../../css/backgrounds.css" />
+      <URL value="@../../css/templates.css" />
+      <URL value="@../../css/fonts.css" />
    </stylesheets>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
 </AnchorPane>

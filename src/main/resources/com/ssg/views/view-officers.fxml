@@ -3,6 +3,7 @@
 <?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -22,7 +23,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="viewOfficers" minHeight="-Infinity" prefHeight="556.0" prefWidth="975.0" style="-fx-background-color: rgba(17, 19, 47);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.ViewOfficers">
+<AnchorPane fx:id="anpView" minHeight="-Infinity" prefHeight="556.0" prefWidth="975.0" style="-fx-background-color: rgba(17, 19, 47);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.ViewOfficers">
    <children>
       <StackPane prefHeight="542.0" prefWidth="976.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -42,10 +43,10 @@
                            <children>
                               <Pane id="pneOfficialSearch" prefHeight="39.0" prefWidth="336.0" style="-fx-border-color: white; -fx-border-radius: 50;">
                                  <children>
-                                    <TextField fx:id="txfSearchOfficer" focusTraversable="false" layoutX="32.0" layoutY="5.0" prefHeight="28.0" prefWidth="296.0" promptText="Search Officer" style="-fx-background-color: none; -fx-text-fill: white;">
+                                    <TextField fx:id="txfOfficerListSearchOfficer" focusTraversable="false" layoutX="32.0" layoutY="5.0" prefHeight="28.0" prefWidth="296.0" promptText="Search Officer" style="-fx-background-color: none; -fx-text-fill: white;">
                                        <styleClass>
                                           <String fx:value="fontregular" />
-                                          <String fx:value="_16" />
+                                          <String fx:value="_14" />
                                        </styleClass>
                                     </TextField>
                                     <ImageView fitHeight="19.0" fitWidth="21.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
@@ -61,36 +62,57 @@
                                     <Insets bottom="10.0" left="100.0" right="10.0" top="10.0" />
                                  </HBox.margin>
                               </Pane>
-                              <Button fx:id="btnOfficerListClearSearch" focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Clear Search">
+                              <Button fx:id="btnOfficerListClearSearch" focusTraversable="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="136.0" text="Clear Search">
                                  <HBox.margin>
                                     <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
                                  </HBox.margin>
                                  <styleClass>
                                     <String fx:value="fontregular" />
                                     <String fx:value="_14" />
+                                    <String fx:value="button1" />
                                  </styleClass>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <padding>
+                                    <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                                 </padding>
                               </Button>
-                              <Button fx:id="btnOfficerListAddNew" focusTraversable="false" mnemonicParsing="false" prefHeight="109.0" prefWidth="124.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Add New">
+                              <Button fx:id="btnOfficerListAddNew" focusTraversable="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="133.0" text="Add New">
                                  <HBox.margin>
                                     <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
                                  </HBox.margin>
                                  <styleClass>
                                     <String fx:value="fontregular" />
                                     <String fx:value="_14" />
+                                    <String fx:value="button1" />
                                  </styleClass>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <padding>
+                                    <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                                 </padding>
                               </Button>
-                              <Button fx:id="btnOfficerListRefresh" focusTraversable="false" mnemonicParsing="false" prefHeight="109.0" prefWidth="124.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Refresh">
+                              <Button fx:id="btnOfficerListGenerateReport" focusTraversable="false" mnemonicParsing="false" prefHeight="29.0" text="Generate Report">
                                  <HBox.margin>
                                     <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
                                  </HBox.margin>
                                  <styleClass>
                                     <String fx:value="fontregular" />
                                     <String fx:value="_14" />
+                                    <String fx:value="button1" />
                                  </styleClass>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <padding>
+                                    <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                                 </padding>
                               </Button>
                            </children>
                         </HBox>
-                        <ScrollPane hbarPolicy="NEVER" prefHeight="382.0" prefWidth="909.0" VBox.vgrow="ALWAYS">
+                        <ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="356.0" prefWidth="906.0" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="20.0" left="38.0" right="33.0" top="10.0" />
                            </VBox.margin>
@@ -115,7 +137,7 @@
                   </VBox>
                   <Pane fx:id="pneViewOfficerNoOfficer" layoutY="139.0" prefHeight="417.0" prefWidth="976.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="139.0">
                      <children>
-                        <Label layoutX="371.0" layoutY="188.0" text="Hmm. We can't find any result">
+                        <Label layoutX="361.0" layoutY="199.0" text="We can't find any officers, Sorry">
                            <styleClass>
                               <String fx:value="_20" />
                               <String fx:value="whiteText" />
@@ -129,13 +151,13 @@
                   </Pane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="anpOfficerProfile" styleClass="mainBackground" visible="false">
+            <AnchorPane fx:id="anpOfficerProfile" styleClass="mainBackground">
                <children>
-                  <ScrollPane hbarPolicy="NEVER" layoutX="77.0" layoutY="229.0" prefHeight="528.0" prefWidth="976.0" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <ScrollPane hbarPolicy="NEVER" layoutX="22.0" layoutY="5.0" prefHeight="560.8" prefWidth="978.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <content>
-                        <AnchorPane prefHeight="533.0" prefWidth="976.0">
+                        <AnchorPane prefHeight="554.0" prefWidth="949.0">
                            <children>
-                              <VBox prefHeight="1243.0" prefWidth="845.0" style="-fx-background-radius: 20;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <VBox prefHeight="554.4" prefWidth="949.6" style="-fx-background-radius: 20;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
                                     <AnchorPane minHeight="-Infinity" prefHeight="247.0" prefWidth="951.0" style="-fx-background-radius: 20;">
                                        <children>
@@ -144,97 +166,118 @@
                                                 <Image url="@../assets/icons/school-logo.png" />
                                              </image>
                                           </ImageView>
-                                          <TextField fx:id="txfOfficerProfileName" editable="false" layoutX="297.0" layoutY="26.0" text="Hello World">
-                                             <styleClass>
-                                                <String fx:value="_42" />
-                                                <String fx:value="noBackground" />
-                                                <String fx:value="fontregular" />
-                                                <String fx:value="whiteText" />
-                                             </styleClass>
-                                          </TextField>
-                                          <TextField fx:id="txfOfficerProfilePosition" editable="false" layoutX="277.0" layoutY="75.0" text="President">
-                                             <styleClass>
-                                                <String fx:value="_25" />
-                                                <String fx:value="noBackground" />
-                                                <String fx:value="fontregular" />
-                                                <String fx:value="whiteText" />
-                                             </styleClass>
-                                          </TextField>
-                                          <TextArea fx:id="txaOfficerProfileDescription" editable="false" layoutX="280.0" layoutY="108.0" maxWidth="666.0" minWidth="666.0" prefHeight="95.0" prefWidth="666.0" style="-fx-control-inner-background: transparent;" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut orci nec quam auctor vestibulum. Duis vel massa vel sem pretium bibendum. Suspendisse potenti. Nunc euismod, quam id gravida consequat, turpis urna vestibulum lorem, ac pharetra velit nulla vel magna." wrapText="true">
-                                             <styleClass>
-                                                <String fx:value="_20" />
-                                                <String fx:value="fontregular" />
-                                             </styleClass>
-                                          </TextArea>
-                                          <HBox layoutX="290.0" layoutY="217.0" prefHeight="40.0" prefWidth="624.0">
+                                          <VBox alignment="CENTER_LEFT" layoutX="301.0" layoutY="23.0" maxHeight="209.0" minHeight="215.0" prefHeight="215.0" prefWidth="611.0" AnchorPane.bottomAnchor="0.0">
                                              <children>
-                                                <Button fx:id="btnOfficerDetailsEditDetails" mnemonicParsing="false" prefHeight="27.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 20; -fx-text-fill: white;" text="Edit Details">
-                                                   <HBox.margin>
-                                                      <Insets bottom="5.0" right="10.0" top="5.0" />
-                                                   </HBox.margin>
+                                                <HBox alignment="CENTER_LEFT" spacing="9.0">
+                                                   <children>
+                                                      <ImageView fx:id="imvOfficerProfileBack" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
+                                                         <image>
+                                                            <Image url="@../assets/icons/back.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label fx:id="txfOfficerProfileName" prefHeight="47.0" prefWidth="590.0" text="Hello World">
+                                                         <styleClass>
+                                                            <String fx:value="_40" />
+                                                            <String fx:value="noBackground" />
+                                                            <String fx:value="fontregular" />
+                                                            <String fx:value="whiteText" />
+                                                         </styleClass>
+                                                         <padding>
+                                                            <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
+                                                         </padding>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <Label fx:id="txfOfficerProfilePosition" prefHeight="26.0" prefWidth="590.0" text="President">
                                                    <styleClass>
-                                                      <String fx:value="_15" />
+                                                      <String fx:value="_20" />
+                                                      <String fx:value="noBackground" />
                                                       <String fx:value="fontregular" />
+                                                      <String fx:value="whiteText" />
                                                    </styleClass>
-                                                   <padding>
-                                                      <Insets bottom="3.0" left="20.0" right="20.0" top="3.0" />
-                                                   </padding>
-                                                </Button>
-                                                <Button fx:id="btnOfficerDetailsGenerateReport" mnemonicParsing="false" prefHeight="27.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 20; -fx-text-fill: white;" text="Generate Report">
-                                                   <HBox.margin>
-                                                      <Insets bottom="5.0" right="10.0" top="5.0" />
-                                                   </HBox.margin>
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <Label fx:id="txaOfficerProfileDescription" prefWidth="570.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." wrapText="true">
                                                    <styleClass>
-                                                      <String fx:value="_15" />
+                                                      <String fx:value="_16" />
                                                       <String fx:value="fontregular" />
+                                                      <String fx:value="whiteText" />
                                                    </styleClass>
-                                                   <padding>
-                                                      <Insets bottom="3.0" left="20.0" right="20.0" top="3.0" />
-                                                   </padding>
-                                                </Button>
-                                                <Button fx:id="btnOfficerDetailsAddProject" mnemonicParsing="false" prefHeight="27.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 20; -fx-text-fill: white;" text="Add Project">
-                                                   <HBox.margin>
-                                                      <Insets bottom="5.0" right="10.0" top="5.0" />
-                                                   </HBox.margin>
-                                                   <styleClass>
-                                                      <String fx:value="_15" />
-                                                      <String fx:value="fontregular" />
-                                                   </styleClass>
-                                                   <padding>
-                                                      <Insets bottom="3.0" left="20.0" right="20.0" top="3.0" />
-                                                   </padding>
-                                                </Button>
-                                                <Button fx:id="btnOfficerDetailsDeleteOfficer" mnemonicParsing="false" prefHeight="27.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 20; -fx-text-fill: white;" text="Delete Officer">
-                                                   <styleClass>
-                                                      <String fx:value="_15" />
-                                                      <String fx:value="fontregular" />
-                                                   </styleClass>
-                                                   <HBox.margin>
-                                                      <Insets bottom="5.0" right="10.0" top="5.0" />
-                                                   </HBox.margin>
-                                                   <padding>
-                                                      <Insets bottom="3.0" left="20.0" right="20.0" top="3.0" />
-                                                   </padding>
-                                                </Button>
+                                                   <VBox.margin>
+                                                      <Insets bottom="3.0" top="3.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <HBox prefHeight="40.0" prefWidth="624.0">
+                                                   <children>
+                                                      <Button fx:id="btnOfficerDetailsEditDetails" mnemonicParsing="false" prefHeight="27.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 20; -fx-text-fill: white;" text="Edit Details">
+                                                         <HBox.margin>
+                                                            <Insets bottom="5.0" right="10.0" top="5.0" />
+                                                         </HBox.margin>
+                                                         <styleClass>
+                                                            <String fx:value="_15" />
+                                                            <String fx:value="fontregular" />
+                                                         </styleClass>
+                                                         <padding>
+                                                            <Insets bottom="3.0" left="20.0" right="20.0" top="3.0" />
+                                                         </padding>
+                                                      </Button>
+                                                      <Button fx:id="btnOfficerDetailsGenerateReport" mnemonicParsing="false" prefHeight="27.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 20; -fx-text-fill: white;" text="Generate Report">
+                                                         <HBox.margin>
+                                                            <Insets bottom="5.0" right="10.0" top="5.0" />
+                                                         </HBox.margin>
+                                                         <styleClass>
+                                                            <String fx:value="_15" />
+                                                            <String fx:value="fontregular" />
+                                                         </styleClass>
+                                                         <padding>
+                                                            <Insets bottom="3.0" left="20.0" right="20.0" top="3.0" />
+                                                         </padding>
+                                                      </Button>
+                                                      <Button fx:id="btnOfficerDetailsEditProjects" mnemonicParsing="false" prefHeight="27.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 20; -fx-text-fill: white;" text="Edit Projects">
+                                                         <HBox.margin>
+                                                            <Insets bottom="5.0" right="10.0" top="5.0" />
+                                                         </HBox.margin>
+                                                         <styleClass>
+                                                            <String fx:value="_15" />
+                                                            <String fx:value="fontregular" />
+                                                         </styleClass>
+                                                         <padding>
+                                                            <Insets bottom="3.0" left="20.0" right="20.0" top="3.0" />
+                                                         </padding>
+                                                      </Button>
+                                                      <Button fx:id="btnOfficerDetailsDeleteOfficer" mnemonicParsing="false" prefHeight="27.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 20; -fx-text-fill: white;" text="Delete Officer">
+                                                         <styleClass>
+                                                            <String fx:value="_15" />
+                                                            <String fx:value="fontregular" />
+                                                         </styleClass>
+                                                         <HBox.margin>
+                                                            <Insets bottom="5.0" right="10.0" top="5.0" />
+                                                         </HBox.margin>
+                                                         <padding>
+                                                            <Insets bottom="3.0" left="20.0" right="20.0" top="3.0" />
+                                                         </padding>
+                                                      </Button>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" top="5.0" />
+                                                   </VBox.margin>
+                                                </HBox>
                                              </children>
-                                          </HBox>
-                                          <ImageView fx:id="imvOfficerProfileBack" fitHeight="25.0" fitWidth="25.0" layoutX="290.0" layoutY="51.0" pickOnBounds="true">
-                                             <image>
-                                                <Image url="@../assets/icons/back.png" />
-                                             </image>
-                                          </ImageView>
+                                          </VBox>
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane>
                                        <children>
-                                          <VBox fx:id="vbxProjectsList" layoutX="70.0" layoutY="11.0" prefHeight="1031.0" prefWidth="848.0" AnchorPane.bottomAnchor="-9.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="11.0" />
+                                          <VBox fx:id="vbxProjectsList" layoutX="71.0" layoutY="11.0" prefHeight="1031.0" prefWidth="848.0" AnchorPane.bottomAnchor="-9.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="69.0" AnchorPane.topAnchor="11.0" />
                                        </children>
                                     </AnchorPane>
                                  </children>
                               </VBox>
-                              <Pane fx:id="pneViewOfficerNoProject" layoutY="231.0" prefHeight="322.0" prefWidth="976.0" visible="false">
+                              <Pane fx:id="pneViewOfficerNoProject" layoutY="253.0" prefHeight="301.0" prefWidth="950.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="253.0">
                                  <children>
-                                    <Label layoutX="313.0" layoutY="127.0" text="Hmm. We can't find any projects for this officer">
+                                    <Label layoutX="331.0" layoutY="121.0" text="We can't find any projects, Sorry.">
                                        <styleClass>
                                           <String fx:value="_20" />
                                           <String fx:value="whiteText" />
@@ -252,7 +295,7 @@
                   </ScrollPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="anpOfficerEditOfficer" prefHeight="573.0" prefWidth="975.0" visible="false">
+            <AnchorPane fx:id="anpOfficerEditOfficer" prefHeight="573.0" prefWidth="975.0">
                <children>
                   <AnchorPane layoutX="646.0" layoutY="92.0" prefHeight="550.0" prefWidth="330.0" style="-fx-background-radius: 30 0 0 30;" styleClass="secondaryBackground" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="646.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
@@ -261,15 +304,15 @@
                               <Label fx:id="lblEditOfficerDialogTitle" contentDisplay="CENTER" prefHeight="46.0" prefWidth="258.0" text="Add Officer" textAlignment="CENTER" textFill="WHITE">
                                  <styleClass>
                                     <String fx:value="fontregular" />
-                                    <String fx:value="_42" />
+                                    <String fx:value="_28" />
                                  </styleClass>
                               </Label>
-                              <Pane id="pneOfficialSearch" prefHeight="39.0" prefWidth="269.0" style="-fx-border-color: yellow; -fx-border-radius: 5;">
+                              <Pane prefHeight="39.0" prefWidth="272.0" style="-fx-border-color: yellow; -fx-border-radius: 5;">
                                  <children>
-                                    <TextField fx:id="txfEditOfficerName" focusTraversable="false" layoutX="12.0" layoutY="5.0" prefHeight="29.0" prefWidth="243.0" promptText="Officer Name" style="-fx-background-color: none; -fx-text-fill: yellow;">
+                                    <TextField fx:id="txfEditOfficerName" focusTraversable="false" layoutX="6.0" layoutY="5.0" prefHeight="29.0" prefWidth="258.0" promptText="Officer Name" style="-fx-background-color: none; -fx-text-fill: yellow;">
                                        <styleClass>
                                           <String fx:value="fontregular" />
-                                          <String fx:value="_16" />
+                                          <String fx:value="_14" />
                                        </styleClass>
                                     </TextField>
                                  </children>
@@ -280,16 +323,16 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </FlowPane.margin>
                               </Pane>
-                              <Pane id="pneOfficialSearch" prefHeight="187.0" prefWidth="270.0" style="-fx-border-color: yellow; -fx-border-radius: 5;">
+                              <Pane prefHeight="133.0" prefWidth="270.0" style="-fx-border-color: yellow; -fx-border-radius: 5;">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
                                  <children>
-                                    <TextArea fx:id="txaEditOfficerDescription" layoutX="11.0" layoutY="10.0" prefHeight="164.0" prefWidth="248.0" promptText="Officer Description" wrapText="true">
+                                    <TextArea fx:id="txaEditOfficerDescription" layoutX="6.0" layoutY="9.0" prefHeight="120.0" prefWidth="248.0" promptText="Officer Description" style="-fx-text-fill: white;" wrapText="true">
                                        <styleClass>
                                           <String fx:value="whiteText" />
                                           <String fx:value="fontregular" />
-                                          <String fx:value="_16" />
+                                          <String fx:value="_14" />
                                        </styleClass>
                                     </TextArea>
                                  </children>
@@ -297,12 +340,12 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </FlowPane.margin>
                               </Pane>
-                              <Pane id="pneOfficialSearch" prefHeight="39.0" prefWidth="269.0" style="-fx-border-color: yellow; -fx-border-radius: 5;">
+                              <Pane prefHeight="39.0" prefWidth="269.0" style="-fx-border-color: yellow; -fx-border-radius: 5;">
                                  <children>
-                                    <TextField fx:id="txfEditOfficerPosition" focusTraversable="false" layoutX="12.0" layoutY="5.0" prefHeight="29.0" prefWidth="248.0" promptText="Position" style="-fx-background-color: none; -fx-text-fill: yellow;">
+                                    <TextField fx:id="txfEditOfficerPosition" focusTraversable="false" layoutX="5.0" layoutY="5.0" prefHeight="29.0" prefWidth="258.0" promptText="Position" style="-fx-background-color: none; -fx-text-fill: yellow;">
                                        <styleClass>
                                           <String fx:value="fontregular" />
-                                          <String fx:value="_16" />
+                                          <String fx:value="_14" />
                                        </styleClass>
                                     </TextField>
                                  </children>
@@ -313,22 +356,25 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </FlowPane.margin>
                               </Pane>
-                              <Pane id="pneOfficialSearch" prefHeight="39.0" prefWidth="159.0" style="-fx-border-color: yellow; -fx-border-radius: 5;">
+                              <Pane prefHeight="39.0" prefWidth="163.0" style="-fx-border-color: yellow; -fx-border-radius: 5;">
                                  <children>
-                                    <TextField fx:id="txfEditOfficerTerm" focusTraversable="false" layoutX="12.0" layoutY="5.0" prefHeight="29.0" prefWidth="123.0" promptText="Term Year" style="-fx-background-color: none; -fx-text-fill: yellow;">
+                                    <TextField fx:id="txfEditOfficerTerm" focusTraversable="false" layoutX="4.0" layoutY="3.0" prefHeight="33.0" prefWidth="158.0" promptText="Term Year" style="-fx-background-color: none; -fx-text-fill: yellow;">
                                        <styleClass>
                                           <String fx:value="fontregular" />
-                                          <String fx:value="_16" />
+                                          <String fx:value="_14" />
                                        </styleClass>
                                     </TextField>
                                  </children>
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
-                              </Pane>
-                              <ComboBox fx:id="cbxEditOfficerStrand" prefHeight="26.0" prefWidth="97.0">
                                  <FlowPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                    <Insets bottom="5.0" right="3.0" top="5.0" />
+                                 </FlowPane.margin>
+                              </Pane>
+                              <ComboBox fx:id="cbxEditOfficerStrand" prefHeight="39.0" prefWidth="104.0">
+                                 <FlowPane.margin>
+                                    <Insets />
                                  </FlowPane.margin>
                               </ComboBox>
                               <Button fx:id="btnEditOfficerAction4" focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Button4">
@@ -380,8 +426,10 @@
       </StackPane>
    </children>
    <stylesheets>
-      <URL value="@../css/view-officers.css" />
-      <URL value="@../css/main-style.css" />
-      <URL value="@../css/font-size.css" />
+      <URL value="@../css/selfish/view-officers.css" />
+      <URL value="@../css/backgrounds.css" />
+      <URL value="@../css/components.css" />
+      <URL value="@../css/fonts.css" />
+      <URL value="@../css/buttons.css" />
    </stylesheets>
 </AnchorPane>

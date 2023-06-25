@@ -1,0 +1,12 @@
+
+.toolBar1, .toolBar2 {
+    -fx-background-color: none!important;
+}
+
+.toolBar1:hover {
+    -fx-background-color: rgba(15, 16, 36, 0.8)!important;
+}
+
+.toolBar2:hover {
+    -fx-background-color: #570e09!important;
+}

@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.3.final using JasperReports Library version 6.20.3-415f9428cffdb6805c6f85bbb29ebaf18813a2ab  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="project-list" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="036947c6-19ec-4ae1-859c-c2b5e74ec9d3">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SPEND Data Adapter"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<subDataset name="Projects" uuid="5a4552ee-2d14-4f62-82f1-9fb18c3b8400">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SPEND Data Adapter"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT
+    SD.DATA_ID,
+    SD.UPDATETIME,
+    SD.SCHOOLYEAR,
+    SD.SCHOOLLOGO,
+    SD.SSGLOGO,
+    P.PROJECT_ID,
+    P.TITLE,
+    P.DESCRIPTION,
+    P.USER_ID,
+    P.PROJECT_CD,
+    P.EVENTDATE,
+    E.TOTAL_EXPENSE,
+    C.CONTRIBUTOR_COUNT,
+    ROW_NUMBER() OVER (ORDER BY P.PROJECT_ID) AS PROJECT_NUMBER
+FROM
+    SCHOOLDATA SD
+JOIN
+    PROJECTS P 
+LEFT JOIN
+    (
+        SELECT
+            PROJECT_ID,
+            SUM(TOTALPRICE) AS TOTAL_EXPENSE
+        FROM
+            EXPENSES
+        GROUP BY
+            PROJECT_ID
+    ) E ON P.PROJECT_ID = E.PROJECT_ID
+LEFT JOIN
+    (
+        SELECT
+            PROJECT_ID,
+            COUNT(OFFICER_ID) AS CONTRIBUTOR_COUNT
+        FROM
+            CONTRIBUTORS
+        GROUP BY
+            PROJECT_ID
+    ) C ON P.PROJECT_ID = C.PROJECT_ID
+WHERE
+  P.PROJECT_ID IN ('1', '2', '3')]]>
+		</queryString>
+		<field name="DATA_ID" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="DATA_ID"/>
+			<property name="com.jaspersoft.studio.field.label" value="DATA_ID"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="schooldata"/>
+		</field>
+		<field name="UPDATETIME" class="java.sql.Timestamp">
+			<property name="com.jaspersoft.studio.field.name" value="UPDATETIME"/>
+			<property name="com.jaspersoft.studio.field.label" value="UPDATETIME"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="schooldata"/>
+		</field>
+		<field name="SCHOOLYEAR" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="SCHOOLYEAR"/>
+			<property name="com.jaspersoft.studio.field.label" value="SCHOOLYEAR"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="schooldata"/>
+		</field>
+		<field name="SCHOOLLOGO" class="byte[]">
+			<property name="com.jaspersoft.studio.field.name" value="SCHOOLLOGO"/>
+			<property name="com.jaspersoft.studio.field.label" value="SCHOOLLOGO"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="schooldata"/>
+		</field>
+		<field name="SSGLOGO" class="byte[]">
+			<property name="com.jaspersoft.studio.field.name" value="SSGLOGO"/>
+			<property name="com.jaspersoft.studio.field.label" value="SSGLOGO"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="schooldata"/>
+		</field>
+		<field name="PROJECT_ID" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="PROJECT_ID"/>
+			<property name="com.jaspersoft.studio.field.label" value="PROJECT_ID"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="projects"/>
+		</field>
+		<field name="TITLE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="TITLE"/>
+			<property name="com.jaspersoft.studio.field.label" value="TITLE"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="projects"/>
+		</field>
+		<field name="DESCRIPTION" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="DESCRIPTION"/>
+			<property name="com.jaspersoft.studio.field.label" value="DESCRIPTION"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="projects"/>
+		</field>
+		<field name="USER_ID" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="USER_ID"/>
+			<property name="com.jaspersoft.studio.field.label" value="USER_ID"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="projects"/>
+		</field>
+		<field name="PROJECT_CD" class="java.sql.Date">
+			<property name="com.jaspersoft.studio.field.name" value="PROJECT_CD"/>
+			<property name="com.jaspersoft.studio.field.label" value="PROJECT_CD"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="projects"/>
+		</field>
+		<field name="EVENTDATE" class="java.sql.Date">
+			<property name="com.jaspersoft.studio.field.name" value="EVENTDATE"/>
+			<property name="com.jaspersoft.studio.field.label" value="EVENTDATE"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="projects"/>
+		</field>
+		<field name="TOTAL_EXPENSE" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.name" value="TOTAL_EXPENSE"/>
+			<property name="com.jaspersoft.studio.field.label" value="TOTAL_EXPENSE"/>
+		</field>
+		<field name="CONTRIBUTOR_COUNT" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="CONTRIBUTOR_COUNT"/>
+			<property name="com.jaspersoft.studio.field.label" value="CONTRIBUTOR_COUNT"/>
+		</field>
+		<field name="PROJECT_NUMBER" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="PROJECT_NUMBER"/>
+			<property name="com.jaspersoft.studio.field.label" value="PROJECT_NUMBER"/>
+		</field>
+		<group name="DATA_ID">
+			<groupExpression><![CDATA[$F{DATA_ID}]]></groupExpression>
+		</group>
+		<group name="UPDATETIME">
+			<groupExpression><![CDATA[$F{UPDATETIME}]]></groupExpression>
+		</group>
+		<group name="SCHOOLYEAR">
+			<groupExpression><![CDATA[$F{SCHOOLYEAR}]]></groupExpression>
+		</group>
+		<group name="SCHOOLLOGO">
+			<groupExpression><![CDATA[$F{SCHOOLLOGO}]]></groupExpression>
+		</group>
+		<group name="SSGLOGO">
+			<groupExpression><![CDATA[$F{SSGLOGO}]]></groupExpression>
+		</group>
+		<group name="PROJECT_ID">
+			<groupExpression><![CDATA[$F{PROJECT_ID}]]></groupExpression>
+		</group>
+		<group name="TITLE">
+			<groupExpression><![CDATA[$F{TITLE}]]></groupExpression>
+		</group>
+		<group name="DESCRIPTION">
+			<groupExpression><![CDATA[$F{DESCRIPTION}]]></groupExpression>
+		</group>
+		<group name="USER_ID">
+			<groupExpression><![CDATA[$F{USER_ID}]]></groupExpression>
+		</group>
+		<group name="PROJECT_CD">
+			<groupExpression><![CDATA[$F{PROJECT_CD}]]></groupExpression>
+		</group>
+		<group name="EVENTDATE">
+			<groupExpression><![CDATA[$F{EVENTDATE}]]></groupExpression>
+		</group>
+		<group name="TOTAL_EXPENSE">
+			<groupExpression><![CDATA[$F{TOTAL_EXPENSE}]]></groupExpression>
+		</group>
+		<group name="CONTRIBUTOR_COUNT">
+			<groupExpression><![CDATA[$F{CONTRIBUTOR_COUNT}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="PRINCIPAL" class="java.lang.String"/>
+	<parameter name="SSG_ADVISER" class="java.lang.String"/>
+	<parameter name="PREPARED" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+    SD.DATA_ID,
+    SD.UPDATETIME,
+    SD.SCHOOLYEAR,
+    SD.SCHOOLLOGO,
+    SD.SSGLOGO,
+    P.PROJECT_ID,
+    P.TITLE,
+    P.DESCRIPTION,
+    P.USER_ID,
+    P.PROJECT_CD,
+    P.EVENTDATE,
+    E.TOTAL_EXPENSE,
+    C.CONTRIBUTOR_COUNT,
+    ROW_NUMBER() OVER (ORDER BY P.PROJECT_ID) AS PROJECT_NUMBER
+FROM
+    SCHOOLDATA SD
+JOIN
+    PROJECTS P 
+LEFT JOIN
+    (
+        SELECT
+            PROJECT_ID,
+            SUM(TOTALPRICE) AS TOTAL_EXPENSE
+        FROM
+            EXPENSES
+        GROUP BY
+            PROJECT_ID
+    ) E ON P.PROJECT_ID = E.PROJECT_ID
+LEFT JOIN
+    (
+        SELECT
+            PROJECT_ID,
+            COUNT(OFFICER_ID) AS CONTRIBUTOR_COUNT
+        FROM
+            CONTRIBUTORS
+        GROUP BY
+            PROJECT_ID
+    ) C ON P.PROJECT_ID = C.PROJECT_ID
+WHERE
+  P.PROJECT_ID IN ('1', '2', '3')]]>
+	</queryString>
+	<field name="DATA_ID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="DATA_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="DATA_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="schooldata"/>
+	</field>
+	<field name="UPDATETIME" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="UPDATETIME"/>
+		<property name="com.jaspersoft.studio.field.label" value="UPDATETIME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="schooldata"/>
+	</field>
+	<field name="SCHOOLYEAR" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="SCHOOLYEAR"/>
+		<property name="com.jaspersoft.studio.field.label" value="SCHOOLYEAR"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="schooldata"/>
+	</field>
+	<field name="SCHOOLLOGO" class="byte[]">
+		<property name="com.jaspersoft.studio.field.name" value="SCHOOLLOGO"/>
+		<property name="com.jaspersoft.studio.field.label" value="SCHOOLLOGO"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="schooldata"/>
+	</field>
+	<field name="SSGLOGO" class="byte[]">
+		<property name="com.jaspersoft.studio.field.name" value="SSGLOGO"/>
+		<property name="com.jaspersoft.studio.field.label" value="SSGLOGO"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="schooldata"/>
+	</field>
+	<field name="PROJECT_ID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="PROJECT_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="PROJECT_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="projects"/>
+	</field>
+	<field name="TITLE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="TITLE"/>
+		<property name="com.jaspersoft.studio.field.label" value="TITLE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="projects"/>
+	</field>
+	<field name="DESCRIPTION" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="DESCRIPTION"/>
+		<property name="com.jaspersoft.studio.field.label" value="DESCRIPTION"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="projects"/>
+	</field>
+	<field name="USER_ID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="USER_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="USER_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="projects"/>
+	</field>
+	<field name="PROJECT_CD" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="PROJECT_CD"/>
+		<property name="com.jaspersoft.studio.field.label" value="PROJECT_CD"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="projects"/>
+	</field>
+	<field name="EVENTDATE" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="EVENTDATE"/>
+		<property name="com.jaspersoft.studio.field.label" value="EVENTDATE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="projects"/>
+	</field>
+	<field name="TOTAL_EXPENSE" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="TOTAL_EXPENSE"/>
+		<property name="com.jaspersoft.studio.field.label" value="TOTAL_EXPENSE"/>
+	</field>
+	<field name="CONTRIBUTOR_COUNT" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="CONTRIBUTOR_COUNT"/>
+		<property name="com.jaspersoft.studio.field.label" value="CONTRIBUTOR_COUNT"/>
+	</field>
+	<field name="PROJECT_NUMBER" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="PROJECT_NUMBER"/>
+		<property name="com.jaspersoft.studio.field.label" value="PROJECT_NUMBER"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="105" splitType="Stretch">
+			<frame>
+				<reportElement x="40" y="20" width="480" height="82" uuid="ea608b0a-6ced-4f6e-93f4-05be3c82c7e5"/>
+				<image>
+					<reportElement x="0" y="0" width="80" height="80" uuid="61d13f53-64f0-4fd1-b2a4-28214420ecc7"/>
+					<imageExpression><![CDATA[$F{SCHOOLLOGO}]]></imageExpression>
+				</image>
+				<image>
+					<reportElement x="400" y="0" width="80" height="80" uuid="aa959a17-c3bf-4051-b65e-7d8a05579aaa"/>
+					<imageExpression><![CDATA[$F{SSGLOGO}]]></imageExpression>
+				</image>
+				<textField>
+					<reportElement x="90" y="39" width="289" height="30" uuid="df86e157-c5ce-4c84-8598-3028a989149c"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA["School Year " + $F{SCHOOLYEAR} + " - " + ($F{SCHOOLYEAR} + 1)]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="125" y="7" width="221" height="30" uuid="78773dd0-5407-4af6-879a-989b5621f3df"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="12"/>
+					</textElement>
+					<text><![CDATA[SHS in San Nicholas III, Bacoor City]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="121" y="24" width="230" height="30" uuid="b4bbe6d5-c3bf-43f9-b975-d487b220a858"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="12"/>
+					</textElement>
+					<text><![CDATA[Supreme Student Government]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="145" y="57" width="185" height="30" uuid="d53a9bb3-2346-4ec6-a569-b9f553c058d3"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="12"/>
+					</textElement>
+					<text><![CDATA[SPEND System]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<summary>
+		<band height="300" splitType="Stretch">
+			<staticText>
+				<reportElement x="80" y="30" width="410" height="30" uuid="9408a231-22fd-4672-86cb-ab15b4711ccd"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Supreme Student Government Projects and Programs]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="40" y="80" width="480" height="70" uuid="55be24be-4a92-48f3-bea8-f903e25dbd17"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Projects" uuid="5c9d2725-14f2-4273-82a0-4e494309118a">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="70" width="480">
+						<textField textAdjust="StretchHeight">
+							<reportElement x="0" y="0" width="480" height="20" uuid="7c85911b-3121-4400-8f0b-e52ca7d32b20"/>
+							<textElement>
+								<font fontName="Arial" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{PROJECT_NUMBER} + ". " + $F{TITLE} + "\n" +
+"Date: " + new SimpleDateFormat("MMMM dd, yyyy").format($F{EVENTDATE}) + "\n" +
+"Number of Officer Contributors: " + $F{CONTRIBUTOR_COUNT} + "\n" +
+"Total Expenses: ₱" + String.format("%.2f", $F{TOTAL_EXPENSE})]]></textFieldExpression>
+						</textField>
+						<textField textAdjust="StretchHeight">
+							<reportElement positionType="Float" x="10" y="30" width="470" height="20" uuid="a1334de7-2b9d-412b-b2b4-25af807d8665"/>
+							<textElement>
+								<font fontName="Arial" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA["\t" + $F{DESCRIPTION}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<frame>
+				<reportElement positionType="Float" x="29" y="240" width="490" height="40" uuid="49ddf947-8a5c-41fc-9a3d-6e9af1c261fd"/>
+				<textField>
+					<reportElement x="180" y="10" width="140" height="30" uuid="2b48ca64-8324-4747-8b1d-5c2ef2f1c411"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{SSG_ADVISER} + "\n"+
+"SSG Adviser"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="350" y="10" width="139" height="30" uuid="68812f1b-5d60-4df0-ba78-dfbf5d513158"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{PRINCIPAL} + "\n"+
+"Principal"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="180" y="2" width="140" height="1" uuid="05ed72a5-9b8d-40fd-928e-660106581848"/>
+				</line>
+				<line>
+					<reportElement x="349" y="1" width="140" height="1" uuid="b3a1d77b-51f4-48e9-93c7-71ce81e757bb"/>
+				</line>
+				<textField>
+					<reportElement x="16" y="10" width="140" height="30" uuid="786f48e3-cc63-420a-96ac-b1b9379a8e6c"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{PREPARED} + "\n"+
+"Prepared by"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="16" y="2" width="140" height="1" uuid="0253fc14-3c51-4530-9941-fb13a2b04e01"/>
+				</line>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>

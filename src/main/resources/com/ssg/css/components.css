@@ -1,0 +1,188 @@
+/* Assorted */
+.scroll-pane .viewport,
+.scroll-pane .content,
+.scroll-pane,
+.text-area .scroll-pane .content,
+.text-area .scroll-pane .viewport,
+.text-area .scroll-pane,
+.mfx-scroll-pane,
+.mfx-scroll-pane .viewport,
+.mfx-scroll-pane .content,
+.text-area {
+    -fx-background-color: transparent;
+}
+.scroll-pane .scroll-bar:vertical .increment-button,
+.scroll-pane .scroll-bar:vertical .decrement-button {
+    -fx-opacity: 0;
+    -fx-interactable: false;
+}
+
+.scroll-bar:vertical {
+    /* -fx-opacity: 0; */
+    -fx-pref-width: 10px;
+    -fx-background-color: none;
+    -fx-min-width: 10px;
+    -fx-max-width: 10px;
+}
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #212342;
+}
+
+TextField, TextArea {
+    -fx-context-menu: none;
+}
+
+/* Combo Box */
+.combo-box {
+    -fx-text-fill: white;
+    -fx-font-family: "Century Gothic";
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: yellow;
+    -fx-text-fill: white;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: #212342;
+    -fx-padding: 5px;
+    -fx-text-fill: white;
+}
+
+.combo-box .list-cell:selected {
+    -fx-border-color: yellow;
+    -fx-text-fill: white;
+    -fx-background-radius: 5 0 0 5;
+    -fx-background-color: #212342;
+    -fx-border-radius: 5 0 0 5;
+    -fx-font-family: "Century Gothic";
+    -fx-text-fill: white;
+}
+
+.combo-box .list-view {
+    -fx-background-color: #212342;
+    -fx-padding: 0;
+    -fx-text-fill: white;
+    -fx-border-color: yellow;
+}
+
+.combo-box .list-view .list-cell {
+    -fx-background-color: #212342;
+    -fx-text-fill: white;
+}
+
+.combo-box .list-view .list-cell:hover {
+    -fx-background-color: #212342;
+    -fx-text-fill: white;
+}
+
+/* Progress Bar */
+.mfx-progress-bar:indeterminate .bar1,
+.mfx-progress-bar:indeterminate .bar2,
+.mfx-progress-bar .bar1,
+.mfx-progress-bar .bar2 {
+	-fx-fill: #2e5dab!important;
+}
+
+.mfx-progress-bar .track {
+	-fx-fill: #11132f!important;
+}
+
+/* Date Picker */
+.date-picker {
+    -fx-background-color: #040814;
+    -fx-text-fill: white;
+    -fx-font-family: "Century Gothic";
+    -fx-border-color: yellow;
+    -fx-font-size: 14px;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+.date-picker .arrow-button {
+  -fx-background-color: #212342;
+  -fx-background-radius: 0;
+}
+.date-picker .arrow-button .arrow {
+  -fx-background-color: white;
+  -fx-text-fill: white;
+}
+.date-picker-popup .month-year-pane {
+    -fx-background-color: #212342;
+}
+.date-picker .cell {
+  -fx-background-color: #212342;
+  -fx-text-fill: yellow;
+}
+.date-picker-popup {
+    -fx-background-color: #212342;
+}
+.date-picker-popup .month-year-pane {
+    -fx-background-color: #212342;
+}
+
+.date-picker-popup .month-year-pane .label {
+  -fx-text-fill: white;
+}
+
+.date-picker-popup .week-number-cell {
+  -fx-text-fill: white;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: #212342;
+    -fx-text-fill: white;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.date-picker .text-field {
+    -fx-background-color: #040814;
+    -fx-text-fill: white;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-font-family: "Century Gothic";
+}
+
+.date-picker .text-field:focused {
+    -fx-background-color: #040814;
+    -fx-text-fill: white;
+}
+
+.date-picker .popup-content .month-year-pane {
+    -fx-background-color: #040814;
+}
+
+.date-picker .popup-content {
+    -fx-background-color: #212342;
+    -fx-text-fill: white;
+}
+
+.date-picker .day-cell {
+    -fx-background-color: #212342;
+    -fx-text-fill: white;
+}
+
+.date-picker .day-cell:hover {
+    -fx-background-color: #212342;
+    -fx-text-fill: white;
+}
+
+.date-picker .day-cell:selected {
+    -fx-background-color: #212342;
+    -fx-text-fill: white;
+}
+
+/* Radio Button */
+.radio-button .radio {
+    -fx-background-color: #212342;
+    -fx-border-color: yellow;
+    -fx-border-radius: 50;
+}
+
+.radio-button .radio .dot {
+    -fx-background-color: transparent;
+}
+
+.radio-button:selected .radio .dot {
+    -fx-background-color: yellow;
+}

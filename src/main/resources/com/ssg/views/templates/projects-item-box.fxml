@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXProgressBar?>
 <?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane minHeight="253.0" prefHeight="253.0" prefWidth="370.0" style="-fx-background-color: #2b3d5a50; -fx-background-radius: 20;" styleClass="template" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.templates.ProjectsItemBox">
+<AnchorPane minHeight="-Infinity" prefHeight="258.0" prefWidth="370.0" style="-fx-background-radius: 20;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.templates.ProjectsItemBox">
    <children>
       <VBox layoutX="88.0" layoutY="47.0" prefHeight="249.0" prefWidth="368.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -29,57 +28,26 @@
                   <Insets top="10.0" />
                </VBox.margin>
                <styleClass>
-                  <String fx:value="_42" />
+                  <String fx:value="_32" />
                   <String fx:value="fontregular" />
                   <String fx:value="whiteText" />
                </styleClass>
             </Label>
-            <Label fx:id="lblProjectDescription" prefHeight="73.0" prefWidth="300.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ultrices libero et ex venenatis luctus." wrapText="true">
+            <Label fx:id="lblProjectDescription" alignment="TOP_LEFT" prefHeight="98.0" prefWidth="300.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ultrices libero et ex venenatis luctus." wrapText="true">
                <styleClass>
-                  <String fx:value="_23" />
+                  <String fx:value="_18" />
                   <String fx:value="fontregular" />
                   <String fx:value="whiteText" />
                </styleClass>
-            </Label>
-            <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="293.0">
-               <children>
-                  <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" styleClass="contributors">
-                     <image>
-                        <Image url="@../../assets/icons/school-logo.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets left="-10.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" styleClass="contributors">
-                     <image>
-                        <Image url="@../../assets/icons/school-logo.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets left="-10.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" styleClass="contributors">
-                     <image>
-                        <Image url="@../../assets/icons/school-logo.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets left="-10.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" styleClass="contributors">
-                     <image>
-                        <Image url="@../../assets/icons/school-logo.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets left="-10.0" />
-                     </HBox.margin>
-                  </ImageView>
-               </children>
                <VBox.margin>
-                  <Insets left="10.0" top="10.0" />
+                  <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
-            </HBox>
+            </Label>
+            <MFXProgressBar fx:id="pgbProjectExpensesApprovalRate" prefHeight="8.0" prefWidth="300.0" progress="0.57">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </MFXProgressBar>
          </children>
          <padding>
             <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
@@ -90,8 +58,16 @@
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
    </padding>
    <stylesheets>
-      <URL value="@../../css/main-style.css" />
-      <URL value="@../../css/font-size.css" />
-      <URL value="@../../css/templates/main-templates.css" />
+      <URL value="@../../css/components.css" />
+      <URL value="@../../css/templates.css" />
+      <URL value="@../../css/fonts.css" />
+      <URL value="@../../css/backgrounds.css" />
    </stylesheets>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
+   <styleClass>
+      <String fx:value="template" />
+      <String fx:value="background4" />
+   </styleClass>
 </AnchorPane>

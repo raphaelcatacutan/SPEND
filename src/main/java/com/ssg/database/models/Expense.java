@@ -1,6 +1,7 @@
 package com.ssg.database.models;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Expense {
     private int expense_id;
@@ -11,8 +12,9 @@ public class Expense {
     private double quantity;
     private double unitPrice;
     private int status;
+    private Timestamp updateTime;
 
-    public Expense(int expense_id, int project_id, String title, double totalPrice, Date expenseDate_cd, double quantity, double unitPrice, int status) {
+    public Expense(int expense_id, int project_id, String title, double totalPrice, Date expenseDate_cd, double quantity, double unitPrice, int status, Timestamp updateTime) {
         this.expense_id = expense_id;
         this.project_id = project_id;
         this.title = title;
@@ -21,6 +23,15 @@ public class Expense {
         this.quantity = quantity;
         this.unitPrice = unitPrice;
         this.status = status;
+        this.updateTime = updateTime;
+    }
+
+    public Timestamp getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Timestamp updateTime) {
+        this.updateTime = updateTime;
     }
 
     public int getProject_id() {

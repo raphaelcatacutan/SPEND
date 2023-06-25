@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import java.net.URL?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.chart.PieChart?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
@@ -14,29 +14,34 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainDashboard" prefHeight="556.0" prefWidth="975.0" style="-fx-background-color: rgba(17, 19, 47);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.ViewDashboard">
+<AnchorPane fx:id="anpView" prefHeight="556.0" prefWidth="975.0" style="-fx-background-color: rgba(17, 19, 47);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.ViewDashboard">
    <children>
       <AnchorPane layoutX="656.0" layoutY="239.0" prefHeight="307.0" prefWidth="276.0" style="-fx-background-radius: 20; -fx-background-color: rgba(9, 12, 48, 1);">
          <children>
-            <Label layoutX="28.0" layoutY="26.0" styleClass="fontregular" text="Recents" textFill="YELLOW">
+            <Label layoutX="28.0" layoutY="26.0" text="Recents" textFill="YELLOW">
                <font>
                   <Font size="33.0" />
                </font>
+               <styleClass>
+                  <String fx:value="fontregular" />
+                  <String fx:value="_23" />
+               </styleClass>
             </Label>
             <Separator layoutX="32.0" layoutY="71.0" prefHeight="5.0" prefWidth="207.0" />
             <VBox fx:id="vbxRecentList" layoutX="21.0" layoutY="85.0" prefHeight="200.0" prefWidth="215.0">
                <children>
-                  <Pane prefHeight="74.0" prefWidth="186.0" styleClass="recentsBox">
+                  <Pane fx:id="pneRecentBox1" prefHeight="74.0" prefWidth="186.0" styleClass="recentsBox">
                      <children>
                         <ImageView fx:id="imvRecent1" fitHeight="37.0" fitWidth="51.0" layoutX="15.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../assets/icons/school-logo.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="lblRecentTitle1" layoutX="65.0" layoutY="12.0" prefHeight="32.0" prefWidth="163.0" styleClass="fontregular" text="R. Catacutan" textAlignment="CENTER" textFill="WHITE">
-                           <font>
-                              <Font size="21.0" />
-                           </font>
+                        <Label fx:id="lblRecentTitle1" layoutX="65.0" layoutY="12.0" prefHeight="32.0" prefWidth="163.0" text="R. Catacutan" textAlignment="CENTER" textFill="WHITE">
+                           <styleClass>
+                              <String fx:value="fontregular" />
+                              <String fx:value="_19" />
+                           </styleClass>
                         </Label>
                         <Label fx:id="lblRecentSubtitle1" layoutX="66.0" layoutY="28.0" prefHeight="32.0" prefWidth="163.0" styleClass="fontregular" text="Official" textAlignment="CENTER" textFill="WHITE">
                            <font>
@@ -44,18 +49,22 @@
                            </font>
                         </Label>
                      </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Pane>
-                  <Pane prefHeight="74.0" prefWidth="200.0" styleClass="recentsBox">
+                  <Pane fx:id="pneRecentBox2" prefHeight="74.0" prefWidth="200.0" styleClass="recentsBox">
                      <children>
                         <ImageView fx:id="imvRecent2" fitHeight="43.0" fitWidth="37.0" layoutX="15.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../assets/icons/school-logo.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="lblRecentTitle2" layoutX="65.0" layoutY="12.0" prefHeight="32.0" prefWidth="163.0" styleClass="fontregular" text="Feeding Program" textAlignment="CENTER" textFill="WHITE">
-                           <font>
-                              <Font size="21.0" />
-                           </font>
+                        <Label fx:id="lblRecentTitle2" layoutX="65.0" layoutY="12.0" prefHeight="32.0" prefWidth="163.0" text="Feeding Program" textAlignment="CENTER" textFill="WHITE">
+                           <styleClass>
+                              <String fx:value="fontregular" />
+                              <String fx:value="_19" />
+                           </styleClass>
                         </Label>
                         <Label fx:id="lblRecentSubtitle2" layoutX="66.0" layoutY="28.0" prefHeight="32.0" prefWidth="163.0" styleClass="fontregular" text="Program" textAlignment="CENTER" textFill="WHITE">
                            <font>
@@ -63,18 +72,22 @@
                            </font>
                         </Label>
                      </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Pane>
-                  <Pane prefHeight="74.0" prefWidth="200.0" styleClass="recentsBox">
+                  <Pane fx:id="pneRecentBox3" prefHeight="74.0" prefWidth="200.0" styleClass="recentsBox">
                      <children>
                         <ImageView fx:id="imvRecent3" fitHeight="37.0" fitWidth="37.0" layoutX="15.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../assets/icons/school-logo.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="lblRecentTitle3" layoutX="65.0" layoutY="12.0" prefHeight="32.0" prefWidth="163.0" styleClass="fontregular" text="Reuse, Reduce, Recycle" textAlignment="CENTER" textFill="WHITE">
-                           <font>
-                              <Font size="21.0" />
-                           </font>
+                        <Label fx:id="lblRecentTitle3" layoutX="65.0" layoutY="12.0" prefHeight="32.0" prefWidth="163.0" text="Reuse, Reduce, Recycle" textAlignment="CENTER" textFill="WHITE">
+                           <styleClass>
+                              <String fx:value="fontregular" />
+                              <String fx:value="_19" />
+                           </styleClass>
                         </Label>
                         <Label fx:id="lblRecentSubtitle3" layoutX="66.0" layoutY="28.0" prefHeight="32.0" prefWidth="163.0" styleClass="fontregular" text="Platform" textAlignment="CENTER" textFill="WHITE">
                            <font>
@@ -82,70 +95,120 @@
                            </font>
                         </Label>
                      </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Pane>
                </children>
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="654.0" layoutY="35.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="179.0" prefWidth="276.0" style="-fx-background-radius: 20; -fx-background-color: rgba(33, 35, 66, 1); -fx-background-image: url('..\assets\images\pinned-task-background.png');">
+      <AnchorPane layoutX="657.0" layoutY="35.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="179.0" prefWidth="276.0" style="-fx-background-radius: 20; -fx-background-color: rgba(33, 35, 66, 1); -fx-background-image: url('..\assets\images\pinned-task-background.png');">
          <children>
-            <ImageView blendMode="SOFT_LIGHT" fitHeight="159.0" fitWidth="308.0" layoutX="-23.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView blendMode="SOFT_LIGHT" fitHeight="159.0" fitWidth="308.0" layoutX="-10.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.5;">
                <image>
                   <Image url="@../assets/images/pinned-task-background.png" />
                </image>
             </ImageView>
-            <VBox alignment="BOTTOM_LEFT" layoutX="17.0" layoutY="21.0" prefHeight="179.0" prefWidth="276.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <VBox alignment="BOTTOM_LEFT" layoutX="22.0" layoutY="20.0" prefHeight="179.0" prefWidth="276.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="20.0">
                <children>
-                  <Label alignment="BOTTOM_LEFT" styleClass="fontregular" text="Next Event" textFill="YELLOW">
+                  <Label alignment="BOTTOM_LEFT" text="Next Event" textFill="YELLOW">
                      <font>
                         <Font size="33.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="fontregular" />
+                        <String fx:value="_23" />
+                     </styleClass>
                   </Label>
-                  <Label fx:id="lblNearestEvent" alignment="BOTTOM_LEFT" maxHeight="70.0" styleClass="fontregular" text="Hello World" textFill="WHITE" wrapText="true">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
+                  <Label fx:id="lblNearestEvent" alignment="BOTTOM_LEFT" maxHeight="70.0" text="Hello World" textFill="WHITE" wrapText="true">
+                     <styleClass>
+                        <String fx:value="fontregular" />
+                        <String fx:value="_27" />
+                     </styleClass>
                   </Label>
-                  <Label alignment="TOP_LEFT" styleClass="fontregular" text="View Details" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
+                  <Button fx:id="btnDashboardViewNextEvent" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="18.0" prefWidth="128.0" text="View Details">
+                     <styleClass>
+                        <String fx:value="noBackground" />
+                        <String fx:value="whiteText" />
+                        <String fx:value="fontregular" />
+                        <String fx:value="_18" />
+                     </styleClass>
+                     <padding>
+                        <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                </children>
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="57.0" layoutY="315.0" minHeight="-Infinity" prefHeight="230.0" prefWidth="572.0" style="-fx-background-radius: 20; -fx-background-color: rgba(9, 12, 48, 1);">
+      <AnchorPane fx:id="anpDashboardOverview" layoutX="57.0" layoutY="315.0" minHeight="-Infinity" prefHeight="230.0" prefWidth="572.0" style="-fx-background-radius: 20; -fx-background-color: rgba(9, 12, 48, 1);">
          <children>
-            <Label layoutX="40.0" layoutY="27.0" styleClass="fontregular" text="Overview" textFill="YELLOW">
+            <Label fx:id="lblDashboardExpenseChartTitle" layoutX="33.0" layoutY="27.0" text="Overview" textFill="YELLOW">
                <font>
                   <Font size="33.0" />
                </font>
+               <styleClass>
+                  <String fx:value="fontregular" />
+                  <String fx:value="_23" />
+               </styleClass>
             </Label>
-            <LineChart fx:id="lncProjectsExpense" layoutX="40.0" layoutY="45.0" prefHeight="179.0" prefWidth="517.0" title="Expenses by Month">
-              <xAxis>
-                <CategoryAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
-            </LineChart>
          </children>
+         <padding>
+            <Insets bottom="10.0" left="30.0" right="30.0" top="65.0" />
+         </padding>
       </AnchorPane>
-      <Label fx:id="lblWelcome" layoutX="67.0" layoutY="40.0" prefHeight="65.0" prefWidth="543.0" styleClass="fontregular" text="Welcome Username!" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font size="60.0" />
-         </font>
+      <Label fx:id="lblWelcome" layoutX="67.0" layoutY="56.0" prefHeight="65.0" prefWidth="543.0" text="Welcome Username!" textAlignment="CENTER" textFill="WHITE">
+         <styleClass>
+            <String fx:value="_50" />
+            <String fx:value="fontregular" />
+         </styleClass>
       </Label>
-      <Label layoutX="76.0" layoutY="126.0" prefHeight="165.0" prefWidth="312.0" styleClass="fontregular" text="SPEND (SSG Projects Expense &amp; Notation Database) is a database system designed to help the SSG members in keeping track of their project expenses, allocate budgets, and monitor the progress of their projects." textFill="WHITE" wrapText="true">
-         <font>
-            <Font size="21.0" />
-         </font>
+      <Label layoutX="89.0" layoutY="140.0" prefHeight="152.0" prefWidth="364.0" text="SPEND (SSG Projects Expense &amp; Notation Database) is a database system designed to help the SSG members in keeping track of their project expenses, allocate budgets, and monitor the progress of their projects." textFill="WHITE" wrapText="true">
+         <styleClass>
+            <String fx:value="fontregular" />
+            <String fx:value="_18" />
+         </styleClass>
       </Label>
-      <PieChart id="picProjectStatus" fx:id="picProjectStatus" labelLineLength="0.0" labelsVisible="false" layoutX="359.0" layoutY="95.0" prefHeight="215.0" prefWidth="297.0" />
+      <Button fx:id="btnQuickAddProject" focusTraversable="false" layoutX="468.0" layoutY="150.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="150.0" text="Add Project">
+         <styleClass>
+            <String fx:value="fontregular" />
+            <String fx:value="_13" />
+            <String fx:value="button1" />
+         </styleClass>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="btnQuickAddOfficer" focusTraversable="false" layoutX="468.0" layoutY="197.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="150.0" text="Add Officer">
+         <styleClass>
+            <String fx:value="fontregular" />
+            <String fx:value="_13" />
+            <String fx:value="button1" />
+         </styleClass>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="btnNewSchoolYear" focusTraversable="false" layoutX="468.0" layoutY="244.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="150.0" text="New School Year">
+         <styleClass>
+            <String fx:value="fontregular" />
+            <String fx:value="_13" />
+            <String fx:value="button1" />
+         </styleClass>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
    <stylesheets>
-      <URL value="@../css/main-style.css" />
-      <URL value="@../css/chart-style.css" />
+      <URL value="@../css/components.css" />
+      <URL value="@../css/backgrounds.css" />
+      <URL value="@../css/fonts.css" />
+      <URL value="@../css/templates.css" />
+      <URL value="@../css/buttons.css" />
    </stylesheets>
 </AnchorPane>

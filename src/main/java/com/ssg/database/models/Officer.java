@@ -1,29 +1,38 @@
 package com.ssg.database.models;
 
 import java.sql.Blob;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Officer {
-    int officer_id;
-    String firstname;
-    String middleInitial;
-    String lastName;
-    String description;
-    String position;
-    String strand;
-    int user_id;
-    int year;
-    Timestamp updatetime;
-    Blob avatar;
+    private int officer_id;
+    private String firstname;
+    private String middleInitial;
+    private String lastName;
+    private String description;
+    private String position;
+    private String strand;
+    private int user_id;
+    private int year;
+    private Timestamp updatetime;
+    private Blob avatar;
+    private Date officer_cd;
 
     public String getFullName() {
-        return firstname + " " + middleInitial + ". " + lastName;
+        String middleInitials = "";
+        if (middleInitial.length() != 0) middleInitial += (middleInitial.charAt(middleInitial.length() - 1) == '.' ? " " : ". ");
+        return firstname + " " + middleInitials + lastName;
     }
     public String getShortName() {
         return firstname.charAt(0) + ". " + lastName;
     }
 
-    public Officer(int officer_id, String firstname, String middleInitial, String lastName, String description, String position, String strand, int user_id, int year, Timestamp updatetime, Blob avatar) {
+    public String getFormattedName() {
+        String middleInitials = "";
+        if (middleInitial.length() != 0) middleInitial += (middleInitial.charAt(middleInitial.length() - 1) == '.' ? " " : ". ");
+        return lastName + ", " + firstname + " " + middleInitials;
+    }
+    public Officer(int officer_id, String firstname, String middleInitial, String lastName, String description, String position, String strand, int user_id, int year, Timestamp updatetime, Blob avatar, Date officer_cd) {
         this.officer_id = officer_id;
         this.firstname = firstname;
         this.middleInitial = middleInitial;
@@ -35,6 +44,15 @@ public class Officer {
         this.year = year;
         this.updatetime = updatetime;
         this.avatar = avatar;
+        this.officer_cd = officer_cd;
+    }
+
+    public Date getOfficer_cd() {
+        return officer_cd;
+    }
+
+    public void setOfficer_cd(Date officer_cd) {
+        this.officer_cd = officer_cd;
     }
 
     public int getOfficer_id() {

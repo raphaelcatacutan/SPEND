@@ -1,6 +1,7 @@
 package com.ssg.database;
 
 import com.ssg.database.models.*;
+import com.ssg.utils.ProgramUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -9,29 +10,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SpendBRead {
-    private static final boolean defaultBool = false;
 
-    // TODO Remove Filters
-    private static ResultSet tableQuery(String table, String[] filters, boolean all) {
+    private static ResultSet tableQuery(String table) {
         try {
-            StringBuilder query = new StringBuilder("SELECT * FROM " + table);
-            if (filters.length > 0) query.append(" WHERE ");
-            for (int i = 0; i < filters.length; i++) query.append(filters[i]).append(i == filters.length - 1 ? "" : all ? " AND " : " OR ");
+            String query = "SELECT * FROM " + table + " ORDER BY UPDATETIME DESC";
             Statement stmt = SpendBConnection.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            return stmt.executeQuery(query.toString());
+            return stmt.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
     public static ObservableList<Object> readTableData(String table) {
-        ResultSet rs = tableQuery(table, SpendBUtils.EMPTY, defaultBool);
+        ResultSet rs = tableQuery(table);
         return getTableData(rs, table);
     }
-    public static ObservableList<Object> readTableData(String table, boolean all, String... filters) {
-        ResultSet rs = tableQuery(table, filters, all);
-        return getTableData(rs, table);
-    }
+
     public static Map<String, ObservableList<Object>> readTablesData() {
         Map<String, ObservableList<Object>> tableDataMap = new HashMap<>();
         for (String x : SpendBUtils.SPENDBTABLES) {
@@ -41,24 +35,14 @@ public class SpendBRead {
         return tableDataMap;
     }
 
-    public static String generateQuery(String table, boolean all, String... filters) {
-        StringBuilder query = new StringBuilder("SELECT * FROM " + table);
-        if (filters.length > 0) query.append(" WHERE ");
-        for (int i = 0; i < filters.length; i++) query.append(filters[i]).append(i == filters.length - 1 ? "" : all ? " AND " : " OR ");
-        return query.toString();
-    }
-
-    public static void checkIfIdExists(String tableName, String columnName, int id) throws Exception {
+    public static boolean checkIfIdExists(String tableName, String columnName, int id) throws SQLException {
         String query = "SELECT COUNT(*) FROM " + tableName + " WHERE " + columnName + " = " + id;
-        PreparedStatement stmt = SpendBConnection.getConnection().prepareStatement(query);
-        ResultSet rs = stmt.executeQuery();
-        rs.next();
-        int count = rs.getInt(1);
-        rs.close();
-        stmt.close();
-        if (count != 0) return;
-        System.out.println("Error: " + id + " does not exist in " + columnName + " of " + tableName);
-        throw new Exception();
+        try (PreparedStatement stmt = SpendBConnection.getConnection().prepareStatement(query); ResultSet rs = stmt.executeQuery(); ) {
+            rs.next();
+            if (rs.getInt(1) != 0) return true;
+            ProgramUtils.print(2, id + " does not exist in " + columnName + " of " + tableName);
+            return false;
+        }
     }
 
     // Getters
@@ -72,9 +56,15 @@ public class SpendBRead {
         }
         return null;
     }
+    @SafeVarargs public static SchoolData getSchoolData(ObservableList<Object>... schoolData) {
+        ObservableList<Object> schoolDataList;
+        if (schoolData.length == 0) schoolDataList = readTableData("SCHOOLDATA");
+        else schoolDataList = schoolData[0];
+        return (SchoolData) schoolDataList.get(0);
+    }
     @SafeVarargs public static User getUser(int id, ObservableList<Object>... users) {
         ObservableList<Object> userList;
-        if (users.length == 0) userList = readTableData("PROJECTS");
+        if (users.length == 0) userList = readTableData("USERS");
         else userList = users[0];
         for (Object u : userList) {
             User user = (User) u;
@@ -92,7 +82,6 @@ public class SpendBRead {
         }
         return null;
     }
-    // TODO Add more getters
 
     // Editable
     private static ObservableList<Object> getTableData (ResultSet rs, String table) {
@@ -109,7 +98,8 @@ public class SpendBRead {
                                 rs.getString("LASTNAME"),
                                 rs.getString("USERNAME"),
                                 rs.getString("PASSWORD"),
-                                rs.getBoolean("ISADMIN")
+                                rs.getBoolean("ISADMIN"),
+                                rs.getDate("USER_CD")
                         );
                         resultList.add(user);
                     }
@@ -125,7 +115,8 @@ public class SpendBRead {
                                 rs.getInt("USER_ID"),
                                 rs.getInt("TERM"),
                                 rs.getTimestamp("UPDATETIME"),
-                                rs.getBlob("AVATAR")
+                                rs.getBlob("AVATAR"),
+                                rs.getDate("OFFICER_CD")
                         );
                         resultList.add(officer);
                     }
@@ -138,7 +129,8 @@ public class SpendBRead {
                                 rs.getDate("EXPENSEDATE_CD"),
                                 rs.getDouble("QUANTITY"),
                                 rs.getDouble("UNITPRICE"),
-                                rs.getInt("STATUS")
+                                rs.getInt("STATUS"),
+                                rs.getTimestamp("UPDATETIME")
                         );
                         resultList.add(expense);
                     }
@@ -148,6 +140,7 @@ public class SpendBRead {
                                 rs.getString("TITLE"),
                                 rs.getString("DESCRIPTION"),
                                 rs.getInt("USER_ID"),
+                                rs.getDate("PROJECT_CD"),
                                 rs.getDate("EVENTDATE"),
                                 rs.getTimestamp("UPDATETIME")
                         );
@@ -160,11 +153,39 @@ public class SpendBRead {
                         );
                         resultList.add(contributors);
                     }
+                    case "FUNDS" -> {
+                        Fund fund = new Fund(
+                                rs.getInt("FUND_ID"),
+                                rs.getDouble("AMOUNT"),
+                                rs.getTimestamp("UPDATETIME"),
+                                rs.getDate("FUND_CD"),
+                                rs.getString("DESCRIPTION")
+                        );
+                        resultList.add(fund);
+                    }
+                    case "SCHOOLDATA" -> {
+                        SchoolData schoolData = new SchoolData(
+                                rs.getInt("DATA_ID"),
+                                rs.getTimestamp("UPDATETIME"),
+                                rs.getInt("SCHOOLYEAR"),
+                                rs.getBlob("SCHOOLLOGO"),
+                                rs.getBlob("SSGLOGO"),
+                                rs.getString("REPORTEXPORTLOCATION"),
+                                rs.getBoolean("MANAGEXAMPP"),
+                                rs.getString("XAMPPLOCATION"),
+                                rs.getBoolean("VIEWPDF"),
+                                rs.getBoolean("CURRENTSCHOOLYEAR"),
+                                rs.getString("SSGADVISER"),
+                                rs.getString("PRINCIPAL"),
+                                rs.getString("PROPOSALPARAGRAPH")
+                        );
+                        resultList.add(schoolData);
+                    }
                 }
             }
             return resultList;
         } catch (SQLException e) {
-            System.out.println("Error in Getting Data: " + e.getMessage());
+            ProgramUtils.print(2, e.getMessage());
             return null;
         }
     }

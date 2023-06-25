@@ -1,170 +1,208 @@
 package com.ssg.views;
 
-import eu.hansolo.fx.charts.*;
+import com.ssg.database.SpendBCreate;
+import com.ssg.database.SpendBUtils;
+import com.ssg.database.models.*;
+import com.ssg.utils.DateUtils;
+import com.ssg.utils.ProgramUtils;
+import eu.hansolo.fx.charts.ChartType;
+import eu.hansolo.fx.charts.NestedBarChart;
 import eu.hansolo.fx.charts.data.ChartItem;
-import eu.hansolo.fx.charts.data.ChartItemBuilder;
-import eu.hansolo.fx.charts.data.Metadata;
-import eu.hansolo.fx.charts.event.ChartEvt;
 import eu.hansolo.fx.charts.series.ChartItemSeries;
-import eu.hansolo.fx.charts.tools.NumberFormat;
-import eu.hansolo.fx.charts.tools.Order;
 import eu.hansolo.tilesfx.Tile;
 import eu.hansolo.tilesfx.TileBuilder;
 import eu.hansolo.tilesfx.chart.ChartData;
-import javafx.beans.property.StringProperty;
-import javafx.beans.property.StringPropertyBase;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
-
-import static eu.hansolo.fx.charts.color.MaterialDesignColors.*;
 
 
 public class ViewStatistics extends ViewController {
+    @FXML private AnchorPane anpView;
 
-    // Start of Temporary
-    private static final Random RND = new Random();
-    // End of Temporary
+    @FXML private Label lblStatistics;
 
     @FXML private AnchorPane anpProjectNumber;
-    @FXML private AnchorPane anpExpensesNumber;
+    @FXML private Label lblProjectNumber;
+    @FXML private Label lblProjectAdded;
+
+    @FXML private AnchorPane anpExpenseNumber;
+    @FXML private Label lblExpenseNumber;
+    @FXML private Label lblExpenseAdded;
+
     @FXML private AnchorPane anpOfficerNumber;
-    @FXML private AnchorPane anpActivityLogsNumber;
+    @FXML private Label lblOfficerNumber;
+    @FXML private Label lblOfficerAdded;
+
     @FXML private AnchorPane anpRemainingFundsNumber;
-    @FXML private AnchorPane anpOfficerStats;
+    @FXML private Label lblRemainingFundsValue;
+    @FXML private Label lblRemainingFundsProposed;
+    @FXML private Label lblRemainingFundsApproved;
+    @FXML private Label lblRemainingFundsAugmented;
+    @FXML private TextField txfStatisticsFundValue;
+    @FXML private TextField txfStatisticsFundDescription;
+    @FXML private Button btnStatisticsRegisterFund;
+    @FXML private Button btnStatisticsGenerateReport;
+
     @FXML private AnchorPane anpExpenseStats;
-    @FXML private AnchorPane anpProjectStats;
+    @FXML private Label lblNoDatatoDisplay;
 
-    private Tile projectNumbersChart;
-    private Tile expenseNumberChart;
-    private Tile officerNumberChart;
-    private Tile activityNumberChart;
+    private static final Random RND = new Random();
+    private static final String[] expenseStatus = {"Proposed", "Approved"};
+    private static final String[] chartDataTime = {"day", "week", "month"};
+    private int chartDataType = 0;
+
+    // Colors
+    private final Color numberChartsColor = Tile.BLUE;
+    private final Color fundsChartColor = Color.web("#223f6E");
+    private final Color[] expenseChartBarSubs = {
+            Color.web("#063A92"),
+            Color.web("#0754B6"),
+            Color.web("#3A8ADE")
+    };
+    private final Color expenseChartBar = Color.web("#AAC0DE");
+
     private Tile remainingFundsChart;
+    private final NestedBarChart expenseStatsChart = new NestedBarChart();
 
-    private ConcentricRingChart officerStatsChart;
-    private NestedBarChart expenseStatsChart;
-    private CoxcombChart projectStatsChart;
+    // Chart Data
+    // Numbers
+    private ChartData projectNumberChartData1;
+    private ChartData projectNumberChartData2;
+    private ChartData projectNumberChartData3;
+    private ChartData projectNumberChartData4;
+    private ChartData expenseNumberChartData1;
+    private ChartData expenseNumberChartData2;
+    private ChartData expenseNumberChartData3;
+    private ChartData expenseNumberChartData4;
+    private ChartData officerNumberChartData1;
+    private ChartData officerNumberChartData2;
+    private ChartData officerNumberChartData3;
+    private ChartData officerNumberChartData4;
 
-    @Override
     public void initialize() {
         ControllerUtils.EVENTBUS.register(this);
+        // Event Handlers
+        btnStatisticsRegisterFund.setOnMouseClicked(this::registerFund);
+        btnStatisticsGenerateReport.setOnMouseClicked(this::generateReport);
 
+        txfStatisticsFundValue.setTextFormatter(ControllerUtils.textFormatter(10, true));
+        txfStatisticsFundDescription.setTextFormatter(ControllerUtils.textFormatter(400, false));
+
+        // Setup
         setupProjectNumbers();
         setupExpenseNumber();
         setupOfficerNumber();
-        setupActivityLogsNumber();
-
         setupRemainingFundsNumber();
-        setupOfficerStats();
-        setupExpenseStats();
-        setupProjectStats();
+        setupExpensesStats();
+
+        refreshView(true);
     }
 
-    @Override
-    public void refreshView() {
+    @Override public void refreshView(boolean loadDB) {
+        if (loadDB) loadDatabase();
+        if (chartDataType >= 2) chartDataType = 0;
+        else chartDataType++;
 
+        displayProjectNumbers();
+        displayExpenseNumber();
+        displayOfficerNumber();
+        displayRemainingFundsNumber();
+        displayExpensesStats();
     }
 
-    @Override
-    public void onNavigate() {
-
+    @Override public void onNavigate() {
+        refreshView(false);
     }
 
+    // Setup
     private void setupProjectNumbers() {
         double width = anpProjectNumber.getPrefWidth();
         double height = anpProjectNumber.getPrefHeight();
         Rectangle newRect = new Rectangle(width, height);
 
-        ChartData smoothChartData1;
-        ChartData smoothChartData2;
-        ChartData smoothChartData3;
-        ChartData smoothChartData4;
-        smoothChartData1 = new ChartData("Item 1", RND.nextDouble() * 25, Tile.YELLOW);
-        smoothChartData2 = new ChartData("Item 2", RND.nextDouble() * 25, Tile.BLUE);
-        smoothChartData3 = new ChartData("Item 3", RND.nextDouble() * 25, Tile.BLUE);
-        smoothChartData4 = new ChartData("Item 4", RND.nextDouble() * 25, Tile.BLUE);
+        projectNumberChartData1 = new ChartData("Item 1", RND.nextDouble() * 25, Tile.BLUE);
+        projectNumberChartData2 = new ChartData("Item 2", RND.nextDouble() * 25, Tile.BLUE);
+        projectNumberChartData3 = new ChartData("Item 3", RND.nextDouble() * 25, Tile.BLUE);
+        projectNumberChartData4 = new ChartData("Item 4", RND.nextDouble() * 25, Tile.BLUE);
 
-       projectNumbersChart = TileBuilder.create().skinType(Tile.SkinType.SMOOTH_AREA_CHART)
-               .prefSize(width, height)
-               .minValue(0)
-               .maxValue(40)
-               .textVisible(false)
-               .valueVisible(false)
-               .backgroundColor(null)
-               .chartData(smoothChartData1, smoothChartData2, smoothChartData3, smoothChartData4)
-               .tooltipText("")
-               .animated(true)
-               .barColor(Color.rgb(129, 112, 0))
-               .build();
+        // Charts
+        Tile projectNumbersChart = TileBuilder.create().skinType(Tile.SkinType.SMOOTH_AREA_CHART)
+                .prefSize(width, height)
+                .minValue(0)
+                .maxValue(40)
+                .textVisible(false)
+                .valueVisible(false)
+                .backgroundColor(null)
+                .chartData(projectNumberChartData1, projectNumberChartData2, projectNumberChartData3, projectNumberChartData4)
+                .tooltipText("")
+                .animated(true)
+                .barColor(numberChartsColor)
+                .build();
 
         newRect.setArcHeight(40.0);
         newRect.setArcWidth(40.0);
         projectNumbersChart.setClip(newRect);
         anpProjectNumber.getChildren().add(0, projectNumbersChart);
     }
-
     private void setupExpenseNumber() {
-        double width = anpExpensesNumber.getPrefWidth();
-        double height = anpExpensesNumber.getPrefHeight();
+        double width = anpExpenseNumber.getPrefWidth();
+        double height = anpExpenseNumber.getPrefHeight();
         Rectangle newRect = new Rectangle(width, height);
 
-        ChartData smoothChartData1;
-        ChartData smoothChartData2;
-        ChartData smoothChartData3;
-        ChartData smoothChartData4;
-        smoothChartData1 = new ChartData("Item 1", RND.nextDouble() * 25, Tile.BLUE);
-        smoothChartData2 = new ChartData("Item 2", RND.nextDouble() * 25, Tile.BLUE);
-        smoothChartData3 = new ChartData("Item 3", RND.nextDouble() * 25, Tile.BLUE);
-        smoothChartData4 = new ChartData("Item 4", RND.nextDouble() * 25, Tile.BLUE);
+        expenseNumberChartData1 = new ChartData("Item 1", RND.nextDouble() * 25, Tile.BLUE);
+        expenseNumberChartData2 = new ChartData("Item 2", RND.nextDouble() * 25, Tile.BLUE);
+        expenseNumberChartData3 = new ChartData("Item 3", RND.nextDouble() * 25, Tile.BLUE);
+        expenseNumberChartData4 = new ChartData("Item 4", RND.nextDouble() * 25, Tile.BLUE);
 
-        expenseNumberChart = TileBuilder.create().skinType(Tile.SkinType.SMOOTH_AREA_CHART)
+        Tile expenseNumberChart = TileBuilder.create().skinType(Tile.SkinType.SMOOTH_AREA_CHART)
                 .prefSize(width, height)
                 .minValue(0)
                 .maxValue(40)
                 .textVisible(false)
                 .valueVisible(false)
                 .backgroundColor(null)
-                .chartData(smoothChartData1, smoothChartData2, smoothChartData3, smoothChartData4)
+                .chartData(projectNumberChartData1, expenseNumberChartData2, projectNumberChartData3, projectNumberChartData4)
                 .tooltipText("")
                 .animated(true)
-                .barColor(Color.rgb(129, 112, 0))
+                .barColor(numberChartsColor)
                 .build();
 
         newRect.setArcHeight(40.0);
         newRect.setArcWidth(40.0);
         expenseNumberChart.setClip(newRect);
-        anpExpensesNumber.getChildren().add(0, expenseNumberChart);
+        anpExpenseNumber.getChildren().add(0, expenseNumberChart);
     }
-
     private void setupOfficerNumber() {
         double width = anpOfficerNumber.getPrefWidth();
         double height = anpOfficerNumber.getPrefHeight();
         Rectangle newRect = new Rectangle(width, height);
 
-        ChartData smoothChartData1;
-        ChartData smoothChartData2;
-        ChartData smoothChartData3;
-        ChartData smoothChartData4;
-        smoothChartData1 = new ChartData("Item 1", RND.nextDouble() * 25, Tile.BLUE);
-        smoothChartData2 = new ChartData("Item 2", RND.nextDouble() * 25, Tile.BLUE);
-        smoothChartData3 = new ChartData("Item 3", RND.nextDouble() * 25, Tile.BLUE);
-        smoothChartData4 = new ChartData("Item 4", RND.nextDouble() * 25, Tile.BLUE);
+        officerNumberChartData1 = new ChartData("Item 1", RND.nextDouble() * 25, Tile.BLUE);
+        officerNumberChartData2 = new ChartData("Item 2", RND.nextDouble() * 25, Tile.BLUE);
+        officerNumberChartData3 = new ChartData("Item 3", RND.nextDouble() * 25, Tile.BLUE);
+        officerNumberChartData4 = new ChartData("Item 4", RND.nextDouble() * 25, Tile.BLUE);
 
-        officerNumberChart = TileBuilder.create().skinType(Tile.SkinType.SMOOTH_AREA_CHART)
+        Tile officerNumberChart = TileBuilder.create().skinType(Tile.SkinType.SMOOTH_AREA_CHART)
                 .prefSize(width, height)
                 .minValue(0)
                 .maxValue(40)
                 .textVisible(false)
                 .valueVisible(false)
                 .backgroundColor(null)
-                .chartData(smoothChartData1, smoothChartData2, smoothChartData3, smoothChartData4)
+                .chartData(officerNumberChartData1, officerNumberChartData2, officerNumberChartData3, officerNumberChartData4)
                 .tooltipText("")
                 .animated(true)
-                .barColor(Color.rgb(129, 112, 0))
+                .barColor(numberChartsColor)
                 .build();
 
         newRect.setArcHeight(40.0);
@@ -172,206 +210,201 @@ public class ViewStatistics extends ViewController {
         officerNumberChart.setClip(newRect);
         anpOfficerNumber.getChildren().add(0, officerNumberChart);
     }
-
-    private void setupActivityLogsNumber() {
-        double width = anpActivityLogsNumber.getPrefWidth();
-        double height = anpActivityLogsNumber.getPrefHeight();
-        Rectangle newRect = new Rectangle(width, height);
-
-        ChartData smoothChartData1;
-        ChartData smoothChartData2;
-        ChartData smoothChartData3;
-        ChartData smoothChartData4;
-        smoothChartData1 = new ChartData("Item 1", RND.nextDouble() * 25, Tile.BLUE);
-        smoothChartData2 = new ChartData("Item 2", RND.nextDouble() * 25, Tile.BLUE);
-        smoothChartData3 = new ChartData("Item 3", RND.nextDouble() * 25, Tile.BLUE);
-        smoothChartData4 = new ChartData("Item 4", RND.nextDouble() * 25, Tile.BLUE);
-
-        activityNumberChart = TileBuilder.create().skinType(Tile.SkinType.SMOOTH_AREA_CHART)
-                .prefSize(width, height)
-                .minValue(0)
-                .maxValue(40)
-                .textVisible(false)
-                .valueVisible(false)
-                .backgroundColor(null)
-                .chartData(smoothChartData1, smoothChartData2, smoothChartData3, smoothChartData4)
-                .tooltipText("")
-                .animated(true)
-                .barColor(Color.rgb(129, 112, 0))
-                .build();
-
-        newRect.setArcHeight(40.0);
-        newRect.setArcWidth(40.0);
-        activityNumberChart.setClip(newRect);
-        anpActivityLogsNumber.getChildren().add(0, activityNumberChart);
-    }
-
     private void setupRemainingFundsNumber() {
         double width = anpRemainingFundsNumber.getPrefWidth();
         double height = anpRemainingFundsNumber.getPrefHeight();
         Rectangle newRect = new Rectangle(width, height);
 
         remainingFundsChart = TileBuilder.create().skinType(Tile.SkinType.FLUID)
-                .prefSize(width, height)
+                .prefSize(width, 509)
                 .decimals(0)
-                .barColor(Tile.BLUE)
                 .animated(true)
-                .backgroundColor(null)
+                .backgroundColor(Color.TRANSPARENT)
                 .valueVisible(false)
                 .textVisible(false)
-                .barColor(Color.rgb(129, 112, 0, 0.6))
+                .barColor(fundsChartColor)
                 .build();
 
-        remainingFundsChart.setValue(0.3);
-
+        remainingFundsChart.setValue(0);
         newRect.setArcHeight(40.0);
         newRect.setArcWidth(40.0);
         remainingFundsChart.setClip(newRect);
         anpRemainingFundsNumber.getChildren().add(0, remainingFundsChart);
     }
-
-    private void setupOfficerStats() {
-        double size = anpProjectStats.getPrefHeight() - anpProjectStats.getPadding().getTop() - anpProjectStats.getPadding().getBottom();
-        ChartItem chart1Data1;
-        ChartItem chart1Data2;
-        ChartItem chart1Data3;
-        ChartItem chart1Data4;
-        ChartItem chart1Data5;
-        chart1Data1 = ChartItemBuilder.create().name("Item 1").fill(Color.web("#3552a0")).textFill(Color.WHITE).animated(true).build();
-        chart1Data2 = ChartItemBuilder.create().name("Item 2").fill(Color.web("#45a1cf")).textFill(Color.WHITE).animated(true).build();
-        chart1Data3 = ChartItemBuilder.create().name("Item 3").fill(Color.web("#45cf6d")).textFill(Color.WHITE).animated(true).build();
-        chart1Data4 = ChartItemBuilder.create().name("Item 4").fill(Color.web("#e3eb4f")).textFill(Color.BLACK).animated(true).build();
-        chart1Data5 = ChartItemBuilder.create().name("Item 5").fill(Color.web("#efb750")).textFill(Color.WHITE).animated(true).build();
-
-        officerStatsChart = ConcentricRingChartBuilder.create()
-                .prefSize(size, size)
-                .maxSize(size, size)
-                .items(chart1Data1, chart1Data2, chart1Data3, chart1Data4, chart1Data5)
-                .sorted(false)
-                .order(Order.DESCENDING)
-                .numberFormat(NumberFormat.PERCENTAGE_1_DECIMAL)
-                .itemLabelFill(Color.BLACK)
-                .barBackgroundFill(Color.TRANSPARENT)
-                .build();
-
-        chart1Data1.setValue(100);
-        chart1Data2.setValue(80);
-        chart1Data3.setValue(60);
-        chart1Data4.setValue(50);
-        chart1Data5.setValue(20);
-
-        AnchorPane.setRightAnchor(officerStatsChart, 0.0);
-        AnchorPane.setBottomAnchor(officerStatsChart, 0.0);
-        AnchorPane.setLeftAnchor(officerStatsChart, 0.0);
-        anpProjectStats.getChildren().add(0, officerStatsChart);
-    }
-
-    private void setupExpenseStats() {
+    private void setupExpensesStats() {
         double width = anpExpenseStats.getPrefWidth() - anpExpenseStats.getPadding().getLeft() - anpExpenseStats.getPadding().getRight();
         double height = anpExpenseStats.getPrefHeight() - anpExpenseStats.getPadding().getBottom() - anpExpenseStats.getPadding().getTop();
-        ChartItem p1Q1 = new ChartItem("Product 1", 16, CYAN_700.get());
-        ChartItem p2Q1 = new ChartItem("Product 2", 8, CYAN_500.get());
-        ChartItem p3Q1 = new ChartItem("Product 3", 4, CYAN_300.get());
-        ChartItem p4Q1 = new ChartItem("Product 4", 2, CYAN_100.get());
-
-        ChartItem p1Q2 = new ChartItem("Product 1", 12, PURPLE_700.get());
-        ChartItem p2Q2 = new ChartItem("Product 2", 5, PURPLE_500.get());
-        ChartItem p3Q2 = new ChartItem("Product 3", 3, PURPLE_300.get());
-        ChartItem p4Q2 = new ChartItem("Product 4", 1, PURPLE_100.get());
-
-        ChartItem p1Q3 = new ChartItem("Product 1", 14, PINK_700.get());
-        ChartItem p2Q3 = new ChartItem("Product 2", 7, PINK_500.get());
-        ChartItem p3Q3 = new ChartItem("Product 3", 3.5, PINK_300.get());
-        ChartItem p4Q3 = new ChartItem("Product 4", 1.75, PINK_100.get());
-
-        ChartItem p1Q4 = new ChartItem("Product 1", 18, AMBER_700.get());
-        ChartItem p2Q4 = new ChartItem("Product 2", 9, AMBER_500.get());
-        ChartItem p3Q4 = new ChartItem("Product 3", 4.5, AMBER_300.get());
-        ChartItem p4Q4 = new ChartItem("Product 4", 2.25, AMBER_100.get());
-
-        ChartItemSeries<ChartItem> q1 = new ChartItemSeries<>(ChartType.NESTED_BAR, "1st Quarter", CYAN_900.get(), Color.TRANSPARENT, p1Q1, p2Q1, p3Q1, p4Q1);
-        ChartItemSeries<ChartItem> q2 = new ChartItemSeries<>(ChartType.NESTED_BAR, "2nd Quarter", PURPLE_900.get(), Color.TRANSPARENT, p1Q2, p2Q2, p3Q2, p4Q2);
-        ChartItemSeries<ChartItem> q3 = new ChartItemSeries<>(ChartType.NESTED_BAR, "3rd Quarter", PINK_900.get(), Color.TRANSPARENT, p1Q3, p2Q3, p3Q3, p4Q3);
-        ChartItemSeries<ChartItem> q4 = new ChartItemSeries<>(ChartType.NESTED_BAR, "4th Quarter", AMBER_900.get(), Color.TRANSPARENT, p1Q4, p2Q4, p3Q4, p4Q4);
-
-
-        expenseStatsChart = new NestedBarChart(q1, q2, q3, q4);
-
+        int projectSize = 8;
+        ChartItemSeries[] projectsSeries = new ChartItemSeries[projectSize];
+        for (int i = projectSize - 1; i >= 0; i--) {
+            ChartItem[] items = new ChartItem[3];
+            for (int x = 0; x < 3; x++) items[x] = new ChartItem("Product " + x, RND.nextInt(1, 30), expenseChartBarSubs[x]);
+            projectsSeries[i] = new ChartItemSeries<>(ChartType.NESTED_BAR, "Quarter " + i, expenseChartBar, Color.TRANSPARENT, items);
+        }
+        expenseStatsChart.setSeries(projectsSeries);
         expenseStatsChart.setPrefSize(width, height);
-        expenseStatsChart.addChartEvtObserver(ChartEvt.ANY, System.out::println);
+        // expenseStatsChart.addChartEvtObserver(ChartEvt.ANY, System.out::println);
 
         AnchorPane.setRightAnchor(expenseStatsChart, 0.0);
         AnchorPane.setBottomAnchor(expenseStatsChart, 0.0);
         AnchorPane.setLeftAnchor(expenseStatsChart, 0.0);
         anpExpenseStats.getChildren().add(0, expenseStatsChart);
-
     }
 
-    private void setupProjectStats() {
-        double size = anpOfficerStats.getPrefWidth() - anpOfficerStats.getPadding().getLeft() - anpOfficerStats.getPadding().getRight();
-
-        Metainfo     metainfo1;
-        Metainfo     metainfo2;
-        Metainfo     metainfo3;
-        Metainfo     metainfo4;
-        Metainfo     metainfo5;
-        Metainfo     metainfo6;
-        metainfo1 = new Metainfo("Text 1");
-        metainfo2 = new Metainfo("Text 2");
-        metainfo3 = new Metainfo("Text 3");
-        metainfo4 = new Metainfo("Text 4");
-        metainfo5 = new Metainfo("Text 5");
-        metainfo6 = new Metainfo("Text 6");
-
-
-        List<ChartItem> items = List.of(
-                ChartItemBuilder.create().name("Item 1").value(27).fill(Color.web("#96AA3B")).metadata(metainfo1).build(),
-                ChartItemBuilder.create().name("Item 2").value(27).fill(Color.web("#29A783")).metadata(metainfo2).build(),
-                ChartItemBuilder.create().name("Item 3").value(27).fill(Color.web("#098AA9")).metadata(metainfo3).build(),
-                ChartItemBuilder.create().name("Item 4").value(15).fill(Color.web("#62386F")).metadata(metainfo4).build(),
-                ChartItemBuilder.create().name("Item 5").value(13).fill(Color.web("#89447B")).metadata(metainfo5).build(),
-                ChartItemBuilder.create().name("Item 6").value(5).fill(Color.web("#EF5780")).metadata(metainfo6).build()
-        );
-
-        projectStatsChart = CoxcombChartBuilder.create()
-                .items(items)
-                .textColor(Color.WHITE)
-                .autoTextColor(false)
-                .useChartItemTextFill(false)
-                .equalSegmentAngles(true)
-                .order(Order.ASCENDING)
-                .showPopup(false)
-                .showItemName(true)
-                .formatString("%.2f")
-                .selectedItemFill(Color.MAGENTA)
-                .build();
-
-
-        projectStatsChart.setPrefSize(size, size);
-        projectStatsChart.addChartEvtObserver(ChartEvt.ANY, System.out::println);
-
-        AnchorPane.setRightAnchor(projectStatsChart, 0.0);
-        AnchorPane.setBottomAnchor(projectStatsChart, 0.0);
-        AnchorPane.setLeftAnchor(projectStatsChart, 0.0);
-        anpOfficerStats.getChildren().add(0, projectStatsChart);
-
-    }
-
-    public class Metainfo implements Metadata {
-        private StringProperty text;
-
-        public Metainfo(final String text) {
-            this.text = new StringPropertyBase(text) {
-                @Override protected void invalidated() { super.invalidated(); }
-                @Override public Object getBean() { return Metainfo.this; }
-                @Override public String getName() { return "text"; }
+    // Display
+    private void displayProjectNumbers() {
+        int[] recentlyAdded = {1, 1, 1, 1};
+        for (Object p: projects) {
+            Project project = (Project) p;
+            int timeAgo = switch (chartDataType) {
+                case 0 -> DateUtils.calculateWeeksAgo(project.getProject_cd());
+                case 1 -> DateUtils.calculateDaysAgo(project.getProject_cd());
+                case 2 -> DateUtils.calculateMonthsAgo(project.getProject_cd());
+                default -> throw new IllegalStateException("Unexpected value: " + chartDataType);
             };
+            if (timeAgo > 3) continue;
+            recentlyAdded[timeAgo]++;
+        }
+        projectNumberChartData1.setValue(recentlyAdded[3]);
+        projectNumberChartData2.setValue(recentlyAdded[2]);
+        projectNumberChartData3.setValue(recentlyAdded[1]);
+        projectNumberChartData4.setValue(recentlyAdded[0]);
+        lblProjectNumber.setText(ProgramUtils.shortenNumber(projects.size()));
+        lblProjectAdded.setText(recentlyAdded[0] - 1 + " added last " + chartDataTime[chartDataType]);
+    }
+    private void displayExpenseNumber() {
+        int[] recentlyAdded = {1, 1, 1, 1};
+        for (Object e: expenses) {
+            Expense expense = (Expense) e;
+            int timeAgo = switch (chartDataType) {
+                case 0 -> DateUtils.calculateWeeksAgo(expense.getExpenseDate_cd());
+                case 1 -> DateUtils.calculateDaysAgo(expense.getExpenseDate_cd());
+                case 2 -> DateUtils.calculateMonthsAgo(expense.getExpenseDate_cd());
+                default -> throw new IllegalStateException("Unexpected value: " + chartDataType);
+            };
+            if (timeAgo > 3) continue;
+            recentlyAdded[timeAgo]++;
+        }
+        expenseNumberChartData1.setValue(recentlyAdded[3]);
+        expenseNumberChartData2.setValue(recentlyAdded[2]);
+        expenseNumberChartData3.setValue(recentlyAdded[1]);
+        expenseNumberChartData4.setValue(recentlyAdded[0]);
+
+        lblExpenseNumber.setText(String.valueOf(expenses.size()));
+        lblExpenseAdded.setText(recentlyAdded[0] - 1 + " added last " + chartDataTime[chartDataType]);
+    }
+    private void displayOfficerNumber() {
+        int[] recentlyAdded = {1, 1, 1, 1};
+        for (Object o: officers) {
+            Officer officer = (Officer) o;
+            int timeAgo = switch (chartDataType) {
+                case 0 -> DateUtils.calculateWeeksAgo(officer.getOfficer_cd());
+                case 1 -> DateUtils.calculateDaysAgo(officer.getOfficer_cd());
+                case 2 -> DateUtils.calculateMonthsAgo(officer.getOfficer_cd());
+                default -> throw new IllegalStateException("Unexpected value: " + chartDataType);
+            };
+            if (timeAgo > 3) continue;
+            recentlyAdded[timeAgo]++;
+        }
+        officerNumberChartData1.setValue(recentlyAdded[3]);
+        officerNumberChartData2.setValue(recentlyAdded[2]);
+        officerNumberChartData3.setValue(recentlyAdded[1]);
+        officerNumberChartData4.setValue(recentlyAdded[0]);
+
+        lblOfficerNumber.setText(String.valueOf(officers.size()));
+        lblOfficerAdded.setText(recentlyAdded[0] - 1 + " added last " + chartDataTime[chartDataType]);
+    }
+
+    private void displayRemainingFundsNumber() {
+        final double[] expenseFunds = {
+                0.0,
+                0.0
+        };
+        final double[] augmentedFunds = {0.0};
+        expenses.stream().map(e -> (Expense) e).forEach(expense -> expenseFunds[expense.getStatus()] += expense.getTotalPrice());
+        funds.stream().map(f -> (Fund) f).forEach(fund -> augmentedFunds[0] += fund.getAmount());
+        double remainingFunds = augmentedFunds[0] - (expenseFunds[0] + expenseFunds[1]);
+        double percentageFunds = Math.max(remainingFunds / augmentedFunds[0] * 100, 1);
+        lblRemainingFundsValue.setText((remainingFunds < 0 ? "-" : "") + "₱" + ProgramUtils.shortenNumber(remainingFunds));
+        lblRemainingFundsProposed.setText("-₱" + ProgramUtils.shortenNumber(expenseFunds[0]));
+        lblRemainingFundsApproved.setText("-₱" + ProgramUtils.shortenNumber(expenseFunds[1]));
+        lblRemainingFundsAugmented.setText("₱" + ProgramUtils.shortenNumber(augmentedFunds[0]));
+        remainingFundsChart.setValue((2 * percentageFunds) - 100);
+    }
+    private void displayExpensesStats() {
+        lblNoDatatoDisplay.setVisible(projects.size() == 0);
+        int projectSize = 10;
+        ChartItemSeries[] projectsBar = new ChartItemSeries[projectSize];
+        for (int i = projectSize - 1; i >= 0; i--) {
+            ChartItem[] items = new ChartItem[2];
+            for (int x = 0; x < 2; x++) items[x] = new ChartItem(expenseStatus[x], 1.0, expenseChartBarSubs[x]);
+            projectsBar[projectSize - 1 - i] = new ChartItemSeries<>(ChartType.NESTED_BAR, i + " Weeks Ago ", expenseChartBar, Color.TRANSPARENT, items);
+        }
+        for (Object p : projects) {
+            Project project = (Project) p;
+            int index = DateUtils.calculateWeeksAgo(project.getUpdatetime());
+            if (index > projectSize) continue;
+            for (Object e : expenses) {
+                Expense expense = (Expense) e;
+                if (expense.getProject_id() != project.getProject_id()) continue;
+                int status = expense.getStatus();
+                ChartItem item = (ChartItem) projectsBar[projectSize - 1 - index].getItems().get(status);
+                item.setValue(expense.getTotalPrice() + item.getValue());
+            }
         }
 
-        public String getText() { return text.get(); }
-        public void setText(final String text) { this.text.set(text); }
-        public StringProperty textProperty() { return text; }
-
-        @Override public String toString() { return text.get(); }
+        expenseStatsChart.setSeries(projectsBar);
     }
+
+    // Methods
+    private void registerFund(MouseEvent mouseEvent) {
+        try {
+            double fundValue = Double.parseDouble(txfStatisticsFundValue.getText());
+            String description = txfStatisticsFundDescription.getText();
+
+            if (fundValue <= 0) {
+                MainEvents.showDialogMessage("Invalid Funds", "You can't add a negative fund. Make sure you input correctly in the text fields");
+                return;
+            }
+
+            Object[] newFund = ModelValues.newFundData(
+                    fundValue,
+                    description
+            );
+            txfStatisticsFundDescription.setText("");
+            txfStatisticsFundValue.setText("");
+            lblStatistics.requestFocus();
+            SpendBCreate.createFundsData(newFund, true);
+            MainEvents.showDialogMessage("Fund Registered", "You successfully registered a new amount in the funds database.");
+        } catch (Exception e) {
+            MainEvents.showDialogMessage("Fund value should be numeric", "Error! Make sure you input correctly in the text fields", "Okay");
+        }
+    }
+    private void generateReport(MouseEvent mouseEvent) {
+        MainEvents.startLoading();
+        Map<String, String> queries = new HashMap<>();
+
+        String query = "SELECT\n" +
+                "  sd.DATA_ID AS DATAID,\n" +
+                "  sd.UPDATETIME AS UPDATETIME,\n" +
+                "  sd.SCHOOLYEAR,\n" +
+                "  sd.SCHOOLLOGO AS SCHOOLLOGO,\n" +
+                "  sd.SSGLOGO AS SSGLOGO,\n" +
+                "  f.FUND_ID AS FUNDID,\n" +
+                "  f.AMOUNT AS AMOUNT,\n" +
+                "  f.DESCRIPTION AS DESCRIPTION,\n" +
+                "  f.FUND_CD\n" +
+                "FROM\n" +
+                "  schooldata sd\n" +
+                "JOIN\n" +
+                "  funds f ON 1 = 1";
+
+        queries.put("main", query);
+        queries.put("Funds", query);
+        SpendBUtils.generateReport(6, queries);
+        MainEvents.stopLoading();
+
+    }
+
+
 }

@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.3.final using JasperReports Library version 6.20.3-415f9428cffdb6805c6f85bbb29ebaf18813a2ab  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="officer-list" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c8bc35cd-9d67-4f52-93fc-f2dc5b7e79b4">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SPEND Data Adapter"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<subDataset name="Officers" uuid="cae3f0b1-2833-424d-aaf3-0b3480dc70f3">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SPEND Data Adapter"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<queryString>
+			<![CDATA[SELECT
+    SD.*,
+    O.OFFICER_ID,
+    O.FIRSTNAME,
+    O.MIDDLEINITIAL,
+    O.LASTNAME,
+    O.DESCRIPTION,
+    O.POSITION,
+    O.STRAND,
+    O.USER_ID,
+    O.AVATAR,
+    O.OFFICER_CD,
+    O.TERM,
+    COUNT(C.PROJECT_ID) AS CONTRIBUTION_COUNT,
+     ROW_NUMBER() OVER (ORDER BY O.OFFICER_ID) AS CURRENT_OFFICER_NUMBER
+FROM
+    SCHOOLDATA SD
+LEFT JOIN
+    OFFICERS O ON 1 = 1
+LEFT JOIN
+    CONTRIBUTORS C ON O.OFFICER_ID = C.OFFICER_ID
+GROUP BY
+    O.OFFICER_ID]]>
+		</queryString>
+		<field name="DATA_ID" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="DATA_ID"/>
+			<property name="com.jaspersoft.studio.field.label" value="DATA_ID"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="schooldata"/>
+		</field>
+		<field name="UPDATETIME" class="java.sql.Timestamp">
+			<property name="com.jaspersoft.studio.field.name" value="UPDATETIME"/>
+			<property name="com.jaspersoft.studio.field.label" value="UPDATETIME"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="schooldata"/>
+		</field>
+		<field name="SCHOOLYEAR" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="SCHOOLYEAR"/>
+			<property name="com.jaspersoft.studio.field.label" value="SCHOOLYEAR"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="schooldata"/>
+		</field>
+		<field name="SCHOOLLOGO" class="byte[]">
+			<property name="com.jaspersoft.studio.field.name" value="SCHOOLLOGO"/>
+			<property name="com.jaspersoft.studio.field.label" value="SCHOOLLOGO"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="schooldata"/>
+		</field>
+		<field name="SSGLOGO" class="byte[]">
+			<property name="com.jaspersoft.studio.field.name" value="SSGLOGO"/>
+			<property name="com.jaspersoft.studio.field.label" value="SSGLOGO"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="schooldata"/>
+		</field>
+		<field name="OFFICER_ID" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="OFFICER_ID"/>
+			<property name="com.jaspersoft.studio.field.label" value="OFFICER_ID"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="officers"/>
+		</field>
+		<field name="FIRSTNAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="FIRSTNAME"/>
+			<property name="com.jaspersoft.studio.field.label" value="FIRSTNAME"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="officers"/>
+		</field>
+		<field name="MIDDLEINITIAL" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="MIDDLEINITIAL"/>
+			<property name="com.jaspersoft.studio.field.label" value="MIDDLEINITIAL"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="officers"/>
+		</field>
+		<field name="LASTNAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="LASTNAME"/>
+			<property name="com.jaspersoft.studio.field.label" value="LASTNAME"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="officers"/>
+		</field>
+		<field name="DESCRIPTION" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="DESCRIPTION"/>
+			<property name="com.jaspersoft.studio.field.label" value="DESCRIPTION"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="officers"/>
+		</field>
+		<field name="POSITION" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="POSITION"/>
+			<property name="com.jaspersoft.studio.field.label" value="POSITION"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="officers"/>
+		</field>
+		<field name="STRAND" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="STRAND"/>
+			<property name="com.jaspersoft.studio.field.label" value="STRAND"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="officers"/>
+		</field>
+		<field name="USER_ID" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="USER_ID"/>
+			<property name="com.jaspersoft.studio.field.label" value="USER_ID"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="officers"/>
+		</field>
+		<field name="AVATAR" class="byte[]">
+			<property name="com.jaspersoft.studio.field.name" value="AVATAR"/>
+			<property name="com.jaspersoft.studio.field.label" value="AVATAR"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="officers"/>
+		</field>
+		<field name="OFFICER_CD" class="java.sql.Date">
+			<property name="com.jaspersoft.studio.field.name" value="OFFICER_CD"/>
+			<property name="com.jaspersoft.studio.field.label" value="OFFICER_CD"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="officers"/>
+		</field>
+		<field name="TERM" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="TERM"/>
+			<property name="com.jaspersoft.studio.field.label" value="TERM"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="officers"/>
+		</field>
+		<field name="CONTRIBUTION_COUNT" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="CONTRIBUTION_COUNT"/>
+			<property name="com.jaspersoft.studio.field.label" value="CONTRIBUTION_COUNT"/>
+		</field>
+		<field name="CURRENT_OFFICER_NUMBER" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="CURRENT_OFFICER_NUMBER"/>
+			<property name="com.jaspersoft.studio.field.label" value="CURRENT_OFFICER_NUMBER"/>
+		</field>
+	</subDataset>
+	<parameter name="PRINCIPAL" class="java.lang.String"/>
+	<parameter name="SSG_ADVISER" class="java.lang.String"/>
+	<parameter name="PREPARED" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+    SD.*,
+    O.OFFICER_ID,
+    O.FIRSTNAME,
+    O.MIDDLEINITIAL,
+    O.LASTNAME,
+    O.DESCRIPTION,
+    O.POSITION,
+    O.STRAND,
+    O.USER_ID,
+    O.AVATAR,
+    O.OFFICER_CD,
+    O.TERM,
+    COUNT(C.PROJECT_ID) AS CONTRIBUTION_COUNT,
+     ROW_NUMBER() OVER (ORDER BY O.OFFICER_ID) AS CURRENT_OFFICER_NUMBER
+FROM
+    SCHOOLDATA SD
+LEFT JOIN
+    OFFICERS O ON O.TERM = 2021
+LEFT JOIN
+    CONTRIBUTORS C ON O.OFFICER_ID = C.OFFICER_ID
+GROUP BY
+    O.OFFICER_ID]]>
+	</queryString>
+	<field name="DATA_ID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="DATA_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="DATA_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="schooldata"/>
+	</field>
+	<field name="UPDATETIME" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="UPDATETIME"/>
+		<property name="com.jaspersoft.studio.field.label" value="UPDATETIME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="schooldata"/>
+	</field>
+	<field name="SCHOOLYEAR" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="SCHOOLYEAR"/>
+		<property name="com.jaspersoft.studio.field.label" value="SCHOOLYEAR"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="schooldata"/>
+	</field>
+	<field name="SCHOOLLOGO" class="byte[]">
+		<property name="com.jaspersoft.studio.field.name" value="SCHOOLLOGO"/>
+		<property name="com.jaspersoft.studio.field.label" value="SCHOOLLOGO"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="schooldata"/>
+	</field>
+	<field name="SSGLOGO" class="byte[]">
+		<property name="com.jaspersoft.studio.field.name" value="SSGLOGO"/>
+		<property name="com.jaspersoft.studio.field.label" value="SSGLOGO"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="schooldata"/>
+	</field>
+	<field name="OFFICER_ID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="OFFICER_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="OFFICER_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="officers"/>
+	</field>
+	<field name="FIRSTNAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="FIRSTNAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="FIRSTNAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="officers"/>
+	</field>
+	<field name="MIDDLEINITIAL" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="MIDDLEINITIAL"/>
+		<property name="com.jaspersoft.studio.field.label" value="MIDDLEINITIAL"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="officers"/>
+	</field>
+	<field name="LASTNAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="LASTNAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="LASTNAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="officers"/>
+	</field>
+	<field name="DESCRIPTION" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="DESCRIPTION"/>
+		<property name="com.jaspersoft.studio.field.label" value="DESCRIPTION"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="officers"/>
+	</field>
+	<field name="POSITION" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="POSITION"/>
+		<property name="com.jaspersoft.studio.field.label" value="POSITION"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="officers"/>
+	</field>
+	<field name="STRAND" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="STRAND"/>
+		<property name="com.jaspersoft.studio.field.label" value="STRAND"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="officers"/>
+	</field>
+	<field name="USER_ID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="USER_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="USER_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="officers"/>
+	</field>
+	<field name="AVATAR" class="byte[]">
+		<property name="com.jaspersoft.studio.field.name" value="AVATAR"/>
+		<property name="com.jaspersoft.studio.field.label" value="AVATAR"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="officers"/>
+	</field>
+	<field name="OFFICER_CD" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="OFFICER_CD"/>
+		<property name="com.jaspersoft.studio.field.label" value="OFFICER_CD"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="officers"/>
+	</field>
+	<field name="TERM" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="TERM"/>
+		<property name="com.jaspersoft.studio.field.label" value="TERM"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="officers"/>
+	</field>
+	<field name="CONTRIBUTION_COUNT" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="CONTRIBUTION_COUNT"/>
+		<property name="com.jaspersoft.studio.field.label" value="CONTRIBUTION_COUNT"/>
+	</field>
+	<field name="CURRENT_OFFICER_NUMBER" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="CURRENT_OFFICER_NUMBER"/>
+		<property name="com.jaspersoft.studio.field.label" value="CURRENT_OFFICER_NUMBER"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="106" splitType="Stretch">
+			<frame>
+				<reportElement x="40" y="20" width="480" height="82" uuid="5235e014-92f4-4237-bbc5-b98ae9449099"/>
+				<image>
+					<reportElement x="0" y="0" width="80" height="80" uuid="4d1ad3fb-2b16-4f3a-ae0e-2122b80cba79"/>
+					<imageExpression><![CDATA[$F{SCHOOLLOGO}]]></imageExpression>
+				</image>
+				<image>
+					<reportElement x="400" y="0" width="80" height="80" uuid="75eb33cb-7d67-493a-bce7-9b21226679c4"/>
+					<imageExpression><![CDATA[$F{SSGLOGO}]]></imageExpression>
+				</image>
+				<textField>
+					<reportElement x="90" y="39" width="289" height="30" uuid="5ecfda29-5a8a-43c6-888d-052156c9b0a1"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA["School Year " + $F{SCHOOLYEAR} + " - " + ($F{SCHOOLYEAR} + 1)]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="125" y="7" width="221" height="30" uuid="350c64ee-e69c-4184-a8c5-89d889fd926b"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="12"/>
+					</textElement>
+					<text><![CDATA[SHS in San Nicholas III, Bacoor City]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="121" y="24" width="230" height="30" uuid="3019e56b-8fe5-4dc6-847b-18ab17edb3a4"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="12"/>
+					</textElement>
+					<text><![CDATA[Supreme Student Government]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="145" y="57" width="185" height="30" uuid="3da10d25-551b-4086-a9dc-31379dbd0b0e"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="12"/>
+					</textElement>
+					<text><![CDATA[SPEND System]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<summary>
+		<band height="280" splitType="Stretch">
+			<staticText>
+				<reportElement x="70" y="20" width="418" height="30" uuid="69804ad3-5c6a-46f6-9551-6107e9a24609"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Supreme Student Government Officers]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="40" y="60" width="490" height="100" uuid="5663ce45-a86c-4471-b760-9a77e89649ed"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Officers" uuid="a4872d5b-36b8-456e-9b97-00f904ea703a">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="100" width="490">
+						<image>
+							<reportElement x="30" y="10" width="80" height="80" uuid="2b42d37c-d178-47f6-82a1-26830425e447"/>
+							<imageExpression><![CDATA[($F{AVATAR} == null) ? $F{SCHOOLLOGO} : $F{AVATAR}]]></imageExpression>
+						</image>
+						<textField textAdjust="StretchHeight">
+							<reportElement positionType="Float" x="120" y="14" width="370" height="26" uuid="9d5223c7-2b63-4303-9d40-43d567c54dcc"/>
+							<textElement>
+								<font fontName="Arial" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{CURRENT_OFFICER_NUMBER} + ".  " + $F{FIRSTNAME} + " " + $F{MIDDLEINITIAL} + ". " + $F{LASTNAME}+ "\n"+
+"Position: " + $F{POSITION} + "\n"+
+"Strand: " + $F{STRAND} + "\n"+
+"Term: " + $F{TERM} + " - " + ($F{TERM} + 1) + "\n"+ 
+"Projects: " + $F{CONTRIBUTION_COUNT}]]></textFieldExpression>
+						</textField>
+						<textField textAdjust="StretchHeight">
+							<reportElement positionType="Float" x="120" y="50" width="370" height="23" uuid="6e752b55-8f93-401a-9e5f-92809c0b9d57"/>
+							<textElement textAlignment="Left">
+								<font fontName="Arial" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{DESCRIPTION}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<frame>
+				<reportElement positionType="Float" x="31" y="220" width="490" height="40" uuid="ca1852e6-2164-40b5-a939-0ca1fe9fdc60"/>
+				<textField>
+					<reportElement x="180" y="10" width="140" height="30" uuid="de220876-5eb2-4c0b-bc30-5a30eda0c84b"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{SSG_ADVISER} + "\n"+
+"SSG Adviser"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="350" y="10" width="139" height="30" uuid="8366d910-84dd-4831-9120-9d271106604f"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{PRINCIPAL} + "\n"+
+"Principal"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="180" y="2" width="140" height="1" uuid="2816b1f1-45ef-47a8-b2da-6d8134579ca3"/>
+				</line>
+				<line>
+					<reportElement x="349" y="1" width="140" height="1" uuid="7d4bce4a-0bfb-4894-bbf7-93c190352005"/>
+				</line>
+				<textField>
+					<reportElement x="16" y="10" width="140" height="30" uuid="3f061464-f70c-46e4-9f23-a053c416d3d9"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{PREPARED} + "\n"+
+"Prepared by"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="16" y="2" width="140" height="1" uuid="dff7d21f-8302-42e1-b707-e13a1d6321a8"/>
+				</line>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>

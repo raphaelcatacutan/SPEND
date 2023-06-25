@@ -3,6 +3,7 @@
 <?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,7 +17,7 @@
             <Label fx:id="projectTitle" alignment="CENTER" contentDisplay="CENTER" text="Feeding Program" textAlignment="CENTER" textFill="WHITE">
                <styleClass>
                   <String fx:value="fontregular" />
-                  <String fx:value="_34" />
+                  <String fx:value="_30" />
                </styleClass>
             </Label>
             <Label fx:id="projectDescription" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="93.0" prefWidth="651.0" text="This is an example description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed blandit malesuada massa id venenatis. Praesent ac neque vel nulla efficitur consectetur. " textFill="WHITE" wrapText="true">
@@ -25,28 +26,21 @@
                </padding>
                <styleClass>
                   <String fx:value="fontregular" />
-                  <String fx:value="_23" />
+                  <String fx:value="_21" />
                </styleClass>
             </Label>
-            <HBox prefHeight="28.0" prefWidth="727.0">
+            <HBox spacing="20.0">
                <children>
-                  <Label fx:id="projectDate" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="262.0" text="Started: 12-APR-23" textFill="WHITE">
+                  <Label fx:id="projectDate" alignment="CENTER" contentDisplay="CENTER" text="Started: 12-APR-23" textFill="WHITE">
                      <styleClass>
-                        <String fx:value="_23" />
+                        <String fx:value="_20" />
                         <String fx:value="fontregular" />
                      </styleClass>
                   </Label>
                   <Separator orientation="VERTICAL" prefHeight="200.0" />
-                  <Label fx:id="projectStatus" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="257.0" text="Status: Ongoing" textFill="WHITE">
+                  <Label fx:id="projectExpense" alignment="CENTER" contentDisplay="CENTER" text="Expense: 5000" textFill="WHITE">
                      <styleClass>
-                        <String fx:value="_23" />
-                        <String fx:value="fontregular" />
-                     </styleClass>
-                  </Label>
-                  <Separator orientation="VERTICAL" prefHeight="200.0" />
-                  <Label fx:id="projectExpense" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="241.0" text="Expense: 5000" textFill="WHITE">
-                     <styleClass>
-                        <String fx:value="_23" />
+                        <String fx:value="_20" />
                         <String fx:value="fontregular" />
                      </styleClass>
                   </Label>
@@ -62,8 +56,11 @@
       <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
    </padding>
    <stylesheets>
-      <URL value="@../../css/templates/main-templates.css" />
-      <URL value="@../../css/font-size.css" />
-      <URL value="@../../css/main-style.css" />
+      <URL value="@../../css/templates.css" />
+      <URL value="@../../css/components.css" />
+      <URL value="@../../css/fonts.css" />
    </stylesheets>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
 </AnchorPane>

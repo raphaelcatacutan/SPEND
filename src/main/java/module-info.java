@@ -23,6 +23,7 @@ module com.ssg {
     opens com.ssg to javafx.fxml;
     exports com.ssg;
     exports com.ssg.views;
+    exports com.ssg.views.animations;
     exports com.ssg.database.models;
     opens com.ssg.views to javafx.fxml;
     exports com.ssg.views.templates;

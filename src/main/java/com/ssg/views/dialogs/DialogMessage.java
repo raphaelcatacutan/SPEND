@@ -12,15 +12,13 @@ public class DialogMessage {
     @FXML private Label lblDialogMessageDescription;
     @FXML private Button btnDialogMessageButton1;
     @FXML private Button btnDialogMessageButton2;
-    @FXML private Button btnDialogMessageButton3;
 
     private Button[] dialogButtons;
 
     public void initialize() {
         dialogButtons = new Button[]{
                 btnDialogMessageButton1,
-                btnDialogMessageButton2,
-                btnDialogMessageButton3
+                btnDialogMessageButton2
         };
         resetDialog();
     }
@@ -37,7 +35,7 @@ public class DialogMessage {
 
         for (int x = 0; x < buttons.length; x++) {
             String textButton = buttons[x];
-            if (textButton == null) return;
+            if (textButton == null || textButton.isEmpty()) return;
             dialogButtons[x].setText(textButton);
             dialogButtons[x].setVisible(true);
             dialogButtons[x].setOnMouseClicked(event -> {

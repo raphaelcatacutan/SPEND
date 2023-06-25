@@ -13,11 +13,11 @@ import java.util.List;
 import static com.ssg.database.SpendBRead.checkIfIdExists;
 
 public class SpendBCreate {
-    private static void createTableData(String table, Object[] values, LinkedHashMap<String, String> column) throws SQLException, FileNotFoundException {
+    private static void createTableData(String table, Object[] values, LinkedHashMap<String, String> column, boolean reload) throws SQLException {
         List<String> col = new ArrayList<>(column.keySet());
         Connection conn = SpendBConnection.getConnection();
         StringBuilder sqlBuilder = new StringBuilder();
-        sqlBuilder.append("INSERT INTO ").append(table).append("(");
+        sqlBuilder.append("INSERT IGNORE INTO ").append(table).append("(");
         for (int i = 0; i < values.length; i++) {
             sqlBuilder.append(col.get(i));
             if (i < values.length - 1) sqlBuilder.append(", ");
@@ -37,29 +37,48 @@ public class SpendBCreate {
         }
         stmt.executeUpdate();
         SpendBUtils.spendBUpdate(true, table);
-        ControllerUtils.triggerEvent("refreshViews");
+        if (reload) ControllerUtils.triggerEvent("refreshViews");
     }
 
     // Array Parameter Implementation
-    // TODO Make this in one method only
-    public static void createUser(Object[] values) throws Exception {
-        createTableData("USERS", values, SpendBConnection.getColumnNames("USERS"));
+    public static void createUser(Object[] values, boolean... reload) throws Exception {
+        boolean reloadView = false;
+        if (reload.length == 1) reloadView = reload[0];
+        createTableData("USERS", values, SpendBConnection.getColumnNames("USERS"), reloadView);
     }
-    public static void createOfficer(Object[] values) throws Exception {
-        checkIfIdExists("USERS", "USER_ID", (Integer) values[6]);
-        createTableData("OFFICERS", values, SpendBConnection.getColumnNames("OFFICERS"));
+    public static void createOfficer(Object[] values, boolean... reload) throws Exception {
+        boolean reloadView = false;
+        if (reload.length == 1) reloadView = reload[0];
+        if (!checkIfIdExists("USERS", "USER_ID", (Integer) values[6])) return;
+        createTableData("OFFICERS", values, SpendBConnection.getColumnNames("OFFICERS"), reloadView);
     }
-    public static void createProject(Object[] values) throws Exception {
-        checkIfIdExists("USERS", "USER_ID", (Integer) values[2]);
-        createTableData("PROJECTS", values, SpendBConnection.getColumnNames("PROJECTS"));
+    public static void createProject(Object[] values, boolean... reload) throws Exception {
+        boolean reloadView = false;
+        if (reload.length == 1) reloadView = reload[0];
+        if (!checkIfIdExists("USERS", "USER_ID", (Integer) values[2])) return;
+        createTableData("PROJECTS", values, SpendBConnection.getColumnNames("PROJECTS"), reloadView);
     }
-    public static void createExpenses(Object[] values) throws Exception {
-        checkIfIdExists("PROJECTS", "PROJECT_ID", (Integer) values[0]);
-        createTableData("EXPENSES", values, SpendBConnection.getColumnNames("EXPENSES"));
+    public static void createExpenses(Object[] values, boolean... reload) throws Exception {
+        boolean reloadView = false;
+        if (reload.length == 1) reloadView = reload[0];
+        if (!checkIfIdExists("PROJECTS", "PROJECT_ID", (Integer) values[0])) return;
+        createTableData("EXPENSES", values, SpendBConnection.getColumnNames("EXPENSES"), reloadView);
     }
-    public static void createContributors(Object[] values) throws Exception {
-        checkIfIdExists("PROJECTS", "PROJECT_ID", (Integer) values[0]);
-        checkIfIdExists("OFFICERS", "OFFICER_ID", (Integer) values[1]);
-        createTableData("CONTRIBUTORS", values, SpendBConnection.getColumnNames("CONTRIBUTORS"));
+    public static void createContributors(Object[] values, boolean... reload) throws Exception {
+        boolean reloadView = false;
+        if (reload.length == 1) reloadView = reload[0];
+        if (!checkIfIdExists("PROJECTS", "PROJECT_ID", (Integer) values[0])) return;
+        if (!checkIfIdExists("OFFICERS", "OFFICER_ID", (Integer) values[1])) return;
+        createTableData("CONTRIBUTORS", values, SpendBConnection.getColumnNames("CONTRIBUTORS"), reloadView);
+    }
+    public static void createSchoolData(Object[] values, boolean... reload) throws SQLException, FileNotFoundException {
+        boolean reloadView = false;
+        if (reload.length == 1) reloadView = reload[0];
+        createTableData("SCHOOLDATA", values, SpendBConnection.getColumnNames("SCHOOLDATA"), reloadView);
+    }
+    public static void createFundsData(Object[] values, boolean... reload) throws SQLException, FileNotFoundException {
+        boolean reloadView = false;
+        if (reload.length == 1) reloadView = reload[0];
+        createTableData("FUNDS", values, SpendBConnection.getColumnNames("FUNDS"), reloadView);
     }
 }

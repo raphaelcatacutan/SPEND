@@ -2,17 +2,21 @@ package com.ssg.views;
 
 import com.google.common.eventbus.EventBus;
 import com.ssg.MainActivity;
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.PauseTransition;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.net.URISyntaxException;
-import java.sql.Blob;
 import java.util.Objects;
+import java.util.function.UnaryOperator;
 
 public class ControllerUtils {
 
@@ -33,13 +37,36 @@ public class ControllerUtils {
     public static FXMLLoader getLoader(String path) {
         return new FXMLLoader(MainActivity.class.getResource("views/" + path + ".fxml"));
     }
-    public static Image loadBlob(Blob blob) {
-        try {
-            return new Image(new ByteArrayInputStream(blob.getBytes(1, (int) blob.length())));
-        } catch (Exception e) {
-            return DEFAULTAVATAR;
-        }
+
+    public static TextFormatter<String> textFormatter(int maxLength, boolean restrictToNumbers) {
+        UnaryOperator<TextFormatter.Change> lengthFilter = change -> {
+            if (change.isContentChange()) {
+                int newLength = change.getControlNewText().length();
+                if (newLength > maxLength) {
+                    int replaceLength = change.getControlText().length();
+                    int removeLength = newLength - maxLength;
+                    try {
+                        change.setText(change.getText().substring(0, maxLength - replaceLength));
+                    } catch (Exception ignored) {}
+                    try {
+                        change.setRange(change.getRangeStart(), change.getRangeStart() + removeLength);
+                    } catch (Exception ignored) {}
+                    try {
+                        change.setCaretPosition(change.getCaretPosition() - removeLength);
+                    } catch (Exception ignored) {}
+                }
+            }
+            if (restrictToNumbers) {
+                if (!change.getControlNewText().matches("-?\\d*\\.?\\d*")) {
+                    change.setText("");
+                }
+            }
+            return change;
+        };
+        return new TextFormatter<>(lengthFilter);
     }
+
+
     public static void triggerEvent(String eventID) {
         EVENTBUS.post(new ControllerEvent(eventID));
     }
@@ -48,6 +75,12 @@ public class ControllerUtils {
     }
     public static void triggerEvent(String eventID, Object[]... args) {
         EVENTBUS.post(new ControllerEvent(eventID, args));
+    }
+    public static void triggerEvent(String eventID, Object[] sArgs, Object[][] aArgs) {
+        ControllerEvent event = new ControllerEvent(eventID);
+        event.setArrayArgs(aArgs);
+        event.setSimpleArgs(sArgs);
+        EVENTBUS.post(event);
     }
 
 

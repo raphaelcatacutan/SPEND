@@ -10,17 +10,27 @@ public class Project {
     private int user_id;
     private Date eventdate;
     private Timestamp updatetime;
+    private Date project_cd;
 
-    public Project(int project_id, String title, String description, int user_id, Date eventdate, Timestamp updatetime) {
+    public Project(int project_id, String title, String description, int user_id, Date project_cd, Date eventdate, Timestamp updatetime) {
         this.project_id = project_id;
         this.title = title;
         this.description = description;
         this.user_id = user_id;
         this.eventdate = eventdate;
+        this.project_cd = project_cd;
         this.updatetime = updatetime;
     }
 
     // Getters and Setters
+
+    public Date getProject_cd() {
+        return project_cd;
+    }
+
+    public void setProject_cd(Date project_cd) {
+        this.project_cd = project_cd;
+    }
 
     public int getProject_id() {
         return project_id;

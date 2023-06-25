@@ -1,334 +1,827 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
 <?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="viewSettings" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="975.0" style="-fx-background-color: rgba(17, 19, 47);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.ViewSettings">
+<AnchorPane fx:id="anpView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="975.0" style="-fx-background-color: rgba(17, 19, 47);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.ViewSettings">
    <children>
-      <VBox>
+      <HBox layoutY="39.0" prefHeight="575.0" prefWidth="975.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label prefHeight="46.0" prefWidth="343.0" styleClass="fontregular" text="System" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font size="50.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="10.0" left="100.0" right="20.0" top="20.0" />
-               </VBox.margin>
-            </Label>
-            <HBox prefHeight="41.0" prefWidth="976.0">
+            <VBox alignment="CENTER_RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="263.0" spacing="10.0">
                <children>
-                  <Pane id="pneOfficialSearch" prefHeight="39.0" prefWidth="336.0" style="-fx-border-color: white; -fx-border-radius: 50;">
-                     <children>
-                        <TextField fx:id="txfSearchOfficer" focusTraversable="false" layoutX="32.0" layoutY="5.0" prefHeight="28.0" prefWidth="296.0" promptText="Search Officer" style="-fx-background-color: none; -fx-text-fill: white;" text="Search Settings">
-                           <styleClass>
-                              <String fx:value="fontregular" />
-                              <String fx:value="_16" />
-                           </styleClass>
-                        </TextField>
-                        <ImageView fitHeight="19.0" fitWidth="21.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/icons/search.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                     <opaqueInsets>
+                  <Label fx:id="lblSettingsTitle" styleClass="fontregular" text="Settings" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                     <VBox.margin>
                         <Insets />
-                     </opaqueInsets>
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="100.0" right="10.0" top="10.0" />
-                     </HBox.margin>
-                  </Pane>
-                  <Button focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Clear Search">
-                     <HBox.margin>
-                        <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
-                     </HBox.margin>
+                     </VBox.margin>
+                  </Label>
+                  <Pane prefHeight="25.0" prefWidth="244.0" />
+                  <Label fx:id="navSettingsPreference" text="Preference" textFill="#eeff00">
                      <styleClass>
                         <String fx:value="fontregular" />
-                        <String fx:value="_14" />
+                        <String fx:value="_19" />
                      </styleClass>
-                  </Button>
-                  <Button focusTraversable="false" mnemonicParsing="false" prefHeight="109.0" prefWidth="124.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Set to Default">
-                     <HBox.margin>
-                        <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
-                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="navSettingsReportTemplates" text="Report Templates" textFill="#4f513a">
                      <styleClass>
                         <String fx:value="fontregular" />
-                        <String fx:value="_14" />
+                        <String fx:value="_19" />
                      </styleClass>
-                  </Button>
-                  <Button focusTraversable="false" mnemonicParsing="false" prefHeight="109.0" prefWidth="124.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Refresh">
-                     <HBox.margin>
-                        <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
-                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="navSettingsYourAccount" text="Your Account" textFill="#4f513a">
                      <styleClass>
                         <String fx:value="fontregular" />
-                        <String fx:value="_14" />
+                        <String fx:value="_19" />
                      </styleClass>
-                  </Button>
+                  </Label>
+                  <Label fx:id="navSettingsAdministrator" text="Administrator" textFill="#4f513a">
+                     <styleClass>
+                        <String fx:value="fontregular" />
+                        <String fx:value="_19" />
+                     </styleClass>
+                  </Label>
+                  <Label fx:id="navSettingsAbout" text="About" textFill="#4f513a">
+                     <styleClass>
+                        <String fx:value="fontregular" />
+                        <String fx:value="_19" />
+                     </styleClass>
+                  </Label>
+                  <Pane prefHeight="90.0" prefWidth="244.0" />
                </children>
-            </HBox>
-            <ScrollPane hbarPolicy="NEVER" prefHeight="367.0" prefWidth="776.0">
-               <content>
-                  <VBox prefHeight="739.0" prefWidth="769.0">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets right="19.0" />
+               </padding>
+            </VBox>
+            <StackPane alignment="TOP_LEFT" prefHeight="565.0" prefWidth="712.0">
+               <children>
+                  <AnchorPane fx:id="anpSettingsPreference" prefHeight="535.0" prefWidth="653.0" style="-fx-border-radius: 30; -fx-background-radius: 30;" styleClass="background2">
                      <children>
-                        <VBox>
-                           <children>
-                              <Label prefHeight="46.0" prefWidth="343.0" text="Database" textAlignment="CENTER" textFill="WHITE">
-                                 <styleClass>
-                                    <String fx:value="fontregular" />
-                                    <String fx:value="_34" />
-                                 </styleClass>
-                              </Label>
-                              <VBox>
+                        <ScrollPane hbarPolicy="NEVER" layoutX="70.0" layoutY="70.0" prefHeight="554.4" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <VBox alignment="CENTER_LEFT" prefHeight="459.0" prefWidth="578.0" spacing="10.0">
                                  <children>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
+                                    <Label text="Preference" textAlignment="CENTER" textFill="WHITE">
+                                       <styleClass>
+                                          <String fx:value="fontregular" />
+                                          <String fx:value="_42" />
+                                       </styleClass>
+                                    </Label>
+                                    <HBox alignment="CENTER" prefHeight="64.0" prefWidth="622.0" style="-fx-background-radius: 20;" styleClass="mainBackground">
                                        <children>
-                                          <Label prefHeight="42.0" prefWidth="561.0" text="Export Databse" textAlignment="CENTER" textFill="WHITE">
+                                          <VBox prefHeight="42.0" prefWidth="441.0">
+                                             <children>
+                                                <Label text="Report Export Location">
+                                                   <styleClass>
+                                                      <String fx:value="whiteText" />
+                                                      <String fx:value="fontregular" />
+                                                      <String fx:value="_18" />
+                                                   </styleClass>
+                                                </Label>
+                                                <Label fx:id="lblSettingsPreferenceReportExportLocation" text="G:\SSG EXPENSE SYSTEM\GROUP WORK" wrapText="true">
+                                                   <styleClass>
+                                                      <String fx:value="whiteText" />
+                                                      <String fx:value="fontregular" />
+                                                      <String fx:value="_13" />
+                                                   </styleClass>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <Button fx:id="btnSettingsPreferenceReportExportLocation" focusTraversable="false" minWidth="120.0" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Change">
                                              <styleClass>
                                                 <String fx:value="fontregular" />
-                                                <String fx:value="_25" />
-                                             </styleClass>
-                                          </Label>
-                                          <Button focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Export">
-                                             <styleClass>
-                                                <String fx:value="fontregular" />
-                                                <String fx:value="_14" />
+                                                <String fx:value="_12" />
                                              </styleClass>
                                           </Button>
                                        </children>
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
+                                       <padding>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </padding>
                                     </HBox>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
+                                    <HBox alignment="CENTER" prefHeight="64.0" prefWidth="622.0" style="-fx-background-radius: 20;" styleClass="mainBackground">
                                        <children>
-                                          <Label prefHeight="42.0" prefWidth="561.0" text="Import Database" textAlignment="CENTER" textFill="WHITE">
+                                          <VBox prefHeight="42.0" prefWidth="441.0">
+                                             <children>
+                                                <Label text="XAMPP Installation Location">
+                                                   <styleClass>
+                                                      <String fx:value="whiteText" />
+                                                      <String fx:value="fontregular" />
+                                                      <String fx:value="_18" />
+                                                   </styleClass>
+                                                </Label>
+                                                <Label fx:id="lblSettingsPreferenceXAMPPLocation" text="C:\xampp" wrapText="true">
+                                                   <styleClass>
+                                                      <String fx:value="whiteText" />
+                                                      <String fx:value="fontregular" />
+                                                      <String fx:value="_13" />
+                                                   </styleClass>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <Button fx:id="btnSettingsPreferenceXAMPPLocation" focusTraversable="false" minWidth="120.0" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Change">
                                              <styleClass>
                                                 <String fx:value="fontregular" />
-                                                <String fx:value="_25" />
-                                             </styleClass>
-                                          </Label>
-                                          <Button focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Import">
-                                             <styleClass>
-                                                <String fx:value="fontregular" />
-                                                <String fx:value="_14" />
+                                                <String fx:value="_12" />
                                              </styleClass>
                                           </Button>
                                        </children>
+                                       <padding>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="64.0" prefWidth="622.0" style="-fx-background-radius: 20;" styleClass="mainBackground">
+                                       <children>
+                                          <VBox prefHeight="42.0" prefWidth="441.0">
+                                             <children>
+                                                <Label text="XAMPP Manager">
+                                                   <styleClass>
+                                                      <String fx:value="whiteText" />
+                                                      <String fx:value="fontregular" />
+                                                      <String fx:value="_18" />
+                                                   </styleClass>
+                                                </Label>
+                                                <Label text="Automatically start or stop XAMPP at launch / exit" wrapText="true">
+                                                   <styleClass>
+                                                      <String fx:value="whiteText" />
+                                                      <String fx:value="fontregular" />
+                                                      <String fx:value="_13" />
+                                                   </styleClass>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <MFXToggleButton fx:id="tgbSettingsPreferenceXAMPPManager" contentDisposition="GRAPHIC_ONLY" prefHeight="41.0" prefWidth="101.0" selected="true" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="64.0" prefWidth="622.0" style="-fx-background-radius: 20;" styleClass="mainBackground">
+                                       <children>
+                                          <VBox prefHeight="42.0" prefWidth="441.0">
+                                             <children>
+                                                <Label text="PDF Viewer">
+                                                   <styleClass>
+                                                      <String fx:value="whiteText" />
+                                                      <String fx:value="fontregular" />
+                                                      <String fx:value="_18" />
+                                                   </styleClass>
+                                                </Label>
+                                                <Label text="Automatically preview PDF when generating report" wrapText="true">
+                                                   <styleClass>
+                                                      <String fx:value="whiteText" />
+                                                      <String fx:value="fontregular" />
+                                                      <String fx:value="_13" />
+                                                   </styleClass>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <MFXToggleButton fx:id="tgbSettingsPreferenceViewPDF" contentDisposition="GRAPHIC_ONLY" prefHeight="41.0" prefWidth="101.0" selected="true" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="64.0" prefWidth="622.0" style="-fx-background-radius: 20;" styleClass="mainBackground">
+                                       <children>
+                                          <VBox prefHeight="42.0" prefWidth="441.0">
+                                             <children>
+                                                <Label text="Current School Year Only">
+                                                   <styleClass>
+                                                      <String fx:value="whiteText" />
+                                                      <String fx:value="fontregular" />
+                                                      <String fx:value="_18" />
+                                                   </styleClass>
+                                                </Label>
+                                                <Label text="Show data from the current school year only" wrapText="true">
+                                                   <styleClass>
+                                                      <String fx:value="whiteText" />
+                                                      <String fx:value="fontregular" />
+                                                      <String fx:value="_13" />
+                                                   </styleClass>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <MFXToggleButton fx:id="tgbSettingsPreferenceCurrentSchoolYear" contentDisposition="GRAPHIC_ONLY" prefHeight="41.0" prefWidth="101.0" selected="true" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </padding>
                                     </HBox>
                                  </children>
-                                 <VBox.margin>
-                                    <Insets left="30.0" />
-                                 </VBox.margin>
                               </VBox>
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="246.0" prefWidth="823.0">
-                           <children>
-                              <Label prefHeight="46.0" prefWidth="343.0" text="Your Account" textAlignment="CENTER" textFill="WHITE">
-                                 <styleClass>
-                                    <String fx:value="fontregular" />
-                                    <String fx:value="_34" />
-                                 </styleClass>
-                              </Label>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
-                                       <children>
-                                          <Label prefHeight="42.0" prefWidth="561.0" text="Edit Account Information" textAlignment="CENTER" textFill="WHITE">
-                                             <styleClass>
-                                                <String fx:value="fontregular" />
-                                                <String fx:value="_25" />
-                                             </styleClass>
-                                          </Label>
-                                          <Button focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Edit Details">
-                                             <styleClass>
-                                                <String fx:value="fontregular" />
-                                                <String fx:value="_14" />
-                                             </styleClass>
-                                          </Button>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
-                                       <children>
-                                          <Label prefHeight="42.0" prefWidth="561.0" text="Account Activities" textAlignment="CENTER" textFill="WHITE">
-                                             <styleClass>
-                                                <String fx:value="fontregular" />
-                                                <String fx:value="_25" />
-                                             </styleClass>
-                                          </Label>
-                                          <Button focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="View Activity">
-                                             <styleClass>
-                                                <String fx:value="fontregular" />
-                                                <String fx:value="_14" />
-                                             </styleClass>
-                                          </Button>
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
-                                       <children>
-                                          <Label prefHeight="42.0" prefWidth="561.0" text="Account Ownership" textAlignment="CENTER" textFill="WHITE">
-                                             <styleClass>
-                                                <String fx:value="fontregular" />
-                                                <String fx:value="_25" />
-                                             </styleClass>
-                                          </Label>
-                                          <Button focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Delete Account">
-                                             <styleClass>
-                                                <String fx:value="fontregular" />
-                                                <String fx:value="_14" />
-                                             </styleClass>
-                                          </Button>
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
-                                       <children>
-                                          <Label prefHeight="42.0" prefWidth="561.0" text="Account Logs" textAlignment="CENTER" textFill="WHITE">
-                                             <styleClass>
-                                                <String fx:value="fontregular" />
-                                                <String fx:value="_25" />
-                                             </styleClass>
-                                          </Label>
-                                          <Button focusTraversable="false" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Generate Logs">
-                                             <styleClass>
-                                                <String fx:value="fontregular" />
-                                                <String fx:value="_14" />
-                                             </styleClass>
-                                          </Button>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets left="30.0" />
-                                 </VBox.margin>
-                              </VBox>
-                           </children>
-                        </VBox>
-                        <VBox>
-                           <children>
-                              <Label prefHeight="46.0" prefWidth="343.0" text="Preference" textAlignment="CENTER" textFill="WHITE">
-                                 <styleClass>
-                                    <String fx:value="fontregular" />
-                                    <String fx:value="_34" />
-                                 </styleClass>
-                              </Label>
-                              <VBox>
-                                 <children>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
-                                       <children>
-                                          <Label prefHeight="42.0" prefWidth="561.0" text="Default School Year" textAlignment="CENTER" textFill="WHITE">
-                                             <styleClass>
-                                                <String fx:value="fontregular" />
-                                                <String fx:value="_25" />
-                                             </styleClass>
-                                          </Label>
-                                          <MFXComboBox />
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
-                                       <children>
-                                          <Label prefHeight="42.0" prefWidth="943.0" text="Report Location" textAlignment="CENTER" textFill="WHITE">
-                                             <styleClass>
-                                                <String fx:value="fontregular" />
-                                                <String fx:value="_25" />
-                                             </styleClass>
-                                          </Label>
-                                          <Label prefHeight="42.0" prefWidth="561.0" text="C:/Users/Documents/Foo/Bar/Hello/World/Lorem" textAlignment="CENTER" textFill="WHITE">
-                                             <styleClass>
-                                                <String fx:value="fontregular" />
-                                                <String fx:value="_15" />
-                                             </styleClass>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
-                                       <children>
-                                          <Label prefHeight="42.0" prefWidth="561.0" text="Theme" textAlignment="CENTER" textFill="WHITE">
-                                             <styleClass>
-                                                <String fx:value="fontregular" />
-                                                <String fx:value="_25" />
-                                             </styleClass>
-                                          </Label>
-                                          <MFXComboBox prefHeight="20.0" prefWidth="119.0" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
-                                       <children>
-                                          <Label prefHeight="42.0" prefWidth="561.0" text="XAMPP Manager" textAlignment="CENTER" textFill="WHITE">
-                                             <styleClass>
-                                                <String fx:value="fontregular" />
-                                                <String fx:value="_25" />
-                                             </styleClass>
-                                          </Label>
-                                          <MFXToggleButton contentDisposition="GRAPHIC_ONLY" prefHeight="42.0" prefWidth="121.0" selected="true" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
-                                       <children>
-                                          <Label prefHeight="42.0" prefWidth="943.0" text="XAMPP Location" textAlignment="CENTER" textFill="WHITE">
-                                             <styleClass>
-                                                <String fx:value="fontregular" />
-                                                <String fx:value="_25" />
-                                             </styleClass>
-                                          </Label>
-                                          <Label prefHeight="42.0" prefWidth="561.0" text="C:/xampp/" textAlignment="CENTER" textFill="WHITE">
-                                             <styleClass>
-                                                <String fx:value="fontregular" />
-                                                <String fx:value="_15" />
-                                             </styleClass>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="976.0">
-                                       <children>
-                                          <Label prefHeight="42.0" prefWidth="561.0" text="Use XAMPP" textAlignment="CENTER" textFill="WHITE">
-                                             <styleClass>
-                                                <String fx:value="fontregular" />
-                                                <String fx:value="_25" />
-                                             </styleClass>
-                                          </Label>
-                                          <MFXToggleButton contentDisposition="GRAPHIC_ONLY" prefHeight="42.0" prefWidth="121.0" selected="true" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets left="30.0" />
-                                 </VBox.margin>
-                              </VBox>
-                           </children>
-                        </VBox>
+                           </content>
+                        </ScrollPane>
                      </children>
-                  </VBox>
-               </content>
-               <VBox.margin>
-                  <Insets left="100.0" right="100.0" top="20.0" />
-               </VBox.margin>
-            </ScrollPane>
+                     <padding>
+                        <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
+                     </padding>
+                  </AnchorPane>
+                  <AnchorPane fx:id="anpSettingsReportTemplates" prefHeight="535.0" prefWidth="653.0" style="-fx-border-radius: 30; -fx-background-radius: 30;" styleClass="background2">
+                     <children>
+                        <ScrollPane hbarPolicy="NEVER" layoutX="70.0" layoutY="70.0" prefHeight="554.4" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <VBox alignment="CENTER_LEFT" minWidth="-Infinity" prefHeight="570.0" prefWidth="568.0" spacing="10.0">
+                                 <children>
+                                    <Label text="Report Templates" textAlignment="CENTER" textFill="WHITE">
+                                       <styleClass>
+                                          <String fx:value="fontregular" />
+                                          <String fx:value="_42" />
+                                       </styleClass>
+                                    </Label>
+                                    <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="578.0" spacing="5.0" style="-fx-background-radius: 20;" styleClass="mainBackground">
+                                       <children>
+                                          <Label text="School Principal">
+                                             <styleClass>
+                                                <String fx:value="whiteText" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_18" />
+                                             </styleClass>
+                                          </Label>
+                                          <Label text="Edit the name of the Principal for printing reports" wrapText="true">
+                                             <styleClass>
+                                                <String fx:value="whiteText" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_13" />
+                                             </styleClass>
+                                          </Label>
+                                          <TextField fx:id="txfSettingsReportTemplatesPrincipal" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="21.0" prefWidth="544.0" style="-fx-border-color: white; -fx-text-fill: white; -fx-border-width: 0 0 1 0;">
+                                             <styleClass>
+                                                <String fx:value="noBackground" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_13" />
+                                             </styleClass>
+                                             <padding>
+                                                <Insets bottom="5.0" left="-1.0" right="-1.0" top="-1.0" />
+                                             </padding>
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox layoutX="10.0" layoutY="218.0" minWidth="-Infinity" prefWidth="578.0" spacing="5.0" style="-fx-background-radius: 20;" styleClass="mainBackground">
+                                       <children>
+                                          <Label text="SSG Adviser">
+                                             <styleClass>
+                                                <String fx:value="whiteText" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_18" />
+                                             </styleClass>
+                                          </Label>
+                                          <Label text="Edit the name of the SSG Adviser for printing reports" wrapText="true">
+                                             <styleClass>
+                                                <String fx:value="whiteText" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_13" />
+                                             </styleClass>
+                                          </Label>
+                                          <TextField fx:id="txfSettingsReportTemplatesAdviser" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="21.0" prefWidth="544.0" style="-fx-border-color: white; -fx-text-fill: white; -fx-border-width: 0 0 1 0;">
+                                             <styleClass>
+                                                <String fx:value="noBackground" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_13" />
+                                             </styleClass>
+                                             <padding>
+                                                <Insets bottom="5.0" left="-1.0" right="-1.0" top="-1.0" />
+                                             </padding>
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox layoutX="10.0" layoutY="273.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="578.0" spacing="5.0" style="-fx-background-radius: 20;" styleClass="mainBackground">
+                                       <children>
+                                          <Label text="Expense Proposal Letter Body">
+                                             <styleClass>
+                                                <String fx:value="whiteText" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_18" />
+                                             </styleClass>
+                                          </Label>
+                                          <Label text="Edit the proposal letter message for printing expense proposal" wrapText="true">
+                                             <styleClass>
+                                                <String fx:value="whiteText" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_13" />
+                                             </styleClass>
+                                          </Label>
+                                          <TextArea fx:id="txfSettingsReportTemplatesProposal" focusTraversable="false" prefHeight="154.0" prefWidth="519.0" style="-fx-border-color: white; -fx-border-width: 0 0 1 0; -fx-text-fill: white;" wrapText="true">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_13" />
+                                             </styleClass>
+                                             <padding>
+                                                <Insets bottom="5.0" left="-1.0" right="-1.0" top="-1.0" />
+                                             </padding>
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </TextArea>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                     <padding>
+                        <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
+                     </padding>
+                  </AnchorPane>
+                  <AnchorPane fx:id="anpSettingsYourAccount" prefHeight="535.0" prefWidth="653.0" style="-fx-border-radius: 30; -fx-background-radius: 30;" styleClass="background2" visible="false">
+                     <children>
+                        <ScrollPane hbarPolicy="NEVER" layoutX="70.0" layoutY="70.0" prefHeight="554.4" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <VBox alignment="CENTER_LEFT" prefHeight="452.0" prefWidth="578.0" spacing="10.0">
+                                 <children>
+                                    <Label text="Your Account" textAlignment="CENTER" textFill="WHITE">
+                                       <styleClass>
+                                          <String fx:value="fontregular" />
+                                          <String fx:value="_42" />
+                                       </styleClass>
+                                    </Label>
+                                    <VBox prefHeight="42.0" prefWidth="441.0" spacing="5.0" style="-fx-background-radius: 20;" styleClass="mainBackground">
+                                       <children>
+                                          <Label text="Account Name">
+                                             <styleClass>
+                                                <String fx:value="whiteText" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_18" />
+                                             </styleClass>
+                                          </Label>
+                                          <Label text="Change your account name. This can appear in the generated reports." wrapText="true">
+                                             <styleClass>
+                                                <String fx:value="whiteText" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_13" />
+                                             </styleClass>
+                                          </Label>
+                                          <TextField fx:id="txfSettingsYourAccountName" focusTraversable="false" promptText="Account Name" style="-fx-border-color: white; -fx-text-fill: white; -fx-border-width: 0 0 1 0;">
+                                             <styleClass>
+                                                <String fx:value="noBackground" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_13" />
+                                             </styleClass>
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                             <padding>
+                                                <Insets bottom="5.0" left="-1.0" right="-1.0" top="-1.0" />
+                                             </padding>
+                                          </TextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                       <padding>
+                                          <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox prefHeight="42.0" prefWidth="441.0" spacing="5.0" style="-fx-background-radius: 20;" styleClass="mainBackground">
+                                       <children>
+                                          <Label text="Account Username">
+                                             <styleClass>
+                                                <String fx:value="whiteText" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_18" />
+                                             </styleClass>
+                                          </Label>
+                                          <Label text="Change your account username for signing in." wrapText="true">
+                                             <styleClass>
+                                                <String fx:value="whiteText" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_13" />
+                                             </styleClass>
+                                          </Label>
+                                          <TextField fx:id="txfSettingsYourAccountUserName" focusTraversable="false" promptText="User Name" style="-fx-border-color: white; -fx-text-fill: white; -fx-border-width: 0 0 1 0;">
+                                             <styleClass>
+                                                <String fx:value="noBackground" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_13" />
+                                             </styleClass>
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                             <padding>
+                                                <Insets bottom="5.0" left="-1.0" right="-1.0" top="-1.0" />
+                                             </padding>
+                                          </TextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                       <padding>
+                                          <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox prefHeight="42.0" prefWidth="441.0" spacing="5.0" style="-fx-background-radius: 20;" styleClass="mainBackground">
+                                       <children>
+                                          <Label text="Account Password">
+                                             <styleClass>
+                                                <String fx:value="whiteText" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_18" />
+                                             </styleClass>
+                                          </Label>
+                                          <Label text="Change your account password for signing in." wrapText="true">
+                                             <styleClass>
+                                                <String fx:value="whiteText" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_13" />
+                                             </styleClass>
+                                          </Label>
+                                          <PasswordField fx:id="txfSettingsYourAccountPassword" focusTraversable="false" promptText="*************" style="-fx-border-color: white; -fx-text-fill: white; -fx-border-width: 0 0 1 0;">
+                                             <styleClass>
+                                                <String fx:value="noBackground" />
+                                                <String fx:value="_13" />
+                                                <String fx:value="fontregular" />
+                                             </styleClass>
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                             <padding>
+                                                <Insets bottom="5.0" left="-1.0" right="-1.0" top="-1.0" />
+                                             </padding>
+                                          </PasswordField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                       <padding>
+                                          <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                     <padding>
+                        <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
+                     </padding>
+                  </AnchorPane>
+                  <AnchorPane fx:id="anpSettingsAdministrator" prefHeight="535.0" prefWidth="653.0" style="-fx-border-radius: 30; -fx-background-radius: 30;" styleClass="background2" visible="false">
+                     <children>
+                        <ScrollPane hbarPolicy="NEVER" layoutX="70.0" layoutY="70.0" prefHeight="554.4" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <VBox alignment="CENTER_LEFT" prefHeight="450.0" prefWidth="578.0" spacing="10.0">
+                                 <children>
+                                    <Label text="Administrator" textAlignment="CENTER" textFill="WHITE">
+                                       <styleClass>
+                                          <String fx:value="fontregular" />
+                                          <String fx:value="_42" />
+                                       </styleClass>
+                                    </Label>
+                                    <HBox alignment="CENTER" prefHeight="64.0" prefWidth="622.0" style="-fx-background-radius: 20;" styleClass="mainBackground">
+                                       <children>
+                                          <VBox prefHeight="42.0" prefWidth="441.0">
+                                             <children>
+                                                <Label text="New School Year">
+                                                   <styleClass>
+                                                      <String fx:value="whiteText" />
+                                                      <String fx:value="fontregular" />
+                                                      <String fx:value="_18" />
+                                                   </styleClass>
+                                                </Label>
+                                                <Label text="Start a new school year: 2023-2024" wrapText="true">
+                                                   <styleClass>
+                                                      <String fx:value="whiteText" />
+                                                      <String fx:value="fontregular" />
+                                                      <String fx:value="_13" />
+                                                   </styleClass>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <Button fx:id="btnSettingsAdministratorNewSY" focusTraversable="false" minWidth="120.0" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Change">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_12" />
+                                             </styleClass>
+                                          </Button>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="64.0" prefWidth="622.0" style="-fx-background-radius: 20;" styleClass="mainBackground">
+                                       <children>
+                                          <VBox prefHeight="42.0" prefWidth="441.0">
+                                             <children>
+                                                <Label text="New SSG Logo">
+                                                   <styleClass>
+                                                      <String fx:value="whiteText" />
+                                                      <String fx:value="fontregular" />
+                                                      <String fx:value="_18" />
+                                                   </styleClass>
+                                                </Label>
+                                                <Label text="Change the SSG Logo for reports, and app icon" wrapText="true">
+                                                   <styleClass>
+                                                      <String fx:value="whiteText" />
+                                                      <String fx:value="fontregular" />
+                                                      <String fx:value="_13" />
+                                                   </styleClass>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <Button fx:id="btnSettingsAdministratorSSGLogo" focusTraversable="false" minWidth="120.0" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Change">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_12" />
+                                             </styleClass>
+                                          </Button>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="64.0" prefWidth="622.0" style="-fx-background-radius: 20;" styleClass="mainBackground">
+                                       <children>
+                                          <VBox prefHeight="42.0" prefWidth="441.0">
+                                             <children>
+                                                <Label text="New School Logo">
+                                                   <styleClass>
+                                                      <String fx:value="whiteText" />
+                                                      <String fx:value="fontregular" />
+                                                      <String fx:value="_18" />
+                                                   </styleClass>
+                                                </Label>
+                                                <Label text="Change the School Logo for reports" wrapText="true">
+                                                   <styleClass>
+                                                      <String fx:value="whiteText" />
+                                                      <String fx:value="fontregular" />
+                                                      <String fx:value="_13" />
+                                                   </styleClass>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <Button fx:id="btnSettingsAdministratorSchoolLogo" focusTraversable="false" minWidth="120.0" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Change">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_12" />
+                                             </styleClass>
+                                          </Button>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="64.0" prefWidth="622.0" style="-fx-background-radius: 20;" styleClass="mainBackground">
+                                       <children>
+                                          <VBox prefHeight="42.0" prefWidth="441.0">
+                                             <children>
+                                                <Label text="Set Account as Admin">
+                                                   <styleClass>
+                                                      <String fx:value="whiteText" />
+                                                      <String fx:value="fontregular" />
+                                                      <String fx:value="_18" />
+                                                   </styleClass>
+                                                </Label>
+                                                <Label text="Grant admin permission to a user account" wrapText="true">
+                                                   <styleClass>
+                                                      <String fx:value="whiteText" />
+                                                      <String fx:value="fontregular" />
+                                                      <String fx:value="_13" />
+                                                   </styleClass>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <Button fx:id="btnSettingsAdministratorAccountAdmin" focusTraversable="false" minWidth="120.0" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Set">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_12" />
+                                             </styleClass>
+                                          </Button>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                     <padding>
+                        <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
+                     </padding>
+                  </AnchorPane>
+                  <AnchorPane fx:id="anpSettingsAbout" prefHeight="535.0" prefWidth="653.0" style="-fx-border-radius: 30; -fx-background-radius: 30;" styleClass="background2" visible="false">
+                     <children>
+                        <ScrollPane hbarPolicy="NEVER" layoutX="70.0" layoutY="70.0" prefHeight="554.4" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <VBox alignment="CENTER_LEFT" prefHeight="458.0" prefWidth="578.0" spacing="10.0">
+                                 <children>
+                                    <Label text="About" textAlignment="CENTER" textFill="WHITE">
+                                       <styleClass>
+                                          <String fx:value="fontregular" />
+                                          <String fx:value="_42" />
+                                       </styleClass>
+                                    </Label>
+                                    <HBox alignment="CENTER" prefHeight="64.0" prefWidth="622.0" style="-fx-background-radius: 20;" styleClass="mainBackground">
+                                       <children>
+                                          <VBox prefHeight="42.0" prefWidth="441.0">
+                                             <children>
+                                                <Label text="App Version: v1.0.1">
+                                                   <styleClass>
+                                                      <String fx:value="whiteText" />
+                                                      <String fx:value="fontregular" />
+                                                      <String fx:value="_18" />
+                                                   </styleClass>
+                                                </Label>
+                                                <Label text="Check previous changes, release date, and updates" wrapText="true">
+                                                   <styleClass>
+                                                      <String fx:value="whiteText" />
+                                                      <String fx:value="fontregular" />
+                                                      <String fx:value="_13" />
+                                                   </styleClass>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <Button focusTraversable="false" minWidth="120.0" mnemonicParsing="false" onAction="#aboutAppVersion" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Open">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_12" />
+                                             </styleClass>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="64.0" prefWidth="622.0" style="-fx-background-radius: 20;" styleClass="mainBackground">
+                                       <children>
+                                          <VBox prefHeight="42.0" prefWidth="441.0">
+                                             <children>
+                                                <Label text="Github">
+                                                   <styleClass>
+                                                      <String fx:value="whiteText" />
+                                                      <String fx:value="fontregular" />
+                                                      <String fx:value="_18" />
+                                                   </styleClass>
+                                                </Label>
+                                                <Label text="Check license information, documentation and source code" wrapText="true">
+                                                   <styleClass>
+                                                      <String fx:value="whiteText" />
+                                                      <String fx:value="fontregular" />
+                                                      <String fx:value="_13" />
+                                                   </styleClass>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <Button focusTraversable="false" minWidth="120.0" mnemonicParsing="false" onAction="#aboutAppGithub" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Open">
+                                             <styleClass>
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_12" />
+                                             </styleClass>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                    </HBox>
+                                    <VBox prefHeight="42.0" prefWidth="441.0" style="-fx-background-radius: 20;" styleClass="mainBackground">
+                                       <children>
+                                          <Label text="Credentials">
+                                             <styleClass>
+                                                <String fx:value="whiteText" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_18" />
+                                             </styleClass>
+                                          </Label>
+                                          <Label prefHeight="77.0" prefWidth="548.0" text="Project Created by: " wrapText="true">
+                                             <styleClass>
+                                                <String fx:value="whiteText" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_13" />
+                                             </styleClass>
+                                          </Label>
+                                          <Label prefHeight="77.0" prefWidth="548.0" text="Raphael James C. Catacutan" wrapText="true">
+                                             <styleClass>
+                                                <String fx:value="whiteText" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_13" />
+                                             </styleClass>
+                                             <padding>
+                                                <Insets left="50.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label prefHeight="77.0" prefWidth="548.0" text="Nermie R. Dela Paz" wrapText="true">
+                                             <styleClass>
+                                                <String fx:value="whiteText" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_13" />
+                                             </styleClass>
+                                             <padding>
+                                                <Insets left="50.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label prefHeight="77.0" prefWidth="548.0" text="Stephen Bugna" wrapText="true">
+                                             <styleClass>
+                                                <String fx:value="whiteText" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_13" />
+                                             </styleClass>
+                                             <padding>
+                                                <Insets left="50.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label prefHeight="77.0" prefWidth="548.0" text="Joy Inocencio" wrapText="true">
+                                             <styleClass>
+                                                <String fx:value="whiteText" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_13" />
+                                             </styleClass>
+                                             <padding>
+                                                <Insets left="50.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label prefHeight="77.0" prefWidth="548.0" text="CJ Belen" wrapText="true">
+                                             <styleClass>
+                                                <String fx:value="whiteText" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_13" />
+                                             </styleClass>
+                                             <padding>
+                                                <Insets left="50.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label prefHeight="77.0" prefWidth="548.0" text="Andrea Estudillo" wrapText="true">
+                                             <styleClass>
+                                                <String fx:value="whiteText" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_13" />
+                                             </styleClass>
+                                             <padding>
+                                                <Insets left="50.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label prefHeight="77.0" prefWidth="548.0" text="Supervised by: Mr. Roi Francisco" wrapText="true">
+                                             <styleClass>
+                                                <String fx:value="whiteText" />
+                                                <String fx:value="fontregular" />
+                                                <String fx:value="_13" />
+                                             </styleClass>
+                                          </Label>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                     <padding>
+                        <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
+                     </padding>
+                  </AnchorPane>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </StackPane>
          </children>
-      </VBox>
+      </HBox>
    </children>
    <stylesheets>
-      <URL value="@../css/main-style.css" />
-      <URL value="@../css/font-size.css" />
+      <URL value="@../css/components.css" />
+      <URL value="@../css/backgrounds.css" />
+      <URL value="@../css/fonts.css" />
    </stylesheets>
 </AnchorPane>

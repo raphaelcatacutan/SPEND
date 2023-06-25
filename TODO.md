@@ -1,0 +1,151 @@
+# TODO v0.0.25c2
+- Main Login
+- Main View
+	- [x] Log Out
+- View Dashboard
+	- [x] Clickable Next Event
+	- [x] Clickable Recents
+	- Quick Actions
+		- [x] Quick Add Project
+		- [x] Visit Github
+		- [x] New School Year
+	- [x] Line Chart
+- View Officers
+	- Officer List
+		- [x] Add Button
+		- [x] Search Field
+		- [x] Clear Searches
+		- [x] Display Avatar
+		- [x] Generate Report
+	- Officer Profile
+		- [x] Edit Details
+			- [x] Confirm Editing
+		- ]x] Generate Report
+		- [x] Edit Contributions
+		- [x] Delete Officer
+			- [x] Confirm Deleting
+		- [x] Navigate to a Project
+		- [x] Display Avatar
+- View Projects
+	- Project List
+		- [x] Search Field
+		- [x] Add Button
+		- [x] Display Proposed Progress
+		- [x] Generate Report
+	- Project Details
+		- [x] Contributors
+		- [x] Generate Report
+		- [x] Delete Project
+			- [x] Confirm Deleting
+		- [x] Add Expense
+		- [x] Edit Details
+			- [x] Confirm Editing
+	- Expense Modifier
+		- [x] Delete Button
+			- [x] Confirm Deleting
+		- [x] Generate Proposal
+		- [x] Add Button
+		- [x] Update Button
+			- [x] Confirm Editing
+- View Statistics
+	- [x] Numbers
+	- Funds Status - Fluid Tile
+		- [x] Add funds
+		- [x] Generate fund logs
+		- [x] Fluid
+	- [x] Expense Status Distribution - Nested Bar Chart
+		- [x] Bar
+		- [x] No Data
+- View System
+	- [x] Navigating
+	- User Preference
+		- [x] Report Export Location
+		- [x] XAMPP Manager
+		- [x] Preview Report in PDF Viewer
+		- [x] Show current school year only
+	- Report Templates
+		- [x] Principal Name
+		- [x] SSG Adviser
+		- [x] Proposal Paragraph
+	- Your Account
+		- [x] Edit Account Name
+		- [x] Edit Account username
+		- [x] Edit Account password
+	- Administrator
+		- [x] New School Year
+		- [x] New SSG Logo
+		- [x] New School Logo
+		- [x] Set account as an admin
+	- About
+		- [x] App Version
+		- [x] Github
+		- [x] Credentials
+
+# TODO v0.0.25c3
+- All
+	- [x] Center the Stage
+	- [x] Delete files in `temp` on exit
+	- [x] Hide editor when clicking back
+- Generate Report
+	- [x] Show Message when error
+	- [x] Get the names in the database
+	- [x] Add prepared by
+    - [x] Fonts
+- Main Login
+	- [x] Username taken
+    - [x] Sign in resets all
+- View Officers
+	- [x] Project List Status Remove
+    - [x] Descending View
+- View Projects
+  - [x] Descending View
+- View Settings
+	- [x] Username taken
+	- [x] Manage XAMPP
+
+# TODO v0.0.25c4
+- [x] Fonts
+- [x] Database failed handler
+- [x] No Right Click on TextFields and TextArea
+- [x] List of Officers Text Wrapping
+- [ ] Comma Separated Currency
+- [x] Text Limits
+- [ ] Add Tooltips
+- [x] Adding image in officer
+- [x] Style Table 
+- [ ] Catch Message
+- [x] Multiple Selection of Expense
+- [x] Refreshing new visual data
+- [x] Refreshing expense stats
+- [ ] Refreshing reloads the database once
+- [ ] Hover Recents
+- [x] Change the position of choice dialog
+- [-] Current School Year Only
+- [ ] Filtered Print
+- [ ] Remove filter parameter in update methods
+- [ ] Add boolean `reload` in create methodsw
+- [ ] Release `stmt` statements
+- [ ] New ways of displaying data
+- [ ] New ways of displaying data
+- [ ] Remove data adding in setups
+- [x] Toolbar
+- [-] Splash Screen
+- [-] Empty reports when empty query
+- [x] No avatar officer reports
+- [ ] Jasper Reports Fonts
+- [-] Editors
+- [x] Expense Editor Enables
+- [ ] Design Filter
+- [ ] Optimize Jasper Queries
+- [x] Adding or Editing Officer Avatar
+- [-] Animation
+- [x] Admin Privilege showing on login
+- [-] Expense Status Bug
+
+# TODO v.1.0.0
+- [ ] Packaging to JAR
+- [ ] Code Clean up
+- [ ] Remove Print-Outs
+- [ ] Remove Prefilled Data
+- [ ] Change SSG Logo, Adviser, and Principal
+- [ ] Check ENHANCE, TODO, FIXME

@@ -1,29 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<HBox id="toolbar" alignment="CENTER_RIGHT" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="975.0" stylesheets="@../css/main-style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.Toolbar">
+<HBox id="toolbar" alignment="CENTER_RIGHT" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="975.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.Toolbar">
    <children>
-      <ImageView fx:id="imgMinimize" fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" styleClass="toolbarImg">
-         <image>
-            <Image url="@../assets/icons/minimize.png" />
-         </image>
-      </ImageView>
-      <Pane prefHeight="32.0" prefWidth="12.0" />
-      <ImageView fx:id="imgLogOut" fitHeight="21.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" styleClass="toolbarImg">
-         <image>
-            <Image url="@../assets/icons/logout.png" />
-         </image>
-      </ImageView>
-      <Pane prefHeight="32.0" prefWidth="10.0" />
-      <ImageView fx:id="imgExit" fitHeight="21.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" styleClass="toolbarImg">
-         <image>
-            <Image url="@../assets/icons/close-window.png" />
-         </image>
-      </ImageView>
-      <Pane prefHeight="30.0" prefWidth="15.0" />
+      <Pane prefHeight="30.0" prefWidth="40.0" styleClass="toolBar1" fx:id="pneMinimize">
+         <children>
+            <ImageView fx:id="imgMinimize" fitHeight="16.0" fitWidth="16.0" layoutX="11.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" styleClass="toolbarImg">
+               <image>
+                  <Image url="@../assets/icons/minimize.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane prefHeight="30.0" prefWidth="37.0" styleClass="toolBar1" fx:id="pneLogout">
+         <children>
+            <ImageView fx:id="imgLogOut" blendMode="ADD" fitHeight="16.0" fitWidth="16.0" layoutX="12.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" styleClass="toolbarImg">
+               <image>
+                  <Image url="@../assets/icons/logout.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane prefHeight="30.0" prefWidth="46.0" styleClass="toolBar2" fx:id="pneExit">
+         <children>
+            <ImageView fx:id="imgExit" fitHeight="14.0" fitWidth="14.0" layoutX="15.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" styleClass="toolbarImg">
+               <image>
+                  <Image url="@../assets/icons/close-window.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
    </children>
+   <stylesheets>
+      <URL value="@../css/components.css" />
+      <URL value="@../css/selfish/toolbar.css" />
+   </stylesheets>
 </HBox>

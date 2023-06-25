@@ -27,15 +27,17 @@
                   <Image url="@../assets/icons/school-logo.png" />
                </image>
             </ImageView>
-            <Label id="title" fx:id="title" layoutX="102.0" layoutY="142.0" prefHeight="75.0" prefWidth="892.0" styleClass="fontregular" text="Welcome to SPEND" textFill="YELLOW">
-               <font>
-                  <Font size="81.0" />
-               </font>
+            <Label id="title" fx:id="title" layoutX="102.0" layoutY="142.0" prefHeight="75.0" prefWidth="892.0" text="Welcome to SPEND" textFill="YELLOW">
+               <styleClass>
+                  <String fx:value="_63" />
+                  <String fx:value="fontregular" />
+               </styleClass>
             </Label>
-            <Label layoutX="109.0" layoutY="198.0" prefHeight="72.0" prefWidth="698.0" styleClass="fontregular" text="SSG Projects Expense &amp; Notation Database" textFill="YELLOW">
-               <font>
-                  <Font size="27.0" />
-               </font>
+            <Label layoutX="109.0" layoutY="198.0" prefHeight="72.0" prefWidth="698.0" text="SSG Projects Expense &amp; Notation Database" textFill="YELLOW">
+               <styleClass>
+                  <String fx:value="fontregular" />
+                  <String fx:value="_25" />
+               </styleClass>
             </Label>
             <StackPane layoutX="64.0" layoutY="271.0" prefHeight="342.0" prefWidth="638.0">
                <children>
@@ -46,7 +48,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btnToRegister" layoutX="197.0" layoutY="23.0" mnemonicParsing="false" style="-fx-text-fill: white; -fx-background-color: none;" text="Register">
+                        <Button fx:id="btnToRegister" layoutX="228.0" layoutY="23.0" mnemonicParsing="false" style="-fx-text-fill: white; -fx-background-color: none;" text="Register">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -67,12 +69,9 @@
                                  </styleClass>
                               </Label>
                               <TextField fx:id="txfSigninUsername" layoutX="14.0" layoutY="4.0" prefHeight="67.0" prefWidth="304.0" style="-fx-background-color: none; -fx-text-fill: white;">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
                                  <styleClass>
-                                    <String fx:value="txfLogin" />
                                     <String fx:value="fontregular" />
+                                    <String fx:value="_14" />
                                  </styleClass>
                               </TextField>
                            </children>
@@ -89,12 +88,9 @@
                                  </styleClass>
                               </Label>
                               <PasswordField fx:id="txfSigninPassword" layoutX="17.0" layoutY="16.0" prefHeight="44.0" prefWidth="293.0" style="-fx-text-fill: white; -fx-background-color: none;">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
                                  <styleClass>
-                                    <String fx:value="txfLogin" />
                                     <String fx:value="fontregular" />
+                                    <String fx:value="_14" />
                                  </styleClass>
                               </PasswordField>
                            </children>
@@ -121,20 +117,6 @@
                   </AnchorPane>
                   <AnchorPane fx:id="anpRegisterForm" minHeight="0.0" minWidth="0.0" prefHeight="348.0" prefWidth="638.0" visible="false">
                      <children>
-                        <Label layoutX="87.0" layoutY="29.0" styleClass="fontregular" text="Have an Account?" textFill="#f2f2f2">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Button id="toRegister" fx:id="btnToSignin" layoutX="209.0" layoutY="23.0" mnemonicParsing="false" text="Login">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="pageNav" />
-                              <String fx:value="fontregular" />
-                           </styleClass>
-                        </Button>
                         <Pane layoutX="84.0" layoutY="59.0" prefHeight="60.0" prefWidth="158.0" styleClass="txfPane">
                            <children>
                               <Label layoutX="15.0" layoutY="7.0" styleClass="fontregular" text="FIRST NAME" textFill="YELLOW">
@@ -142,13 +124,15 @@
                                     <Font size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="txfRegisterFirstName" layoutX="12.0" layoutY="19.0" prefHeight="37.0" prefWidth="138.0">
+                              <TextField fx:id="txfRegisterFirstName" focusTraversable="false" layoutX="12.0" layoutY="19.0" prefHeight="37.0" prefWidth="138.0">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                                  <styleClass>
-                                    <String fx:value="txfLogin" />
                                     <String fx:value="fontregular" />
+                                    <String fx:value="_14" />
+                                    <String fx:value="noBackground" />
+                                    <String fx:value="whiteText" />
                                  </styleClass>
                               </TextField>
                            </children>
@@ -160,17 +144,33 @@
                                     <Font size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="txfRegisterMiddleInitial" layoutX="8.0" layoutY="19.0" prefHeight="37.0" prefWidth="47.0">
+                              <TextField fx:id="txfRegisterMiddleInitial" focusTraversable="false" layoutX="8.0" layoutY="19.0" prefHeight="37.0" prefWidth="47.0">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                                  <styleClass>
-                                    <String fx:value="txfLogin" />
                                     <String fx:value="fontregular" />
+                                    <String fx:value="_14" />
+                                    <String fx:value="noBackground" />
+                                    <String fx:value="whiteText" />
                                  </styleClass>
                               </TextField>
                            </children>
                         </Pane>
+                        <Label layoutX="87.0" layoutY="29.0" styleClass="fontregular" text="Have an Account?" textFill="#f2f2f2">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Button id="toRegister" fx:id="btnToSignin" layoutX="247.0" layoutY="23.0" mnemonicParsing="false" text="Login">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="pageNav" />
+                              <String fx:value="fontregular" />
+                           </styleClass>
+                        </Button>
                         <Pane layoutX="322.0" layoutY="58.0" prefHeight="60.0" prefWidth="148.0" styleClass="txfPane">
                            <children>
                               <Label layoutX="12.0" layoutY="6.0" styleClass="fontregular" text="LAST NAME" textFill="YELLOW">
@@ -178,13 +178,15 @@
                                     <Font size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="txfRegisterLastName" layoutX="10.0" layoutY="21.0" prefHeight="37.0" prefWidth="129.0">
+                              <TextField fx:id="txfRegisterLastName" focusTraversable="false" layoutX="10.0" layoutY="21.0" prefHeight="37.0" prefWidth="129.0">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                                  <styleClass>
-                                    <String fx:value="txfLogin" />
                                     <String fx:value="fontregular" />
+                                    <String fx:value="_14" />
+                                    <String fx:value="noBackground" />
+                                    <String fx:value="whiteText" />
                                  </styleClass>
                               </TextField>
                            </children>
@@ -196,13 +198,15 @@
                                     <Font size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="txfRegisterUsername" layoutX="12.0" layoutY="21.0" prefHeight="31.0" prefWidth="307.0">
+                              <TextField fx:id="txfRegisterUsername" focusTraversable="false" layoutX="12.0" layoutY="21.0" prefHeight="31.0" prefWidth="307.0">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                                  <styleClass>
-                                    <String fx:value="txfLogin" />
                                     <String fx:value="fontregular" />
+                                    <String fx:value="_14" />
+                                    <String fx:value="noBackground" />
+                                    <String fx:value="whiteText" />
                                  </styleClass>
                               </TextField>
                            </children>
@@ -214,13 +218,15 @@
                                     <Font size="12.0" />
                                  </font>
                               </Label>
-                              <PasswordField fx:id="txfRegisterPassword" layoutX="12.0" layoutY="16.0" prefHeight="44.0" prefWidth="304.0">
+                              <PasswordField fx:id="txfRegisterPassword" focusTraversable="false" layoutX="12.0" layoutY="14.0" prefHeight="44.0" prefWidth="304.0">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                                  <styleClass>
-                                    <String fx:value="txfLogin" />
                                     <String fx:value="fontregular" />
+                                    <String fx:value="noBackground" />
+                                    <String fx:value="_15" />
+                                    <String fx:value="whiteText" />
                                  </styleClass>
                               </PasswordField>
                            </children>
@@ -240,9 +246,14 @@
             </StackPane>
          </children>
          <stylesheets>
-            <URL value="@../css/main-style.css" />
-            <URL value="@../css/main-login.css" />
+            <URL value="@../css/components.css" />
+            <URL value="@../css/selfish/logins.css" />
          </stylesheets>
       </AnchorPane>
    </children>
+   <stylesheets>
+      <URL value="@../css/backgrounds.css" />
+      <URL value="@../css/fonts.css" />
+      <URL value="@../css/selfish/logins.css" />
+   </stylesheets>
 </AnchorPane>

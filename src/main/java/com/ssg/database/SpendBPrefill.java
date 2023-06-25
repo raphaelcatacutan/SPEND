@@ -1,6 +1,11 @@
 package com.ssg.database;
 
+import com.ssg.MainActivity;
+
+import java.io.File;
 import java.sql.SQLException;
+import java.time.Year;
+import java.util.Objects;
 
 
 public class SpendBPrefill {
@@ -8,19 +13,21 @@ public class SpendBPrefill {
 
     public static void generate() throws SQLException {
         Object[][] usersData = {
+                {"Administrator", "A", "Administrator", "admin", "admin", 1},
+                {"Raphael", "C", "Catacutan", "a", "a", 1},
                 {"Raphael", "C", "Catacutan", "r", "r", 1},
                 {"John Paul", "A", "Reyes", "jpreyes", "Johnpaul01", 0},
                 {"Vince", "M", "De Jesus", "vincedejusus", "Vincedj098", 1}
         };
         Object[][] officerData = {
-                {"Stephen", "A", "Bugna", lorem200, "President", "ICT", 1, 2021, "G:\\MTMP\\avatar.png"},
-                {"JC", "G", "Santos", lorem200, "Vice President", "GAS", 2, 2021, "G:\\MTMP\\avatar.png"},
-                {"Christine", "P", "Dela Cruz", lorem200, "Secretary", "HUMSS", 3, 2021},
-                {"Laurence", "J", "Antonio", lorem200, "Auditor", "HE", 1, 2021},
-                {"Gabriel", "C", "Frias", lorem200, "Project Manager", "STEM", 2, 2021},
-                {"Andrew", "N", "Quinto", lorem200, "Financial Officer", "SPORTS", 3, 2022},
-                {"Jasmine", "O", "Alonzo", lorem200, "Executive Assistant", "ICT", 1, 2022},
-                {"Wesley", "H", "Gomez", lorem200, "Executive Assistant", "GAS", 2, 2022},
+                {"Stephen", "A", "Bugna", lorem200, "President", "ICT", 1, 2021, "G:\\RESOURCES\\GENERATED PROFILE PICTURE\\B (1).jpg"},
+                {"JC", "G", "Santos", lorem200, "Vice President", "GAS", 2, 2021, "G:\\RESOURCES\\GENERATED PROFILE PICTURE\\B (2).jpg"},
+                {"Christine", "P", "Dela Cruz", lorem200, "Secretary", "HUMSS", 3, 2021, "G:\\RESOURCES\\GENERATED PROFILE PICTURE\\B (3).jpg"},
+                {"Laurence", "J", "Antonio", lorem200, "Auditor", "HE", 1, 2021, "G:\\RESOURCES\\GENERATED PROFILE PICTURE\\B (4).jpg"},
+                {"Gabriel", "C", "Frias", lorem200, "Project Manager", "STEM", 2, 2021, "G:\\RESOURCES\\GENERATED PROFILE PICTURE\\B (5).jpg"},
+                {"Andrew", "N", "Quinto", lorem200, "Financial Officer", "SPORTS", 3, 2022, "G:\\RESOURCES\\GENERATED PROFILE PICTURE\\G (1).jpg"},
+                {"Jasmine", "O", "Alonzo", lorem200, "Executive Assistant", "ICT", 1, 2022, "G:\\RESOURCES\\GENERATED PROFILE PICTURE\\G (2).jpg"},
+                {"Wesley", "H", "Gomez", lorem200, "Executive Assistant", "GAS", 2, 2022, "G:\\RESOURCES\\GENERATED PROFILE PICTURE\\G (3).jpg"},
                 {"Mark James", "L", "Austria", lorem200, "Finance Manager", "HUMSS", 3, 2022},
                 {"Luis", "B", "Diaz", lorem200, "Analyst", "HE", 1, 2022},
                 {"Samantha", "M", "Villanueva", lorem200, "Analyst", "STEM", 2, 2023},
@@ -186,15 +193,38 @@ public class SpendBPrefill {
                 {14, "Cow milk", 2172.45, 4.51, 34.9, 0},
                 {15, "Borax", 3775.87, 4.79, 69.61, 0},
                 {16, "Magnesium sulfate", 4785.28, 2.66, 46.45, 0},
-                {17, "Flax", 2727.11, 6.99, 41.95, 0}, {18, "Barite", 4131.29, 2.29, 68.38, 1}, {19, "Bentonite", 2498.35, 4.21, 88.05, 0}, {20, "Stainless steel", 1613.73, 8.88, 55.91, 1}, {21, "Vinegar", 3593.15, 1.49, 40.7, 1}, {22, "Chromium compounds", 1959.87, 9.5, 4.61, 0}, {23, "Gypsum plaster", 1483.23, 3.38, 16.74, 0}, {24, "Cotton linter", 4751.18, 5.71, 47.36, 0}, {25, "Hemp oil", 4102.91, 3.75, 52.64, 0}, {26, "Wool felt", 3930.73, 1.94, 29.64, 0}, {27, "Graphite electrodes", 3740.02, 1.09, 35.21, 0}, {28, "Cottonseed oil", 2833.58, 3.03, 28.83, 1}, {29, "Tungsten carbide", 1316.1, 9.13, 99, 1}, {30, "Lignite", 1632.09, 9.2, 51.52, 1}, {1, "Furs", 1643.91, 7.93, 32.58, 1}, {2, "Lumber", 3311.91, 1.11, 33.53, 0}, {3, "Sulfuric acid", 3862.76, 5.95, 78.47, 1}, {4, "Titanium dioxide", 4146.3, 9.8, 6.72, 0}, {5, "Coconut oil", 2389.15, 3.11, 59.17, 0}, {6, "Boron", 4717.53, 8.05, 1.07, 1}, {7, "Plasticizers", 3511.45, 2.99, 84.92, 0}, {8, "Synthetic rubber", 3031.23, 2.91, 39.39, 0}, {9, "Carob", 3292.07, 9.09, 82.3, 1}, {10, "Methanol", 1381.41, 4.77, 4.87, 1}, {11, "Corn", 3414.22, 3.2, 8.37, 0}, {12, "Copper", 3599.19, 1.86, 84.96, 0}, {13, "Cotton", 4537.77, 4.64, 81.4, 1}, {14, "Fish", 3749.89, 1.23, 31.02, 0}, {15, "Gold", 2095.73, 3.74, 91.74, 0}, {16, "Grapes", 2236.06, 4.27, 99.67, 0}, {17, "Iron", 2672.92, 4.9, 2.35, 1}, {18, "Lumber", 1045.05, 4.01, 10.21, 0}, {19, "Marble", 3792.4, 8.97, 72.96, 1}, {20, "Nickel", 1132.8, 5.28, 1.45, 0}, {21, "Oil", 1905.99, 7.72, 58.66, 1}, {22, "Potatoes", 1771.82, 2.01, 38.68, 0}, {23, "Rubber", 1840.3, 4.41, 8.4, 0}, {24, "Salt", 2266.63, 7.15, 60.78, 0}, {25, "Silver", 2395.66, 7.56, 60.58, 1}, {26, "Soybeans", 3013.29, 5.15, 63.21, 1}, {27, "Sugar", 3919.28, 4, 50.65, 1}, {28, "Wheat", 1988.96, 5.37, 7.34, 0}, {29, "Zinc", 1346.42, 2.94, 21.88, 0}, {1, "Bamboo", 2922.53, 6.31, 62.38, 0}, {1, "Granite", 1141.32, 9.45, 80.42, 1}};
-        Object[][] contributorsData = {{1, 1}, {1, 2}, {1, 3}, {1, 4}, {2, 5}, {2, 6}, {2, 7}, {2, 8}, {3, 9}, {3, 10}, {3, 11}, {3, 12}, {4, 13}, {4, 14}, {4, 15}, {4, 1}, {5, 2}, {5, 3}, {5, 4}, {5, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 9}, {7, 10}, {7, 11}, {7, 12}, {7, 13}, {8, 14}, {8, 15}, {8, 1}, {8, 2}, {9, 3}, {9, 4}, {9, 5}, {9, 6}, {10, 7}, {10, 8}, {10, 9}, {10, 10}, {11, 11}, {11, 12}, {11, 13}, {11, 14}, {12, 15}, {12, 1}, {12, 2}, {12, 3}, {13, 4}, {13, 5}, {13, 6}, {13, 7}, {14, 8}, {14, 9}, {14, 10}, {14, 11}, {15, 12}, {15, 13}, {15, 14}, {15, 15}, {16, 1}, {16, 2}, {16, 3}, {16, 4}, {17, 5}, {17, 6}, {17, 7}, {17, 8}, {18, 9}, {18, 10}, {18, 11}, {18, 12}, {19, 13}, {19, 14}, {19, 15}, {19, 1}, {20, 2}, {20, 3}, {20, 4}, {20, 5}, {21, 6}, {21, 7}, {21, 8}, {21, 9}, {22, 10}, {22, 11}, {22, 12}, {22, 13}, {23, 14}, {23, 15}, {23, 1}, {23, 2}, {24, 3}, {24, 4}, {24, 5}, {24, 6}, {25, 7}, {25, 8}, {25, 9}, {25, 10}, {26, 11}, {26, 12}, {26, 13}, {26, 14}, {27, 15}, {27, 1}, {27, 2}, {27, 3}, {28, 4}, {28, 5}, {28, 6}, {28, 7}, {29, 8}, {29, 9}, {29, 10}, {29, 11}, {30, 12}, {30, 13}, {30, 14}, {30, 15}};
-        try {
-            for (Object[] x : usersData) SpendBCreate.createUser(x);
-            for (Object[] x : officerData) SpendBCreate.createOfficer(x);
-            for (Object[] x : projectsData) SpendBCreate.createProject(x);
-            for (Object[] x : expensesData) SpendBCreate.createExpenses(x);
-            for (Object[] x : contributorsData) SpendBCreate.createContributors(x);
+                {17, "Flax", 2727.11, 6.99, 41.95, 0}, {18, "Barite", 4131.29, 2.29, 68.38, 1}, {19, "Bentonite", 2498.35, 4.21, 88.05, 0}, {20, "Stainless steel", 1613.73, 8.88, 55.91, 1}, {21, "Vinegar", 3593.15, 1.49, 40.7, 1}, {22, "Chromium compounds", 1959.87, 9.5, 4.61, 0}, {23, "Gypsum plaster", 1483.23, 3.38, 16.74, 0}, {24, "Cotton linter", 4751.18, 5.71, 47.36, 0}, {25, "Hemp oil", 4102.91, 3.75, 52.64, 0}, {26, "Wool felt", 3930.73, 1.94, 29.64, 0}, {27, "Graphite electrodes", 3740.02, 1.09, 35.21, 0}, {28, "Cottonseed oil", 2833.58, 3.03, 28.83, 1}, {29, "Tungsten carbide", 1316.1, 9.13, 99, 1}, {30, "Lignite", 1632.09, 9.2, 51.52, 1}, {1, "Furs", 1643.91, 7.93, 32.58, 1}, {2, "Lumber", 3311.91, 1.11, 33.53, 0}, {3, "Sulfuric acid", 3862.76, 5.95, 78.47, 1}, {4, "Titanium dioxide", 4146.3, 9.8, 6.72, 0}, {5, "Coconut oil", 2389.15, 3.11, 59.17, 0}, {6, "Boron", 4717.53, 8.05, 1.07, 1}, {7, "Plasticizers", 3511.45, 2.99, 84.92, 0}, {8, "Synthetic rubber", 3031.23, 2.91, 39.39, 0}, {9, "Carob", 3292.07, 9.09, 82.3, 1}, {10, "Methanol", 1381.41, 4.77, 4.87, 1}, {11, "Corn", 3414.22, 3.2, 8.37, 0}, {12, "Copper", 3599.19, 1.86, 84.96, 0}, {13, "Cotton", 4537.77, 4.64, 81.4, 1}, {14, "Fish", 3749.89, 1.23, 31.02, 0}, {15, "Gold", 2095.73, 3.74, 91.74, 0}, {16, "Grapes", 2236.06, 4.27, 99.67, 0}, {17, "Iron", 2672.92, 4.9, 2.35, 1}, {18, "Lumber", 1045.05, 4.01, 10.21, 0}, {19, "Marble", 3792.4, 8.97, 72.96, 1}, {20, "Nickel", 1132.8, 5.28, 1.45, 0}, {21, "Oil", 1905.99, 7.72, 58.66, 1}, {22, "Potatoes", 1771.82, 2.01, 38.68, 0}, {23, "Rubber", 1840.3, 4.41, 8.4, 0}, {24, "Salt", 2266.63, 7.15, 60.78, 0}, {25, "Silver", 2395.66, 7.56, 60.58, 1}, {26, "Soybeans", 3013.29, 5.15, 63.21, 1}, {27, "Sugar", 3919.28, 4, 50.65, 1}, {28, "Wheat", 1988.96, 5.37, 7.34, 0}, {29, "Zinc", 1346.42, 2.94, 21.88, 0}, {1, "Bamboo", 2922.53, 6.31, 62.38, 0}, {1, "Granite", 1141.32, 9.45, 80.42, 1}
+        };
+        Object[][] contributorsData = {
+                {1, 1}, {1, 2}, {1, 3}, {1, 4}, {2, 5}, {2, 6}, {2, 7}, {2, 8}, {3, 9}, {3, 10}, {3, 11}, {3, 12}, {4, 13}, {4, 14}, {4, 15}, {4, 1}, {5, 2}, {5, 3}, {5, 4}, {5, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 9}, {7, 10}, {7, 11}, {7, 12}, {7, 13}, {8, 14}, {8, 15}, {8, 1}, {8, 2}, {9, 3}, {9, 4}, {9, 5}, {9, 6}, {10, 7}, {10, 8}, {10, 9}, {10, 10}, {11, 11}, {11, 12}, {11, 13}, {11, 14}, {12, 15}, {12, 1}, {12, 2}, {12, 3}, {13, 4}, {13, 5}, {13, 6}, {13, 7}, {14, 8}, {14, 9}, {14, 10}, {14, 11}, {15, 12}, {15, 13}, {15, 14}, {15, 15}, {16, 1}, {16, 2}, {16, 3}, {16, 4}, {17, 5}, {17, 6}, {17, 7}, {17, 8}, {18, 9}, {18, 10}, {18, 11}, {18, 12}, {19, 13}, {19, 14}, {19, 15}, {19, 1}, {20, 2}, {20, 3}, {20, 4}, {20, 5}, {21, 6}, {21, 7}, {21, 8}, {21, 9}, {22, 10}, {22, 11}, {22, 12}, {22, 13}, {23, 14}, {23, 15}, {23, 1}, {23, 2}, {24, 3}, {24, 4}, {24, 5}, {24, 6}, {25, 7}, {25, 8}, {25, 9}, {25, 10}, {26, 11}, {26, 12}, {26, 13}, {26, 14}, {27, 15}, {27, 1}, {27, 2}, {27, 3}, {28, 4}, {28, 5}, {28, 6}, {28, 7}, {29, 8}, {29, 9}, {29, 10}, {29, 11}, {30, 12}, {30, 13}, {30, 14}, {30, 15}
+        };
+        Object[][] schoolData = {{
+                Year.now().getValue() - 1,
+                new File(Objects.requireNonNull(MainActivity.class.getResource("assets/icons/school-logo.png")).getFile()).getAbsolutePath().replace("%20", " "),
+                new File(Objects.requireNonNull(MainActivity.class.getResource("assets/icons/school-logo.png")).getFile()).getAbsolutePath().replace("%20", " "),
+                // FIXME Get SSG Logo
+                "G:\\Downloads",
+                1,
+                "C:\\xampp",
+                1,
+                1,
+                "Ms. Nermie Dela Paz",
+                "Mr. Alord Somera",
+                lorem200
+        }};
+        Object[][] fundsData = {{
+                200.0,
+                lorem200
+        }};
 
+        try {
+            for (Object[] x : usersData) SpendBCreate.createUser(x, false);
+            for (Object[] x : officerData) SpendBCreate.createOfficer(x, false);
+            for (Object[] x : projectsData) SpendBCreate.createProject(x, false);
+            for (Object[] x : expensesData) SpendBCreate.createExpenses(x, false);
+            for (Object[] x : contributorsData) SpendBCreate.createContributors(x, false);
+            for (Object[] x : schoolData) SpendBCreate.createSchoolData(x, false);
+            for (Object[] x : fundsData) SpendBCreate.createFundsData(x, false);
         } catch (Exception e) {
             e.printStackTrace();
         }

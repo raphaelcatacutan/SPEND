@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Main New Database" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="com.ssg.MainActivity" />
-    <module name="SPEND" />
+    <module name="ssg" />
     <option name="PROGRAM_PARAMETERS" value="createDatabase" />
     <extension name="coverage">
       <pattern>

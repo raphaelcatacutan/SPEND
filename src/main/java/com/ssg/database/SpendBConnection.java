@@ -1,6 +1,7 @@
 
 package com.ssg.database;
 
+import com.ssg.utils.ProgramUtils;
 import com.ssg.utils.RuntimeData;
 
 import java.sql.DriverManager;
@@ -13,23 +14,25 @@ import java.util.*;
 
 public class SpendBConnection {
 
-    private static final String DATABASE_NAME = "spendB"; // TODO Change database name
+    private static final String DATABASE_NAME = "spendB";
     private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_CONNECTION = "jdbc:mysql://localhost:3306/";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "";
-    private static final Map<String, List<String>> TABLECOLUMNS = new LinkedHashMap<>();
     private static Connection connection;
-
-    // TODO Change Password
+    public static final Map<String, List<String>> TABLECOLUMNS = new LinkedHashMap<>();
 
     // Editable
     static {
         /*
          * Adding Columns in a Table:
          *    Edit this HashMap
-         *    Edit the Reading Methods
+         *    Edit the Reading
+         *    Edit the Updating
+         *    Edit the Creating
          *    Generate Random Data
+         *    Model Data
+         *    Model Values
          * In creating data, columns ending with _ID, _CD and is a TIMESTAMP are skipped
          */
         TABLECOLUMNS.put("USERS", Arrays.asList(
@@ -39,17 +42,20 @@ public class SpendBConnection {
                 "LASTNAME/VARCHAR(255)",
                 "USERNAME/VARCHAR(255)",
                 "PASSWORD/VARCHAR(255)",
-                "ISADMIN/BIT"
+                "ISADMIN/BIT",
+                "USER_CD/DATE",
+                "UPDATETIME/TIMESTAMP"
         ));
         TABLECOLUMNS.put("OFFICERS", Arrays.asList(
                 "OFFICER_ID/INT",
                 "FIRSTNAME/VARCHAR(255)",
                 "MIDDLEINITIAL/VARCHAR(255)",
                 "LASTNAME/VARCHAR(255)",
-                "DESCRIPTION/VARCHAR(255)",
+                "DESCRIPTION/VARCHAR(400)",
                 "POSITION/VARCHAR(255)",
                 "STRAND/VARCHAR(255)",
                 "USER_ID/INT/USERS",
+                "OFFICER_CD/DATE",
                 "TERM/INT",
                 "UPDATETIME/TIMESTAMP",
                 "AVATAR/LONGBLOB"
@@ -57,8 +63,9 @@ public class SpendBConnection {
         TABLECOLUMNS.put("PROJECTS", Arrays.asList(
                 "PROJECT_ID/INT",
                 "TITLE/VARCHAR(255)",
-                "DESCRIPTION/VARCHAR(255)",
+                "DESCRIPTION/VARCHAR(400)",
                 "USER_ID/INT/USERS",
+                "PROJECT_CD/DATE",
                 "EVENTDATE/DATE",
                 "UPDATETIME/TIMESTAMP"
         ));
@@ -70,36 +77,54 @@ public class SpendBConnection {
                 "EXPENSEDATE_CD/DATE",
                 "QUANTITY/DOUBLE",
                 "UNITPRICE/DOUBLE",
-                "STATUS/INT"
+                "STATUS/INT",
+                "UPDATETIME/TIMESTAMP"
         ));
         TABLECOLUMNS.put("CONTRIBUTORS", Arrays.asList(
                 "PROJECT_ID/INT/PROJECTS",
-                "OFFICER_ID/INT/OFFICERS"
-        ));
-        TABLECOLUMNS.put("SETTINGS", Arrays.asList(
-                "DEFAULTYEAR/INT",
-                "EXITXAMPP/BIT"
+                "OFFICER_ID/INT/OFFICERS",
+                "UPDATETIME/TIMESTAMP"
         ));
         TABLECOLUMNS.put("FUNDS", Arrays.asList(
                 "FUND_ID/INT",
-                "DESCRIPTION/VARCHAR(255)",
                 "AMOUNT/DOUBLE",
-                "UPDATETIME/TIMESTAMP"
+                "DESCRIPTION/VARCHAR(400)",
+                "UPDATETIME/TIMESTAMP",
+                "FUND_CD/DATE"
         ));
+        TABLECOLUMNS.put("SCHOOLDATA", Arrays.asList(
+                "DATA_ID/INT",
+                "UPDATETIME/TIMESTAMP",
+                "SCHOOLYEAR/INT",
+                "SCHOOLLOGO/LONGBLOB",
+                "SSGLOGO/LONGBLOB",
+                "REPORTEXPORTLOCATION/VARCHAR(255)",
+                "MANAGEXAMPP/BIT",
+                "XAMPPLOCATION/VARCHAR(255)",
+                "VIEWPDF/BIT",
+                "CURRENTSCHOOLYEAR/BIT",
+                "SSGADVISER/VARCHAR(255)",
+                "PRINCIPAL/VARCHAR(255)",
+                "PROPOSALPARAGRAPH/VARCHAR(500)"
+        ));
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getColumnNames("USERS"));
     }
 
     public static void intializeConnection() {
         try {
             boolean newDatabase = setupDatabase();
             connection = SpendBConnection.getDBConnection();
+            SpendBUtils.spendBPacket(5048576);
             if (!newDatabase) return;
             setupTable();
-            SpendBPrefill.generate();
+            if (RuntimeData.FILLDATA) SpendBPrefill.generate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
-
     private static boolean setupDatabase() {
         try  (Connection tempConnection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD)){
             if (!RuntimeData.CREATEDATABASE) return false;
@@ -122,8 +147,8 @@ public class SpendBConnection {
             System.out.println("Database created successfully.");
             return true;
         } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
-            return false;
+            ProgramUtils.showDialogMessage("MYSQL Connection Error", "The MySQL connection encountered an error while initializing.\nPlease ensure that the MySQL server is running and accessible.\nVerify that the server is up and running properly to establish\na successful connection.");
+            throw new RuntimeException();
         }
     }
     private static void setupTable() throws SQLException {
@@ -162,18 +187,16 @@ public class SpendBConnection {
         }
         stmt.close();
     }
-
     private static Connection getDBConnection() {
         try {
             Class.forName(DB_DRIVER); // Load a JDBC driver dynamically at runtime.
             return DriverManager.getConnection(DB_CONNECTION + DATABASE_NAME, DB_USER, DB_PASSWORD);
         } catch (Exception e) {
+            ProgramUtils.showDialogMessage("MYSQL Connection Error", "The MySQL connection encountered an error while initializing.\nPlease ensure that the MySQL server is running and accessible.\nVerify that the server is up and running properly to establish\na successful connection.");
             e.printStackTrace();
             return null;
-            // TODO Display an Error
         }
     }
-
     /**
      * Gets the columns of a table excluding
      * Columns ending with "_ID" (AND not referenced) or "CD", Columns with TIMESTAMP type
@@ -188,17 +211,16 @@ public class SpendBConnection {
             String columnType = tokens[1];
             boolean isReferenced = tokens.length == 3;
             boolean isInserted = !columnName.endsWith("_ID") || isReferenced;
-            boolean hasDefault = Objects.equals(columnType, "TIMESTAMP");
+            boolean isTimestamp = Objects.equals(columnType, "TIMESTAMP");
             boolean isCreationDate = columnName.endsWith("_CD");
-            if (!isInserted || hasDefault || isCreationDate) continue;
+            if (!isInserted || isTimestamp || isCreationDate) continue;
             columns.put(columnName, columnType);
         }
         return columns;
     }
     public static Connection getConnection() {
-        // TODO Error Handling
         assert connection != null;
         return connection;
     }
-    // TODO: Release resource for stmt
+
 }

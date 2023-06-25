@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="anpDialogChoice" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="352.0" prefWidth="232.0" style="-fx-border-radius: 20; -fx-background-radius: 20;" styleClass="secondaryBackground" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.dialogs.DialogChoice">
+   <children>
+      <VBox prefHeight="352.0" prefWidth="232.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="lblDialogChoiceTitle" prefHeight="46.0" prefWidth="343.0" text="Title">
+               <styleClass>
+                  <String fx:value="fontregular" />
+                  <String fx:value="whiteText" />
+                  <String fx:value="_25" />
+               </styleClass>
+            </Label>
+            <ScrollPane hbarPolicy="NEVER" prefHeight="294.0" prefWidth="190.0">
+               <content>
+                  <VBox fx:id="vbxDialogChoiceList" />
+               </content>
+            </ScrollPane>
+            <HBox alignment="CENTER_RIGHT" spacing="5.0">
+               <children>
+                  <Button fx:id="btnDialogChoiceCancel" minWidth="95.0" mnemonicParsing="false" style="-fx-border-radius: 5; -fx-border-color: white;" text="Cancel">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="fontregular" />
+                        <String fx:value="_13" />
+                        <String fx:value="noBackground" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="btnDialogChoiceConfirm" minWidth="95.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="95.0" style="-fx-border-radius: 5; -fx-border-color: #2f476e;" text="Confirm">
+                     <styleClass>
+                        <String fx:value="background3" />
+                        <String fx:value="whiteText" />
+                        <String fx:value="fontregular" />
+                        <String fx:value="_13" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../../css/components.css" />
+      <URL value="@../../css/fonts.css" />
+      <URL value="@../../css/backgrounds.css" />
+   </stylesheets>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <effect>
+      <DropShadow />
+   </effect>
+</AnchorPane>

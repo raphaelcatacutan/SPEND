@@ -3,38 +3,57 @@
 <?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="mainStatistics" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="975.0" style="-fx-background-color: rgba(17, 19, 47);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.ViewStatistics">
+<AnchorPane fx:id="anpView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="951.0" style="-fx-background-color: rgba(17, 19, 47);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.ViewStatistics">
    <children>
-      <AnchorPane fx:id="anpProjectNumber" layoutX="35.0" layoutY="20.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="118.0" prefWidth="206.0" style="-fx-background-radius: 20;" styleClass="background1">
+      <Label fx:id="lblStatistics" layoutX="62.0" layoutY="33.0" prefHeight="82.0" prefWidth="472.0" text="Statistics">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="fontregular" />
+            <String fx:value="_63" />
+         </styleClass>
+      </Label>
+      <AnchorPane fx:id="anpProjectNumber" layoutX="47.0" layoutY="122.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="118.0" prefWidth="184.0" style="-fx-background-radius: 20;" styleClass="background1">
          <children>
-            <Label layoutX="24.0" layoutY="26.0" prefHeight="48.0" prefWidth="212.0" text="24" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="26.0">
+            <Label fx:id="lblProjectNumber" layoutX="24.0" layoutY="25.0" prefHeight="48.0" prefWidth="212.0" text="24" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="4.0">
                <styleClass>
                   <String fx:value="whiteText" />
                   <String fx:value="fontregular" />
-                  <String fx:value="_42" />
+                  <String fx:value="_38" />
                </styleClass>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Label>
-            <Label layoutX="24.0" layoutY="52.0" prefHeight="48.0" prefWidth="152.0" text="Projects">
+            <Label layoutX="24.0" layoutY="51.0" prefHeight="48.0" prefWidth="152.0" text="Projects">
                <styleClass>
                   <String fx:value="whiteText" />
                   <String fx:value="fontregular" />
-                  <String fx:value="_21" />
+                  <String fx:value="_18" />
                </styleClass>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Label>
-            <Label layoutX="24.0" layoutY="86.0" prefHeight="18.0" prefWidth="152.0" text="15 added last week">
+            <Label fx:id="lblProjectAdded" layoutX="24.0" layoutY="84.0" prefHeight="18.0" prefWidth="152.0" text="15 added last week">
                <styleClass>
                   <String fx:value="whiteText" />
                   <String fx:value="fontregular" />
-                  <String fx:value="_13" />
+                  <String fx:value="_11" />
                </styleClass>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Label>
             <ImageView fitHeight="42.0" fitWidth="40.0" layoutX="148.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="21.0">
                <image>
@@ -43,28 +62,37 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anpExpensesNumber" layoutX="267.0" layoutY="20.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="118.0" prefWidth="212.0" style="-fx-background-radius: 20;" styleClass="background1">
+      <AnchorPane fx:id="anpExpenseNumber" layoutX="246.0" layoutY="122.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="118.0" prefWidth="184.0" style="-fx-background-radius: 20;" styleClass="background1">
          <children>
-            <Label layoutX="24.0" layoutY="26.0" prefHeight="48.0" prefWidth="212.0" text="312" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="26.0">
+            <Label fx:id="lblExpenseNumber" layoutX="24.0" layoutY="25.0" prefHeight="48.0" prefWidth="212.0" text="312" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="4.0">
                <styleClass>
                   <String fx:value="whiteText" />
                   <String fx:value="fontregular" />
-                  <String fx:value="_42" />
+                  <String fx:value="_38" />
                </styleClass>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Label>
-            <Label layoutX="24.0" layoutY="52.0" prefHeight="48.0" prefWidth="152.0" text="Expenses">
+            <Label layoutX="24.0" layoutY="51.0" prefHeight="48.0" prefWidth="152.0" text="Expenses">
                <styleClass>
                   <String fx:value="whiteText" />
                   <String fx:value="fontregular" />
-                  <String fx:value="_21" />
+                  <String fx:value="_18" />
                </styleClass>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Label>
-            <Label layoutX="24.0" layoutY="86.0" prefHeight="18.0" prefWidth="152.0" text="15 added last week">
+            <Label fx:id="lblExpenseAdded" layoutX="24.0" layoutY="84.0" prefHeight="18.0" prefWidth="152.0" text="15 added last week">
                <styleClass>
                   <String fx:value="whiteText" />
                   <String fx:value="fontregular" />
-                  <String fx:value="_13" />
+                  <String fx:value="_11" />
                </styleClass>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Label>
             <ImageView fitHeight="42.0" fitWidth="40.0" layoutX="141.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="21.0">
                <image>
@@ -73,223 +101,235 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anpOfficerNumber" layoutX="501.0" layoutY="20.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="118.0" prefWidth="212.0" style="-fx-background-radius: 20;" styleClass="background1">
+      <AnchorPane fx:id="anpOfficerNumber" layoutX="445.0" layoutY="122.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="118.0" prefWidth="184.0" style="-fx-background-radius: 20;" styleClass="background1">
          <children>
-            <Label layoutX="24.0" layoutY="26.0" prefHeight="48.0" prefWidth="212.0" text="23M" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="26.0">
+            <Label fx:id="lblOfficerNumber" layoutX="24.0" layoutY="25.0" prefHeight="48.0" prefWidth="212.0" text="23M" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="4.0">
                <styleClass>
                   <String fx:value="whiteText" />
                   <String fx:value="fontregular" />
-                  <String fx:value="_42" />
+                  <String fx:value="_38" />
                </styleClass>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Label>
-            <Label layoutX="24.0" layoutY="52.0" prefHeight="48.0" prefWidth="152.0" text="Officers">
+            <Label layoutX="24.0" layoutY="51.0" prefHeight="48.0" prefWidth="152.0" text="Officers">
                <styleClass>
                   <String fx:value="whiteText" />
                   <String fx:value="fontregular" />
-                  <String fx:value="_21" />
+                  <String fx:value="_18" />
                </styleClass>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Label>
-            <Label layoutX="24.0" layoutY="86.0" prefHeight="18.0" prefWidth="152.0" text="15 added last week">
+            <Label fx:id="lblOfficerAdded" layoutX="24.0" layoutY="84.0" prefHeight="18.0" prefWidth="152.0" text="15 added last week">
                <styleClass>
                   <String fx:value="whiteText" />
                   <String fx:value="fontregular" />
-                  <String fx:value="_13" />
+                  <String fx:value="_11" />
                </styleClass>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Label>
-            <ImageView fitHeight="42.0" fitWidth="40.0" layoutX="141.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="21.0">
+            <ImageView fitHeight="46.0" fitWidth="44.0" layoutX="120.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="21.0">
                <image>
                   <Image url="@../assets/icons/officer.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anpActivityLogsNumber" layoutX="736.0" layoutY="21.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="118.0" prefWidth="212.0" style="-fx-background-radius: 20;" styleClass="background1">
+      <AnchorPane fx:id="anpRemainingFundsNumber" layoutX="647.0" layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="259.0" style="-fx-background-radius: 20;" styleClass="background1">
          <children>
-            <Label layoutX="24.0" layoutY="26.0" prefHeight="48.0" prefWidth="212.0" text="214K" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="26.0">
-               <styleClass>
-                  <String fx:value="whiteText" />
-                  <String fx:value="fontregular" />
-                  <String fx:value="_42" />
-               </styleClass>
-            </Label>
-            <Label layoutX="24.0" layoutY="52.0" prefHeight="48.0" prefWidth="152.0" text="Activity Logs">
-               <styleClass>
-                  <String fx:value="whiteText" />
-                  <String fx:value="fontregular" />
-                  <String fx:value="_21" />
-               </styleClass>
-            </Label>
-            <Label layoutX="24.0" layoutY="86.0" prefHeight="18.0" prefWidth="152.0" text="15 added last week">
-               <styleClass>
-                  <String fx:value="whiteText" />
-                  <String fx:value="fontregular" />
-                  <String fx:value="_13" />
-               </styleClass>
-            </Label>
-            <ImageView fitHeight="42.0" fitWidth="40.0" layoutX="141.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="21.0">
-               <image>
-                  <Image url="@../assets/icons/activity.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="anpRemainingFundsNumber" layoutX="33.0" layoutY="167.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="138.0" prefWidth="571.0" style="-fx-background-radius: 20;" styleClass="background1">
-         <children>
-            <HBox fillHeight="false" layoutY="-1.0" prefHeight="159.2" prefWidth="556.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox alignment="TOP_RIGHT" layoutX="50.0" layoutY="50.0" prefHeight="329.0" prefWidth="259.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Pane prefHeight="90.0" prefWidth="225.0">
+                  <Label prefHeight="28.0" prefWidth="206.0" text="Remaining Funds">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="fontregular" />
+                        <String fx:value="_23" />
+                     </styleClass>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </Label>
+                  <AnchorPane minHeight="-Infinity" prefHeight="102.0" prefWidth="200.0">
                      <children>
-                        <Label layoutY="8.0" prefHeight="48.0" prefWidth="152.0" text="₱1,231">
+                        <Label fx:id="lblRemainingFundsValue" layoutY="24.0" prefHeight="49.0" prefWidth="199.0" text="₱1,231" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
                            <styleClass>
                               <String fx:value="whiteText" />
                               <String fx:value="fontregular" />
                               <String fx:value="_50" />
                            </styleClass>
+                           <effect>
+                              <DropShadow />
+                           </effect>
                         </Label>
-                        <Label layoutY="43.0" prefHeight="48.0" prefWidth="186.0" text="Remaining Funds">
+                        <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="156.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/icons/funds.png" />
+                           </image>
+                        </ImageView>
+                        <Button fx:id="btnStatisticsGenerateReport" focusTraversable="false" layoutY="82.0" mnemonicParsing="false" text="Generate Report">
                            <styleClass>
-                              <String fx:value="whiteText" />
                               <String fx:value="fontregular" />
-                              <String fx:value="_25" />
-                           </styleClass>
-                        </Label>
-                        <Label layoutY="79.0" prefHeight="18.0" prefWidth="152.0" text="21 transactions last week">
-                           <styleClass>
+                              <String fx:value="_17" />
+                              <String fx:value="noBackground" />
                               <String fx:value="whiteText" />
-                              <String fx:value="fontregular" />
-                              <String fx:value="_15" />
                            </styleClass>
-                        </Label>
+                           <padding>
+                              <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
+                           </padding>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
                      </children>
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </Pane>
-                  <VBox alignment="TOP_CENTER" prefHeight="111.0" prefWidth="298.0" spacing="8.0">
+                  </AnchorPane>
+                  <VBox spacing="3.0">
                      <children>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="241.0">
+                        <HBox alignment="CENTER_RIGHT">
                            <children>
-                              <ImageView blendMode="RED" fitHeight="25.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                              <ImageView blendMode="RED" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
                                  <image>
                                     <Image url="@../assets/icons/triangle.png" />
                                  </image>
                               </ImageView>
-                              <Label prefHeight="23.0" prefWidth="90.0" style="-fx-text-fill: #FF4242;" text="Purchased">
+                              <Label prefHeight="23.0" prefWidth="98.0" style="-fx-text-fill: #FF4242;" text="Proposed">
                                  <styleClass>
                                     <String fx:value="fontregular" />
-                                    <String fx:value="_17" />
+                                    <String fx:value="_12" />
                                  </styleClass>
                                  <padding>
                                     <Insets left="10.0" />
                                  </padding>
                               </Label>
-                              <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="170.0" style="-fx-text-fill: #FF4242;" text="-₱13,324">
+                              <Label fx:id="lblRemainingFundsProposed" alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="100.0" style="-fx-text-fill: #FF4242;" text="-₱13,324">
                                  <styleClass>
                                     <String fx:value="fontregular" />
-                                    <String fx:value="_22" />
+                                    <String fx:value="_18" />
                                  </styleClass>
                               </Label>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="241.0">
+                        <HBox alignment="CENTER_RIGHT">
                            <children>
-                              <ImageView blendMode="RED" fitHeight="25.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                              <ImageView blendMode="RED" fitHeight="25.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
                                  <image>
                                     <Image url="@../assets/icons/triangle.png" />
                                  </image>
                               </ImageView>
-                              <Label prefHeight="23.0" prefWidth="90.0" style="-fx-text-fill: #FF4242;" text="Approved">
+                              <Label prefHeight="23.0" prefWidth="98.0" style="-fx-text-fill: #FF4242;" text="Approved">
                                  <styleClass>
                                     <String fx:value="fontregular" />
-                                    <String fx:value="_17" />
+                                    <String fx:value="_12" />
                                  </styleClass>
                                  <padding>
                                     <Insets left="10.0" />
                                  </padding>
                               </Label>
-                              <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="170.0" style="-fx-text-fill: #FF4242;" text="-₱6,324">
+                              <Label fx:id="lblRemainingFundsApproved" alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="100.0" style="-fx-text-fill: #FF4242;" text="-₱6,324">
                                  <styleClass>
                                     <String fx:value="fontregular" />
-                                    <String fx:value="_22" />
+                                    <String fx:value="_18" />
                                  </styleClass>
                               </Label>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="241.0">
+                        <HBox alignment="CENTER_RIGHT">
                            <children>
-                              <ImageView blendMode="GREEN" fitHeight="25.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView blendMode="GREEN" fitHeight="25.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../assets/icons/triangle.png" />
                                  </image>
                               </ImageView>
-                              <Label prefHeight="23.0" prefWidth="90.0" style="-fx-text-fill: #00FF00;" text="Augmented">
+                              <Label prefHeight="23.0" prefWidth="98.0" style="-fx-text-fill: #00FF00;" text="Augmented">
                                  <styleClass>
                                     <String fx:value="fontregular" />
-                                    <String fx:value="_17" />
+                                    <String fx:value="_12" />
                                  </styleClass>
                                  <padding>
                                     <Insets left="10.0" />
                                  </padding>
                               </Label>
-                              <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="170.0" style="-fx-text-fill: #00FF00;" text="₱324">
+                              <Label fx:id="lblRemainingFundsAugmented" alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="100.0" style="-fx-text-fill: #00FF00;" text="₱324">
                                  <styleClass>
                                     <String fx:value="fontregular" />
-                                    <String fx:value="_22" />
+                                    <String fx:value="_18" />
                                  </styleClass>
                               </Label>
                            </children>
                         </HBox>
                      </children>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets top="5.0" />
-                     </HBox.margin>
                   </VBox>
+                  <TextField fx:id="txfStatisticsFundValue" promptText="Fund Value" style="-fx-border-color: white;">
+                     <styleClass>
+                        <String fx:value="noBackground" />
+                        <String fx:value="whiteText" />
+                        <String fx:value="fontregular" />
+                        <String fx:value="_13" />
+                     </styleClass>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </TextField>
+                  <TextField fx:id="txfStatisticsFundDescription" alignment="TOP_LEFT" prefHeight="126.0" prefWidth="200.0" promptText="Description" style="-fx-border-color: white;">
+                     <styleClass>
+                        <String fx:value="noBackground" />
+                        <String fx:value="whiteText" />
+                        <String fx:value="fontregular" />
+                        <String fx:value="_13" />
+                     </styleClass>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </TextField>
+                  <Button fx:id="btnStatisticsRegisterFund" focusTraversable="false" mnemonicParsing="false" prefHeight="28.0" prefWidth="147.0" style="-fx-border-color: white; -fx-border-radius: 20;" text="Register Fund">
+                     <styleClass>
+                        <String fx:value="fontregular" />
+                        <String fx:value="_13" />
+                        <String fx:value="noBackground" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                </children>
                <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
-            </HBox>
-            <ImageView fitHeight="49.0" fitWidth="51.0" layoutX="200.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/icons/funds.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="anpOfficerStats" layoutX="33.0" layoutY="336.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="202.0" prefWidth="242.0" style="-fx-background-radius: 20;" />
-      <AnchorPane fx:id="anpExpenseStats" layoutX="306.0" layoutY="337.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="296.0" style="-fx-background-radius: 20;" styleClass="background1">
-         <children>
-            <Label layoutX="19.0" layoutY="20.0" text="Expense Statistics">
-               <styleClass>
-                  <String fx:value="whiteText" />
-                  <String fx:value="fontregular" />
-                  <String fx:value="_21" />
-               </styleClass>
-            </Label>
+            </VBox>
          </children>
          <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="50.0" />
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
          </padding>
       </AnchorPane>
-      <AnchorPane fx:id="anpProjectStats" layoutX="631.0" layoutY="167.0" prefHeight="368.0" prefWidth="317.0" style="-fx-background-radius: 20;" styleClass="background1">
+      <Label layoutX="47.0" layoutY="281.0" text="Expense Statistics">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="fontregular" />
+            <String fx:value="_21" />
+         </styleClass>
+      </Label>
+      <AnchorPane fx:id="anpExpenseStats" layoutX="51.0" layoutY="317.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="224.0" prefWidth="563.0">
          <children>
-            <Label layoutX="25.0" layoutY="19.0" text="Projects Statistics">
+            <Label fx:id="lblNoDatatoDisplay" layoutX="217.0" layoutY="102.0" text="No data to display" visible="false">
                <styleClass>
                   <String fx:value="whiteText" />
                   <String fx:value="fontregular" />
-                  <String fx:value="_21" />
+                  <String fx:value="_17" />
                </styleClass>
             </Label>
-         </children>
-         <padding>
-            <Insets top="80.0" />
-         </padding></AnchorPane>
+         </children></AnchorPane>
    </children>
    <stylesheets>
-      <URL value="@../css/main-style.css" />
-      <URL value="@../css/font-size.css" />
+      <URL value="@../css/components.css" />
+      <URL value="@../css/backgrounds.css" />
+      <URL value="@../css/fonts.css" />
    </stylesheets>
 </AnchorPane>

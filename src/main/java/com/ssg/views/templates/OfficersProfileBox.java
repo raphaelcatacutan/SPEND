@@ -1,5 +1,6 @@
 package com.ssg.views.templates;
 
+import com.ssg.database.SpendBUtils;
 import com.ssg.database.models.Officer;
 import com.ssg.views.ControllerUtils;
 import javafx.fxml.FXML;
@@ -18,12 +19,11 @@ public class OfficersProfileBox {
     @FXML private Button officerStrand;
 
     public void setData(Officer officer, int projects) {
-        // TODO Avatar
         officerName.setText(officer.getFullName());
         officerDescription.setText(officer.getPosition() + " | " + projects + " Projects");
         officerStrand.setText(officer.getStrand());
         officerYear.setText(officer.getYear() + "-" + (officer.getYear() + 1));
-        officerAvatar.setImage(ControllerUtils.loadBlob(officer.getAvatar()));
+        officerAvatar.setImage(SpendBUtils.loadBlob(officer.getAvatar()));
     }
 
 }

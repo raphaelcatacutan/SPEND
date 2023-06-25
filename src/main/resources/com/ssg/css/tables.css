@@ -1,0 +1,84 @@
+.mfx-table-view {
+	-fx-background-color: #0d1538;
+	-fx-background-radius: 5;
+	-fx-border-color: #679be900;
+	-fx-border-radius: 5;
+	-fx-padding: 10 10 12 10;
+	-fx-font-family: "Century Gothic";
+	-fx-font-size: 15px;
+	-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
+
+}
+
+
+.mfx-table-view .columns-container {
+	-fx-border-color: transparent transparent transparent transparent;
+}
+
+.mfx-table-view .default-footer {
+	-fx-border-color: transparent transparent transparent transparent;
+	-fx-padding: 10;
+}
+
+.mfx-table-view .default-footer .mfx-icon-wrapper .mfx-ripple-generator {
+	-mfx-ripple-radius: 18;
+}
+
+/********************
+Table Columns
+********************/
+.mfx-table-column {
+	-fx-border-color: transparent transparent transparent transparent;
+	-fx-padding: 10 15 10 15;
+	-fx-text-fill: yellow;
+}
+
+.mfx-table-column:hover,
+.mfx-table-column:dragged {
+	-fx-border-color: transparent transparent transparent transparent;
+}
+
+/********************
+Table Rows
+********************/
+.mfx-table-row {
+	-fx-background-color: transparent;
+}
+
+.mfx-table-row:hover {
+	-fx-background-color: #366286;
+}
+
+.mfx-table-row:selected {
+	-fx-background-color: #2c5c94;
+}
+
+.mfx-table-row .mfx-ripple-generator {
+	-mfx-ripple-radius: 30;
+	-mfx-ripple-color: #4866ca;
+}
+
+/********************
+Table Row Cells
+********************/
+.mfx-table-row-cell {
+	-fx-background-color: transparent;
+	-fx-padding: 10 15 10 15;
+	-fx-text-fill: rgb(255, 253, 253);
+}
+
+.mfx-table-row-cell,
+.mfx-table-row-cell:focused {
+	-fx-border-color: transparent;
+}
+
+/********************
+Virtual Flow
+********************/
+.mfx-table-view .virtual-flow {
+	-fx-background-color: transparent;
+
+	-track-color: rgb(82, 125, 241);
+	-thumb-color: rgb(19, 4, 71);
+	-thumb-hover-color: rgb(26, 3, 71);
+}

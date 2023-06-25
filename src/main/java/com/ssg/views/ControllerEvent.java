@@ -2,9 +2,9 @@ package com.ssg.views;
 
 public class ControllerEvent {
 
-    private String eventId;
-    private Object[] simpleArgs;
-    private Object[][] arrayArgs;
+    private String eventId = null;
+    private Object[] simpleArgs = new Object[1];
+    private Object[][] arrayArgs = new Object[1][1];
 
     public ControllerEvent(String eventId) {
         this.eventId = eventId;
@@ -19,7 +19,11 @@ public class ControllerEvent {
         this.arrayArgs = args;
     }
 
+    public boolean notEvent(String event) {
+        return !this.eventId.equals(event);
+    }
 
+    // Setters and Getters
     public Object[] getSimpleArgs() {
         return simpleArgs;
     }

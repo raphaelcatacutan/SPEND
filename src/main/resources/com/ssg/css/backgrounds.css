@@ -1,0 +1,25 @@
+.mainBackground {
+    -fx-background-color: #11132f;
+}
+.secondaryBackground {
+    -fx-background-color: #040814;
+}
+.background1 {
+    -fx-background-color: #212342;
+}
+.background2 {
+    -fx-background-color: #181b3d;
+}
+.background3 {
+    -fx-background-color: #2f476e;
+}
+.background4 {
+    -fx-background-color: #0a0c26;
+}
+.background5 {
+    -fx-background-color: #0f225c;
+}
+
+.noBackground {
+    -fx-background-color: transparent;
+}

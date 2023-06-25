@@ -2,40 +2,29 @@ package com.ssg.views;
 
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class Toolbar {
-    @FXML ImageView imgExit;
-    @FXML ImageView imgLogOut;
-    @FXML ImageView imgMinimize;
+    @FXML Pane pneExit;
+    @FXML Pane pneLogout;
+    @FXML Pane pneMinimize;
 
     public void initialize() {
-        imgExit.setOnMouseClicked(event -> exitApplication());
-        imgLogOut.setOnMouseClicked(event -> signOut());
-        imgMinimize.setOnMouseClicked(event -> minimize());
+        pneExit.setOnMouseClicked(event -> exitApplication());
+        pneLogout.setOnMouseClicked(event -> MainEvents.signOut());
+        pneMinimize.setOnMouseClicked(event -> minimize());
     }
 
     public void exitApplication() {
-        if (!workPrompt()) return;
-        Stage stage = ControllerUtils.getStage(imgExit);
+        Stage stage = ControllerUtils.getStage(pneExit);
         stage.hide();
         System.exit(0);
     }
 
-    public void signOut() {
-        if (!workPrompt()) return;
-        // TODO Reset GUI
-        // TODO Show the Login Screen
-    }
-
     public void minimize() {
-        Stage stage = ControllerUtils.getStage(imgMinimize);
+        Stage stage = ControllerUtils.getStage(pneMinimize);
         stage.setIconified(true);
     }
 
-    public boolean workPrompt() {
-        return true;
-        // TODO Show Prompt
-        // Want to stop XAMPP?
-    }
 }
