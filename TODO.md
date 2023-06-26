@@ -118,12 +118,12 @@
 - [x] Current School Year Only
 - [x] Toolbar
 - [x] Splash Screen
-- [-] Empty reports when empty query
+- [ ] Empty reports when empty query
 - [x] No avatar officer reports
-- [-] Editors
+- [x] Editors
 - [x] Expense Editor Enables
 - [x] Adding or Editing Officer Avatar
-- [-] Animation
+- [ ] Animation
 - [x] Admin Privilege showing on login
 - [x] Expense Status Bug
 - [x] Projects Statistics

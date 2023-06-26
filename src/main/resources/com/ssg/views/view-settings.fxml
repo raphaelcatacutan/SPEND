@@ -38,30 +38,45 @@
                         <String fx:value="fontregular" />
                         <String fx:value="_19" />
                      </styleClass>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Label>
                   <Label fx:id="navSettingsReportTemplates" text="Report Templates" textFill="#4f513a">
                      <styleClass>
                         <String fx:value="fontregular" />
                         <String fx:value="_19" />
                      </styleClass>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Label>
                   <Label fx:id="navSettingsYourAccount" text="Your Account" textFill="#4f513a">
                      <styleClass>
                         <String fx:value="fontregular" />
                         <String fx:value="_19" />
                      </styleClass>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Label>
                   <Label fx:id="navSettingsAdministrator" text="Administrator" textFill="#4f513a">
                      <styleClass>
                         <String fx:value="fontregular" />
                         <String fx:value="_19" />
                      </styleClass>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Label>
                   <Label fx:id="navSettingsAbout" text="About" textFill="#4f513a">
                      <styleClass>
                         <String fx:value="fontregular" />
                         <String fx:value="_19" />
                      </styleClass>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Label>
                   <Pane prefHeight="90.0" prefWidth="244.0" />
                </children>
@@ -106,11 +121,15 @@
                                                 </Label>
                                              </children>
                                           </VBox>
-                                          <Button fx:id="btnSettingsPreferenceReportExportLocation" focusTraversable="false" minWidth="120.0" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Change">
+                                          <Button fx:id="btnSettingsPreferenceReportExportLocation" focusTraversable="false" minWidth="120.0" mnemonicParsing="false" text="Change">
                                              <styleClass>
                                                 <String fx:value="fontregular" />
                                                 <String fx:value="_12" />
+                                                <String fx:value="button1" />
                                              </styleClass>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </Button>
                                        </children>
                                        <padding>
@@ -128,7 +147,7 @@
                                                       <String fx:value="_18" />
                                                    </styleClass>
                                                 </Label>
-                                                <Label fx:id="lblSettingsPreferenceXAMPPLocation" text="C:\xampp" wrapText="true">
+                                                <Label fx:id="lblSettingsPreferenceXAMPPLocation" prefHeight="16.0" prefWidth="307.0" text="C:\xampp" wrapText="true">
                                                    <styleClass>
                                                       <String fx:value="whiteText" />
                                                       <String fx:value="fontregular" />
@@ -137,11 +156,15 @@
                                                 </Label>
                                              </children>
                                           </VBox>
-                                          <Button fx:id="btnSettingsPreferenceXAMPPLocation" focusTraversable="false" minWidth="120.0" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Change">
+                                          <Button fx:id="btnSettingsPreferenceXAMPPLocation" focusTraversable="false" minWidth="120.0" mnemonicParsing="false" text="Change">
                                              <styleClass>
                                                 <String fx:value="fontregular" />
                                                 <String fx:value="_12" />
+                                                <String fx:value="button1" />
                                              </styleClass>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </Button>
                                        </children>
                                        <padding>
@@ -168,7 +191,10 @@
                                                 </Label>
                                              </children>
                                           </VBox>
-                                          <MFXToggleButton fx:id="tgbSettingsPreferenceXAMPPManager" contentDisposition="GRAPHIC_ONLY" prefHeight="41.0" prefWidth="101.0" selected="true" />
+                                          <MFXToggleButton fx:id="tgbSettingsPreferenceXAMPPManager" contentDisposition="GRAPHIC_ONLY" prefHeight="41.0" prefWidth="101.0" selected="true">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor></MFXToggleButton>
                                        </children>
                                        <padding>
                                           <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -194,7 +220,10 @@
                                                 </Label>
                                              </children>
                                           </VBox>
-                                          <MFXToggleButton fx:id="tgbSettingsPreferenceViewPDF" contentDisposition="GRAPHIC_ONLY" prefHeight="41.0" prefWidth="101.0" selected="true" />
+                                          <MFXToggleButton fx:id="tgbSettingsPreferenceViewPDF" contentDisposition="GRAPHIC_ONLY" prefHeight="41.0" prefWidth="101.0" selected="true">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor></MFXToggleButton>
                                        </children>
                                        <padding>
                                           <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -220,7 +249,10 @@
                                                 </Label>
                                              </children>
                                           </VBox>
-                                          <MFXToggleButton fx:id="tgbSettingsPreferenceCurrentSchoolYear" contentDisposition="GRAPHIC_ONLY" prefHeight="41.0" prefWidth="101.0" selected="true" />
+                                          <MFXToggleButton fx:id="tgbSettingsPreferenceCurrentSchoolYear" contentDisposition="GRAPHIC_ONLY" prefHeight="41.0" prefWidth="101.0" selected="true">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor></MFXToggleButton>
                                        </children>
                                        <padding>
                                           <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -357,7 +389,7 @@
                         <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
                      </padding>
                   </AnchorPane>
-                  <AnchorPane fx:id="anpSettingsYourAccount" prefHeight="535.0" prefWidth="653.0" style="-fx-border-radius: 30; -fx-background-radius: 30;" styleClass="background2" visible="false">
+                  <AnchorPane fx:id="anpSettingsYourAccount" prefHeight="535.0" prefWidth="653.0" style="-fx-border-radius: 30; -fx-background-radius: 30;" styleClass="background2">
                      <children>
                         <ScrollPane hbarPolicy="NEVER" layoutX="70.0" layoutY="70.0" prefHeight="554.4" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <content>
@@ -489,7 +521,7 @@
                         <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
                      </padding>
                   </AnchorPane>
-                  <AnchorPane fx:id="anpSettingsAdministrator" prefHeight="535.0" prefWidth="653.0" style="-fx-border-radius: 30; -fx-background-radius: 30;" styleClass="background2" visible="false">
+                  <AnchorPane fx:id="anpSettingsAdministrator" prefHeight="535.0" prefWidth="653.0" style="-fx-border-radius: 30; -fx-background-radius: 30;" styleClass="background2">
                      <children>
                         <ScrollPane hbarPolicy="NEVER" layoutX="70.0" layoutY="70.0" prefHeight="554.4" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <content>
@@ -512,7 +544,7 @@
                                                       <String fx:value="_18" />
                                                    </styleClass>
                                                 </Label>
-                                                <Label text="Start a new school year: 2023-2024" wrapText="true">
+                                                <Label fx:id="lblSettingsAdministratorSchoolYear" text="Start a new school year: 2023-2024" wrapText="true">
                                                    <styleClass>
                                                       <String fx:value="whiteText" />
                                                       <String fx:value="fontregular" />
@@ -521,11 +553,15 @@
                                                 </Label>
                                              </children>
                                           </VBox>
-                                          <Button fx:id="btnSettingsAdministratorNewSY" focusTraversable="false" minWidth="120.0" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Change">
+                                          <Button fx:id="btnSettingsAdministratorNewSY" focusTraversable="false" minWidth="120.0" mnemonicParsing="false" text="Change">
                                              <styleClass>
                                                 <String fx:value="fontregular" />
                                                 <String fx:value="_12" />
+                                                <String fx:value="button1" />
                                              </styleClass>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </Button>
                                        </children>
                                        <padding>
@@ -552,11 +588,15 @@
                                                 </Label>
                                              </children>
                                           </VBox>
-                                          <Button fx:id="btnSettingsAdministratorSSGLogo" focusTraversable="false" minWidth="120.0" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Change">
+                                          <Button fx:id="btnSettingsAdministratorSSGLogo" focusTraversable="false" minWidth="120.0" mnemonicParsing="false" text="Change">
                                              <styleClass>
                                                 <String fx:value="fontregular" />
                                                 <String fx:value="_12" />
+                                                <String fx:value="button1" />
                                              </styleClass>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </Button>
                                        </children>
                                        <padding>
@@ -583,11 +623,15 @@
                                                 </Label>
                                              </children>
                                           </VBox>
-                                          <Button fx:id="btnSettingsAdministratorSchoolLogo" focusTraversable="false" minWidth="120.0" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Change">
+                                          <Button fx:id="btnSettingsAdministratorSchoolLogo" focusTraversable="false" minWidth="120.0" mnemonicParsing="false" text="Change">
                                              <styleClass>
                                                 <String fx:value="fontregular" />
                                                 <String fx:value="_12" />
+                                                <String fx:value="button1" />
                                              </styleClass>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </Button>
                                        </children>
                                        <padding>
@@ -614,11 +658,15 @@
                                                 </Label>
                                              </children>
                                           </VBox>
-                                          <Button fx:id="btnSettingsAdministratorAccountAdmin" focusTraversable="false" minWidth="120.0" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Set">
+                                          <Button fx:id="btnSettingsAdministratorAccountAdmin" focusTraversable="false" minWidth="120.0" mnemonicParsing="false" text="Set">
                                              <styleClass>
                                                 <String fx:value="fontregular" />
                                                 <String fx:value="_12" />
+                                                <String fx:value="button1" />
                                              </styleClass>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </Button>
                                        </children>
                                        <padding>
@@ -634,7 +682,7 @@
                         <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
                      </padding>
                   </AnchorPane>
-                  <AnchorPane fx:id="anpSettingsAbout" prefHeight="535.0" prefWidth="653.0" style="-fx-border-radius: 30; -fx-background-radius: 30;" styleClass="background2" visible="false">
+                  <AnchorPane fx:id="anpSettingsAbout" prefHeight="535.0" prefWidth="653.0" style="-fx-border-radius: 30; -fx-background-radius: 30;" styleClass="background2">
                      <children>
                         <ScrollPane hbarPolicy="NEVER" layoutX="70.0" layoutY="70.0" prefHeight="554.4" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <content>
@@ -666,10 +714,11 @@
                                                 </Label>
                                              </children>
                                           </VBox>
-                                          <Button focusTraversable="false" minWidth="120.0" mnemonicParsing="false" onAction="#aboutAppVersion" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Open">
+                                          <Button focusTraversable="false" minWidth="120.0" mnemonicParsing="false" onAction="#aboutAppVersion" text="Open">
                                              <styleClass>
                                                 <String fx:value="fontregular" />
                                                 <String fx:value="_12" />
+                                                <String fx:value="button1" />
                                              </styleClass>
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
@@ -700,10 +749,11 @@
                                                 </Label>
                                              </children>
                                           </VBox>
-                                          <Button focusTraversable="false" minWidth="120.0" mnemonicParsing="false" onAction="#aboutAppGithub" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 50; -fx-text-fill: white;" text="Open">
+                                          <Button focusTraversable="false" minWidth="120.0" mnemonicParsing="false" onAction="#aboutAppGithub" text="Open">
                                              <styleClass>
                                                 <String fx:value="fontregular" />
                                                 <String fx:value="_12" />
+                                                <String fx:value="button1" />
                                              </styleClass>
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
@@ -823,5 +873,6 @@
       <URL value="@../css/components.css" />
       <URL value="@../css/backgrounds.css" />
       <URL value="@../css/fonts.css" />
+      <URL value="@../css/buttons.css" />
    </stylesheets>
 </AnchorPane>

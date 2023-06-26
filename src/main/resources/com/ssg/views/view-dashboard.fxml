@@ -133,6 +133,7 @@
                         <String fx:value="whiteText" />
                         <String fx:value="fontregular" />
                         <String fx:value="_18" />
+                        <String fx:value="button2" />
                      </styleClass>
                      <padding>
                         <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />

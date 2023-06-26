@@ -2,6 +2,7 @@
 
 <?import java.lang.String?>
 <?import java.net.URL?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -56,6 +57,9 @@
                               <String fx:value="pageNav" />
                               <String fx:value="fontregular" />
                            </styleClass>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                         <Pane layoutX="85.0" layoutY="62.0" prefHeight="60.0" prefWidth="335.0" styleClass="txfPane">
                            <children>
@@ -103,14 +107,15 @@
                               <String fx:value="btnProceed" />
                               <String fx:value="fontregular" />
                            </styleClass>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                         <Label fx:id="lblSigninOutput" layoutX="202.0" layoutY="220.0" prefHeight="21.0" prefWidth="210.0" textFill="#f2f2f2">
-                           <font>
-                              <Font name="System Italic" size="18.0" />
-                           </font>
                            <styleClass>
                               <String fx:value="text" />
                               <String fx:value="fontregular" />
+                              <String fx:value="_15" />
                            </styleClass>
                         </Label>
                      </children>
@@ -170,6 +175,9 @@
                               <String fx:value="pageNav" />
                               <String fx:value="fontregular" />
                            </styleClass>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                         <Pane layoutX="322.0" layoutY="58.0" prefHeight="60.0" prefWidth="148.0" styleClass="txfPane">
                            <children>
@@ -239,6 +247,9 @@
                               <String fx:value="btnProceed" />
                               <String fx:value="fontregular" />
                            </styleClass>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                      </children>
                   </AnchorPane>
