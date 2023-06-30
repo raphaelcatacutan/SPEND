@@ -2,7 +2,6 @@ package com.ssg.views;
 
 import com.ssg.database.models.Officer;
 import com.ssg.database.models.Project;
-import com.ssg.utils.RuntimeData;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -26,15 +25,6 @@ public class MainEvents {
     public static void quickAddOfficer() {
         ControllerUtils.triggerEvent("quickAddOfficer");
     }
-
-
-    public static void startLoading() {
-        ControllerUtils.triggerEvent("startLoading");
-    }
-    public static void stopLoading() {
-        ControllerUtils.triggerEvent("stopLoading");
-    }
-
     public static void showDialogMessage(String title, String description, String... buttonText) {
         String[] args = Arrays.stream(buttonText).map(Object::toString).toArray(String[]::new);
         String[] mArgs = Arrays.copyOf(args, 3);
@@ -45,5 +35,4 @@ public class MainEvents {
     public static void restrictedAccount() {
         showDialogMessage("Restricted Access Alert", "Only admin accounts have access to some feature. Some of the features might not be available for you", "Okay");
     }
-
 }

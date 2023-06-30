@@ -3,6 +3,7 @@ package com.ssg.views.dialogs;
 import com.google.common.eventbus.Subscribe;
 import com.ssg.views.ControllerEvent;
 import com.ssg.views.ControllerUtils;
+import com.ssg.views.animations.ViewsAnimations;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -10,7 +11,6 @@ import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -58,8 +58,9 @@ public class DialogBox {
                          */
                         String[] args = Arrays.stream(event.getSimpleArgs()).map(Object::toString).toArray(String[]::new);
                         String[] mArgs = Arrays.copyOf(args, 6);
-                        messageDialog.setVisible(true);
+                        // messageDialog.setVisible(true);
                         messageController.setData(mArgs[1], mArgs[2], mArgs[3], mArgs[4]);
+                        ViewsAnimations.showDialog(messageDialog);
                     }
                     case "choice" -> {
                         /*
@@ -70,17 +71,17 @@ public class DialogBox {
                          */
                         int[] selectedID = Arrays.stream(event.getArrayArgs()[0]).mapToInt(obj -> Integer.parseInt(obj.toString())).toArray();
                         choiceController.setData(selectedID, (String) event.getSimpleArgs()[1], event.getArrayArgs()[1]);
-                        choiceDialog.setVisible(true);
+                        // choiceDialog.setVisible(true);
+                        ViewsAnimations.showDialog(choiceDialog);
                     }
                 }
             }
             case "hideDialog" -> {
-                mainDialogBox.toBack();
-                mainDialogBox.setVisible(false);
                 if (event.getSimpleArgs()[0] != null) ControllerUtils.triggerEvent((String) event.getSimpleArgs()[0]);
 
-                messageDialog.setVisible(false);
-                choiceDialog.setVisible(false);
+                ViewsAnimations.hideDialog(messageDialog);
+                ViewsAnimations.hideDialog(choiceDialog);
+
                 choiceController.clear();
             }
         }

@@ -339,7 +339,7 @@ FROM
 							<textElement>
 								<font fontName="Arial" size="12"/>
 							</textElement>
-							<textFieldExpression><![CDATA[$F{EXPENSES_NO} + ". " + String.format("%.2f", $F{QUANTITY}) + " of ₱" + String.format("%.2f", $F{UNITPRICE}) + " - " + $F{ITEMNAME} + " for ₱" + String.format("%.2f", $F{TOTALPRICE})]]></textFieldExpression>
+							<textFieldExpression><![CDATA[$F{EXPENSES_NO} + ".) " + String.format("%,.2f", $F{QUANTITY}) + " of PHP " + String.format("%,.2f", $F{UNITPRICE}) + " - " + $F{ITEMNAME} + " for PHP " + String.format("%,.2f", $F{TOTALPRICE})]]></textFieldExpression>
 						</textField>
 					</jr:listContents>
 				</jr:list>

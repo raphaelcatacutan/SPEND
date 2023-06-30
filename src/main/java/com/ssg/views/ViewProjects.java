@@ -2,13 +2,19 @@ package com.ssg.views;
 
 import com.google.common.eventbus.Subscribe;
 import com.ssg.database.*;
-import com.ssg.database.models.*;
+import com.ssg.database.models.Contributors;
+import com.ssg.database.models.Expense;
+import com.ssg.database.models.Officer;
+import com.ssg.database.models.Project;
 import com.ssg.utils.DateUtils;
 import com.ssg.utils.ProgramUtils;
 import com.ssg.utils.RuntimeData;
+import com.ssg.views.animations.ViewsAnimations;
 import com.ssg.views.templates.ProjectsItemBox;
-import io.github.palexdev.materialfx.controls.*;
+import io.github.palexdev.materialfx.controls.MFXTableColumn;
+import io.github.palexdev.materialfx.controls.MFXTableView;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -61,6 +67,7 @@ public class ViewProjects extends ViewController {
 
     // Project Details Editor
     @FXML private AnchorPane anpProjectEditProject;
+    @FXML private AnchorPane anpProjectForm;
     @FXML private Label lblEditProjectDialogTitle;
     @FXML private TextField txfEditProjectName;
     @FXML private TextArea txaEditProjectDescription;
@@ -70,6 +77,7 @@ public class ViewProjects extends ViewController {
 
     // Project Expenses Editor
     @FXML private AnchorPane anpProjectEditExpense;
+    @FXML private AnchorPane anpExpenseForm;
     @FXML private Label lblEditExpenseDialogTitle;
     @FXML private Button btnEditExpenseAction1;
     @FXML private Button btnEditExpenseAction2;
@@ -155,7 +163,7 @@ public class ViewProjects extends ViewController {
         MFXTableColumn<Expense> expenseDateColumn = new MFXTableColumn<>("Date", false, Comparator.comparing(Expense::getExpenseDate_cd));
         MFXTableColumn<Expense> totalPriceColumn = new MFXTableColumn<>("Total Price", false, Comparator.comparing(Expense::getTotalPrice));
 
-        quantityColumn.setRowCellFactory(expense -> new MFXTableRowCell<>(Expense::getQuantity) {
+        quantityColumn.setRowCellFactory(expense -> new MFXTableRowCell<>(expenseQuantity -> String.format("%,.2f", expenseQuantity.getQuantity())) {
             {
                 setAlignment(Pos.CENTER);
                 setOnMouseClicked(event -> {
@@ -173,7 +181,7 @@ public class ViewProjects extends ViewController {
                 });
             }
         });
-        unitPriceColumn.setRowCellFactory(expense -> new MFXTableRowCell<>(Expense::getUnitPrice){
+        unitPriceColumn.setRowCellFactory(expense -> new MFXTableRowCell<>(expenseUnitPrice -> String.format("%,.2f", expenseUnitPrice.getUnitPrice())){
             {
                 setAlignment(Pos.CENTER);
                 setOnMouseClicked(event -> {
@@ -182,7 +190,7 @@ public class ViewProjects extends ViewController {
                 });
             }
         });
-        statusColumn.setRowCellFactory(expense -> new MFXTableRowCell<>(factoryExpense -> factoryExpense.getStatus() == 0 ? "Proposed" : "Approved"){
+        statusColumn.setRowCellFactory(expense -> new MFXTableRowCell<>(expenseStatus -> expenseStatus.getStatus() == 0 ? "Proposed" : "Approved"){
             {
                 setAlignment(Pos.CENTER);
                 setOnMouseClicked(event -> {
@@ -200,7 +208,7 @@ public class ViewProjects extends ViewController {
                 });
             }
         });
-        totalPriceColumn.setRowCellFactory(expense -> new MFXTableRowCell<>(Expense::getTotalPrice){
+        totalPriceColumn.setRowCellFactory(expense -> new MFXTableRowCell<>(expenseTotalPrice -> String.format("%,.2f", expenseTotalPrice.getTotalPrice())){
             {
                 setAlignment(Pos.CENTER);
                 setOnMouseClicked(event -> {
@@ -230,69 +238,90 @@ public class ViewProjects extends ViewController {
 
     // Project List
     public void displayProjects() {
-        int column = 0;
-        int row = 0;
-        final int COLUMNLIMIT = 2;
-        gnpProjectsList.getChildren().clear();
-        searchedProjects.clear();
-        try {
-            ArrayList<Project> filteredProject = new ArrayList<>();
-            ArrayList<Project> strongFilterProject = new ArrayList<>();
-            ArrayList<Project> moderateFilterProject = new ArrayList<>();
-            ArrayList<Project> weakFilterProject = new ArrayList<>();
+        Thread thread = new Thread(() -> {
+            Platform.runLater(() -> {
+                int column = 0;
+                int row = 0;
+                final int COLUMNLIMIT = 2;
+                gnpProjectsList.getChildren().clear();
+                searchedProjects.clear();
+                try {
+                    ArrayList<Project> filteredProject = new ArrayList<>();
+                    ArrayList<Project> strongFilterProject = new ArrayList<>();
+                    ArrayList<Project> moderateFilterProject = new ArrayList<>();
+                    ArrayList<Project> weakFilterProject = new ArrayList<>();
 
-            for (Object p : projects) {
-                Project project = (Project) p;
-                if (schoolData.isCurrentSchoolYear() && schoolData.getSchoolYear() > DateUtils.getYear(project.getProject_cd())) continue;
-                int matchStrength = ProgramUtils.lowestNumber(
-                        ProgramUtils.stringMatch(DateUtils.formatDate("5", project.getEventdate()), searchProjectPattern), // Event Year
-                        ProgramUtils.stringMatch(DateUtils.formatDate("6", project.getEventdate()), searchProjectPattern), // Event Month
-                        ProgramUtils.stringMatch(project.getTitle(), "%" + searchProjectPattern + "%"),
-                        ProgramUtils.stringMatch(project.getDescription(), "%" + searchProjectPattern + "%")
-                );
-                switch (matchStrength) {
-                    case 1 -> strongFilterProject.add(project);
-                    case 2 -> moderateFilterProject.add(project);
-                    case 3 -> weakFilterProject.add(project);
+                    for (Object p : projects) {
+                        Project project = (Project) p;
+                        if (schoolData.isCurrentSchoolYear() && schoolData.getSchoolYear() > DateUtils.getYear(project.getProject_cd()))
+                            continue;
+                        int matchStrength = ProgramUtils.lowestNumber(
+                                ProgramUtils.stringMatch(DateUtils.formatDate("5", project.getEventdate()), searchProjectPattern), // Event Year
+                                ProgramUtils.stringMatch(DateUtils.formatDate("6", project.getEventdate()), searchProjectPattern), // Event Month
+                                ProgramUtils.stringMatch(project.getTitle(), "%" + searchProjectPattern + "%"),
+                                ProgramUtils.stringMatch(project.getDescription(), "%" + searchProjectPattern + "%")
+                        );
+                        switch (matchStrength) {
+                            case 1 -> strongFilterProject.add(project);
+                            case 2 -> moderateFilterProject.add(project);
+                            case 3 -> weakFilterProject.add(project);
+                        }
+                        if (matchStrength != 4) searchedProjects.add(project.getProject_id());
+                    }
+                    filteredProject.addAll(strongFilterProject);
+                    filteredProject.addAll(moderateFilterProject);
+                    filteredProject.addAll(weakFilterProject);
+
+                    pneViewProjectsNoProject.setVisible(filteredProject.isEmpty());
+                    for (Project project : filteredProject) {
+                        FXMLLoader projectItemLoader = ControllerUtils.getLoader("templates/projects-item-box");
+                        AnchorPane projectItemBox = projectItemLoader.load();
+                        ProjectsItemBox projectItemController = projectItemLoader.getController();
+
+                        Predicate<Object> filterExpenses = (e) -> ((Expense) e).getProject_id() == project.getProject_id();
+                        ObservableList<Expense> expenseList = expenses.filtered(filterExpenses).stream().filter(obj -> obj instanceof Expense).map(obj -> (Expense) obj).collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+                        Predicate<Expense> filterApproved = (e) -> e.getStatus() == 1;
+                        double expenseApprovalRate = ((double) expenseList.filtered(filterApproved).size()) / expenseList.size();
+
+                        projectItemController.setData(project, expenseApprovalRate);
+                        projectItemBox.setOnMouseClicked(event -> {
+                            focusedProject = project;
+                            displayProjectDetails();
+                        });
+                        gnpProjectsList.add(projectItemBox, column++, row);
+                        GridPane.setMargin(projectItemBox, new Insets(10));
+                        if (column != COLUMNLIMIT) continue;
+                        column = 0;
+                        ++row;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                if (matchStrength != 4) searchedProjects.add(project.getProject_id());
-            }
-            filteredProject.addAll(strongFilterProject);
-            filteredProject.addAll(moderateFilterProject);
-            filteredProject.addAll(weakFilterProject);
-
-            pneViewProjectsNoProject.setVisible(filteredProject.isEmpty());
-            for (Project project : filteredProject) {
-                FXMLLoader projectItemLoader = ControllerUtils.getLoader("templates/projects-item-box");
-                AnchorPane projectItemBox = projectItemLoader.load();
-                ProjectsItemBox projectItemController = projectItemLoader.getController();
-
-                Predicate<Object> filterExpenses = (e) -> ((Expense) e).getProject_id() == project.getProject_id();
-                ObservableList<Expense> expenseList = expenses.filtered(filterExpenses).stream().filter(obj -> obj instanceof Expense).map(obj -> (Expense) obj).collect(Collectors.toCollection(FXCollections::observableArrayList));
-
-                Predicate<Expense> filterApproved = (e) -> e.getStatus() == 1;
-                double expenseApprovalRate = ((double) expenseList.filtered(filterApproved).size()) / expenseList.size();
-
-                projectItemController.setData(project, expenseApprovalRate);
-                projectItemBox.setOnMouseClicked(event -> {
-                    focusedProject = project;
-                    displayProjectDetails();
-                });
-                gnpProjectsList.add(projectItemBox, column++, row);
-                GridPane.setMargin(projectItemBox, new Insets(10));
-                if (column != COLUMNLIMIT) continue;
-                column = 0;
-                ++row;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            });
+        });
+        thread.start();
     }
     public void searchProject(KeyEvent event) {
         if (event.getCode() != KeyCode.ENTER) return;
         String searchValue = txfProjectListSearchProject.getText();
         searchProjectPattern = searchValue.isEmpty() ? "%" : searchValue;
         refreshView(false);
+    }
+    public void quickAddProject() {
+        focusedProject = null;
+        expenseDialogEditor("hide");
+        ViewsAnimations.unfocusModel(anpProjectDetails);
+        tbvProjectDetailsExpenses.getSelectionModel().clearSelection();
+        txfEditProjectName.setText("");
+        txaEditProjectDescription.setText("");
+        dpkEditProjectDate.setValue(null);
+
+        btnEditProjectAction1.setOnMouseClicked(null);
+        btnEditProjectAction2.setOnMouseClicked(null);
+
+        txfEditProjectName.setDisable(false);
+        projectDialogEditor("add");
     }
     private void clearSearches(MouseEvent mouseEvent) {
         txfProjectListSearchProject.setText("");
@@ -301,7 +330,6 @@ public class ViewProjects extends ViewController {
         refreshView(false);
     }
     private void generateProjectsReport(MouseEvent mouseEvent) {
-        MainEvents.startLoading();
         String filter = SpendBUtils.spendBFilterID("P.PROJECT_ID", true, searchedProjects.stream().mapToInt(Integer::intValue).toArray());
         Map<String, String> queries = new HashMap<>();
 
@@ -350,13 +378,14 @@ public class ViewProjects extends ViewController {
         queries.put("main", query);
         queries.put("Projects", query);
         SpendBUtils.generateReport(5, queries);
-        MainEvents.stopLoading();
     }
 
     // Project Details
     public void displayProjectDetails() {
         if (focusedProject == null) return;
-        anpProjectDetails.setVisible(true);
+        ViewsAnimations.focusModel(anpProjectDetails);
+        projectDialogEditor("hide");
+        expenseDialogEditor("hide");
         lblProjectDetailsItemName.setText(focusedProject.getTitle());
         lblProjectDetailsItemDescription.setText("Program Date: " + DateUtils.formatDate("2", focusedProject.getEventdate()) + "\n" + focusedProject.getDescription());
         hbxProjectDetailsContributor.getChildren().clear();
@@ -386,14 +415,13 @@ public class ViewProjects extends ViewController {
     }
     public void projectsListBack() {
         focusedProject = null;
-        anpProjectDetails.setVisible(false);
         projectDialogEditor("hide");
         expenseDialogEditor("hide");
+        ViewsAnimations.unfocusModel(anpProjectDetails);
         tbvProjectDetailsExpenses.getSelectionModel().clearSelection();
     }
     private void showProjectDialogChoices(MouseEvent mouseEvent) {
         if (notAdmin()) return;
-        // FIXME Not showing when officer doens't have a project
         // Filter the Contributors of this Project
         Predicate<Object> filterContributions = (c) -> ((Contributors) c).getProject_id() == focusedProject.getProject_id();
         ObservableList<Object> contributorsID = contributors.filtered(filterContributions);
@@ -407,13 +435,14 @@ public class ViewProjects extends ViewController {
     }
     private void deleteProjectConfirm(MouseEvent event) {
         if (notAdmin()) return;
-        MainEvents.showDialogMessage("Edit Project", "Are you sure you want to delete this project", "Delete Project", "Back");
+        MainEvents.showDialogMessage("Delete Project", "Are you sure you want to delete this project", "Delete Project", "Back");
     }
 
     // Project Editor
     public void projectDialogEditor(String mode) {
         if (!Objects.equals(mode, "hide") && notAdmin()) return;
-        anpProjectEditProject.setVisible(!Objects.equals(mode, "hide"));
+        if (Objects.equals(mode, "hide")) ViewsAnimations.hideEditor(anpProjectForm);
+        else ViewsAnimations.showEditor(anpProjectForm);
         switch (mode) {
             case "add" -> {
                 btnEditProjectAction1.setOnMouseClicked(event -> createProject());
@@ -458,7 +487,6 @@ public class ViewProjects extends ViewController {
     }
     public void createProject() {
         try {
-            MainEvents.startLoading();
             Object[] userInput = getEditProjectInput(false);
             if (userInput == null) return;
             Object[] newProject = {
@@ -468,13 +496,11 @@ public class ViewProjects extends ViewController {
                     userInput[2]
             };
             SpendBCreate.createProject(newProject, true);
-            MainEvents.stopLoading();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            MainEvents.showDialogMessage("Invalid User Input", "The input provided is invalid. Please make sure to enter a valid value or format to proceed. Input", "Back");
         }
     }
     public void generateProjectReport(Event ignored) {
-        MainEvents.startLoading();
         Map<String, String> queries = new HashMap<>();
         String query = "SELECT\n" +
                 "    SD.DATA_ID,\n" +
@@ -507,13 +533,13 @@ public class ViewProjects extends ViewController {
         queries.put("main", query);
         queries.put("Expenses", query);
         SpendBUtils.generateReport(4, queries);
-        MainEvents.stopLoading();
     }
 
     // Expense Editor
     private void expenseDialogEditor(String mode, Object... args) {
         if (!Objects.equals(mode, "hide") && notAdmin()) return;
-        anpProjectEditExpense.setVisible(!Objects.equals(mode, "hide"));
+        if (Objects.equals(mode, "hide")) ViewsAnimations.hideEditor(anpExpenseForm);
+        else ViewsAnimations.showEditor(anpExpenseForm);
         switch (mode) {
             case "add" -> {
                 btnEditExpenseAction1.setOnMouseClicked(event -> createExpense());
@@ -528,6 +554,12 @@ public class ViewProjects extends ViewController {
                     txfEditExpenseUnitPrice.setText(String.valueOf(updatingExpense.getUnitPrice()));
                     txfEditExpenseTotalPrice.setText(String.valueOf(updatingExpense.getTotalPrice()));
                     rbgEditExpenseRadioStatus.selectToggle(updatingExpense.getStatus() == 0 ? rbtEditExpenseIsProposed : rbtEditExpenseIsApproved);
+
+                    txfEditExpenseName.setDisable(false);
+                    txfEditExpenseQuantity.setDisable(false);
+                    txfEditExpenseUnitPrice.setDisable(false);
+                    txfEditExpenseTotalPrice.setDisable(false);
+
                 } else {
                     txfEditExpenseName.setText("Selected Multiple");
                     txfEditExpenseQuantity.setText("0.0");
@@ -573,7 +605,6 @@ public class ViewProjects extends ViewController {
         }
     }
     private Object[] getEditExpenseInput(boolean allowNull) {
-        System.out.println(rbtEditExpenseIsProposed.isSelected());
         Object[] userInput = {
                 txfEditExpenseName.getText().isEmpty() ? null: txfEditExpenseName.getText(),
                 ProgramUtils.parseDouble(txfEditExpenseTotalPrice.getText()),
@@ -582,7 +613,7 @@ public class ViewProjects extends ViewController {
                 rbtEditExpenseIsProposed.isSelected() ? 0 : 1
         };
         if (Arrays.stream(userInput).anyMatch(Objects::isNull) && !allowNull) {
-            ControllerUtils.triggerEvent("showDialog", "message", "Invalid Input", "Invalid Input", "Back");
+            MainEvents.showDialogMessage("Invalid Input", "You input an invalid value in the fields. Please check the information you provided to continue", "Back");
             return null;
         } else {
             expenseDialogEditor("hide");
@@ -591,7 +622,6 @@ public class ViewProjects extends ViewController {
     }
     private void createExpense() {
         try {
-            MainEvents.startLoading();
             Object[] userInput = getEditExpenseInput(false);
             if (userInput == null) return;
             Object[] newExpense = {
@@ -603,13 +633,11 @@ public class ViewProjects extends ViewController {
                     userInput[4]
             };
             SpendBCreate.createExpenses(newExpense, true);
-            MainEvents.stopLoading();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
     private void proposeExpense(List<Expense> expenses) {
-        MainEvents.startLoading();
         String filter = SpendBUtils.spendBFilterID("e.EXPENSE_ID", true, expenses.stream().mapToInt(Expense::getExpense_id).toArray());
         String query = "SELECT\n" +
                 "  sd.DATA_ID,\n" +
@@ -639,7 +667,6 @@ public class ViewProjects extends ViewController {
         queries.put("EXPENSES", query);
         queries.put("main", query);
         SpendBUtils.generateReport(1, queries);
-        MainEvents.stopLoading();
     }
     private void editExpenseConfirm(MouseEvent event) {
         if (notAdmin()) return;
@@ -654,7 +681,6 @@ public class ViewProjects extends ViewController {
     @Subscribe
     public void updateProject(ControllerEvent event) {
         if (!Objects.equals(event.getEventId(), "Edit Project")) return;
-        MainEvents.startLoading();
         try {
             Object[] userInput = getEditProjectInput(true);
             if (userInput == null) return;
@@ -673,7 +699,6 @@ public class ViewProjects extends ViewController {
     @Subscribe
     public void deleteProject(ControllerEvent event) {
         if (!Objects.equals(event.getEventId(), "Delete Project")) return;
-        MainEvents.startLoading();
         SpendBDelete.deleteTableData("PROJECTS", true, "PROJECT_ID = " + focusedProject.getProject_id());
         projectsListBack();
     }
@@ -681,7 +706,6 @@ public class ViewProjects extends ViewController {
     @Subscribe
     public void updateOfficer(ControllerEvent event) {
         if (event.notEvent("officersChoices")) return;
-        MainEvents.startLoading();
         String projectFilter = "PROJECT_ID = " + focusedProject.getProject_id();
         int[] selectedID = Arrays.stream(event.getSimpleArgs()).mapToInt(obj -> Integer.parseInt(obj.toString())).toArray();
         String deleteIDS = SpendBUtils.spendBFilterID("OFFICER_ID", false, selectedID);
@@ -699,7 +723,6 @@ public class ViewProjects extends ViewController {
     @Subscribe
     public void deleteExpense(ControllerEvent event) {
         if (event.notEvent("Delete Expenses")) return;
-        MainEvents.startLoading();
         expenseDialogEditor("hide");
         int[] expenseIDs = Arrays.stream(selectedExpense.stream().mapToInt(Expense::getExpense_id).toArray()).toArray();
         String filter = SpendBUtils.spendBFilterID("EXPENSE_ID", true, expenseIDs);
@@ -710,7 +733,6 @@ public class ViewProjects extends ViewController {
     public void updateExpense(ControllerEvent event) {
         if (event.notEvent("Update Expenses")) return;
         try {
-            MainEvents.startLoading();
             Object[] userInput = getEditExpenseInput(true);
             if (userInput == null) return;
             int[] expenseIDs = Arrays.stream(selectedExpense.stream().mapToInt(Expense::getExpense_id).toArray()).toArray();
@@ -725,7 +747,6 @@ public class ViewProjects extends ViewController {
                     userInput[4]
             };
             SpendBUpdate.updateExpense(newExpense, true, true, filter);
-            MainEvents.stopLoading();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

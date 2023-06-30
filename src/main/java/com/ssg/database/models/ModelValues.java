@@ -1,7 +1,5 @@
 package com.ssg.database.models;
 
-import net.sf.jasperreports.engine.json.expression.member.ObjectKeyExpression;
-
 import java.util.Objects;
 
 import static com.ssg.database.SpendBPrefill.lorem200;
@@ -92,8 +90,6 @@ public class ModelValues {
             String schoolLogo,
             String ssgLogo,
             String reportExportLocation,
-            Integer manageXampp,
-            String xamppLocation,
             Integer viewPDF,
             Integer currentSchoolYear,
             String ssgAdviser,
@@ -105,8 +101,6 @@ public class ModelValues {
                 schoolLogo,
                 ssgLogo,
                 reportExportLocation,
-                manageXampp,
-                xamppLocation,
                 viewPDF,
                 currentSchoolYear,
                 ssgAdviser,

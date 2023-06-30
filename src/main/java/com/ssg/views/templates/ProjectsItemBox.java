@@ -2,7 +2,6 @@ package com.ssg.views.templates;
 
 import com.ssg.database.models.Project;
 import com.ssg.utils.DateUtils;
-import com.ssg.utils.ProgramUtils;
 import io.github.palexdev.materialfx.controls.MFXProgressBar;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

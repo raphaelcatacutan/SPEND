@@ -80,7 +80,7 @@ public class MainLogin {
             txfSigninUsername.setText(username);
             toSignIn();
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
         }
     }
     private void signIn() {
@@ -98,7 +98,7 @@ public class MainLogin {
             lblSigninOutput.setText(""); // Resets in case the user logs out
             return;
         }
-        lblSigninOutput.setText("Invalid username or password");
+        lblSigninOutput.setText("Invalid credentials");
     }
     private void toSignIn() {
         resetView();
@@ -130,5 +130,6 @@ public class MainLogin {
         resetView();
         login.setVisible(true);
         login.toFront();
+
     }
 }

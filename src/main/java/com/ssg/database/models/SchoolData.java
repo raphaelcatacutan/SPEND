@@ -10,23 +10,19 @@ public class SchoolData {
     private Blob schoolLogo;
     private Blob ssgLogo;
     private String reportExportLocation;
-    private boolean manageXampp;
-    private String xamppLocation;
     private boolean viewPDF;
     private boolean currentSchoolYear;
     private String ssgAdviser;
     private String principal;
     private String proposalParagraph;
 
-    public SchoolData(int data_id, Timestamp updateTime, int schoolYear, Blob schoolLogo, Blob ssgLogo, String reportExportLcoation, boolean manageXampp, String xamppLocation, boolean viewPDF, boolean currentSchoolYear, String ssgAdviser, String principal, String proposalParagraph) {
+    public SchoolData(int data_id, Timestamp updateTime, int schoolYear, Blob schoolLogo, Blob ssgLogo, String reportExportLocation, boolean viewPDF, boolean currentSchoolYear, String ssgAdviser, String principal, String proposalParagraph) {
         this.data_id = data_id;
         this.updateTime = updateTime;
         this.schoolYear = schoolYear;
         this.schoolLogo = schoolLogo;
         this.ssgLogo = ssgLogo;
-        this.reportExportLocation = reportExportLcoation;
-        this.manageXampp = manageXampp;
-        this.xamppLocation = xamppLocation;
+        this.reportExportLocation = reportExportLocation;
         this.viewPDF = viewPDF;
         this.currentSchoolYear = currentSchoolYear;
         this.ssgAdviser = ssgAdviser;
@@ -48,22 +44,6 @@ public class SchoolData {
 
     public void setReportExportLocation(String reportExportLocation) {
         this.reportExportLocation = reportExportLocation;
-    }
-
-    public boolean isManageXampp() {
-        return manageXampp;
-    }
-
-    public void setManageXampp(boolean manageXampp) {
-        this.manageXampp = manageXampp;
-    }
-
-    public String getXamppLocation() {
-        return xamppLocation;
-    }
-
-    public void setXamppLocation(String xamppLocation) {
-        this.xamppLocation = xamppLocation;
     }
 
     public boolean isViewPDF() {

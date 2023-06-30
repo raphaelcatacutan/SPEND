@@ -18,7 +18,6 @@ import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 public class DialogChoice {
 
@@ -95,6 +94,7 @@ public class DialogChoice {
             }
         }
     }
+
     public void clear() {
         vbxDialogChoiceList.getChildren().clear();
     }

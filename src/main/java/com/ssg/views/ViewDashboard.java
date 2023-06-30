@@ -44,7 +44,8 @@ public class ViewDashboard extends ViewController {
 
     private final XYChart.Series<String, Number> lncSeries = new XYChart.Series<>();
     private final String[] DBNEEDED = {"PROJECTS", "EXPENSES", "OFFICERS", "SCHOOLDATA"};
-    private final String[] xValues = new String[]{"8", "7", "6", "5", "4", "3", "2", "1", "0"};
+    private final String[] xValues = new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8"};
+    private final int lineSize = 8;
     private int chartDataType = 0;
     private Project nearestProject;
 
@@ -88,18 +89,9 @@ public class ViewDashboard extends ViewController {
         Tile chart;
         lncSeries.setName("Project Expenses");
         lncSeries.getData().add(new XYChart.Data<>("", 0));
-        for (int x = 0; x < 8; x++) {
-            lncSeries.getData().add(new XYChart.Data<>(xValues[x], 23));
+        for (int x = 0; x < lineSize - 1; x++) {
+            lncSeries.getData().add(new XYChart.Data<>(xValues[lineSize - 2 - x], new Random().nextInt(20)));
         }
-        lncSeries.getData().add(new XYChart.Data<>("9", 23));
-        lncSeries.getData().add(new XYChart.Data<>("8", 21));
-        lncSeries.getData().add(new XYChart.Data<>("7", 20));
-        lncSeries.getData().add(new XYChart.Data<>("6", 22));
-        lncSeries.getData().add(new XYChart.Data<>("5", 24));
-        lncSeries.getData().add(new XYChart.Data<>("4", 22));
-        lncSeries.getData().add(new XYChart.Data<>("3", 20));
-        lncSeries.getData().add(new XYChart.Data<>("2", 22));
-        lncSeries.getData().add(new XYChart.Data<>("1", 22));
         lncSeries.getData().add(new XYChart.Data<>(" ", 0));
 
         chart = TileBuilder.create()
@@ -125,11 +117,11 @@ public class ViewDashboard extends ViewController {
         AnchorPane.setLeftAnchor(chart, 0.0);
     }
     private void displayLncProjectsExpense() {
-        int[] yValues = new int[9];
+        int[] yValues = new int[lineSize];
         switch (chartDataType) {
-            case 0 -> lblDashboardExpenseChartTitle.setText("Expenses from the last 9 months");
-            case 1 -> lblDashboardExpenseChartTitle.setText("Expenses from the last 9 weeks");
-            case 2 -> lblDashboardExpenseChartTitle.setText("Expenses from the last 9 days");
+            case 0 -> lblDashboardExpenseChartTitle.setText("Expenses from the last " + (lineSize - 2) + " months");
+            case 1 -> lblDashboardExpenseChartTitle.setText("Expenses from the last " + (lineSize - 2) + " weeks");
+            case 2 -> lblDashboardExpenseChartTitle.setText("Expenses from the last " + (lineSize - 2) + " days");
             default -> throw new IllegalStateException("Unexpected value: " + chartDataType);
         };
         for (Object e: expenses) {
@@ -140,19 +132,17 @@ public class ViewDashboard extends ViewController {
                 case 2 -> DateUtils.calculateDaysAgo(expense.getUpdateTime());
                 default -> throw new IllegalStateException("Unexpected value: " + chartDataType);
             };
-            if (index > 9) continue;
+            if (index > lineSize) continue;
             yValues[index] += expense.getTotalPrice();
 
         }
+        for (int i = 0; i < lineSize; i++) {
+            lncSeries.getData().get(lineSize - 1 - i).setYValue(yValues[i]);
+        }
         lncSeries.getData().get(0).setXValue("");
         lncSeries.getData().get(0).setYValue(0);
-        for (int i = 8, x = 0; i >= 0; i--) {
-            lncSeries.getData().get(x + 1).setXValue(xValues[i]);
-            lncSeries.getData().get(x + 1).setYValue(yValues[i]);
-            x++;
-        }
-        lncSeries.getData().get(10).setXValue(" ");
-        lncSeries.getData().get(10).setYValue(0);
+        lncSeries.getData().get(lineSize).setXValue(" ");
+        lncSeries.getData().get(lineSize).setYValue(0);
     }
     private void displayNextEvent() {
         Date currentDate = new Date(System.currentTimeMillis());
@@ -187,7 +177,7 @@ public class ViewDashboard extends ViewController {
         for (Object d : data) {
             Timestamp updateTime;
             if (d instanceof Project project) updateTime = project.getUpdatetime();
-            else if (d instanceof Officer officer)  updateTime = officer.getUpdatetime();
+            else if (d instanceof Officer officer) updateTime = officer.getUpdatetime();
             else continue;
             if (updateTime.after(currentDate)) continue;
             if (!objectsByTimestamp.containsKey(updateTime)) objectsByTimestamp.put(updateTime, new ArrayList<>());
@@ -210,10 +200,11 @@ public class ViewDashboard extends ViewController {
 
         // Display recent objects in the UI
         ObservableList<Object> recent = FXCollections.observableArrayList(recentObjects);
-        for (int x = 1; x <= recent.size(); x++) {
-            Object r = recent.get(x - 1);
+        for (int x = 1; x <= 3; x++) {
             String objectName, objectType;
             EventHandler<MouseEvent> onClick;
+            Image image;
+            Object r = (recent.size() < x) ? null : recent.get(x - 1);
             if (r instanceof Project project) {
                 objectName = project.getTitle();
                 objectType = "Project";
@@ -222,9 +213,14 @@ public class ViewDashboard extends ViewController {
                 objectName = officer.getShortName();
                 objectType = "Officer";
                 onClick = e -> MainEvents.focusOfficer(officer);
-            } else continue;
+            } else {
+                objectName = "No Recents";
+                objectType = "No Recents";
+                onClick = e -> {};
+            }
             String pathname = "assets/icons/" + objectType.toLowerCase() + ".png";
-            Image image = new Image(Objects.requireNonNull(MainActivity.class.getResource(pathname)).toString());
+            if (objectType.equals("No Recents")) image = ControllerUtils.DEFAULTAVATAR;
+            else image = new Image(Objects.requireNonNull(MainActivity.class.getResource(pathname)).toString());
             ((ImageView) vbxRecentList.lookup("#imvRecent" + x)).setImage(image);
             ((Label) vbxRecentList.lookup("#lblRecentTitle" + x)).setText(objectName);
             ((Label) vbxRecentList.lookup("#lblRecentSubtitle" + x)).setText(objectType);
@@ -241,7 +237,5 @@ public class ViewDashboard extends ViewController {
         if (notAdmin()) return;
         MainEvents.quickAddOfficer();
     }
-
-
 
 }

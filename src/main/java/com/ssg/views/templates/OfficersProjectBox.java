@@ -6,8 +6,6 @@ import com.ssg.utils.ProgramUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-import java.awt.geom.Ellipse2D;
-
 public class OfficersProjectBox {
     @FXML Label projectTitle;
     @FXML Label projectDescription;

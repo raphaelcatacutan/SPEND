@@ -297,7 +297,7 @@ JOIN
 								<textElement textAlignment="Left" verticalAlignment="Middle">
 									<font fontName="Arial" size="12"/>
 								</textElement>
-								<textFieldExpression><![CDATA["₱ " + new DecimalFormat("#,##0.00").format($F{AMOUNT})]]></textFieldExpression>
+								<textFieldExpression><![CDATA["PHP " +  String.format("%,.2f", $F{AMOUNT})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>

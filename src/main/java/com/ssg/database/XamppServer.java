@@ -1,17 +1,18 @@
 package com.ssg.database;
 
 import com.ssg.utils.RuntimeData;
-import com.ssg.views.MainEvents;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class XamppServer {
     private static String xamppPath = "C:\\xampp";
 
+    /**
+     * Manages the XAMPP server by starting or stopping it.
+     *
+     * @param start A flag indicating whether to start or stop the XAMPP server.
+     */
     public static void manage(boolean start) {
         if (!isXamppInstalled()) xamppPath = RuntimeData.XAMPPLOCATION;
 
@@ -27,7 +28,6 @@ public class XamppServer {
             e.printStackTrace();
         }
     }
-
     private static boolean isXamppInstalled() {
         File xamppDir = new File(xamppPath);
         return xamppDir.exists() && xamppDir.isDirectory();

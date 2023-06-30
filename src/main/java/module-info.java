@@ -30,6 +30,4 @@ module com.ssg {
     opens com.ssg.views.templates to javafx.fxml;
     exports com.ssg.views.dialogs;
     opens com.ssg.views.dialogs to javafx.fxml;
-    exports com.ssg._test;
-    opens com.ssg._test to javafx.fxml;
 }

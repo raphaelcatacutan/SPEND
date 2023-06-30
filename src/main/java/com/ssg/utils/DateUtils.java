@@ -9,11 +9,14 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
 
 public class DateUtils {
+    /**
+     * Calculates the number of weeks between the specified timestamp and the current time.
+     *
+     * @param timestamp The timestamp to calculate the weeks ago from.
+     * @return The number of weeks ago as an integer value.
+     */
     public static int calculateWeeksAgo(Timestamp timestamp) {
         Instant instant = timestamp.toInstant();
         Instant now = Instant.now();
@@ -21,6 +24,12 @@ public class DateUtils {
         return (int) duration.toDays() / 7;
     }
 
+    /**
+     * Calculates the number of weeks between the specified date and the current date.
+     *
+     * @param date The date to calculate the weeks ago from.
+     * @return The number of weeks ago as an integer value.
+     */
     public static int calculateWeeksAgo(Date date) {
         LocalDate localDate = date.toLocalDate();
         LocalDate now = LocalDate.now();
@@ -28,6 +37,12 @@ public class DateUtils {
         return period.getDays() / 7;
     }
 
+    /**
+     * Calculates the number of days between the specified timestamp and the current time.
+     *
+     * @param timestamp The timestamp to calculate the days ago from.
+     * @return The number of days ago as an integer value.
+     */
     public static int calculateDaysAgo(Timestamp timestamp) {
         Instant instant = timestamp.toInstant();
         Instant now = Instant.now();
@@ -35,12 +50,24 @@ public class DateUtils {
         return (int) duration.toDays();
     }
 
+    /**
+     * Calculates the number of days between the specified date and the current date.
+     *
+     * @param date The date to calculate the days ago from.
+     * @return The number of days ago as an integer value.
+     */
     public static int calculateDaysAgo(Date date) {
         Date currentDate = new Date(System.currentTimeMillis());
         long diff = currentDate.getTime() - date.getTime();
         return (int) (diff / (24 * 60 * 60 * 1000));
     }
 
+    /**
+     * Calculates the number of months between the specified timestamp and the current timestamp.
+     *
+     * @param timestamp The timestamp to calculate the months ago from.
+     * @return The number of months ago as an integer value.
+     */
     public static int calculateMonthsAgo(Timestamp timestamp) {
         LocalDate localDate = timestamp.toLocalDateTime().toLocalDate();
         LocalDate now = LocalDate.now();
@@ -48,6 +75,12 @@ public class DateUtils {
         return period.getMonths();
     }
 
+    /**
+     * Calculates the number of months between the specified date and the current date.
+     *
+     * @param date The date to calculate the months ago from.
+     * @return The number of months ago as an integer value.
+     */
     public static int calculateMonthsAgo(java.sql.Date date) {
         LocalDate localDate = date.toLocalDate();
         LocalDate now = LocalDate.now();
@@ -55,74 +88,12 @@ public class DateUtils {
         return period.getMonths();
     }
 
-
-    public static String[] getLastMonths(int monthNumbers) {
-        Calendar cal = Calendar.getInstance();
-        Date now = new Date(cal.getTimeInMillis());
-        ArrayList<Date> lastMonths = new ArrayList<>();
-        for (int i = 0; i < monthNumbers - 1; i++) {
-            cal.add(Calendar.MONTH, -1);
-            cal.set(Calendar.DATE, 1);
-            Date date = new Date(cal.getTimeInMillis());
-            lastMonths.add(date);
-        }
-        Collections.reverse(lastMonths);
-        lastMonths.add(now);
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM");
-        String[] lastMonthsAsStrings = new String[lastMonths.size()];
-        for (int i = 0; i < lastMonths.size(); i++) {
-            lastMonthsAsStrings[i] = dateFormat.format(lastMonths.get(i));
-        }
-
-        return lastMonthsAsStrings;
-    }
-
-    public static String[] getLastWeeks(int weekNumbers) {
-        Calendar cal = Calendar.getInstance();
-        Date now = new Date(cal.getTimeInMillis());
-        ArrayList<Date> lastWeeks = new ArrayList<>();
-        for (int i = 0; i < weekNumbers - 1; i++) {
-            cal.add(Calendar.WEEK_OF_YEAR, -1);
-            cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
-            Date date = new Date(cal.getTimeInMillis());
-            lastWeeks.add(date);
-        }
-        Collections.reverse(lastWeeks);
-        lastWeeks.add(now);
-
-        String[] lastWeeksAsStrings = new String[lastWeeks.size()];
-        for (int i = 0; i < lastWeeks.size(); i++) {
-            int weekNumber = cal.get(Calendar.WEEK_OF_YEAR);
-            lastWeeksAsStrings[i] = weekNumber + "th week";
-            cal.add(Calendar.WEEK_OF_YEAR, -1);
-        }
-
-        return lastWeeksAsStrings;
-    }
-
-    public static String[] getLastDays(int dayNumbers) {
-        Calendar cal = Calendar.getInstance();
-        Date now = new Date(cal.getTimeInMillis());
-        ArrayList<Date> lastDays = new ArrayList<>();
-        for (int i = 0; i < dayNumbers - 1; i++) {
-            cal.add(Calendar.DAY_OF_YEAR, -1);
-            Date date = new Date(cal.getTimeInMillis());
-            lastDays.add(date);
-        }
-        Collections.reverse(lastDays);
-        lastDays.add(now);
-
-        String[] lastDaysAsStrings = new String[lastDays.size()];
-        for (int i = 0; i < lastDays.size(); i++) {
-            int dayNumber = cal.get(Calendar.DAY_OF_MONTH);
-            lastDaysAsStrings[i] = dayNumber + "th day";
-            cal.add(Calendar.DAY_OF_YEAR, -1);
-        }
-
-        return lastDaysAsStrings;
-    }
-
+    /**
+     * Retrieves the year from the specified date.
+     *
+     * @param date The date from which to retrieve the year.
+     * @return The year as an integer value.
+     */
     public static int getYear(Date date) {
         LocalDate localDate = date.toLocalDate();
         return localDate.getYear();

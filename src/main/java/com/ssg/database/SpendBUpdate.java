@@ -13,6 +13,18 @@ import java.util.List;
 import static com.ssg.database.SpendBRead.checkIfIdExists;
 
 public class SpendBUpdate {
+    /**
+     * Updates data in the specified table based on the provided values and filters.
+     *
+     * @param table       the name of the table in which to update data
+     * @param values      an array of values representing the data to be updated
+     * @param column      a LinkedHashMap containing the column names as keys and their corresponding data types as values
+     * @param filters     an array of filters to apply for updating data
+     * @param skipNull    a boolean flag indicating whether to skip null values during the update
+     * @param reload      a boolean flag indicating whether to reload views after the update
+     * @throws SQLException if an error occurs while accessing the database
+     * @throws FileNotFoundException if a file is not found while accessing the database
+     */
     private static void updateTableData(String table, Object[] values, LinkedHashMap<String, String> column, String[] filters, boolean skipNull, boolean reload) throws SQLException, FileNotFoundException {
         Connection conn = SpendBConnection.getConnection();
         StringBuilder sql = new StringBuilder("UPDATE " + table + " SET ");

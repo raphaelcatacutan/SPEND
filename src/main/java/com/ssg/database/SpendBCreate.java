@@ -2,7 +2,6 @@ package com.ssg.database;
 
 import com.ssg.views.ControllerUtils;
 
-import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -13,6 +12,15 @@ import java.util.List;
 import static com.ssg.database.SpendBRead.checkIfIdExists;
 
 public class SpendBCreate {
+    /**
+     * Creates a new record in the specified table with the provided values.
+     *
+     * @param table   the name of the table in which to insert the record
+     * @param values  an array of values representing the data to be inserted
+     * @param column  a LinkedHashMap containing the column names as keys and their corresponding data types as values
+     * @param reload  a boolean flag indicating whether to reload views or not after the record is inserted
+     * @throws SQLException if an error occurs while accessing the database
+     */
     private static void createTableData(String table, Object[] values, LinkedHashMap<String, String> column, boolean reload) throws SQLException {
         List<String> col = new ArrayList<>(column.keySet());
         Connection conn = SpendBConnection.getConnection();
@@ -71,12 +79,12 @@ public class SpendBCreate {
         if (!checkIfIdExists("OFFICERS", "OFFICER_ID", (Integer) values[1])) return;
         createTableData("CONTRIBUTORS", values, SpendBConnection.getColumnNames("CONTRIBUTORS"), reloadView);
     }
-    public static void createSchoolData(Object[] values, boolean... reload) throws SQLException, FileNotFoundException {
+    public static void createSchoolData(Object[] values, boolean... reload) throws SQLException {
         boolean reloadView = false;
         if (reload.length == 1) reloadView = reload[0];
         createTableData("SCHOOLDATA", values, SpendBConnection.getColumnNames("SCHOOLDATA"), reloadView);
     }
-    public static void createFundsData(Object[] values, boolean... reload) throws SQLException, FileNotFoundException {
+    public static void createFundsData(Object[] values, boolean... reload) throws SQLException {
         boolean reloadView = false;
         if (reload.length == 1) reloadView = reload[0];
         createTableData("FUNDS", values, SpendBConnection.getColumnNames("FUNDS"), reloadView);

@@ -118,45 +118,50 @@
 - [x] Current School Year Only
 - [x] Toolbar
 - [x] Splash Screen
-- [ ] Empty reports when empty query
 - [x] No avatar officer reports
 - [x] Editors
 - [x] Expense Editor Enables
 - [x] Adding or Editing Officer Avatar
-- [ ] Animation
 - [x] Admin Privilege showing on login
 - [x] Expense Status Bug
 - [x] Projects Statistics
 - [x] Numbers Statistics Bug
-- [ ] Buttons and Cursors
+- [x] Buttons and Cursors
 
 # Optimization
-- [ ] Remove filter parameter in update methods
-- [ ] Optimize Jasper Queries
-- [ ] Add boolean `reload` in create methods
-- [ ] Release `stmt` statements
-- [ ] Remove data adding in setups
+- [x] Release `stmt` statements
+- [x] Remove not needed columns
+- [x] Loading database once
+- [x] Dirty Codes
 
 # Enhancement
-- [ ] Comma Separated Currency
-- [ ] Add Tooltips
-- [ ] Catch Message
-- [ ] Refreshing reloads the database once
-- [ ] Hover Recents
-- [ ] Jasper Reports Fonts
-- [ ] Design Filter
-- [-] New ways of displaying data
-- [-] New ways of displaying data
+- [x] Animation
+- [x] Catch Message
+- [x] Jasper Reports Fonts
+- [x] Faster Login
+- [x] Asynchronous refresh new ways of displaying data
+- [x] Asynchronous generate report
+- [x] Adding a delay in the splash screen first progress
 
 # Bugs
-- [ ] Invalid Credentials Fonts
-- [ ] Refresh Statistics
-- [ ] Stop Loading
+- [x] Invalid Credentials Fonts
+- [x] Refresh Statistics
+- [x] Stop Loading
+- [x] Empty reports when empty query
+- [x] Navigating Quick Actions
+- [x] Rounded Choices
+- [x] Jasper Reports Currency
+- [x] Comma Separated Currency
+- [x] Jasper Report Delay
+- [x] From Multiple to Single Selected Expense
+- [x] Quick Add Double Transition
+- [x] Refreshing Animation
 
 # TODO v.1.0.0
 - [ ] Packaging to JAR
-- [ ] Code Clean up
-- [ ] Remove Print-Outs
-- [ ] Remove Prefilled Data
-- [ ] Change SSG Logo, Adviser, and Principal
-- [ ] Check ENHANCE, TODO, FIXME
+- [x] Code Clean up
+- [x] Remove Print-Outs
+- [x] JavaDoc
+- [x] Remove Prefilled Data
+- [x] Change SSG Logo, Adviser, and Principal
+- [x] Check ENHANCE, TODO, FIXME

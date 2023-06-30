@@ -9,7 +9,10 @@ import com.ssg.views.SplashScreen;
 import io.github.palexdev.materialfx.controls.MFXProgressBar;
 import io.github.palexdev.materialfx.css.themes.MFXThemeManager;
 import io.github.palexdev.materialfx.css.themes.Themes;
+import io.github.palexdev.materialfx.utils.AnimationUtils.KeyFrames;
+import io.github.palexdev.materialfx.utils.AnimationUtils.TimelineBuilder;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -31,17 +34,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+
 public class MainActivity extends Application {
-    private Stage primaryStage;
     private Stage splashStage;
     private Scene thisMainScene;
     private double xOffset = 0;
     private double yOffset = 0;
 
-
     @Override
     public void start(Stage primaryStage) throws IOException {
-        this.primaryStage = primaryStage;
         this.splashStage = new Stage();
 
         loadFonts();
@@ -54,8 +55,10 @@ public class MainActivity extends Application {
 
         Task<Void> splashScreenTask = new Task<Void>() {
             public void newProgress(double progress, String description) {
-                updateProgress(progress, 1.0);
-                updateMessage(description);
+                Platform.runLater(() -> {
+                    TimelineBuilder.build().add(KeyFrames.of(200, progressBar.progressProperty(), progress)).getAnimation().play();
+                    lblProgress.setText(description);
+                });
             }
 
             public void loadConfigs() {
@@ -124,7 +127,7 @@ public class MainActivity extends Application {
                 newProgress(0.25, "Starting XAMPP");
                 if (RuntimeData.STARTXAMPP && RuntimeData.MANAGEXAMPP) XamppServer.manage(true);
                 newProgress(0.45, "Initializing Connection");
-                SpendBConnection.intializeConnection();
+                SpendBConnection.initializeConnection();
                 newProgress(0.5, "Adding shutdown hook");
                 Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                     if (RuntimeData.MANAGEXAMPP && RuntimeData.STARTXAMPP) XamppServer.manage(false);
@@ -136,11 +139,10 @@ public class MainActivity extends Application {
                         if (!file.isFile()) continue;
                         file.delete();
                     }
-                    System.out.println("Application exiting...");
                 }));
             }
             public void loadMainScene() {
-                try {// FIXME Scene Size
+                try {
                     newProgress(0.55, "Loading Scenes");
                     AnchorPane login = ControllerUtils.getLoader("main-login").load();
                     AnchorPane view = ControllerUtils.getLoader("main-view").load();
@@ -185,14 +187,20 @@ public class MainActivity extends Application {
             }
             @Override
             protected Void call() throws Exception {
+                newProgress(0.05, "Initializing Application");
+                // Added some sleep breaks to reduce the lag in heavy operations
+                if (!RuntimeData.NOSPLASH) Thread.sleep(2500);
+
                 loadConfigs();
-                Thread.sleep(3000);
+                if (!RuntimeData.NOSPLASH) Thread.sleep(2500);
 
                 loadDatabase();
-                Thread.sleep(3000);
+                if (!RuntimeData.NOSPLASH) Thread.sleep(2500);
 
                 loadMainScene();
-                Thread.sleep(3000);
+                if (!RuntimeData.NOSPLASH) Thread.sleep(2500);
+
+                ControllerUtils.triggerEvent("signOut");
                 return null;
             }
         };
@@ -202,7 +210,7 @@ public class MainActivity extends Application {
             primaryStage.initStyle(StageStyle.TRANSPARENT);
             primaryStage.setTitle("SPEND");
 
-            primaryStage.getIcons().add(new Image(Objects.requireNonNull(MainActivity.class.getResourceAsStream("assets/icons/school-logo.png"))));
+            primaryStage.getIcons().add(new Image(Objects.requireNonNull(MainActivity.class.getResourceAsStream("assets/icons/ssg-logo.png"))));
             primaryStage.setAlwaysOnTop(true);
             primaryStage.centerOnScreen();
             primaryStage.show();
@@ -211,13 +219,8 @@ public class MainActivity extends Application {
             splashStage.close();
         });
 
-        progressBar.progressProperty().bind(splashScreenTask.progressProperty());
-        lblProgress.textProperty().bind(splashScreenTask.messageProperty());
-
         new Thread(splashScreenTask).start();
     }
-
-
 
     public static void main(String[] args) {
         RuntimeData.CREATEDATABASE = Arrays.asList(args).contains("createDatabase");
@@ -254,17 +257,31 @@ public class MainActivity extends Application {
         splashStage.setScene(splashScene);
         splashStage.initStyle(StageStyle.TRANSPARENT);
         splashStage.setTitle("SPEND");
-        splashStage.getIcons().add(new Image(Objects.requireNonNull(MainActivity.class.getResourceAsStream("assets/icons/school-logo.png"))));
+        splashStage.getIcons().add(new Image(Objects.requireNonNull(MainActivity.class.getResourceAsStream("assets/icons/ssg-logo.png"))));
         splashStage.centerOnScreen();
         splashStage.setAlwaysOnTop(true);
         splashStage.centerOnScreen();
 
         return splashLoader.getController();
     }
+
     public void loadFonts() {
-        // ENHANCE Make this an inline variable
-        String fontsProperty = ProgramUtils.getProperty("load_resource", "fonts");
-        String[] fonts = fontsProperty.split(",");
+        String[] fonts = {
+                "TCCB____.TTF",
+                "TCCEB.TTF",
+                "TCCM____.TTF",
+                "TCM_____.TTF",
+                "TCMI____.TTF",
+                "TCB_____.TTF",
+                "TCBI____.TTF",
+                "Century Gothic.ttf",
+                "CenturyGothic.ttf",
+                "GOTHIC.TTF",
+                "GOTHICB.TTF",
+                "GOTHICB0.TTF",
+                "GOTHICBI.TTF",
+                "GOTHICI.TTF"
+        };
         final String DIRFONTS = "assets/fonts/";
         for (String font : fonts) {
             try {

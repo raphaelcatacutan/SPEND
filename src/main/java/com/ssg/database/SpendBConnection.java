@@ -4,11 +4,7 @@ package com.ssg.database;
 import com.ssg.utils.ProgramUtils;
 import com.ssg.utils.RuntimeData;
 
-import java.sql.DriverManager;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.*;
 
 
@@ -99,8 +95,6 @@ public class SpendBConnection {
                 "SCHOOLLOGO/LONGBLOB",
                 "SSGLOGO/LONGBLOB",
                 "REPORTEXPORTLOCATION/VARCHAR(255)",
-                "MANAGEXAMPP/BIT",
-                "XAMPPLOCATION/VARCHAR(255)",
                 "VIEWPDF/BIT",
                 "CURRENTSCHOOLYEAR/BIT",
                 "SSGADVISER/VARCHAR(255)",
@@ -109,11 +103,13 @@ public class SpendBConnection {
         ));
     }
 
-    public static void main(String[] args) {
-        System.out.println(getColumnNames("USERS"));
-    }
-
-    public static void intializeConnection() {
+    /**
+     * Initializes the database connection and sets up the necessary components.
+     * This method checks if the database needs to be set up, retrieves the database connection,
+     * sends a packet, sets up the required table if a new database was created,
+     * and generates pre-fill data if the `FILLDATA` flag is enabled.
+     */
+    public static void initializeConnection() {
         try {
             boolean newDatabase = setupDatabase();
             connection = SpendBConnection.getDBConnection();
@@ -125,39 +121,52 @@ public class SpendBConnection {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Sets up the database by creating a new database or dropping an existing one if necessary.
+     *
+     * @return {@code true} if the database setup was successful, {@code false} if the setup was skipped.
+     * @throws RuntimeException if a MySQL connection error occurs during the setup.
+     */
     private static boolean setupDatabase() {
-        try  (Connection tempConnection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD)){
-            if (!RuntimeData.CREATEDATABASE) return false;
+        try (Connection tempConnection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD)) {
 
-            System.out.println("Setting up the database");
-            // Drop the old database
-            String sql = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '" + DATABASE_NAME + "'";
-            ResultSet rs= tempConnection.createStatement().executeQuery(sql);
-            if (rs.next()) {
-                String dbName = rs.getString("SCHEMA_NAME");
-                String dropSql = "DROP DATABASE " + dbName;
-                tempConnection.createStatement().executeUpdate(dropSql);
-                System.out.println("Dropped database: " + dbName);
+            // Check if the database exists
+            String checkSql = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = ?";
+            try (PreparedStatement checkStatement = tempConnection.prepareStatement(checkSql)) {
+                checkStatement.setString(1, DATABASE_NAME);
+                try (ResultSet rs = checkStatement.executeQuery()) {
+                    if (rs.next()) {
+                        if (RuntimeData.CREATEDATABASE) {
+                            String dropSql = "DROP DATABASE " + DATABASE_NAME;
+                            tempConnection.createStatement().executeUpdate(dropSql);
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        String createSql = "CREATE DATABASE " + DATABASE_NAME;
+                        tempConnection.createStatement().executeUpdate(createSql);
+                    }
+                }
             }
-
-            // Create the Database
-            System.out.println("Creating " + DATABASE_NAME + " database");
-            String query = "CREATE DATABASE " + DATABASE_NAME;
-            tempConnection.createStatement().executeUpdate(query);
-            System.out.println("Database created successfully.");
             return true;
         } catch (SQLException e) {
-            ProgramUtils.showDialogMessage("MYSQL Connection Error", "The MySQL connection encountered an error while initializing.\nPlease ensure that the MySQL server is running and accessible.\nVerify that the server is up and running properly to establish\na successful connection.");
-            throw new RuntimeException();
+            throw new RuntimeException("MySQL connection error occurred during database setup.", e);
         }
     }
+
+
+    /**
+     * Sets up the database tables by creating them if they do not already exist.
+     *
+     * @throws SQLException if a database error occurs while setting up the tables.
+     */
     private static void setupTable() throws SQLException {
-        Statement stmt = getConnection().createStatement();
+        Connection connection = getConnection();
+        Statement stmt = connection.createStatement();
 
         for (String tableName : TABLECOLUMNS.keySet()) {
             List<String> columns = TABLECOLUMNS.get(tableName);
-
-            System.out.println("Setting up " + tableName);
 
             StringBuilder sb = new StringBuilder();
             sb.append("CREATE TABLE IF NOT EXISTS ").append(tableName).append(" (");
@@ -185,8 +194,14 @@ public class SpendBConnection {
             String sql = sb.toString();
             stmt.executeUpdate(sql);
         }
-        stmt.close();
     }
+
+    /**
+     * Retrieves a database connection using the specified driver, connection URL, database name, username, and password.
+     * This method dynamically loads the JDBC driver at runtime and establishes a connection to the database.
+     *
+     * @return the database connection if successful, or null if an error occurs
+     */
     private static Connection getDBConnection() {
         try {
             Class.forName(DB_DRIVER); // Load a JDBC driver dynamically at runtime.
@@ -197,6 +212,7 @@ public class SpendBConnection {
             return null;
         }
     }
+
     /**
      * Gets the columns of a table excluding
      * Columns ending with "_ID" (AND not referenced) or "CD", Columns with TIMESTAMP type
@@ -218,6 +234,13 @@ public class SpendBConnection {
         }
         return columns;
     }
+
+    /**
+     * Retrieves the established database connection.
+     *
+     * @return the established database connection
+     * @throws AssertionError if the connection is null
+     */
     public static Connection getConnection() {
         assert connection != null;
         return connection;

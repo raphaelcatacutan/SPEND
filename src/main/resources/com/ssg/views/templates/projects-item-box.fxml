@@ -11,9 +11,9 @@
 
 <AnchorPane minHeight="-Infinity" prefHeight="258.0" prefWidth="370.0" style="-fx-background-radius: 20;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.templates.ProjectsItemBox">
    <children>
-      <VBox layoutX="88.0" layoutY="47.0" prefHeight="249.0" prefWidth="368.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox layoutX="88.0" layoutY="47.0" prefHeight="258.0" prefWidth="370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="lblProjectDate" text="April 22, 2023">
+            <Label fx:id="lblProjectDate" maxWidth="100000.0" text="April 22, 2023">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -23,7 +23,7 @@
                   <String fx:value="whiteText" />
                </styleClass>
             </Label>
-            <Label fx:id="lblProjectTitle" text="Web Designing">
+            <Label fx:id="lblProjectTitle" maxWidth="100000.0" text="Web Designing">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
@@ -33,7 +33,7 @@
                   <String fx:value="whiteText" />
                </styleClass>
             </Label>
-            <Label fx:id="lblProjectDescription" alignment="TOP_LEFT" prefHeight="98.0" prefWidth="300.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ultrices libero et ex venenatis luctus." wrapText="true">
+            <Label fx:id="lblProjectDescription" alignment="TOP_LEFT" maxWidth="100000.0" prefHeight="98.0" prefWidth="300.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ultrices libero et ex venenatis luctus." wrapText="true">
                <styleClass>
                   <String fx:value="_18" />
                   <String fx:value="fontregular" />
@@ -43,7 +43,7 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <MFXProgressBar fx:id="pgbProjectExpensesApprovalRate" prefHeight="8.0" prefWidth="300.0" progress="0.57">
+            <MFXProgressBar fx:id="pgbProjectExpensesApprovalRate" maxWidth="10000.0" prefHeight="10.0" prefWidth="300.0" progress="0.57">
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin>

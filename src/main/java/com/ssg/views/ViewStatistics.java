@@ -122,7 +122,7 @@ public class ViewStatistics extends ViewController {
     }
 
     @Override public void onNavigate() {
-        refreshView(false);
+        refreshView(true);
     }
 
     // Setup
@@ -239,12 +239,11 @@ public class ViewStatistics extends ViewController {
         ChartItemSeries[] projectsSeries = new ChartItemSeries[projectSize];
         for (int i = projectSize - 1; i >= 0; i--) {
             ChartItem[] items = new ChartItem[3];
-            for (int x = 0; x < 3; x++) items[x] = new ChartItem("Product " + x, RND.nextInt(1, 30), expenseChartBarSubs[x]);
+            for (int x = 0; x < 3; x++) items[x] = new ChartItem("Expense " + x, 0, expenseChartBarSubs[x]);
             projectsSeries[i] = new ChartItemSeries<>(ChartType.NESTED_BAR, "Quarter " + i, expenseChartBar, Color.TRANSPARENT, items);
         }
         expenseStatsChart.setSeries(projectsSeries);
         expenseStatsChart.setPrefSize(width, height);
-        // expenseStatsChart.addChartEvtObserver(ChartEvt.ANY, System.out::println);
 
         AnchorPane.setRightAnchor(expenseStatsChart, 0.0);
         AnchorPane.setBottomAnchor(expenseStatsChart, 0.0);
@@ -326,6 +325,7 @@ public class ViewStatistics extends ViewController {
         funds.stream().map(f -> (Fund) f).forEach(fund -> augmentedFunds[0] += fund.getAmount());
         double remainingFunds = augmentedFunds[0] - (expenseFunds[0] + expenseFunds[1]);
         double percentageFunds = Math.max(remainingFunds / augmentedFunds[0] * 100, 1);
+        percentageFunds = Double.isNaN(percentageFunds) ? 0 : percentageFunds;
         lblRemainingFundsValue.setText((remainingFunds < 0 ? "-" : "") + "₱" + ProgramUtils.shortenNumber(remainingFunds));
         lblRemainingFundsProposed.setText("-₱" + ProgramUtils.shortenNumber(expenseFunds[0]));
         lblRemainingFundsApproved.setText("-₱" + ProgramUtils.shortenNumber(expenseFunds[1]));
@@ -333,14 +333,20 @@ public class ViewStatistics extends ViewController {
         remainingFundsChart.setValue((2 * percentageFunds) - 100);
     }
     private void displayBarChart() {
-        lblNoDatatoDisplay.setVisible(projects.size() == 0);
+        lblNoDatatoDisplay.setVisible(projects.size() == 0 || expenses.size() == 0);
         int projectSize = 10;
         ChartItemSeries[] projectsBar = new ChartItemSeries[projectSize];
         for (int i = 0; i < projectSize; i++) {
+            ChartItem[] items = new ChartItem[2];
+            for (int x = 0; x < 2; x++) items[x] = new ChartItem(expenseStatus[x], 0.0, expenseChartBarSubs[x]);
+            if (i >= projects.size()) {
+                projectsBar[projectSize - 1 - i] = new ChartItemSeries<>(ChartType.NESTED_BAR, "Empty Project " + i, expenseChartBar, Color.TRANSPARENT, items);
+                ((ChartItem) projectsBar[projectSize - i - 1].getItems().get(0)).setValue(0.0);
+                ((ChartItem) projectsBar[projectSize - i - 1].getItems().get(1)).setValue(0.0);
+                continue;
+            }
             Object p = projects.get(i);
             Project project = (Project) p;
-            ChartItem[] items = new ChartItem[2];
-            for (int x = 0; x < 2; x++) items[x] = new ChartItem(expenseStatus[x], 1.0, expenseChartBarSubs[x]);
             projectsBar[projectSize - 1 - i] = new ChartItemSeries<>(ChartType.NESTED_BAR, project.getTitle(), expenseChartBar, Color.TRANSPARENT, items);
             for (Object e : expenses) {
                 Expense expense = (Expense) e;
@@ -355,6 +361,7 @@ public class ViewStatistics extends ViewController {
 
     // Methods
     private void registerFund(MouseEvent mouseEvent) {
+        if (notAdmin()) return;
         try {
             double fundValue = Double.parseDouble(txfStatisticsFundValue.getText());
             String description = txfStatisticsFundDescription.getText();
@@ -378,7 +385,6 @@ public class ViewStatistics extends ViewController {
         }
     }
     private void generateReport(MouseEvent mouseEvent) {
-        MainEvents.startLoading();
         Map<String, String> queries = new HashMap<>();
 
         String query = "SELECT\n" +
@@ -399,7 +405,6 @@ public class ViewStatistics extends ViewController {
         queries.put("main", query);
         queries.put("Funds", query);
         SpendBUtils.generateReport(6, queries);
-        MainEvents.stopLoading();
 
     }
 

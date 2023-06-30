@@ -38,7 +38,7 @@ FROM
   schooldata sd
 JOIN
   officers o ON o.OFFICER_ID = 2
-JOIN
+ JOIN
   contributors c ON c.OFFICER_ID = o.OFFICER_ID
 JOIN
   projects p ON p.PROJECT_ID = c.PROJECT_ID
@@ -234,7 +234,7 @@ FROM
   schooldata sd
 JOIN
   officers o ON o.OFFICER_ID = 2
-JOIN
+ JOIN
   contributors c ON c.OFFICER_ID = o.OFFICER_ID
 JOIN
   projects p ON p.PROJECT_ID = c.PROJECT_ID
@@ -483,7 +483,7 @@ GROUP BY
 								<font fontName="Arial" size="12"/>
 							</textElement>
 							<textFieldExpression><![CDATA[$F{PROJECT_NO} + ". " + $F{PROJECT_TITLE} + " \n" +
-"Total Expenses: ₱" + String.format("%.2f", $F{TOTAL_EXPENSE})]]></textFieldExpression>
+"Total Expenses: PHP " + String.format("%,.2f", $F{TOTAL_EXPENSE})]]></textFieldExpression>
 						</textField>
 						<textField textAdjust="StretchHeight">
 							<reportElement x="40" y="40" width="430" height="20" uuid="d7d4da34-f62e-4e13-a8be-663cada8a8c1"/>

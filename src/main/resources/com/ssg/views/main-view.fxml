@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.materialfx.controls.MFXProgressBar?>
-<?import java.lang.String?>
-<?import java.net.URL?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import java.net.URL?>
 <AnchorPane prefHeight="671.0" prefWidth="975.0" style="-fx-background-color: rgba(17, 19, 47);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.MainView">
    <children>
       <VBox prefHeight="670.0" prefWidth="975.0">
@@ -78,7 +73,6 @@
                   </HBox>
                </children>
             </AnchorPane>
-            <MFXProgressBar fx:id="pgbRefreshing" prefHeight="7.0" prefWidth="975.0" progress="0.0" styleClass="databaseLoading" />
             <StackPane fx:id="stkView" prefHeight="575.0" prefWidth="975.0" />
          </children>
       </VBox>

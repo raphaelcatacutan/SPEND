@@ -2,17 +2,11 @@ package com.ssg.views;
 
 import com.google.common.eventbus.EventBus;
 import com.ssg.MainActivity;
-import javafx.animation.FadeTransition;
-import javafx.animation.ParallelTransition;
-import javafx.animation.PauseTransition;
-import javafx.animation.TranslateTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.net.URISyntaxException;
 import java.util.Objects;

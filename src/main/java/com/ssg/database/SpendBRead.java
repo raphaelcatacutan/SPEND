@@ -5,12 +5,21 @@ import com.ssg.utils.ProgramUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
 public class SpendBRead {
 
+    /**
+     * Executes a table query to retrieve all rows from the specified table.
+     *
+     * @param table  the name of the table from which to retrieve data
+     * @return a ResultSet object containing the result of the query, or null if an error occurs
+     */
     private static ResultSet tableQuery(String table) {
         try {
             String query = "SELECT * FROM " + table + " ORDER BY UPDATETIME DESC";
@@ -21,20 +30,48 @@ public class SpendBRead {
             return null;
         }
     }
+
+    /**
+     * Reads and retrieves data from the specified table.
+     *
+     * @param table  the name of the table from which to read data
+     * @return an ObservableList containing the retrieved data as objects, or an empty list if an error occurs
+     */
+
     public static ObservableList<Object> readTableData(String table) {
         ResultSet rs = tableQuery(table);
         return getTableData(rs, table);
     }
 
+    /**
+     * Reads and retrieves data from all SpendB tables.
+     *
+     * @return a Map containing table names as keys and corresponding ObservableList objects with table data as values
+     */
     public static Map<String, ObservableList<Object>> readTablesData() {
         Map<String, ObservableList<Object>> tableDataMap = new HashMap<>();
         for (String x : SpendBUtils.SPENDBTABLES) {
-            if (!SpendBUtils.spendBHasChanges(x)) continue;
+            // if (!SpendBUtils.spendBHasChanges(x)) continue;
+            /**
+             * FIXME
+             * Commenting this will not result to any change however it will load all database table, even the ones
+             * that doesn't have changes. The problem is, when deleting a project, project table will be registered
+             * as having change but not the expense table.
+             */
             tableDataMap.put(x, readTableData(x));
         }
         return tableDataMap;
     }
 
+    /**
+     * Checks if a specific ID exists in the specified table and column.
+     *
+     * @param tableName    the name of the table to check for ID existence
+     * @param columnName   the name of the column in which to search for the ID
+     * @param id           the ID value to check for existence
+     * @return true if the ID exists in the specified table and column, false otherwise
+     * @throws SQLException if an error occurs while accessing the database
+     */
     public static boolean checkIfIdExists(String tableName, String columnName, int id) throws SQLException {
         String query = "SELECT COUNT(*) FROM " + tableName + " WHERE " + columnName + " = " + id;
         try (PreparedStatement stmt = SpendBConnection.getConnection().prepareStatement(query); ResultSet rs = stmt.executeQuery(); ) {
@@ -84,7 +121,7 @@ public class SpendBRead {
     }
 
     // Editable
-    private static ObservableList<Object> getTableData (ResultSet rs, String table) {
+    private static ObservableList<Object> getTableData(ResultSet rs, String table) {
         ObservableList<Object> resultList = FXCollections.observableArrayList();
         if (rs == null) return resultList;
         try {
@@ -171,8 +208,6 @@ public class SpendBRead {
                                 rs.getBlob("SCHOOLLOGO"),
                                 rs.getBlob("SSGLOGO"),
                                 rs.getString("REPORTEXPORTLOCATION"),
-                                rs.getBoolean("MANAGEXAMPP"),
-                                rs.getString("XAMPPLOCATION"),
                                 rs.getBoolean("VIEWPDF"),
                                 rs.getBoolean("CURRENTSCHOOLYEAR"),
                                 rs.getString("SSGADVISER"),

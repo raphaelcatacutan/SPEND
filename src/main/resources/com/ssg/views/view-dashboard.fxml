@@ -37,13 +37,13 @@
                               <Image url="@../assets/icons/school-logo.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="lblRecentTitle1" layoutX="65.0" layoutY="12.0" prefHeight="32.0" prefWidth="163.0" text="R. Catacutan" textAlignment="CENTER" textFill="WHITE">
+                        <Label fx:id="lblRecentTitle1" layoutX="65.0" layoutY="12.0" prefHeight="32.0" prefWidth="163.0" text="No Recents" textAlignment="CENTER" textFill="WHITE">
                            <styleClass>
                               <String fx:value="fontregular" />
                               <String fx:value="_19" />
                            </styleClass>
                         </Label>
-                        <Label fx:id="lblRecentSubtitle1" layoutX="66.0" layoutY="28.0" prefHeight="32.0" prefWidth="163.0" styleClass="fontregular" text="Official" textAlignment="CENTER" textFill="WHITE">
+                        <Label fx:id="lblRecentSubtitle1" layoutX="66.0" layoutY="28.0" prefHeight="32.0" prefWidth="163.0" styleClass="fontregular" text="No Recents" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font size="13.0" />
                            </font>
@@ -60,13 +60,13 @@
                               <Image url="@../assets/icons/school-logo.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="lblRecentTitle2" layoutX="65.0" layoutY="12.0" prefHeight="32.0" prefWidth="163.0" text="Feeding Program" textAlignment="CENTER" textFill="WHITE">
+                        <Label fx:id="lblRecentTitle2" layoutX="65.0" layoutY="12.0" prefHeight="32.0" prefWidth="163.0" text="No Recents" textAlignment="CENTER" textFill="WHITE">
                            <styleClass>
                               <String fx:value="fontregular" />
                               <String fx:value="_19" />
                            </styleClass>
                         </Label>
-                        <Label fx:id="lblRecentSubtitle2" layoutX="66.0" layoutY="28.0" prefHeight="32.0" prefWidth="163.0" styleClass="fontregular" text="Program" textAlignment="CENTER" textFill="WHITE">
+                        <Label fx:id="lblRecentSubtitle2" layoutX="66.0" layoutY="28.0" prefHeight="32.0" prefWidth="163.0" styleClass="fontregular" text="No Recents" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font size="13.0" />
                            </font>
@@ -83,13 +83,13 @@
                               <Image url="@../assets/icons/school-logo.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="lblRecentTitle3" layoutX="65.0" layoutY="12.0" prefHeight="32.0" prefWidth="163.0" text="Reuse, Reduce, Recycle" textAlignment="CENTER" textFill="WHITE">
+                        <Label fx:id="lblRecentTitle3" layoutX="65.0" layoutY="12.0" prefHeight="32.0" prefWidth="163.0" text="No Recents" textAlignment="CENTER" textFill="WHITE">
                            <styleClass>
                               <String fx:value="fontregular" />
                               <String fx:value="_19" />
                            </styleClass>
                         </Label>
-                        <Label fx:id="lblRecentSubtitle3" layoutX="66.0" layoutY="28.0" prefHeight="32.0" prefWidth="163.0" styleClass="fontregular" text="Platform" textAlignment="CENTER" textFill="WHITE">
+                        <Label fx:id="lblRecentSubtitle3" layoutX="66.0" layoutY="28.0" prefHeight="32.0" prefWidth="163.0" styleClass="fontregular" text="No Recents" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font size="13.0" />
                            </font>
@@ -121,7 +121,7 @@
                         <String fx:value="_23" />
                      </styleClass>
                   </Label>
-                  <Label fx:id="lblNearestEvent" alignment="BOTTOM_LEFT" maxHeight="70.0" text="Hello World" textFill="WHITE" wrapText="true">
+                  <Label fx:id="lblNearestEvent" alignment="BOTTOM_LEFT" maxHeight="70.0" text="No Event" textFill="WHITE" wrapText="true">
                      <styleClass>
                         <String fx:value="fontregular" />
                         <String fx:value="_27" />

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXProgressBar?>
-<?import java.lang.String?>
-<?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
+<?import java.lang.*?>
+<?import java.net.URL?>
 <AnchorPane fx:id="anpSplashScreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="309.0" prefWidth="550.0" styleClass="background5" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssg.views.SplashScreen">
    <children>
       <ImageView fitHeight="402.0" fitWidth="550.0" layoutX="16.0" layoutY="-26.0" opacity="0.4" pickOnBounds="true" preserveRatio="true" rotate="-60.8">
@@ -38,8 +37,8 @@
             <String fx:value="_17" />
          </styleClass>
       </Label>
-      <MFXProgressBar fx:id="pgbSplashProgress" layoutX="103.0" layoutY="232.0" prefHeight="6.0" prefWidth="355.0" progress="0.0" />
-      <Label fx:id="lblProgressStatus" alignment="CENTER_RIGHT" layoutX="103.0" layoutY="243.0" prefHeight="16.0" prefWidth="355.0" stylesheets="@../css/fonts.css" text="Progress Status" textAlignment="RIGHT">
+      <MFXProgressBar fx:id="pgbSplashProgress" layoutX="103.0" layoutY="232.0" prefHeight="6.0" prefWidth="355.0" progress="0.01" />
+      <Label fx:id="lblProgressStatus" alignment="CENTER_RIGHT" layoutX="103.0" layoutY="243.0" prefHeight="16.0" prefWidth="355.0" stylesheets="@../css/fonts.css" text="Intializing Application" textAlignment="RIGHT">
          <styleClass>
             <String fx:value="yellowText" />
             <String fx:value="fontregular" />

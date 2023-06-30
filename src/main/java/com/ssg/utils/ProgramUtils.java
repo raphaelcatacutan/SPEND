@@ -1,16 +1,8 @@
 package com.ssg.utils;
 
-import com.ssg.MainActivity;
-import com.ssg.database.SpendBUtils;
-import com.ssg.views.ControllerUtils;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.application.Platform;
-import javafx.scene.control.Alert;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -20,15 +12,12 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URI;
 import java.nio.file.Paths;
-import java.sql.Date;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Arrays;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 public class ProgramUtils {
@@ -39,43 +28,6 @@ public class ProgramUtils {
     public static String SPENDDATA = Paths.get(USERROAM, "Spend", "appdata").toString();
     public static String CONFIGFILE = SPENDDATA + "/config.json";
 
-    public static void main(String[] args) {
-        System.out.println(readConfig("startXAMPP"));
-    }
-
-    /**
-     * Gets a property from a property file
-     *
-     * @param propertyFile The property file to read
-     * @param property     The property to access
-     * @return The property value or empty string
-     */
-    public static String getProperty(String propertyFile, String property) {
-        Properties prop = new Properties();
-        String propertiesDir = "src/main/resources/com/ssg/properties/";
-        String fileLoad = propertiesDir + propertyFile + ".properties";
-        try {
-            FileInputStream input = new FileInputStream(fileLoad);
-            prop.load(input);
-        } catch (IOException e) {
-            System.out.println("Error loading property file: " + fileLoad);
-            return "";
-        }
-
-        String value = prop.getProperty(property);
-        return (value != null) ? value : "";
-    }
-
-    /**
-     * Gets a property from `configs.properties`
-     *
-     * @param property The property to access
-     * @return The property value or empty string
-     */
-    public static String getProperty(String property) {
-        return getProperty("configs", property);
-    }
-
     public static void separator(int length) {
         for (int i = 0; i < length; i++) System.out.print("-");
         System.out.println();
@@ -83,10 +35,10 @@ public class ProgramUtils {
 
 
     /**
-     * Parse the name parts from a full anme
+     * Parses a full name and separates it into first name, middle initial, and last name.
      *
-     * @param fullName The fullname
-     * @return The array of parsed name parts {FirstName, MiddleInitial, LastName}
+     * @param fullName The full name to be parsed.
+     * @return An array of strings containing the first name, middle initial, and last name in that order.
      */
     public static String[] parseName(String fullName) {
         String[] nameParts = fullName.split(" ");
@@ -111,6 +63,12 @@ public class ProgramUtils {
         return new String[]{firstName.toString(), middleInitial.toString(), lastName.toString()};
     }
 
+    /**
+     * Parses a string value into a Double.
+     *
+     * @param value The string value to be parsed.
+     * @return The parsed Double value, or null if the parsing fails.
+     */
     public static Double parseDouble(String value) {
         try {
             return Double.parseDouble(value);
@@ -119,6 +77,12 @@ public class ProgramUtils {
         }
     }
 
+    /**
+     * Parses a string value into an Integer.
+     *
+     * @param value The string value to be parsed.
+     * @return The parsed Integer value, or null if the parsing fails.
+     */
     public static Integer parseInt(String value) {
         try {
             value = value.split("\\.")[0];
@@ -128,6 +92,12 @@ public class ProgramUtils {
         }
     }
 
+    /**
+     * Prints messages or objects to the console with a specified type and optional arguments.
+     *
+     * @param type The type of the print message. 1 for LOG, 2 for ERROR, and 3 for TEST.
+     * @param args The arguments to be printed.
+     */
     public static void print(int type, Object... args) {
         String dateTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS").format(LocalDateTime.now());
         String printType = switch (type) {
@@ -142,11 +112,17 @@ public class ProgramUtils {
         if (args.length > 1) ProgramUtils.separator(30);
     }
 
-    public static void callDelay(double delay, MethodArgument method) {
-        KeyFrame loadResource = new KeyFrame(Duration.seconds(delay), a -> Platform.runLater(method::callMethod));
-        new Timeline(loadResource).play();
-    }
-
+    /**
+     * Matches a string input against a pattern using wildcard characters (%) and single character placeholders (_).
+     *
+     * @param input   The input string to be matched.
+     * @param pattern The pattern to match against, which may contain wildcard characters (%) and single character placeholders (_).
+     * @return An integer indicating the match result:
+     *         - 1 if the input is an exact match to the pattern.
+     *         - 2 if the input starts with the pattern and matches the remaining characters according to the pattern.
+     *         - 3 if the input matches the pattern according to the wildcard characters and single character placeholders.
+     *         - 4 if the input does not match the pattern.
+     */
     public static int stringMatch(String input, String pattern) {
         String regex = pattern.replace("%", ".*").replace("_", ".");
         Pattern patternObj = Pattern.compile(regex);
@@ -156,6 +132,13 @@ public class ProgramUtils {
         else return 4;
     }
 
+    /**
+     * Finds the lowest number among the provided array of integers.
+     *
+     * @param numbers The array of numbers from which to find the lowest number.
+     * @return The lowest number in the array.
+     * @throws IllegalArgumentException if the array is empty
+     */
     public static int lowestNumber(int... numbers) {
         if (numbers.length == 0) throw new IllegalArgumentException("The array is empty.");
         int lowest = numbers[0];
@@ -164,10 +147,10 @@ public class ProgramUtils {
     }
 
     /**
-     * Abbreviate a number
+     * Shortens a given number by appending an appropriate suffix (K, M, B, T) to represent a large value.
      *
-     * @param number The number
-     * @return The string of shorter representation for the number
+     * @param number The number to be shortened.
+     * @return The shortened representation of the number with an appropriate suffix.
      * @author hapiya1
      * @author andreaestudillo
      */
@@ -183,10 +166,10 @@ public class ProgramUtils {
     }
 
     /**
-     * Abbreviate a number
+     * Shortens a given number by appending an appropriate suffix (K, M, B, T) to represent a large value.
      *
-     * @param number The number
-     * @return The string of shorter representation for the number
+     * @param number The number to be shortened.
+     * @return The shortened representation of the number with an appropriate suffix.
      * @author hapiya1
      * @author andreaestudillo
      */
@@ -201,6 +184,11 @@ public class ProgramUtils {
         return String.format("%.0f%s", num, suffixes[index]);
     }
 
+    /**
+     * Generates a current timestamp as a formatted string to be used as a file name.
+     *
+     * @return The current timestamp as a formatted string in the format "yyyy-MM-dd HH.mm.ss".
+     */
     public static String currentTimeStampFileName() {
         LocalDateTime currentDateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH.mm.ss");
@@ -210,7 +198,7 @@ public class ProgramUtils {
     /**
      * Formats a double in currency
      *
-     * @param amount The currency
+     * @param amount The currency to format
      * @author CJ Belen
      */
     public static String formatCurrency(Double amount) {
@@ -297,6 +285,10 @@ public class ProgramUtils {
         }
     }
 
+    /**
+     * Opens the URL
+     * @param link the link to the url
+     */
     public static void browseURL(String link) {
         try {
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -375,6 +367,11 @@ public class ProgramUtils {
         }
     }
 
+    /**
+     * Reads the value associated with the key in the configuration file
+     * @param key The key to search for
+     * @return The value of the key
+     */
     public static Object readConfig(String key) {
         Object value = null;
         try {
@@ -403,7 +400,12 @@ public class ProgramUtils {
         return value;
     }
 
-
+    /**
+     * Displays a dialog message box with the specified title and content.
+     *
+     * @param title   The title of the dialog box.
+     * @param content The content message to be displayed in the dialog box.
+     */
     public static void showDialogMessage(String title, String content) {
         try {
             // Set the look and feel to the system default

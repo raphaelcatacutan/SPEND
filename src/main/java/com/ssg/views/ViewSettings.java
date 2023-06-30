@@ -2,10 +2,13 @@ package com.ssg.views;
 
 
 import com.google.common.eventbus.Subscribe;
-import com.ssg.database.*;
-import com.ssg.database.models.*;
+import com.ssg.database.SpendBRead;
+import com.ssg.database.SpendBUpdate;
+import com.ssg.database.models.ModelValues;
+import com.ssg.database.models.User;
 import com.ssg.utils.ProgramUtils;
 import com.ssg.utils.RuntimeData;
+import com.ssg.views.animations.ViewsAnimations;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -70,6 +73,7 @@ public class ViewSettings extends ViewController {
 
     // About
     private final HashMap<Label, AnchorPane> settingsView = new HashMap<>();
+    private AnchorPane lastFocus = null;
 
     @Override
     public void initialize() {
@@ -141,6 +145,10 @@ public class ViewSettings extends ViewController {
     }
     public void navigate(Label navigator) {
         AnchorPane viewer = settingsView.get(navigator);
+        if (lastFocus == viewer) return;
+        if (lastFocus != null) ViewsAnimations.fadeOut(lastFocus);
+        ViewsAnimations.fadeIn(viewer);
+        lastFocus = viewer;
         for (Label nav: settingsView.keySet()) {
             if (navigator == nav) continue;
             settingsView.get(nav).setVisible(false);
@@ -173,8 +181,6 @@ public class ViewSettings extends ViewController {
                     null,
                     null,
                     null,
-                    null,
-                    null,
                     null
             );
             SpendBUpdate.updateSchoolData(newSettings, true, false);
@@ -193,14 +199,13 @@ public class ViewSettings extends ViewController {
         try {
             ProgramUtils.updateConfig("startXAMPP", tgbSettingsPreferenceXAMPPManager.isSelected());
         } catch (Exception e) {
+            MainEvents.showDialogMessage("Unexpected Error", "Unable to update your settings. Please try again later or see the exception for further details", "Dismiss");
             e.printStackTrace();
         }
     }
     private void currentSY(MouseEvent mouseEvent) {
         try {
             Object[] newSettings = ModelValues.newSchoolData(
-                    null,
-                    null,
                     null,
                     null,
                     null,
@@ -213,14 +218,13 @@ public class ViewSettings extends ViewController {
             );
             SpendBUpdate.updateSchoolData(newSettings, true, true);
         } catch (Exception e) {
+            MainEvents.showDialogMessage("Unexpected Error", "Unable to update your settings. Please try again later or see the exception for further details", "Dismiss");
             e.printStackTrace();
         }
     }
     private void viewPDF(MouseEvent mouseEvent) {
         try {
             Object[] newSettings = ModelValues.newSchoolData(
-                    null,
-                    null,
                     null,
                     null,
                     null,
@@ -233,6 +237,7 @@ public class ViewSettings extends ViewController {
             );
             SpendBUpdate.updateSchoolData(newSettings, true, false);
         } catch (Exception e) {
+            MainEvents.showDialogMessage("Unexpected Error", "Unable to update settings. Please try again later or see the exception for further details", "Dismiss");
             e.printStackTrace();
         }
     }
@@ -259,13 +264,12 @@ public class ViewSettings extends ViewController {
                     null,
                     null,
                     null,
-                    null,
-                    null,
                     newValue
             );
             SpendBUpdate.updateSchoolData(newSettings, true, false);
             MainEvents.showDialogMessage("Update Successful", "The parameter \"Proposal Body\" has been successfully updated for generating reports. The new value will be reflected in the reports generated from now on.");
         } catch (Exception e) {
+            MainEvents.showDialogMessage("Unexpected Error", "Unable to change the proposal body. Please try again later or see the exception for further details", "Dismiss");
             e.printStackTrace();
         }
     }
@@ -282,8 +286,6 @@ public class ViewSettings extends ViewController {
         txfSettingsReportTemplatesAdviser.setPromptText(newValue);
         try {
             Object[] newSettings = ModelValues.newSchoolData(
-                    null,
-                    null,
                     null,
                     null,
                     null,
@@ -320,14 +322,13 @@ public class ViewSettings extends ViewController {
                     null,
                     null,
                     null,
-                    null,
-                    null,
                     newValue,
                     null
             );
             SpendBUpdate.updateSchoolData(newSettings, true, false);
             MainEvents.showDialogMessage("Update Successful", "The parameter \"Principal Name\" has been successfully updated for generating reports. The new value will be reflected in the reports generated from now on.");
         } catch (Exception e) {
+            MainEvents.showDialogMessage("Unexpected Error", "Unable to change the school principal. Please try again later or see the exception for further details", "Dismiss");
             e.printStackTrace();
         }
     }
@@ -359,6 +360,7 @@ public class ViewSettings extends ViewController {
             refreshView(false);
             MainEvents.showDialogMessage("Update Successful", "Your account name has been successfully updated. The new value will be reflected in the reports and other places from now on.");
         } catch (Exception e) {
+            MainEvents.showDialogMessage("Unexpected Error", "Unable to change your account name. Please try again later or see the exception for further details", "Dismiss");
             e.printStackTrace();
         }
     }
@@ -391,6 +393,7 @@ public class ViewSettings extends ViewController {
             SpendBUpdate.updateUser(newAccount, true, false, "USER_ID = " + RuntimeData.USER.getUser_id());
             MainEvents.showDialogMessage("Update Successful", "Your account username has been successfully updated. Use this for signing in the next time");
         } catch (Exception e) {
+            MainEvents.showDialogMessage("Unexpected Error", "Unable to change your account username. Please try again later or see the exception for further details", "Dismiss");
             e.printStackTrace();
         }
     }
@@ -400,7 +403,6 @@ public class ViewSettings extends ViewController {
             String newValue = txfSettingsYourAccountPassword.getText();
             txfSettingsYourAccountPassword.setText("");
             lblSettingsTitle.requestFocus();
-            System.out.println();
             boolean empty = newValue.isEmpty();
             if (empty) {
                 MainEvents.showDialogMessage("Empty Input", "The password field cannot be left empty. Please enter a valid input to proceed.");
@@ -417,6 +419,7 @@ public class ViewSettings extends ViewController {
             SpendBUpdate.updateUser(newAccount, true, false, "USER_ID = " + RuntimeData.USER.getUser_id());
             MainEvents.showDialogMessage("Update Successful", "Your account password has been successfully updated. Use this for signing in the next time");
         } catch (Exception e) {
+            MainEvents.showDialogMessage("Unexpected Error", "Unable to change the school logo. Please try again later or see the exception for further details", "Dismiss");
             e.printStackTrace();
         }
     }
@@ -424,9 +427,9 @@ public class ViewSettings extends ViewController {
     // Administrator
     private void accountAdmin(MouseEvent mouseEvent) {
         // Checks who are the admins
-        // FIXME Can't fetch newly registered accounts
         if (notAdmin()) return;
         // Filters users that is the signed account
+        users = SpendBRead.readTableData("USERS");
         Predicate<Object> filterUsers = (u) -> ((User) u).getUser_id() != RuntimeData.USER.getUser_id() && !Objects.equals(((User) u).getUsername(), "admin");
         ObservableList<Object> filteredUsers = users.filtered(filterUsers);
         Object[][] aArgs = {new Object[0], filteredUsers.toArray(new Object[0])};
@@ -434,15 +437,14 @@ public class ViewSettings extends ViewController {
         ControllerUtils.triggerEvent("showDialog", sArgs, aArgs);
     }
     private void ssgLogo(MouseEvent mouseEvent) {
-        String selectedImage = ProgramUtils.chooseFile(ControllerUtils.getStage(lblSettingsTitle), "Choose an Image", "png", "jpg", "jpeg");
         if (notAdmin()) return;
+        String selectedImage = ProgramUtils.chooseFile(ControllerUtils.getStage(lblSettingsTitle), "Choose an Image", "png", "jpg", "jpeg");
+        if (selectedImage == null) return;
         try {
             Object[] newSettings = ModelValues.newSchoolData(
                     null,
                     null,
                     selectedImage,
-                    null,
-                    null,
                     null,
                     null,
                     null,
@@ -454,18 +456,18 @@ public class ViewSettings extends ViewController {
             MainEvents.showDialogMessage("Update Successful", "A new SSG Logo has been successfully updated. This will appear in reports or other places");
 
         } catch (Exception e) {
+            MainEvents.showDialogMessage("Unexpected Error", "Unable to change the SSG logo. Please try again later or see the exception for further details", "Dismiss");
             e.printStackTrace();
         }
     }
     private void schoolLogo(MouseEvent mouseEvent) {
-        String selectedImage = ProgramUtils.chooseFile(ControllerUtils.getStage(lblSettingsTitle), "Choose an Image", "png", "jpg", "jpeg");
         if (notAdmin()) return;
+        String selectedImage = ProgramUtils.chooseFile(ControllerUtils.getStage(lblSettingsTitle), "Choose an Image", "png", "jpg", "jpeg");
+        if (selectedImage == null) return;
         try {
             Object[] newSettings = ModelValues.newSchoolData(
                     null,
                     selectedImage,
-                    null,
-                    null,
                     null,
                     null,
                     null,
@@ -478,6 +480,7 @@ public class ViewSettings extends ViewController {
             MainEvents.showDialogMessage("Update Successful", "A new School Logo has been successfully updated. This will appear in reports or other places");
 
         } catch (Exception e) {
+            MainEvents.showDialogMessage("Unexpected Error", "Unable to change the school logo. Please try again later or see the exception for further details", "Dismiss");
             e.printStackTrace();
         }
     }
@@ -509,19 +512,17 @@ public class ViewSettings extends ViewController {
                     null,
                     null,
                     null,
-                    null,
-                    null,
                     null
             );
             SpendBUpdate.updateSchoolData(newSchoolData, true, true);
             lblSettingsAdministratorSchoolYear.setText("Current School Year: " + schoolYear + " - " + (schoolYear + 1));
         } catch (Exception e) {
+            MainEvents.showDialogMessage("School Year Error", "Unable to add a new school year. Please try again later or see the exception for further details", "Dismiss");
             throw new RuntimeException(e);
         }
     }
     @Subscribe public void userChoices(ControllerEvent event) throws Exception {
         if (!Objects.equals(event.getEventId(), "usersChoices")) return;
-        MainEvents.startLoading();
 
         // Filters users that is the signed account
         Predicate<Object> filterUsers = (u) -> ((User) u).getUser_id() != RuntimeData.USER.getUser_id() && !Objects.equals(((User) u).getUsername(), "admin");

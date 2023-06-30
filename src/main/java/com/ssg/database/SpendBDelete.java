@@ -1,6 +1,7 @@
 package com.ssg.database;
 
 import com.ssg.views.ControllerUtils;
+import com.ssg.views.MainEvents;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,10 +9,12 @@ import java.sql.SQLException;
 
 public class SpendBDelete {
     /**
-     * Deletes data from a database table
-     * @param table The table
-     * @param allFilters If all filters should be met
-     * @param filters Array of string filters
+     * Deletes data from the specified table based on the provided filters.
+     *
+     * @param table        the name of the table from which to delete data
+     * @param allFilters   a boolean flag indicating whether all filters should be applied using the "AND" operator (true),
+     *                     or any filter should be applied using the "OR" operator (false)
+     * @param filters      an array of filters to apply for deleting data (optional)
      */
     public static void deleteTableData(String table, boolean allFilters, String... filters) {
         Connection conn = SpendBConnection.getConnection();
@@ -30,6 +33,7 @@ public class SpendBDelete {
             SpendBUtils.spendBUpdate(true, table);
             ControllerUtils.triggerEvent("refreshViews");
         } catch (SQLException e) {
+            MainEvents.showDialogMessage("Unexpected Error", "Database operation failed. Please try again later or see the exception for further details", "Dimiss");
             throw new RuntimeException(e);
         }
     }

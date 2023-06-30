@@ -23,13 +23,13 @@ public class DialogMessage {
         resetDialog();
     }
     private void resetDialog() {
-        anpDialogMessage.setVisible(false);
         for (Button x: dialogButtons) {
             x.setVisible(false);
             x.setOnMouseClicked(null);
         }
     }
     public void setData(String title, String description, String... buttons) {
+        resetDialog();
         lblDialogMessageTitle.setText(title);
         lblDialogMessageDescription.setText(description);
 
@@ -40,7 +40,6 @@ public class DialogMessage {
             dialogButtons[x].setVisible(true);
             dialogButtons[x].setOnMouseClicked(event -> {
                 ControllerUtils.triggerEvent("hideDialog", textButton);
-                resetDialog();
             });
         }
     }

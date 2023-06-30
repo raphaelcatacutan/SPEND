@@ -4,11 +4,8 @@ import com.ssg.database.SpendBRead;
 import com.ssg.database.SpendBUtils;
 import com.ssg.database.models.SchoolData;
 import com.ssg.utils.RuntimeData;
-import javafx.animation.FadeTransition;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Duration;
 
 import java.util.Map;
 
@@ -30,7 +27,6 @@ public abstract class ViewController {
     public void onNavigate() {
 
     }
-
     public void refreshView(boolean loadDB) {
 
     }
@@ -52,10 +48,6 @@ public abstract class ViewController {
                 case "FUNDS" -> funds = tableDataMap.get(key);
             }
         }
-    }
-    public void forceRefreshView() {
-        SpendBUtils.spendBUpdate(true, DBNEEDED);
-        refreshView(true);
     }
     public boolean notAdmin() {
         if (RuntimeData.USER.isAdmin()) return false;

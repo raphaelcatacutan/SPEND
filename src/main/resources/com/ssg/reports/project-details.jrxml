@@ -435,7 +435,7 @@ WHERE
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" size="12"/>
 								</textElement>
-								<textFieldExpression><![CDATA[String.format("%.2f", $F{QUANTITY})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[String.format("%,.2f", $F{QUANTITY})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -478,10 +478,10 @@ WHERE
 									<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 								</reportElement>
 								<box padding="5"/>
-								<textElement textAlignment="Left" verticalAlignment="Middle">
+								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" size="12"/>
 								</textElement>
-								<textFieldExpression><![CDATA["₱" + String.format("%.2f", $F{UNITPRICE})]]></textFieldExpression>
+								<textFieldExpression><![CDATA["PHP " + String.format("%,.2f", $F{UNITPRICE})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -524,10 +524,10 @@ WHERE
 									<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 								</reportElement>
 								<box padding="5"/>
-								<textElement textAlignment="Left" verticalAlignment="Middle">
+								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" size="12"/>
 								</textElement>
-								<textFieldExpression><![CDATA["₱" + String.format("%.2f", $F{TOTALPRICE})]]></textFieldExpression>
+								<textFieldExpression><![CDATA["PHP " + String.format("%,.2f", $F{TOTALPRICE})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>

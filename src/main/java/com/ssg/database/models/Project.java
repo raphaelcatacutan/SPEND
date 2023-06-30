@@ -1,7 +1,7 @@
 package com.ssg.database.models;
 
-import java.sql.Timestamp;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Project {
     private int project_id;

@@ -2,14 +2,19 @@ package com.ssg.views;
 
 import com.google.common.eventbus.Subscribe;
 import com.ssg.database.*;
-import com.ssg.database.models.*;
+import com.ssg.database.models.Contributors;
+import com.ssg.database.models.Expense;
+import com.ssg.database.models.Officer;
+import com.ssg.database.models.Project;
 import com.ssg.utils.DateUtils;
 import com.ssg.utils.ProgramUtils;
 import com.ssg.utils.RuntimeData;
-import com.ssg.views.animations.AnimationUtils;
+import com.ssg.views.animations.ViewsAnimations;
 import com.ssg.views.templates.OfficersProfileBox;
 import com.ssg.views.templates.OfficersProjectBox;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -22,7 +27,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.event.Event;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
@@ -52,6 +56,7 @@ public class ViewOfficers extends ViewController {
     @FXML private Button btnOfficerDetailsDeleteOfficer;
 
     @FXML private AnchorPane anpOfficerEditOfficer;
+    @FXML private AnchorPane anpOfficerForm;
     @FXML private Label lblEditOfficerDialogTitle;
     @FXML private TextField txfEditOfficerName;
     @FXML private TextArea txaEditOfficerDescription;
@@ -115,62 +120,70 @@ public class ViewOfficers extends ViewController {
 
     // Officer List
     public void displayOfficers() {
-        int column = 0;
-        int row = 0;
-        final int COLUMNLIMIT = 3;
-        gpnOfficersList.getChildren().clear();
-        searchedOfficers.clear();
-        try {
-            ArrayList<Officer> filteredOfficer = new ArrayList<>();
-            ArrayList<Officer> strongFilterOfficer = new ArrayList<>();
-            ArrayList<Officer> moderateFilterOfficer = new ArrayList<>();
-            ArrayList<Officer> weakFilterOfficer = new ArrayList<>();
+        Thread thread = new Thread(() -> {
+            Platform.runLater(() -> {
+                int column = 0;
+                int row = 0;
+                final int COLUMNLIMIT = 3;
+                gpnOfficersList.getChildren().clear();
+                searchedOfficers.clear();
+                try {
+                    ArrayList<Officer> filteredOfficer = new ArrayList<>();
+                    ArrayList<Officer> strongFilterOfficer = new ArrayList<>();
+                    ArrayList<Officer> moderateFilterOfficer = new ArrayList<>();
+                    ArrayList<Officer> weakFilterOfficer = new ArrayList<>();
 
-            for (Object o: officers) {
-                Officer officer = (Officer) o;
-                if (schoolData.isCurrentSchoolYear() && schoolData.getSchoolYear() > DateUtils.getYear(officer.getOfficer_cd())) continue;
-                int matchStrength = ProgramUtils.lowestNumber(
-                        ProgramUtils.stringMatch(officer.getLastName(), "%" + searchOfficerPattern + "%"), // Last Name
-                        ProgramUtils.stringMatch(officer.getFirstname(), "%" + searchOfficerPattern + "%"), // First Name
-                        ProgramUtils.stringMatch(officer.getPosition(), searchOfficerPattern + "%"), // Position
-                        ProgramUtils.stringMatch(officer.getStrand(), searchOfficerPattern), // Strand
-                        ProgramUtils.stringMatch(String.valueOf(officer.getYear()), searchOfficerPattern) // Term
-                );
-                switch (matchStrength) {
-                    case 1 -> strongFilterOfficer.add(officer);
-                    case 2 -> moderateFilterOfficer.add(officer);
-                    case 3 -> weakFilterOfficer.add(officer);
+                    for (Object o : officers) {
+                        Officer officer = (Officer) o;
+                        if (schoolData.isCurrentSchoolYear() && schoolData.getSchoolYear() > DateUtils.getYear(officer.getOfficer_cd()))
+                            continue;
+                        int matchStrength = ProgramUtils.lowestNumber(
+                                ProgramUtils.stringMatch(officer.getLastName(), "%" + searchOfficerPattern + "%"), // Last Name
+                                ProgramUtils.stringMatch(officer.getFirstname(), "%" + searchOfficerPattern + "%"), // First Name
+                                ProgramUtils.stringMatch(officer.getPosition(), searchOfficerPattern + "%"), // Position
+                                ProgramUtils.stringMatch(officer.getStrand(), searchOfficerPattern), // Strand
+                                ProgramUtils.stringMatch(String.valueOf(officer.getYear()), searchOfficerPattern) // Term
+                        );
+                        switch (matchStrength) {
+                            case 1 -> strongFilterOfficer.add(officer);
+                            case 2 -> moderateFilterOfficer.add(officer);
+                            case 3 -> weakFilterOfficer.add(officer);
+                        }
+                        if (matchStrength != 4) searchedOfficers.add(officer.getOfficer_id());
+                    }
+                    filteredOfficer.addAll(strongFilterOfficer);
+                    filteredOfficer.addAll(moderateFilterOfficer);
+                    filteredOfficer.addAll(weakFilterOfficer);
+
+                    pneViewOfficerNoOfficer.setVisible(filteredOfficer.isEmpty());
+                    for (Officer officer : filteredOfficer) {
+                        FXMLLoader officerProfileLoader = ControllerUtils.getLoader("templates/officers-profile-box");
+                        AnchorPane officerProfileBox = officerProfileLoader.load();
+                        OfficersProfileBox officerProfileController = officerProfileLoader.getController();
+
+                        Predicate<Object> filterContributions = (c) -> ((Contributors) c).getOfficer_id() == officer.getOfficer_id();
+                        ObservableList<Object> contributorsID = contributors.filtered(filterContributions);
+                        Predicate<Object> filterProject = (p) -> contributorsID.stream().anyMatch(c -> ((Contributors) c).getProject_id() == ((Project) p).getProject_id());
+                        ObservableList<Object> officerProjects = projects.filtered(filterProject);
+
+                        officerProfileController.setData(officer, officerProjects.size());
+
+                        officerProfileBox.setOnMouseClicked(event -> {
+                            focusedOfficer = officer;
+                            displayOfficerDetails();
+                        });
+                        gpnOfficersList.add(officerProfileBox, column++, row);
+                        GridPane.setMargin(officerProfileBox, new Insets(5));
+                        if (column != COLUMNLIMIT) continue;
+                        column = 0;
+                        ++row;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                if (matchStrength != 4) searchedOfficers.add(officer.getOfficer_id());
-            }
-            filteredOfficer.addAll(strongFilterOfficer);
-            filteredOfficer.addAll(moderateFilterOfficer);
-            filteredOfficer.addAll(weakFilterOfficer);
-
-            pneViewOfficerNoOfficer.setVisible(filteredOfficer.isEmpty());
-            for (Officer officer : filteredOfficer) {
-                FXMLLoader officerProfileLoader = ControllerUtils.getLoader("templates/officers-profile-box");
-                AnchorPane officerProfileBox = officerProfileLoader.load();
-                OfficersProfileBox officerProfileController = officerProfileLoader.getController();
-
-                Predicate<Object> filterProject = (c) -> ((Contributors) c).getOfficer_id() == officer.getOfficer_id();
-                ObservableList<Object> officerProjects = contributors.filtered(filterProject);
-
-                officerProfileController.setData(officer, officerProjects.size());
-
-                officerProfileBox.setOnMouseClicked(event -> {
-                    focusedOfficer = officer;
-                    displayOfficerDetails();
-                });
-                gpnOfficersList.add(officerProfileBox, column++, row);
-                GridPane.setMargin(officerProfileBox, new Insets(5));
-                if (column != COLUMNLIMIT) continue;
-                column = 0;
-                ++row;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            });
+        });
+        thread.start();
     }
     public void searchOfficers(KeyEvent event) {
         if (event.getCode() != KeyCode.ENTER) return;
@@ -179,7 +192,6 @@ public class ViewOfficers extends ViewController {
         refreshView(false);
     }
     public void generateOfficersReport(MouseEvent mouseEvent) {
-        MainEvents.startLoading();
         String filter = SpendBUtils.spendBFilterID("O.OFFICER_ID", true, searchedOfficers.stream().mapToInt(Integer::intValue).toArray());
         Map<String, String> queries = new HashMap<>();
 
@@ -210,7 +222,22 @@ public class ViewOfficers extends ViewController {
         queries.put("main", query);
         queries.put("Officers", query);
         SpendBUtils.generateReport(3, queries);
-        MainEvents.stopLoading();
+    }
+    public void quickAddOfficer() {
+        ViewsAnimations.unfocusModel(anpOfficerProfile);
+        focusedOfficer = null;
+        cbxEditOfficerStrand.setValue(null);
+
+        txfEditOfficerName.setText("");
+        txaEditOfficerDescription.setText("");
+        txfEditOfficerPosition.setText("");
+        txfEditOfficerTerm.setText("");
+        cbxEditOfficerStrand.setValue(null);
+
+        btnEditOfficerAction1.setOnMouseClicked(null);
+        btnEditOfficerAction2.setOnMouseClicked(null);
+        btnEditOfficerAction3.setOnMouseClicked(null);
+        officerDialogEditor("add");
     }
     public void clearSearches(MouseEvent ignored) {
         txfOfficerListSearchOfficer.setText("");
@@ -225,7 +252,8 @@ public class ViewOfficers extends ViewController {
             officerProfileBack();
             return;
         }
-        anpOfficerProfile.setVisible(true);
+        officerDialogEditor("hide");
+        ViewsAnimations.focusModel(anpOfficerProfile);
         vbxProjectsList.getChildren().clear();
         txfOfficerProfileName.setText(focusedOfficer.getFullName());
         txfOfficerProfilePosition.setText(focusedOfficer.getPosition());
@@ -258,13 +286,11 @@ public class ViewOfficers extends ViewController {
         }
     }
     public void officerProfileBack() {
-        vbxProjectsList.getChildren().clear();
-        anpOfficerProfile.setVisible(false);
         officerDialogEditor("hide");
+        ViewsAnimations.unfocusModel(anpOfficerProfile);
         focusedOfficer = null;
     }
     public void generateOfficerReport(MouseEvent event) {
-        MainEvents.startLoading();
         Map<String, String> queries = new HashMap<>();
 
         String query = "SELECT\n" +
@@ -331,9 +357,8 @@ public class ViewOfficers extends ViewController {
                 "  p.UPDATETIME";
 
         queries.put("main", query);
-        queries.put("Officers", query);
+        queries.put("Projects", query);
         SpendBUtils.generateReport(2, queries);
-        MainEvents.stopLoading();
     }
     private void deleteOfficerConfirm(MouseEvent event) {
         if (notAdmin()) return;
@@ -344,15 +369,18 @@ public class ViewOfficers extends ViewController {
     // Officer Editor
     public void officerDialogEditor(String mode) {
         if (!Objects.equals(mode, "hide") && notAdmin()) return;
-        anpOfficerEditOfficer.setVisible(!Objects.equals(mode, "hide"));
+        if (Objects.equals(mode, "hide")) ViewsAnimations.hideEditor(anpOfficerForm);
+        else ViewsAnimations.showEditor(anpOfficerForm);
         switch (mode) {
             case "add" -> {
+                selectedImage = null;
+
                 btnEditOfficerAction1.setOnMouseClicked(event -> createOfficer());
                 btnEditOfficerAction2.setOnMouseClicked(event -> officerDialogEditor("hide"));
                 btnEditOfficerAction3.setOnMouseClicked(event -> selectedImage = ProgramUtils.chooseFile(ControllerUtils.getStage(btnEditOfficerAction1), "Choose an Image", "png", "jpg", "jpeg"));
             }
             case "edit" -> {
-                lblEditOfficerDialogTitle.setText("Edit Officer");
+                selectedImage = null;
 
                 txfEditOfficerName.setText(focusedOfficer.getFormattedName());
                 txaEditOfficerDescription.setText(focusedOfficer.getDescription());
@@ -367,11 +395,15 @@ public class ViewOfficers extends ViewController {
             case "hide" -> {
                 cbxEditOfficerStrand.setValue(null);
 
+                txfEditOfficerName.setText("");
+                txaEditOfficerDescription.setText("");
+                txfEditOfficerPosition.setText("");
+                txfEditOfficerTerm.setText("");
+                cbxEditOfficerStrand.setValue(null);
+
                 btnEditOfficerAction1.setOnMouseClicked(null);
                 btnEditOfficerAction2.setOnMouseClicked(null);
                 btnEditOfficerAction3.setOnMouseClicked(null);
-
-                selectedImage = null;
             }
         }
     }
@@ -393,7 +425,6 @@ public class ViewOfficers extends ViewController {
     }
     public void createOfficer() {
         try {
-            MainEvents.startLoading();
             Object[] userInput = getEditOfficerInput(false);
             if (userInput == null) return;
             Object[] newOfficer = {
@@ -409,7 +440,6 @@ public class ViewOfficers extends ViewController {
             };
             officerDialogEditor("hide");
             SpendBCreate.createOfficer(newOfficer, true);
-            MainEvents.stopLoading();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -431,13 +461,9 @@ public class ViewOfficers extends ViewController {
     // Public Events
     @Subscribe public void updateOfficer(ControllerEvent event) {
         if (!Objects.equals(event.getEventId(), "Edit Officer")) return;
-        MainEvents.startLoading();
         try {
             Object[] userInput = getEditOfficerInput(true);
-            if (userInput == null) {
-                MainEvents.stopLoading();
-                return;
-            }
+            if (userInput == null) return;
             boolean noName = userInput[0] == null;
             Object[] newOfficer = {
                     noName ? null : ProgramUtils.parseName((String) userInput[0])[0].strip(),
@@ -453,282 +479,25 @@ public class ViewOfficers extends ViewController {
             officerDialogEditor("hide");
             SpendBUpdate.updateOfficer(newOfficer, true, true, "OFFICER_ID = " + focusedOfficer.getOfficer_id());
         } catch (Exception e) {
-            MainEvents.stopLoading();
             throw new RuntimeException(e);
         }
     }
     @Subscribe public void editProjects(ControllerEvent event) throws Exception {
         if (!Objects.equals(event.getEventId(), "projectsChoices")) return;
-        MainEvents.startLoading();
         String officerFilter = "OFFICER_ID = " + focusedOfficer.getOfficer_id();
         int[] selectedID = Arrays.stream(event.getSimpleArgs()).mapToInt(obj -> Integer.parseInt(obj.toString())).toArray();
         String deleteIDS = SpendBUtils.spendBFilterID("PROJECT_ID", false, selectedID);
         SpendBDelete.deleteTableData("CONTRIBUTORS", true, officerFilter, deleteIDS);
-        System.out.println(focusedOfficer.getOfficer_id());
         for (int x: selectedID) SpendBCreate.createContributors(new Object[]{x, focusedOfficer.getOfficer_id()}, false);
         ControllerUtils.triggerEvent("refreshViews");
     }
     @Subscribe public void deleteOfficer(ControllerEvent event) {
         if (!Objects.equals(event.getEventId(), "Delete Officer")) return;
-        MainEvents.startLoading();
         SpendBDelete.deleteTableData("OFFICERS", true, "OFFICER_ID = " + focusedOfficer.getOfficer_id());
         officerProfileBack();
     }
 
     // Setters and Getters
-
-    public AnchorPane getAnpOfficerProfile() {
-        return anpOfficerProfile;
-    }
-
-    public void setAnpOfficerProfile(AnchorPane anpOfficerProfile) {
-        this.anpOfficerProfile = anpOfficerProfile;
-    }
-
-    public Pane getPneViewOfficerNoOfficer() {
-        return pneViewOfficerNoOfficer;
-    }
-
-    public void setPneViewOfficerNoOfficer(Pane pneViewOfficerNoOfficer) {
-        this.pneViewOfficerNoOfficer = pneViewOfficerNoOfficer;
-    }
-
-    public Pane getPneViewOfficerNoProject() {
-        return pneViewOfficerNoProject;
-    }
-
-    public void setPneViewOfficerNoProject(Pane pneViewOfficerNoProject) {
-        this.pneViewOfficerNoProject = pneViewOfficerNoProject;
-    }
-
-    public GridPane getGpnOfficersList() {
-        return gpnOfficersList;
-    }
-
-    public void setGpnOfficersList(GridPane gpnOfficersList) {
-        this.gpnOfficersList = gpnOfficersList;
-    }
-
-    public VBox getVbxProjectsList() {
-        return vbxProjectsList;
-    }
-
-    public void setVbxProjectsList(VBox vbxProjectsList) {
-        this.vbxProjectsList = vbxProjectsList;
-    }
-
-    public TextField getTxfOfficerListSearchOfficer() {
-        return txfOfficerListSearchOfficer;
-    }
-
-    public void setTxfOfficerListSearchOfficer(TextField txfOfficerListSearchOfficer) {
-        this.txfOfficerListSearchOfficer = txfOfficerListSearchOfficer;
-    }
-
-    public Label getTxfOfficerProfileName() {
-        return txfOfficerProfileName;
-    }
-
-    public void setTxfOfficerProfileName(Label txfOfficerProfileName) {
-        this.txfOfficerProfileName = txfOfficerProfileName;
-    }
-
-    public Label getTxfOfficerProfilePosition() {
-        return txfOfficerProfilePosition;
-    }
-
-    public void setTxfOfficerProfilePosition(Label txfOfficerProfilePosition) {
-        this.txfOfficerProfilePosition = txfOfficerProfilePosition;
-    }
-
-    public Button getBtnOfficerListClearSearch() {
-        return btnOfficerListClearSearch;
-    }
-
-    public void setBtnOfficerListClearSearch(Button btnOfficerListClearSearch) {
-        this.btnOfficerListClearSearch = btnOfficerListClearSearch;
-    }
-
-    public Button getBtnOfficerListAddNew() {
-        return btnOfficerListAddNew;
-    }
-
-    public void setBtnOfficerListAddNew(Button btnOfficerListAddNew) {
-        this.btnOfficerListAddNew = btnOfficerListAddNew;
-    }
-
-    public Button getBtnOfficerListGenerateReport() {
-        return btnOfficerListGenerateReport;
-    }
-
-    public void setBtnOfficerListGenerateReport(Button btnOfficerListGenerateReport) {
-        this.btnOfficerListGenerateReport = btnOfficerListGenerateReport;
-    }
-
-    public Label getTxaOfficerProfileDescription() {
-        return txaOfficerProfileDescription;
-    }
-
-    public void setTxaOfficerProfileDescription(Label txaOfficerProfileDescription) {
-        this.txaOfficerProfileDescription = txaOfficerProfileDescription;
-    }
-
-    public ImageView getImvOfficerProfileBack() {
-        return imvOfficerProfileBack;
-    }
-
-    public void setImvOfficerProfileBack(ImageView imvOfficerProfileBack) {
-        this.imvOfficerProfileBack = imvOfficerProfileBack;
-    }
-
-    public ImageView getImvOfficerProfileAvatar() {
-        return imvOfficerProfileAvatar;
-    }
-
-    public void setImvOfficerProfileAvatar(ImageView imvOfficerProfileAvatar) {
-        this.imvOfficerProfileAvatar = imvOfficerProfileAvatar;
-    }
-
-    public Button getBtnOfficerDetailsEditDetails() {
-        return btnOfficerDetailsEditDetails;
-    }
-
-    public void setBtnOfficerDetailsEditDetails(Button btnOfficerDetailsEditDetails) {
-        this.btnOfficerDetailsEditDetails = btnOfficerDetailsEditDetails;
-    }
-
-    public Button getBtnOfficerDetailsGenerateReport() {
-        return btnOfficerDetailsGenerateReport;
-    }
-
-    public void setBtnOfficerDetailsGenerateReport(Button btnOfficerDetailsGenerateReport) {
-        this.btnOfficerDetailsGenerateReport = btnOfficerDetailsGenerateReport;
-    }
-
-    public Button getBtnOfficerDetailsEditProjects() {
-        return btnOfficerDetailsEditProjects;
-    }
-
-    public void setBtnOfficerDetailsEditProjects(Button btnOfficerDetailsEditProjects) {
-        this.btnOfficerDetailsEditProjects = btnOfficerDetailsEditProjects;
-    }
-
-    public Button getBtnOfficerDetailsDeleteOfficer() {
-        return btnOfficerDetailsDeleteOfficer;
-    }
-
-    public void setBtnOfficerDetailsDeleteOfficer(Button btnOfficerDetailsDeleteOfficer) {
-        this.btnOfficerDetailsDeleteOfficer = btnOfficerDetailsDeleteOfficer;
-    }
-
-    public AnchorPane getAnpOfficerEditOfficer() {
-        return anpOfficerEditOfficer;
-    }
-
-    public void setAnpOfficerEditOfficer(AnchorPane anpOfficerEditOfficer) {
-        this.anpOfficerEditOfficer = anpOfficerEditOfficer;
-    }
-
-    public Label getLblEditOfficerDialogTitle() {
-        return lblEditOfficerDialogTitle;
-    }
-
-    public void setLblEditOfficerDialogTitle(Label lblEditOfficerDialogTitle) {
-        this.lblEditOfficerDialogTitle = lblEditOfficerDialogTitle;
-    }
-
-    public TextField getTxfEditOfficerName() {
-        return txfEditOfficerName;
-    }
-
-    public void setTxfEditOfficerName(TextField txfEditOfficerName) {
-        this.txfEditOfficerName = txfEditOfficerName;
-    }
-
-    public TextArea getTxaEditOfficerDescription() {
-        return txaEditOfficerDescription;
-    }
-
-    public void setTxaEditOfficerDescription(TextArea txaEditOfficerDescription) {
-        this.txaEditOfficerDescription = txaEditOfficerDescription;
-    }
-
-    public TextField getTxfEditOfficerPosition() {
-        return txfEditOfficerPosition;
-    }
-
-    public void setTxfEditOfficerPosition(TextField txfEditOfficerPosition) {
-        this.txfEditOfficerPosition = txfEditOfficerPosition;
-    }
-
-    public TextField getTxfEditOfficerTerm() {
-        return txfEditOfficerTerm;
-    }
-
-    public void setTxfEditOfficerTerm(TextField txfEditOfficerTerm) {
-        this.txfEditOfficerTerm = txfEditOfficerTerm;
-    }
-
-    public ComboBox<String> getCbxEditOfficerStrand() {
-        return cbxEditOfficerStrand;
-    }
-
-    public void setCbxEditOfficerStrand(ComboBox<String> cbxEditOfficerStrand) {
-        this.cbxEditOfficerStrand = cbxEditOfficerStrand;
-    }
-
-    public Button getBtnEditOfficerAction1() {
-        return btnEditOfficerAction1;
-    }
-
-    public void setBtnEditOfficerAction1(Button btnEditOfficerAction1) {
-        this.btnEditOfficerAction1 = btnEditOfficerAction1;
-    }
-
-    public Button getBtnEditOfficerAction2() {
-        return btnEditOfficerAction2;
-    }
-
-    public void setBtnEditOfficerAction2(Button btnEditOfficerAction2) {
-        this.btnEditOfficerAction2 = btnEditOfficerAction2;
-    }
-
-    public Button getBtnEditOfficerAction3() {
-        return btnEditOfficerAction3;
-    }
-
-    public void setBtnEditOfficerAction3(Button btnEditOfficerAction3) {
-        this.btnEditOfficerAction3 = btnEditOfficerAction3;
-    }
-
-    public String[] getDBNEEDED() {
-        return DBNEEDED;
-    }
-
-    public ArrayList<Integer> getSearchedOfficers() {
-        return searchedOfficers;
-    }
-
-    public String getSearchOfficerPattern() {
-        return searchOfficerPattern;
-    }
-
-    public void setSearchOfficerPattern(String searchOfficerPattern) {
-        this.searchOfficerPattern = searchOfficerPattern;
-    }
-
-    public String getSelectedImage() {
-        return selectedImage;
-    }
-
-    public void setSelectedImage(String selectedImage) {
-        this.selectedImage = selectedImage;
-    }
-
-    public Officer getFocusedOfficer() {
-        return focusedOfficer;
-    }
-
     public void setFocusedOfficer(Officer focusedOfficer) {
         this.focusedOfficer = focusedOfficer;
     }

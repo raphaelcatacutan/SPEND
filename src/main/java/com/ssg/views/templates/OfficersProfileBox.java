@@ -2,13 +2,10 @@ package com.ssg.views.templates;
 
 import com.ssg.database.SpendBUtils;
 import com.ssg.database.models.Officer;
-import com.ssg.views.ControllerUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-
-import java.sql.SQLException;
 
 public class OfficersProfileBox {
 

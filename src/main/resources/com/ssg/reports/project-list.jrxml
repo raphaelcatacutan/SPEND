@@ -339,7 +339,7 @@ WHERE
 							<textFieldExpression><![CDATA[$F{PROJECT_NUMBER} + ". " + $F{TITLE} + "\n" +
 "Date: " + new SimpleDateFormat("MMMM dd, yyyy").format($F{EVENTDATE}) + "\n" +
 "Number of Officer Contributors: " + $F{CONTRIBUTOR_COUNT} + "\n" +
-"Total Expenses: ₱" + String.format("%.2f", $F{TOTAL_EXPENSE})]]></textFieldExpression>
+"Total Expenses: PHP " + String.format("%,.2f", $F{TOTAL_EXPENSE})]]></textFieldExpression>
 						</textField>
 						<textField textAdjust="StretchHeight">
 							<reportElement positionType="Float" x="10" y="30" width="470" height="20" uuid="a1334de7-2b9d-412b-b2b4-25af807d8665"/>
