@@ -6,7 +6,6 @@ keeping track of their project expenses, allocate budgets, and monitor the progr
 ## Features
 
 ## Contributing
-This projects is continuous and can still be 
 
 ## Attributions
 * <a target="_blank" href="https://icons8.com/icon/3061/done">Check</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
