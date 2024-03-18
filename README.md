@@ -7,6 +7,10 @@ keeping track of their project expenses, allocate budgets, and monitor the progr
 
 ## Contributing
 
+## Useful Links
+* <a target="_blank" href="https://drive.google.com/file/d/1hhwENrjzzxe6pPjcmSXfwT1Q2HJsBmrQ/view?usp=sharing">SPEND User Guide</a>
+* <a target="_blank" href="https://drive.google.com/file/d/1h9BOLVac6kemEtxU9XdqLtbcBvsHmKOm/view?usp=sharing">How to use SPEND? (Video Tutorial)</a>
+
 ## Attributions
 * <a target="_blank" href="https://icons8.com/icon/3061/done">Check</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 * <a target="_blank" href="https://icons8.com/icon/11705/trash-can">Delete</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
